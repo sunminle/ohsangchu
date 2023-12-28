@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.gi.osc.repository.MainMapper">
+    	
+    	<select id="searchList" parameterType="com.gi.osc.bean.StoreDTO" resultType="com.gi.osc.bean.StoreDTO">
+    		 select * from dbo.store where delete_yn='N' 
+    		 <choose>
+    		 	<when test="type !=null and type.equals('storename')">
+    		 	and storename like CONCAT('%', #{keyword}, '%')
+    		 	</when>
+    		 </choose>
+    	</select>
+    </mapper>
