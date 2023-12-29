@@ -18,6 +18,7 @@
 <!-- jQuery -->
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <!-- css -->
+<link href="/resources/css/include.css" rel="stylesheet">
 <link href="/resources/css/main.css" rel="stylesheet">
 </head>
 <body>
@@ -40,7 +41,7 @@
 	</nav>
 
 
-	<section>
+	<section class="mb-8">
 		<div id="banner">
 			<div id="carouselExample" class="carousel slide">
 				<div class="carousel-inner">
@@ -48,10 +49,13 @@
 						<img src="https://i.namu.wiki/i/82N8K0CPSFhZsqShieizBlUEGOKUkyEgfZPVGCN1jFjKootBTCec7-dxXLA4j_feJKAWzsNWLGYKwBxHlgLH0A.gif" class="d-block w-100" alt="...">
 					</div>
 					<div class="carousel-item">
-						<img src="https://blog.kakaocdn.net/dn/bL3GVY/btsAFtzcZI0/aIFzh6IXmfGk7SYNmQRfIK/img.gif" class="d-block w-100" alt="...">
+						<img src="https://pbs.twimg.com/media/GCWHNxtboAAy5KI?format=jpg&name=4096x4096" class="d-block w-100" alt="...">
 					</div>
 					<div class="carousel-item">
 						<img src="https://blog.kakaocdn.net/dn/ucGeZ/btsCBMEee79/4aLKN8eZKerUjVp1UKLyHk/img.gif" class="d-block w-100" alt="...">
+					</div>
+					<div class="carousel-item">
+						<img src="https://pbs.twimg.com/media/GCPb2NdaEAAvEFa?format=jpg&name=4096x4096" class="d-block w-100" alt="...">
 					</div>
 				</div>
 				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -60,6 +64,99 @@
 				<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
 					<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
 				</button>
+			</div>
+		</div>
+		
+		<div id="qnabanner" class="mt-3">
+			<a class="w-100 d-flex justify-content-center" href="#">
+				<img src="/resources/images/site/qnabanner.png">
+			</a>
+			<hr>
+		</div>
+		
+		<div id="newProduct" class="m-3">
+			<span class="bold"><b class="green">NEW</b> 최신 등록 상품</span>
+			<div id="newProList" class="d-flex justify-content-start">
+				<div class="pro">
+					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
+					<div class="proDes">
+						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
+						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
+						<div class="proProfile d-flex align-items-center">
+							<div class="proImg">
+								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
+							</div>
+							<span>진짜이재현</span>
+						</div>
+					</div>
+				</div>
+				<div class="pro">
+					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
+					<div class="proDes">
+						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
+						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
+						<div class="proProfile d-flex align-items-center">
+							<div class="proImg">
+								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
+							</div>
+							<span>진짜이재현</span>
+						</div>
+					</div>
+				</div>
+				<div class="pro">
+					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
+					<div class="proDes">
+						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
+						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
+						<div class="proProfile d-flex align-items-center">
+							<div class="proImg">
+								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
+							</div>
+							<span>진짜이재현</span>
+						</div>
+					</div>
+				</div>
+				<div class="pro">
+					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
+					<div class="proDes">
+						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
+						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
+						<div class="proProfile d-flex align-items-center">
+							<div class="proImg">
+								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
+							</div>
+							<span>진짜이재현</span>
+						</div>
+					</div>
+				</div>
+				<div class="pro">
+					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
+					<div class="proDes">
+						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
+						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
+						<div class="proProfile d-flex align-items-center">
+							<div class="proImg">
+								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
+							</div>
+							<span>진짜이재현</span>
+						</div>
+					</div>
+				</div>
+				<div class="pro">
+					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
+					<div class="proDes">
+						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
+						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
+						<div class="proProfile d-flex align-items-center">
+							<div class="proImg">
+								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
+							</div>
+							<span>진짜이재현</span>
+						</div>
+					</div>
+				</div>
+				
+				
 			</div>
 		</div>
 	</section>
