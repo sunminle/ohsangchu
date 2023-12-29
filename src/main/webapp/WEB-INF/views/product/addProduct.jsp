@@ -16,7 +16,7 @@ $(document).ready(function() {
 		maxHeight: null,
 		focus: true,
         lang: "ko-KR",
-        placeholder: '최대 2048자까지 쓸 수 있습니다',
+        placeholder: '상품의 이미지와 소개를 적어주세요.',
         callbacks: {	//여기 부분이 이미지를 첨부하는 부분
 			onImageUpload : function(files) {	
 				for(i = 0 ; i < files.length ; i++){
@@ -42,7 +42,7 @@ function uploadSummernoteImageFile(file, editor) {
 	$.ajax({
 		data : data,
 		type : "POST",
-		url : "/product/uploadSummernoteImageFile",
+		url : "/my/uploadSummernoteImageFile",
 		contentType : false,
 		processData : false,
 		dataType: 'json',
@@ -61,9 +61,14 @@ $("div.note-editable").on('drop',function(e){
 })
 </script>
 </head>
+<!-- css -->
+<link href="/resources/css/main.css" rel="stylesheet">
+<!-- bootstrap:css -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<center>
 	<h2>상품 등록</h2>
-	<form action="/product/addProductPro" method = "post" enctype="multipart/form-data">
+	<form action="/my/addProductPro" method = "post" enctype="multipart/form-data">
     상품 이름 : <input type = "text" name = "productName"> <br/>
     상품 가격 : <input type = "number" name = "price"> <br/>
     상품 수량 : <input type = "number" name = "quantity"> <br/>
@@ -79,4 +84,5 @@ $("div.note-editable").on('drop',function(e){
     <input type = "submit" value = "등록하기">
     </form>
     </center>
+    <jsp:include page="/WEB-INF/views/include/footer.jsp" />
     
