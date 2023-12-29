@@ -12,14 +12,58 @@
 $(document).ready(function() {
     $('#summernote').summernote({
         height: 700,
-        lang: "ko-KR"
+        minHeight: null,
+		maxHeight: null,
+		focus: true,
+        lang: "ko-KR",
+        placeholder: '최대 2048자까지 쓸 수 있습니다',
+        callbacks: {	//여기 부분이 이미지를 첨부하는 부분
+			onImageUpload : function(files) {	
+				for(i = 0 ; i < files.length ; i++){
+					uploadSummernoteImageFile(files[i],this);
+				}
+			},
+			onPaste: function (e) {
+				var clipboardData = e.originalEvent.clipboardData;
+				if (clipboardData && clipboardData.items && clipboardData.items.length) {
+					var item = clipboardData.items[0];
+					if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+						e.preventDefault();
+					}
+				}
+			}
+		}
     });
 });
+
+function uploadSummernoteImageFile(file, editor) {
+	data = new FormData();
+	data.append("file", file);
+	$.ajax({
+		data : data,
+		type : "POST",
+		url : "/product/uploadSummernoteImageFile",
+		contentType : false,
+		processData : false,
+		dataType: 'json',
+		success : function(data) {
+        	//항상 업로드된 파일의 url이 있어야 한다.
+			$(editor).summernote('insertImage', data.url);
+		}
+	});
+}
+
+$("div.note-editable").on('drop',function(e){
+    for(i=0; i< e.originalEvent.dataTransfer.files.length; i++){
+    	uploadSummernoteImageFile(e.originalEvent.dataTransfer.files[i],$("#summernote")[0]);
+    }
+   e.preventDefault();
+})
 </script>
 </head>
 	<center>
 	<h2>상품 등록</h2>
-	<form action="/product/addProductPro" method = "post">
+	<form action="/product/addProductPro" method = "post" enctype="multipart/form-data">
     상품 이름 : <input type = "text" name = "productName"> <br/>
     상품 가격 : <input type = "number" name = "price"> <br/>
     상품 수량 : <input type = "number" name = "quantity"> <br/>

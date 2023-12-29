@@ -9,5 +9,9 @@
 		values ((select id from store where userid = (select id from users where realid = #{realId})),
 		#{productName},#{price},#{quantity},#{productIntro},#{isPublic},#{categoryId})
 	</insert>
+	
+	<select id="productList" resultType="com.gi.osc.bean.ProductDTO">
+		select * from product where storeid = #{storeId} order by id desc
+	</select>
 
 </mapper>
