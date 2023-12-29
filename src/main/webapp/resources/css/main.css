@@ -40,6 +40,9 @@ header #logo{
 header #logo span{
 	color : #9B9B9B;
 }
+header #logo a{
+	
+}
 header #searchBox{
 	border-radius : 20px;
 	background-color :#FAFAFA;
@@ -72,6 +75,12 @@ header #searchBox button{
 	font-size :17px;
 	color : #75C573;
 }
+#loginBox {
+	margin-right: 15px;
+}
+#loginBox span {
+	font-size: 17px;
+} 
 
 /*********NAV***********/
 #navbarNav{
