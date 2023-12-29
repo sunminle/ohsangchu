@@ -1,5 +1,7 @@
 package com.gi.osc.service;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,4 +20,22 @@ public class UsersServiceImpl implements UsersService{
 		return mapper.loginChk(dto);
 	}
 	
+
+	@Inject 
+	UsersMapper usersMapper;
+
+	 // 회원 가입 처리
+	@Override
+	public void register(UsersDTO dto) throws Exception {
+		
+		usersMapper.register(dto);
+    }
+		
 }
+
+	
+	
+	
+
+	
+
