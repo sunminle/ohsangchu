@@ -6,8 +6,8 @@ import lombok.Data;
 public class StoreDTO {
 	private int id;
 	private int userId;
-	private int storeName;
-	private int storeIntro;
+	private String storeName;
+	private String storeIntro;
 	
 	private String type;
 	private String keyword;
