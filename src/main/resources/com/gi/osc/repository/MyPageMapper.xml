@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.gi.osc.repository.MyPageMapper">
+	 <select id="selectUsers" resultType="UsersDTO">
+	 	select * from users where realId = #{realId}
+	 </select>
+	 
+	  <select id="selectUsersInfo" resultType="com.gi.osc.bean.UserInfoDTO">
+	 	select * from userinfo where userid = #{userId}
+	 </select>
+	 
+	 <select id="selectStoreInfo" resultType="com.gi.osc.bean.StoreDTO">
+	 	select * from store where userid = #{userId}
+	 </select>
+	
+	<insert id="addProduct" parameterType="com.gi.osc.bean.ProductDTO">
+		insert into product (storeid,productname,price,quantity,productintro,ispublic,categoryid)
+		values ((select id from store where userid = (select id from users where realid = #{realId})),
+		#{productName},#{price},#{quantity},#{productIntro},#{isPublic},#{categoryId})
+	</insert>
+	
+	<select id="productList" resultType="com.gi.osc.bean.ProductDTO">
+		select * from product where storeid = #{storeId} order by id desc
+	</select>
+	
+	
+</mapper>

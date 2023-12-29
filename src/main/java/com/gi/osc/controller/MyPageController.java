@@ -21,15 +21,18 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gi.osc.bean.ProductDTO;
-import com.gi.osc.service.ProductService;
+import com.gi.osc.bean.StoreDTO;
+import com.gi.osc.bean.UserInfoDTO;
+import com.gi.osc.bean.UsersDTO;
+import com.gi.osc.service.MyPageService;
 
 @Controller
 @RequestMapping("/my/*")
 public class MyPageController {
 	
 	@Autowired
-	private ProductService service;
-	
+	private MyPageService service;
+
 	@RequestMapping("addProduct")
 	public String addProduct() {
 		return "product/addProduct";
@@ -75,6 +78,35 @@ public class MyPageController {
 		List<ProductDTO> list = service.productList(storeId);
 		model.addAttribute("list",list);
 		return "product/productList";
+	}
+	
+	@RequestMapping("myPageMain")
+	public String myPageMain(HttpSession session,Model model) {
+		String realId = (String)session.getAttribute("usersId");
+		UsersDTO usersDTO = service.selectUsers(realId);
+		model.addAttribute("usersDTO",usersDTO);
+		return "myPage/myPageMain";
+	}
+	
+	@RequestMapping("modifyMe")
+	public String modifyMe(HttpSession session,Model model) {
+		String realId = (String)session.getAttribute("usersId");
+		UsersDTO usersDTO = service.selectUsers(realId);
+		int userId = usersDTO.getId();
+		UserInfoDTO userInfoDTO = service.selectUsersInfo(userId);
+		model.addAttribute("usersDTO",usersDTO);
+		model.addAttribute("userInfoDTO",userInfoDTO);
+		return "myPage/modifyMe";
+	}
+	
+	@RequestMapping("modifyStore")
+	public String modifyStore(HttpSession session,Model model) {
+		String realId = (String)session.getAttribute("usersId");
+		UsersDTO usersDTO = service.selectUsers(realId);
+		int userId = usersDTO.getId();
+		StoreDTO storeDTO = service.selectStoreInfo(userId);
+		model.addAttribute("storeDTO",storeDTO);
+		return "myPage/modifyStore";
 	}
 	
 }
