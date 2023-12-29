@@ -6,7 +6,7 @@
 		<div id="logo" class="m-3 text-center">
 			<%-- <img src="/resources/images/site/logo2.png"> --%>
 			<h1>
-				<b><a>OSangChu</a></b>
+				<b><a href="/main">OSangChu</a></b>
 			</h1>
 			<span><small>오늘의 상품 추천</small></span>
 		</div>
@@ -74,7 +74,7 @@
 		<%-- 세션에 아이디가 없을 경우 --%>
 		<c:if test="${sessionScope.usersId == null}">
 			<div>
-				<a>로그인</a> <a>회원가입</a>
+				<a href="/users/main">로그인</a> <a>회원가입</a>
 			</div>
 		</c:if>
 		<%-- 세션에 아이디 존재 --%>

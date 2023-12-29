@@ -3,7 +3,7 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <c:if test = "${chk == 1}">
 	<c:set var = "usersId" value = "${usersDTO.realId}" scope = "session" />
-	<c:redirect url = "/users/main" />
+	<c:redirect url = "/main" />
 </c:if>
 <c:if test = "${chk == 0}">
 	<script> 
