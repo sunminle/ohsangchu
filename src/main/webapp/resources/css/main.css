@@ -14,11 +14,11 @@ section {
 }
 #newProduct{
 	width: auto;
-	overflow: hidden;
-	/* 가로 스크롤 
- 	white-space: nowrap;*/
+	overflow: auto;
+	/* 가로 스크롤 */
+ 	white-space: nowrap;
 }
-#newProduct span{
+#newProduct>span{
 	font-size: 20px;
 }
 #newProduct .pro{
@@ -32,7 +32,7 @@ section {
 	margin-top:10px;
 	padding: 1px;
 }
-#newProduct .pro img{
+#newProduct .pro>img{
 	width: 280px;
 	border-radius: 20px 20px 0px 0px / 20px 20px 0px 0px;
 	height : 265px;
@@ -42,12 +42,12 @@ section {
 	padding: 10px;
 }
 .proTitle{
-	font-size:16px;
+	font-size:17px;
 	font-weight: bold;
 	/*줄바꿈*/
 	overflow: hidden;
     text-overflow: ellipsis;
-	line-height: 1.3;
+	line-height: 1.5;
 	/*height: 4.8em;*/
 	word-wrap : break-word;
 	text-align : left;
@@ -55,13 +55,28 @@ section {
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 }
-.proPrice{
-	line-height: 2.0;
-	font-size:15px;
-	text-align : left;
+.proTitle:hover {
+	cursor : pointer;
+	color : #75C573; 
 }
 .proPrice{
 	line-height: 2.0;
-	font-size:15px;
+	font-size:16px;
 	text-align : left;
+}
+.proProfile .proImg{
+	width: 30px;
+	height : 30px;
+	border-radius: 70%;
+    overflow: hidden;
+} 
+.proProfile  img{
+	width: 100%;
+	height : 100%;
+	object-fit:cover; 
+}
+.proProfile span{
+	font-size: 16px;
+	margin : 5px;
+	font-weight: bold;
 }

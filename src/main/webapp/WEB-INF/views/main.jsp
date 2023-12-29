@@ -81,42 +81,82 @@
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
-						<div class="proPrice">112,400 원</div>
-						<div class="proProfile">112,400 원</div>
+						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
+						<div class="proProfile d-flex align-items-center">
+							<div class="proImg">
+								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
+							</div>
+							<span>진짜이재현</span>
+						</div>
 					</div>
 				</div>
 				<div class="pro">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
-						<div class="proPrice">112,400 원</div>
-						<div class="proProfile">112,400 원</div>
+						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
+						<div class="proProfile d-flex align-items-center">
+							<div class="proImg">
+								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
+							</div>
+							<span>진짜이재현</span>
+						</div>
 					</div>
 				</div>
 				<div class="pro">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
-						<div class="proPrice">112,400 원</div>
-						<div class="proProfile">112,400 원</div>
+						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
+						<div class="proProfile d-flex align-items-center">
+							<div class="proImg">
+								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
+							</div>
+							<span>진짜이재현</span>
+						</div>
 					</div>
 				</div>
 				<div class="pro">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
-						<div class="proPrice">112,400 원</div>
-						<div class="proProfile">112,400 원</div>
+						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
+						<div class="proProfile d-flex align-items-center">
+							<div class="proImg">
+								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
+							</div>
+							<span>진짜이재현</span>
+						</div>
 					</div>
 				</div>
 				<div class="pro">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
-						<div class="proPrice">112,400 원</div>
-						<div class="proProfile">112,400 원</div>
+						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
+						<div class="proProfile d-flex align-items-center">
+							<div class="proImg">
+								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
+							</div>
+							<span>진짜이재현</span>
+						</div>
 					</div>
 				</div>
+				<div class="pro">
+					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
+					<div class="proDes">
+						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
+						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
+						<div class="proProfile d-flex align-items-center">
+							<div class="proImg">
+								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
+							</div>
+							<span>진짜이재현</span>
+						</div>
+					</div>
+				</div>
+				
+				
 			</div>
 		</div>
 	</section>
