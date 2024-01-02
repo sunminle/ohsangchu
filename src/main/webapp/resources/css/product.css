@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+section {
+	min-height: 500px;
+}
+
+section #title{
+	min-height: 80px;
+}
+
+section #title div{
+	font-weight: bold;
+	font-size: 25px;
+}
+
+#product>div{
+	margin-top : 15px;
+	width : 1000px;
+	min-width: 800px;
+	min-height: 100px;
+	border : 1px solid #F2F2F2;
+}
+#tags{
+	margin : 30px 0px 30px 0px;
+}
+#tags .tag{
+	background-color : #ECFFE9;
+    border: solid 1px #75C573;
+    font-size : 15px;
+    font-weight : bold;
+    border-radius: 25px;
+    height: 30px;
+    min-width: 50px;
+    margin-right: 8px;
+    padding:8px;
+    cursor:pointer;
+}
