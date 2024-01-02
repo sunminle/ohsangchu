@@ -109,4 +109,50 @@ public class MyPageController {
 		return "myPage/modifyStore";
 	}
 	
+	@RequestMapping("nickCheck")
+	public String nickCheck(String nickname,Model model) {
+		int check = service.nickCheck(nickname);
+		model.addAttribute("check",check);
+		
+		return "myPage/nickCheck";
+	}
+	
+	@RequestMapping("modifyMePro")
+	public String modifyMePro(UsersDTO usersDTO,MultipartFile file,HttpServletRequest request,HttpSession session) {
+		String realId = (String)session.getAttribute("usersId");
+		String filePath = request.getServletContext().getRealPath("/resources/images/profiles/");
+		service.modifyUsers(usersDTO, file, filePath, realId);
+		
+		return "myPage/modifyMePro";
+	}
+	
+	@RequestMapping("storeNameCheck")
+	public String storeNameCheck(String storeName,Model model) {
+		int check = service.storeNameCheck(storeName);
+		model.addAttribute("check",check);
+		
+		return "myPage/storeNameCheck";
+	}
+	
+	@RequestMapping("modifyStorePro")
+	public String modifyStorePro(HttpSession session,StoreDTO storeDTO) {
+		String realId = (String)session.getAttribute("usersId");
+		service.modifyStore(storeDTO, realId);
+		return "myPage/modifyStorePro";
+	}
+	
+	@RequestMapping("reviewAll")
+	public String reviewAll() {
+		return "myPage/reviewAll";
+	}
+	
+	@RequestMapping("myReview")
+	public String myReview() {
+		return "myPage/myReview";
+	}
+	
+	@RequestMapping("getReview")
+	public String getReview() {
+		return "myPage/getReview";
+	}
 }

@@ -2,6 +2,8 @@ package com.gi.osc.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.gi.osc.bean.ProductDTO;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.bean.UserInfoDTO;
@@ -13,4 +15,8 @@ public interface MyPageService {
 	public StoreDTO selectStoreInfo(int userId);
 	public void addProduct(ProductDTO dto);
 	public List<ProductDTO> productList(int storeId);
+	public int nickCheck(String nickname);
+	public void modifyUsers(UsersDTO dto, MultipartFile file,String filePath,String realId);
+	public int storeNameCheck(String storeName);
+	public void modifyStore(StoreDTO dto,String realId);
 }

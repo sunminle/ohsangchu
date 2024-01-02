@@ -45,16 +45,16 @@
 		<div id="banner">
 			<div id="carouselExample" class="carousel slide">
 				<div class="carousel-inner">
-					<div class="carousel-item active">
+					<div class="carousel-item active banners">
 						<img src="https://i.namu.wiki/i/82N8K0CPSFhZsqShieizBlUEGOKUkyEgfZPVGCN1jFjKootBTCec7-dxXLA4j_feJKAWzsNWLGYKwBxHlgLH0A.gif" class="d-block w-100" alt="...">
 					</div>
-					<div class="carousel-item">
+					<div class="carousel-item banners">
 						<img src="https://pbs.twimg.com/media/GCWHNxtboAAy5KI?format=jpg&name=4096x4096" class="d-block w-100" alt="...">
 					</div>
-					<div class="carousel-item">
+					<div class="carousel-item banners">
 						<img src="https://blog.kakaocdn.net/dn/ucGeZ/btsCBMEee79/4aLKN8eZKerUjVp1UKLyHk/img.gif" class="d-block w-100" alt="...">
 					</div>
-					<div class="carousel-item">
+					<div class="carousel-item banners">
 						<img src="https://pbs.twimg.com/media/GCPb2NdaEAAvEFa?format=jpg&name=4096x4096" class="d-block w-100" alt="...">
 					</div>
 				</div>
@@ -77,7 +77,7 @@
 		<div id="newProduct" class="m-3">
 			<span class="bold"><b class="green">NEW</b> 최신 등록 상품</span>
 			<div id="newProList" class="d-flex justify-content-start">
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -168,5 +168,33 @@
 	
 
 </body>
+
+<script>
+var slideIndex = 0;
+
+//배너 이미지 자동 넘기기
+$(document).ready(function() {
+	showSlides();
+	
+	function showSlides() {
+	    var i;
+	    var slides = document.getElementsByClassName("banners");
+	   
+	    for (i = 0; i < slides.length; i++) {
+	        slides[i].style.display = "none";
+	    }
+	    slideIndex++;
+	    if (slideIndex > slides.length) {
+	        slideIndex = 1
+	    }
+	    slides[slideIndex - 1].style.display = "block";
+
+	    setTimeout(showSlides, 2000); // 2초마다 이미지가 체인지됩니다
+	}
+});
+
+
+
+</script>
 
 </html>
