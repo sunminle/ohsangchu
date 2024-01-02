@@ -25,5 +25,20 @@
 		select * from product where storeid = #{storeId} order by id desc
 	</select>
 	
+	<select id="nickCheck">
+		select count(nickname) from users where nickname = #{nickname}
+	</select>
+	
+	<update id="modifyUsers" parameterType="UsersDTO">
+		update users set nickname = #{nickname}, profile = #{profile} where realid = #{realId}
+	</update>
+	
+	<select id="storeNameCheck">
+		select count(storename) from store where storename = #{storeName}
+	</select>
+	
+	<update id="modifyStore" parameterType="com.gi.osc.bean.StoreDTO">
+		update store set storename = #{storeName}, storeintro = #{storeIntro} where userid = #{id}
+	</update>
 	
 </mapper>
