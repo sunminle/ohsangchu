@@ -12,4 +12,13 @@
     		 	</when>
     		 </choose>
     	</select>
+    	
+    	<select id="searchProductsByName" parameterType="java.lang.String" resultType="com.gi.osc.bean.ProductDTO">
+    SELECT P.*, S.STORENAME
+    FROM PRODUCT P
+    JOIN STORE S ON P.STOREID = S.ID
+    WHERE P.PRODUCTNAME LIKE '%' || #{productName, jdbcType=VARCHAR} || '%'
+</select>
+
+
     </mapper>
