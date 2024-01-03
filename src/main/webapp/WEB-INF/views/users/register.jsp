@@ -4,20 +4,24 @@
 <html>
 	<head>
 	
-		<!-- 합쳐지고 최소화된 최신 CSS -->
+		<!-- CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 		<!-- 부가적인 테마 -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	 	
 	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<link href="/resources/css/include.css" rel="stylesheet">
+		<link href="/resources/css/style.css" rel="stylesheet">
+	
+			<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	
 	
 		<title>회원가입</title>
 	</head>
+
 	<script type="text/javascript">
 		$(document).ready(function(){
 			// 취소
-			$(".cencle").on("click", function(){
+			$(".cancle").on("click", function(){
 				
 				location.href = "/login";
 						    
@@ -44,14 +48,21 @@
 					$("#nickname").focus();
 					return false;
 				}
+				
 			});
 			
 				
 			
 		})
+		
 	</script>
+	
+	
+
 	<body>
+	 <div class="wrapper">
 		<section id="container">
+	
 			<form action="/member/register" method="post">
 				<div class="form-group has-feedback">
 					<label class="control-label" for="realId">아이디</label>
@@ -71,12 +82,14 @@
 				</div>
 				<div class="form-group has-feedback">
 					<button class="btn btn-success" type="submit" id="submit">회원가입</button>
-					<button class="cencle btn btn-danger" type="button">취소</button>
+					<button class="cancle btn btn-danger" type="button">취소</button>
 				</div>
 			</form>
+			
 		</section>
 		
 		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	</div>
 	</body>
 	
 </html>
