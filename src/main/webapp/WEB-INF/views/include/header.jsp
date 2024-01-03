@@ -74,7 +74,8 @@
 		<%-- 세션에 아이디가 없을 경우 --%>
 		<c:if test="${sessionScope.usersId == null}">
 			<div>
-				<a href="/users/main">로그인</a> <a>회원가입</a>
+				<a href="/users/main">로그인</a> 
+				<a href="/users/register">회원가입</a>
 			</div>
 		</c:if>
 		<%-- 세션에 아이디 존재 --%>

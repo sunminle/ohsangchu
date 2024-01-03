@@ -41,8 +41,6 @@ public class UsersController {
 		return "users/register";
 	}
 	
-
-
 		private static final Logger logger = LoggerFactory.getLogger(UserRegisterController.class);
 		
 		@Inject
