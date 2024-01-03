@@ -1,4 +1,5 @@
 package com.gi.osc.controller;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gi.osc.bean.ProductDTO;
+import com.gi.osc.bean.QNADTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.bean.UserInfoDTO;
@@ -31,7 +33,7 @@ import com.gi.osc.service.MyPageService;
 @Controller
 @RequestMapping("/my/*")
 public class MyPageController {
-	
+
 	@Autowired
 	private MyPageService service;
 
@@ -39,146 +41,164 @@ public class MyPageController {
 	public String addProduct() {
 		return "product/addProduct";
 	}
-	
+
 	@RequestMapping("addProductPro")
-	public String addProductPro(ProductDTO dto,Model model,HttpSession session) {
+	public String addProductPro(ProductDTO dto, Model model, HttpSession session) {
 		String realId = (String) session.getAttribute("usersId");
 		dto.setRealId(realId);
 		service.addProduct(dto);
 		return "product/addProductPro";
 	}
-	
-	@RequestMapping(value="uploadSummernoteImageFile", produces = "application/json", consumes = "multipart/form-data")
-	public ResponseEntity<JsonNode> uploadSummernoteImageFile(@RequestPart("file") MultipartFile multipartFile,HttpServletRequest request) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode responseJson;
-        String fileRoot = request.getServletContext().getRealPath("/resources/summernoteImage/");
 
-        try {
-            String originalFileName = multipartFile.getOriginalFilename();
-            String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
-            String savedFileName = UUID.randomUUID() + extension;
+	@RequestMapping(value = "uploadSummernoteImageFile", produces = "application/json", consumes = "multipart/form-data")
+	public ResponseEntity<JsonNode> uploadSummernoteImageFile(@RequestPart("file") MultipartFile multipartFile,
+			HttpServletRequest request) {
+		ObjectMapper objectMapper = new ObjectMapper();
+		JsonNode responseJson;
+		String fileRoot = request.getServletContext().getRealPath("/resources/summernoteImage/");
 
-            Path targetPath = Path.of(fileRoot, savedFileName);
-            Files.copy(multipartFile.getInputStream(), targetPath, StandardCopyOption.REPLACE_EXISTING);
+		try {
+			String originalFileName = multipartFile.getOriginalFilename();
+			String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
+			String savedFileName = UUID.randomUUID() + extension;
 
-            String imageUrl = request.getContextPath() + "/resources/summernoteImage/" + savedFileName;
-            responseJson = objectMapper.createObjectNode()
-                    .put("url", imageUrl)
-                    .put("responseCode", "success");
+			Path targetPath = Path.of(fileRoot, savedFileName);
+			Files.copy(multipartFile.getInputStream(), targetPath, StandardCopyOption.REPLACE_EXISTING);
 
-            return ResponseEntity.ok(responseJson);
-        } catch (IOException e) {
-            responseJson = objectMapper.createObjectNode().put("responseCode", "error");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseJson);
-        }
-    }
-	
+			String imageUrl = request.getContextPath() + "/resources/summernoteImage/" + savedFileName;
+			responseJson = objectMapper.createObjectNode().put("url", imageUrl).put("responseCode", "success");
+
+			return ResponseEntity.ok(responseJson);
+		} catch (IOException e) {
+			responseJson = objectMapper.createObjectNode().put("responseCode", "error");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseJson);
+		}
+	}
+
 	@RequestMapping("productList")
-	public String productList(Model model) {
-		int storeId = 4;
-		List<ProductDTO> list = service.productList(storeId);
-		model.addAttribute("list",list);
+	public String productList(HttpSession session,Model model) {
+		String realId = (String) session.getAttribute("usersId");
+		List<ProductDTO> productList = service.productList(realId);
+		model.addAttribute("productList", productList);
 		return "product/productList";
 	}
-	
+
 	@RequestMapping("myPageMain")
 	public String myPageMain(HttpSession session, Model model) {
-		if(session.getAttribute("usersId") != null) {
-		String realId = (String)session.getAttribute("usersId");
-		UsersDTO usersDTO = service.selectUsers(realId);
-		model.addAttribute("usersDTO",usersDTO);
+		if (session.getAttribute("usersId") != null) {
+			String realId = (String) session.getAttribute("usersId");
+			UsersDTO usersDTO = service.selectUsers(realId);
+			model.addAttribute("usersDTO", usersDTO);
 		}
 		return "myPage/myPageMain";
 	}
-	
+
 	@RequestMapping("modifyMe")
-	public String modifyMe(HttpSession session,Model model) {
-		String realId = (String)session.getAttribute("usersId");
+	public String modifyMe(HttpSession session, Model model) {
+		String realId = (String) session.getAttribute("usersId");
 		UsersDTO usersDTO = service.selectUsers(realId);
 		int userId = usersDTO.getId();
 		UserInfoDTO userInfoDTO = service.selectUsersInfo(userId);
-		model.addAttribute("usersDTO",usersDTO);
-		model.addAttribute("userInfoDTO",userInfoDTO);
+		model.addAttribute("usersDTO", usersDTO);
+		model.addAttribute("userInfoDTO", userInfoDTO);
 		return "myPage/modifyMe";
 	}
-	
+
 	@RequestMapping("modifyStore")
-	public String modifyStore(HttpSession session,Model model) {
-		String realId = (String)session.getAttribute("usersId");
+	public String modifyStore(HttpSession session, Model model) {
+		String realId = (String) session.getAttribute("usersId");
 		UsersDTO usersDTO = service.selectUsers(realId);
 		int userId = usersDTO.getId();
 		StoreDTO storeDTO = service.selectStoreInfo(userId);
-		model.addAttribute("storeDTO",storeDTO);
+		model.addAttribute("storeDTO", storeDTO);
 		return "myPage/modifyStore";
 	}
-	
+
 	@RequestMapping("nickCheck")
-	public String nickCheck(String nickname,Model model) {
+	public String nickCheck(String nickname, Model model) {
 		int check = service.nickCheck(nickname);
-		model.addAttribute("check",check);
-		
+		model.addAttribute("check", check);
+
 		return "myPage/nickCheck";
 	}
-	
+
 	@RequestMapping("modifyMePro")
-	public String modifyMePro(UsersDTO usersDTO,MultipartFile file,HttpServletRequest request,HttpSession session) {
-		String realId = (String)session.getAttribute("usersId");
+	public String modifyMePro(UsersDTO usersDTO, MultipartFile file, HttpServletRequest request, HttpSession session) {
+		String realId = (String) session.getAttribute("usersId");
 		String filePath = request.getServletContext().getRealPath("/resources/images/profiles/");
 		service.modifyUsers(usersDTO, file, filePath, realId);
-		
+
 		return "myPage/modifyMePro";
 	}
-	
+
 	@RequestMapping("storeNameCheck")
-	public String storeNameCheck(String storeName,Model model) {
+	public String storeNameCheck(String storeName, Model model) {
 		int check = service.storeNameCheck(storeName);
-		model.addAttribute("check",check);
-		
+		model.addAttribute("check", check);
+
 		return "myPage/storeNameCheck";
 	}
-	
+
 	@RequestMapping("modifyStorePro")
-	public String modifyStorePro(HttpSession session,StoreDTO storeDTO) {
-		String realId = (String)session.getAttribute("usersId");
+	public String modifyStorePro(HttpSession session, StoreDTO storeDTO) {
+		String realId = (String) session.getAttribute("usersId");
 		service.modifyStore(storeDTO, realId);
 		return "myPage/modifyStorePro";
 	}
-	
+
 	@RequestMapping("reviewAll")
 	public String reviewAll() {
 		return "myPage/reviewAll";
 	}
-	
+
 	@RequestMapping("myReview")
-	public String myReview(HttpSession session,Model model) {
-		String realId = (String)session.getAttribute("usersId");
-		List<ReviewDTO> list = service.myReview(realId);
-		model.addAttribute("list",list);
+	public String myReview(HttpSession session, Model model) {
+		String realId = (String) session.getAttribute("usersId");
+		List<ReviewDTO> myReviewList = service.myReview(realId);
+		model.addAttribute("myReviewList", myReviewList);
 		return "myPage/myReview";
 	}
-	
+
 	@RequestMapping("getReview")
-	public String getReview(HttpSession session,Model model) {
-		String realId = (String)session.getAttribute("usersId");
-		List<ReviewDTO> list = service.getReview(realId);
-		model.addAttribute("list",list);
+	public String getReview(HttpSession session, Model model) {
+		String realId = (String) session.getAttribute("usersId");
+		List<ReviewDTO> getReviewList = service.getReview(realId);
+		model.addAttribute("getReviewList", getReviewList);
 		return "myPage/getReview";
 	}
-	
+
 	@RequestMapping("myReviewUpdate")
-	public String myReviewUpdate(@RequestParam("reviewNum")int reviewNum,Model model) {
-		model.addAttribute("reviewNum",reviewNum);
+	public String myReviewUpdate(@RequestParam("reviewNum") int reviewNum, Model model) {
+		model.addAttribute("reviewNum", reviewNum);
 		return "myPage/myReviewUpdate";
 	}
-	
-	
-	
+
 	@RequestMapping("myReviewDelete")
-	public String myReviewDelete(@RequestParam("reviewNum")int reviewNum) {
+	public String myReviewDelete(@RequestParam("reviewNum") int reviewNum) {
 		service.myReviewDelete(reviewNum);
 		return "myPage/myReviewDelete";
 	}
+
+	@RequestMapping("myQNA")
+	public String myQNA(HttpSession session, Model model) {
+		String realId = (String) session.getAttribute("usersId");
+		List<QNADTO> QNAList = service.myQNA(realId);
+		model.addAttribute("QNAList", QNAList);
+		return "myPage/myQNA";
+	}
 	
+	@RequestMapping("myProduct")
+	public String myProduct(HttpSession session, Model model) {
+		String realId = (String) session.getAttribute("usersId");
+		List<ProductDTO> productList = service.productList(realId);
+		model.addAttribute("productList",productList);
+		return "myPage/myProduct";
+	}
 	
+	@RequestMapping("myProductBuyer")
+	public String myProductBuyer(int productId) {
+		
+		return "myPage/myProductBuyer";
+	}
+
 }

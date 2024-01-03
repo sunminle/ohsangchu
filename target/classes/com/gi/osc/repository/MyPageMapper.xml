@@ -60,4 +60,8 @@
 		where p.id=a.productid order by a.id desc
 	</select>
 	
+	<select id="myQNA" resultType="com.gi.osc.bean.QNADTO">
+		select * from qna where userid = #{userId} order by id desc
+	</select>
+	
 </mapper>
