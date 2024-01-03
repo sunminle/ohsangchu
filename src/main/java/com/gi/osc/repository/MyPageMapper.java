@@ -13,4 +13,8 @@ public interface MyPageMapper {
 	public StoreDTO selectStoreInfo(int userId);
 	public void addProduct(ProductDTO dto);
 	public List<ProductDTO> productList(int storeId);
+	public int nickCheck(String nickname);
+	public void modifyUsers(UsersDTO dto);
+	public int storeNameCheck(String storeName);
+	public void modifyStore(StoreDTO dto);
 }

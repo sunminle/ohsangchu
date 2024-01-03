@@ -31,6 +31,10 @@ dl, dt, dd, ol, ul, li{
 body{
 	min-width: 1400px;
 }
+a {
+	text-decoration-line: none;
+	cursor: pointer;
+}
 
 
 /**************HEADER***************/

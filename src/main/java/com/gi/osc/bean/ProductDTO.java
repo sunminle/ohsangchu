@@ -16,4 +16,6 @@ public class ProductDTO {
 	private int isPublic;
 	private int categoryId;
 	private Date regDate;
+	
+	private String storeName;
 }
