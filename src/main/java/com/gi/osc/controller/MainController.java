@@ -16,11 +16,17 @@ import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.service.MainService;
 
 @Controller
-@RequestMapping("/main/*")
+@RequestMapping("/main")
 public class MainController {
 	
 	@Autowired
 	private MainService service;
+	
+	@RequestMapping("")
+	public String main2() {
+		
+		return "main";
+	}
 	
 	@RequestMapping("/main")
 	public String main() {
