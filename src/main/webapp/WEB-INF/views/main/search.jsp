@@ -31,6 +31,7 @@
                 <tr>
                     <td>${product.productName}</td>
                     <td>${product.price}</td>
+                    <br />
                     <td>${product.storeName}</td>
                     
                     <!-- 기타 필요한 필드들 추가 -->

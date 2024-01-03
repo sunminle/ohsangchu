@@ -14,11 +14,18 @@
     	</select>
     	
     	<select id="searchProductsByName" parameterType="java.lang.String" resultType="com.gi.osc.bean.ProductDTO">
-    SELECT P.*, S.STORENAME
-    FROM PRODUCT P
-    JOIN STORE S ON P.STOREID = S.ID
-    WHERE P.PRODUCTNAME LIKE '%' || #{productName, jdbcType=VARCHAR} || '%'
+    SELECT s.storename, p.*
+    FROM store s
+    JOIN product p ON s.id = p.storeid
+    <where>
+        <if test="searchKeyword != null and searchKeyword != ''">
+            AND (p.productname LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%'
+            OR s.storename LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%')
+        </if>
+    </where>
 </select>
+
+
 
 
     </mapper>

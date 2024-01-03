@@ -35,10 +35,11 @@
 		</div>
 		
 				<form action="/main/search" method="get">
-    <label for="productName">검색:</label>
-    <input type="text" id="productName" name="productName" required>
+    <label for="searchKeyword">검색:</label>
+    <input type="text" id="searchKeyword" name="searchKeyword" required>
     <button type="submit">Search</button>
 </form>
+
 				
 			
 		</div>
@@ -163,7 +164,7 @@
 						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
 						<div class="proProfile d-flex align-items-center">
 							<div class="proImg">
-								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
+								<img src="https://www.canva.com/design/DAF4zMd6c08/LARH2zOQDMIoFZIglfNFdw/view?utm_content=DAF4zMd6c08&utm_campaign=share_your_design&utm_medium=link&utm_source=shareyourdesignpanel" alt="프로필이미지">
 							</div>
 							<span>진짜이재현</span>
 						</div>
