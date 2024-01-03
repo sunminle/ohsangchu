@@ -7,7 +7,7 @@
 	  window.open(url + '?nickname=' + encodeURIComponent(nickname), 'Popup', popupOptions);
 	}
 </script>
-
+<center>
 <h2>정보수정</h2><br/>
 	<form method = "post" action = "/my/modifyMePro" enctype="multipart/form-data">
 		닉네임 : <input type = "text" value = "${usersDTO.nickname}" name = "nickname"> <input type = "button" value = "중복 확인" onclick = "openPopup('/my/nickCheck', 250, 50);"><br/>
@@ -16,3 +16,4 @@
 		이메일 : <a>${userInfoDTO.email}</a><br/>
 		<input type = "submit" value = "수정">
 	</form>
+</center>
