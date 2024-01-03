@@ -23,15 +23,9 @@ public class MainController {
 	private MainService service;
 	
 	@RequestMapping("")
-	public String main2() {
-		
-		return "main";
-	}
-	
-	@RequestMapping("/main")
 	public String main() {
 		
-		return "main/main";
+		return "main";
 	}
 	
 	@GetMapping("/main")
