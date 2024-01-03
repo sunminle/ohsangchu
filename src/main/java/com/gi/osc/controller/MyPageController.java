@@ -15,12 +15,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gi.osc.bean.ProductDTO;
+import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.bean.UserInfoDTO;
 import com.gi.osc.bean.UsersDTO;
@@ -81,10 +83,12 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("myPageMain")
-	public String myPageMain(HttpSession session,Model model) {
+	public String myPageMain(HttpSession session, Model model) {
+		if(session.getAttribute("usersId") != null) {
 		String realId = (String)session.getAttribute("usersId");
 		UsersDTO usersDTO = service.selectUsers(realId);
 		model.addAttribute("usersDTO",usersDTO);
+		}
 		return "myPage/myPageMain";
 	}
 	
@@ -147,12 +151,34 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("myReview")
-	public String myReview() {
+	public String myReview(HttpSession session,Model model) {
+		String realId = (String)session.getAttribute("usersId");
+		List<ReviewDTO> list = service.myReview(realId);
+		model.addAttribute("list",list);
 		return "myPage/myReview";
 	}
 	
 	@RequestMapping("getReview")
-	public String getReview() {
+	public String getReview(HttpSession session,Model model) {
+		String realId = (String)session.getAttribute("usersId");
+		List<ReviewDTO> list = service.getReview(realId);
+		model.addAttribute("list",list);
 		return "myPage/getReview";
 	}
+	
+	@RequestMapping("myReviewUpdate")
+	public String myReviewUpdate(@RequestParam("reviewNum")int reviewNum,Model model) {
+		model.addAttribute("reviewNum",reviewNum);
+		return "myPage/myReviewUpdate";
+	}
+	
+	
+	
+	@RequestMapping("myReviewDelete")
+	public String myReviewDelete(@RequestParam("reviewNum")int reviewNum) {
+		service.myReviewDelete(reviewNum);
+		return "myPage/myReviewDelete";
+	}
+	
+	
 }

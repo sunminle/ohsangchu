@@ -38,7 +38,26 @@
 	</select>
 	
 	<update id="modifyStore" parameterType="com.gi.osc.bean.StoreDTO">
-		update store set storename = #{storeName}, storeintro = #{storeIntro} where userid = #{id}
+		update store set storename = #{storeName}, storeintro = #{storeIntro} where userid = #{userId}
 	</update>
+	
+	<select id="myReview" resultType="com.gi.osc.bean.ReviewDTO">
+		select p.productname, a.* from product p ,
+		(select * from review where userid = #{userId}) a
+		where p.id=a.productid order by a.id desc
+	</select>
+	
+	<delete id="myReviewDelete">
+		delete from review where id = #{reviewNum}
+	</delete>
+	
+	<select id="getReview" resultType="com.gi.osc.bean.ReviewDTO">
+		select p.productname , a.* from product p ,
+		(select * from review where productid in 
+		(select id from product where storeid = 
+		(select id from store where userid = 
+		(select id from users where realid = #{realId})))) a
+		where p.id=a.productid order by a.id desc
+	</select>
 	
 </mapper>

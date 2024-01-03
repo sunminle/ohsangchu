@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gi.osc.bean.ProductDTO;
+import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.bean.UserInfoDTO;
 import com.gi.osc.bean.UsersDTO;
@@ -82,9 +83,25 @@ public class MyPageServiceImpl implements MyPageService{
 
 	@Override
 	public void modifyStore(StoreDTO dto, String realId) {
-		int id = mapper.selectUsers(realId).getId();
-		dto.setId(id);
+		int userId = mapper.selectUsers(realId).getId();
+		dto.setUserId(userId);
 		mapper.modifyStore(dto);
+	}
+
+	@Override
+	public List<ReviewDTO> myReview(String realId) {
+		int userId = mapper.selectUsers(realId).getId();
+		return mapper.myReview(userId);
+	}
+
+	@Override
+	public void myReviewDelete(int reviewNum) {
+		mapper.myReviewDelete(reviewNum);
+	}
+
+	@Override
+	public List<ReviewDTO> getReview(String realId) {
+		return mapper.getReview(realId);
 	}
 
 	
