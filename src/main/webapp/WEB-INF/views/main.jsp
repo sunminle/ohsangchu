@@ -46,16 +46,16 @@
 			<div id="carouselExample" class="carousel slide">
 				<div class="carousel-inner">
 					<div class="carousel-item active banners">
-						<img src="https://i.namu.wiki/i/82N8K0CPSFhZsqShieizBlUEGOKUkyEgfZPVGCN1jFjKootBTCec7-dxXLA4j_feJKAWzsNWLGYKwBxHlgLH0A.gif" class="d-block w-100" alt="...">
+						<img src="/resources/images/site/oschu.png" class="d-block w-100" alt="...">
 					</div>
 					<div class="carousel-item banners">
-						<img src="https://pbs.twimg.com/media/GCWHNxtboAAy5KI?format=jpg&name=4096x4096" class="d-block w-100" alt="...">
+						<img src="/resources/images/site/chu.gif" class="d-block w-100" alt="...">
 					</div>
 					<div class="carousel-item banners">
-						<img src="https://blog.kakaocdn.net/dn/ucGeZ/btsCBMEee79/4aLKN8eZKerUjVp1UKLyHk/img.gif" class="d-block w-100" alt="...">
+						<img src="https://ifh.cc/g/3YVDO9.jpg" class="d-block w-100" alt="...">
 					</div>
 					<div class="carousel-item banners">
-						<img src="https://pbs.twimg.com/media/GCPb2NdaEAAvEFa?format=jpg&name=4096x4096" class="d-block w-100" alt="...">
+						<img src="https://ifh.cc/g/vmlZsQ.gif" class="d-block w-100" alt="...">
 					</div>
 				</div>
 				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
