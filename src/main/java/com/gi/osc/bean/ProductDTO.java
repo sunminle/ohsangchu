@@ -18,4 +18,5 @@ public class ProductDTO {
 	private Date regDate;
 	
 	private String storeName;
+	private String searchKeyword;
 }
