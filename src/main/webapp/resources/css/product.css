@@ -13,9 +13,10 @@ section #title div{
 	font-size: 25px;
 }
 
-#product>div{
+#storeInfo>div{
 	margin-top : 15px;
-	width : 1000px;
+	margin-right : 15px;
+	width : 1200px;
 	min-width: 800px;
 	min-height: 100px;
 	border : 1px solid #F2F2F2;
@@ -29,9 +30,23 @@ section #title div{
     font-size : 15px;
     font-weight : bold;
     border-radius: 25px;
-    height: 30px;
+    height: 40px;
     min-width: 50px;
     margin-right: 8px;
     padding:8px;
     cursor:pointer;
+}
+
+
+
+
+#storeNav {position: relative; height: 50px; margin-bottom: 50px;}
+#storeNav li {display: inline-block; padding: 0 20px;}
+.listbox {margin: 0 auto; text-align: center;}
+
+#detail{
+	width: 100%; height: 1500px; margin-bottom: 20px;
+}
+#reviews{
+	width: 100%; height: 1500px; margin-bottom: 20px;
 }
