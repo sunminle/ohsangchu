@@ -11,8 +11,9 @@
 	 	
 	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<link href="/resources/css/style.css" rel="stylesheet">
-	
-			<jsp:include page="/WEB-INF/views/include/header.jsp" />
+		<link href="/resources/css/include.css" rel="stylesheet">
+		
+		<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	
 	
 		<title>회원가입</title>
