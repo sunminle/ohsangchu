@@ -38,6 +38,9 @@ section {
 	height : 265px;
 	object-fit:cover;
 }
+.pro:hover{
+	cursor: pointer;
+}
 .proDes{
 	padding: 10px;
 }
