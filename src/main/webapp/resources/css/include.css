@@ -28,14 +28,21 @@ dl, dt, dd, ol, ul, li{
 .green{
 	color : #75C573;
 }
+html, body{
+	height: 100%;
+}
 body{
-	min-width: 1400px;
+	min-height: 100%;
+	position: relative;
+	padding-bottom: 80px;
+}
+section {
+	margin-bottom: 30px;
 }
 a {
 	text-decoration-line: none;
 	cursor: pointer;
 }
-
 
 /**************HEADER***************/
 header{
@@ -99,10 +106,11 @@ header #searchBox button{
 #navbarNav{
 	
 }
-
-
-
 /**********FOOTER**********/
 footer {
+	bottom : 0px;
+	position: relative;
+	transform: translatY(-100%);
+	width: 100%;
 	height: 80px;
 }
