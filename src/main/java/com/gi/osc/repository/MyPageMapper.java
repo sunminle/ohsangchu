@@ -3,6 +3,7 @@ package com.gi.osc.repository;
 import java.util.List;
 
 import com.gi.osc.bean.ProductDTO;
+import com.gi.osc.bean.QNADTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.bean.UserInfoDTO;
@@ -21,4 +22,5 @@ public interface MyPageMapper {
 	public List<ReviewDTO> myReview(int userId);
 	public void myReviewDelete(int reviewNum);
 	public List<ReviewDTO> getReview(String realId);
+	public List<QNADTO> myQNA(int userId);
 }

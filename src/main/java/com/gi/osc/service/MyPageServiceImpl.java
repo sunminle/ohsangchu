@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gi.osc.bean.ProductDTO;
+import com.gi.osc.bean.QNADTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.bean.UserInfoDTO;
@@ -41,7 +42,9 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public List<ProductDTO> productList(int storeId) {
+	public List<ProductDTO> productList(String realId) {
+		int userId = mapper.selectUsers(realId).getId();
+		int storeId = mapper.selectStoreInfo(userId).getId();
 		return mapper.productList(storeId);
 	}
 
@@ -102,6 +105,12 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public List<ReviewDTO> getReview(String realId) {
 		return mapper.getReview(realId);
+	}
+
+	@Override
+	public List<QNADTO> myQNA(String realId) {
+		int userId = mapper.selectUsers(realId).getId();
+		return mapper.myQNA(userId);
 	}
 
 	
