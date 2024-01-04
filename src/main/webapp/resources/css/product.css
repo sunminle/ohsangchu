@@ -11,29 +11,43 @@ section #title div{
 	font-size: 25px;
 }
 
-#storeInfo>div{
+/**storeInfo**/
+#storeInfo{
 	margin-top : 15px;
-	margin-right : 15px;
-	width : 1200px;
-	min-width: 800px;
-	min-height: 100px;
+	padding : 15px;
+	width: 700px;
+	min-height: 250px;
+	height: auto;
 	border : 1px solid #F2F2F2;
 }
-#tags{
-	margin : 30px 0px 30px 0px;
+#storeImg{
+	width: 150px;
+	height : 150px;
+	margin-right:40px;
+	border-radius: 70%;
+    overflow: hidden;
 }
-#tags .tag{
-	background-color : #ECFFE9;
-    border: solid 1px #75C573;
-    font-size : 15px;
-    font-weight : bold;
-    border-radius: 25px;
-    height: 40px;
-    min-width: 50px;
-    margin-right: 8px;
-    padding:8px;
-    cursor:pointer;
+#storeDes #storeName:hover{
+	cursor:pointer;
+	color:#75C573;
 }
+#storePro img {
+	width: 100%;
+	height : 100%;
+	object-fit:cover; 
+}
+#storeDes .stars span{
+	margin-left:5px;
+	font-size : 13px;
+	color:#9B9B9B;
+}
+#storeDes #introduce{
+	margin : 10px 20px 0px 0px;
+	font-size: 13px;
+}
+
+
+/**storeNav**/
 #storeNav {
 	width:100%;
 	background-color : #FFFFFF;
@@ -72,9 +86,39 @@ li a {
   	font-size:20px;
   	overflow:hidden;
 }
+/**detail**/
 #detail{
 	width: 100%;
 	height: auto;
+}
+#detail #tags{
+	margin : 30px 0px 30px 0px;
+}
+#detail #tags .tag{
+	background-color : #ECFFE9;
+    border: solid 1px #75C573;
+    font-size : 12px;
+    font-weight : bold;
+    border-radius: 25px;
+    height: 35px;
+    min-width: 50px;
+    margin-right: 8px;
+    padding:8px;
+    cursor:pointer;
+}
+#detail #likeShare{
+	width : 800px;
+	height : 70px;
+	background-color: #FAFAFA;
+}
+#detail #likeShare button{
+	width : 100px;
+	height : 25px;
+	font-size : 13px;
+	margin-right : 5px;
+	border : 1px solid #9b9b9b;
+	border-radius :10px;
+	background-color: transparent;
 }
 /**review**/
 #reviews{
