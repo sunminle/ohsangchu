@@ -29,39 +29,74 @@
 		<div id="title" class="bg-dark text-white d-flex justify-content-center align-items-center">
 			<div>10cm 인형 뜨개 18차◡̈</div>
 		</div>
-		<div id="storeInfo" class="d-flex justify-content-center">
-			<div>
+		
+		<div class="d-flex justify-content-center align-items-center m-3">
+			<div id="storeInfo" class="d-flex justify-content-center align-items-center">
+				<div id="storePro" class="d-flex justify-content-end col-4" onclick="location.href='#';">
+					<div id="storeImg">
+						<img src="https://file3.instiz.net/data/cached_img/upload/2021/04/04/14/7ccca66d7654cf8760b3a63ec62c7cad.jpg" alt="프로필이미지">
+					</div>
+				</div>
+				<div id="storeDes" class="col-8">
+					<div id="storeName" class="d-flex align-items-center" onclick="location.href='#';">
+						<b>🍓빵토끼네 뜨개상점🍓</b>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" /></svg>
+					</div>
+					<div class="stars d-flex align-items-center m-1">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
+						
+						<span>4.8 (6,724)</span>
+					</div>
+					<div id="introduce">
+						Best we THEBOYZ! 안녕하세요, 더보이즈 영훈입니다. 이번에 제가 뜨개상점을 열게 되었어용...더비여러분들의 성원에 힘입어 이렇게 상품 판매까지 하게 되었답니다. 모두 여러분 덕분이에요! 구매문의는 아래쪽 채팅으로! 사적인 연락은 안되는거 아시죵^^* 잘부탁 드립니다앙~
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+		<div id="storeNav">
+			<ul class="d-flex justify-content-start">
+				<li id="detailLi" class="d-flex justify-content-center align-items-center"><a href="#detail" class="scroll_move">상세설명</a></li>
+				<li id="reviewLi" class="d-flex justify-content-center align-items-center"><a href="#reviews" class="scroll_move">후기 <small class="ml-2">913</small></a></li>
+			</ul>
+		</div>
+
+		<div id="lists">
+			<div id="detail">
+				<div class="d-flex justify-content-center">
+					<div id="desc" class="text-center">
+						💛10cm인형 귀도리&뜨개옷&가방 소품들💛<br> <img width="1000px" src="https://d2i2w6ttft7yxi.cloudfront.net/froala%2F1702149197161-%EA%B3%B5%EC%A7%80.png"><br> <img width="1000px"
+							src="https://d2i2w6ttft7yxi.cloudfront.net/froala%2F1702160323784-IMG_1670.jpeg"
+						><br> <img width="1000px" src="https://d2i2w6ttft7yxi.cloudfront.net/froala%2F1702149335487-KakaoTalk_20231210_040311196.jpg"><br> 생축케이크 모자<br> <img width="1000px"
+							src="https://d2i2w6ttft7yxi.cloudfront.net/froala%2F1702187315893-BB25D826-6800-4BC3-A9CA-62A092FB03E6.jpeg"
+						><br> 왕리본<br> <img width="1000px" src="https://d2i2w6ttft7yxi.cloudfront.net/froala%2F1702153523038-KakaoTalk_20231209_141442621_01.jpg"><br> 하트 냥 모자<br> <img
+							width="1000px" src="https://d2i2w6ttft7yxi.cloudfront.net/froala%2F1702202729006-C2418567-3F4B-415F-9C46-6810387DB835.jpeg"
+						><br> 판다클라바<br> <img width="1000px" src="https://d2i2w6ttft7yxi.cloudfront.net/froala%2F1702155863499-KakaoTalk_20231210_060355611.jpg"><br> <img width="1000px"
+							src="https://d2i2w6ttft7yxi.cloudfront.net/froala%2F1702194859460-8EADADD6-258A-4702-88FA-325FCCEF1925.jpeg"
+						><br> 체리 볼도리/메론빵 볼도리<br> <img width="1000px" src="https://d2i2w6ttft7yxi.cloudfront.net/froala%2F1702152510194-KakaoTalk_20231208_144116105_02.jpg"><br> 너구리 보이<br> <img
+							width="1000px" src="https://d2i2w6ttft7yxi.cloudfront.net/ckeditor/20230611045225_519867_40jc.jpg"
+						><br> 메이드복 간단<br> <img width="1000px" src="https://d2i2w6ttft7yxi.cloudfront.net/ckeditor/20230402054442_519867_0kf9.jpg"><br> 독기룩<br> <img width="1000px"
+							src="https://d2i2w6ttft7yxi.cloudfront.net/ckeditor/20230402052855_519867_ch5a.jpg"
+						><br>
+					</div>
+				</div>
+
 				<div id="tags" class="d-flex justify-content-center align-itemts-center">
 					<div class="tag green">#더보이즈</div>
 					<div class="tag green">#10cm인형</div>
 					<div class="tag green">#뜨개옷</div>
 				</div>
-			</div>
-		</div>
-		
-		<div id="storeNav">
-		  <ul class="d-flex justify-content-start">
-		    <li id="detailLi" class="d-flex justify-content-center align-items-center"><a href="#detail" class="scroll_move">상세설명</a></li>
-		    <li id="reviewLi" class="d-flex justify-content-center align-items-center"><a href="#reviews" class="scroll_move">후기 <small class="ml-2">913</small></a></li>
-		  </ul>
-		</div>
-
-		<div id="lists">
-			<div id="detail" class="d-flex justify-content-center">
-				<div id="desc" class="text-center">
-					💛10cm인형 귀도리&뜨개옷&가방 소품들💛<br> <img width="1000px" src="https://d2i2w6ttft7yxi.cloudfront.net/froala%2F1702149197161-%EA%B3%B5%EC%A7%80.png"><br> <img width="1000px"
-						src="https://d2i2w6ttft7yxi.cloudfront.net/froala%2F1702160323784-IMG_1670.jpeg"
-					><br> <img width="1000px" src="https://d2i2w6ttft7yxi.cloudfront.net/froala%2F1702149335487-KakaoTalk_20231210_040311196.jpg"><br> 생축케이크 모자<br> <img width="1000px"
-						src="https://d2i2w6ttft7yxi.cloudfront.net/froala%2F1702187315893-BB25D826-6800-4BC3-A9CA-62A092FB03E6.jpeg"
-					><br> 왕리본<br> <img width="1000px" src="https://d2i2w6ttft7yxi.cloudfront.net/froala%2F1702153523038-KakaoTalk_20231209_141442621_01.jpg"><br> 하트 냥 모자<br> <img
-						width="1000px" src="https://d2i2w6ttft7yxi.cloudfront.net/froala%2F1702202729006-C2418567-3F4B-415F-9C46-6810387DB835.jpeg"
-					><br> 판다클라바<br> <img width="1000px" src="https://d2i2w6ttft7yxi.cloudfront.net/froala%2F1702155863499-KakaoTalk_20231210_060355611.jpg"><br> <img width="1000px"
-						src="https://d2i2w6ttft7yxi.cloudfront.net/froala%2F1702194859460-8EADADD6-258A-4702-88FA-325FCCEF1925.jpeg"
-					><br> 체리 볼도리/메론빵 볼도리<br> <img width="1000px" src="https://d2i2w6ttft7yxi.cloudfront.net/froala%2F1702152510194-KakaoTalk_20231208_144116105_02.jpg"><br> 너구리 보이<br> <img
-						width="1000px" src="https://d2i2w6ttft7yxi.cloudfront.net/ckeditor/20230611045225_519867_40jc.jpg"
-					><br> 메이드복 간단<br> <img width="1000px" src="https://d2i2w6ttft7yxi.cloudfront.net/ckeditor/20230402054442_519867_0kf9.jpg"><br> 독기룩<br> <img width="1000px"
-						src="https://d2i2w6ttft7yxi.cloudfront.net/ckeditor/20230402052855_519867_ch5a.jpg"
-					><br>
+				
+				<div class="d-flex justify-content-center">
+					<div id="likeShare" class="d-flex justify-content-center align-items-center">
+						<button>찜하기</button>
+						<button>공유하기</button>
+					</div>
 				</div>
 			</div>
 			<div id="reviews" class="d-flex justify-content-center">
