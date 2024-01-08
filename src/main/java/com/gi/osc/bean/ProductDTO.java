@@ -16,6 +16,7 @@ public class ProductDTO {
 	private int isPublic;
 	private int categoryId;
 	private Date regDate;
+	private String IMG_URL;
 	
 	private String storeName;
 	private String searchKeyword;
