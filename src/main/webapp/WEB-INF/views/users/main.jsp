@@ -24,44 +24,46 @@
 <title>로그인 메인</title>
 </head>
 <body>
+	<p>
+		<c:if test="${sessionScope.usersId == null}">
 
-	<c:if test="${sessionScope.usersId == null}">
+			<div id=border>
+				<h4>안녕하세요! 오상추입니다.</h4>
+				<br>
+				<h5>오상추를 이용하시려면 로그인이 필요합니다</h5>
+				<br>
 
-		<div id=border>
-			<h4>안녕하세요! 오상추입니다.</h4><br>
-			<h5>오상추를 이용하시려면 로그인이 필요합니다</h5><br>
+				<form action="/users/login" method="post">
 
-			<form action="/users/login" method="post">
+					<div class="input-box">
+						<input id="username" type="text" name="realId" placeholder="아이디">
+						<label for="username">아이디</label>
+					</div>
 
-				<div class="input-box">
-					<input id="username" type="text" name="realId" placeholder="아이디">
-					<label for="username">아이디</label>
+					<div class="input-box">
+
+						<input id="password" type="password" name="userPw"
+							placeholder="비밀번호"> <label for="password">비밀번호</label>
+					</div>
+					<div id="forgot">
+						<a href="">아이디 찾기</a>
+						<a href="">비밀번호 찾기</a>
+					</div>
+					<input type="submit" value="로그인">
+
+				</form>
+
+				<div
+					onClick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=ff7b89b43db02f47252b06a513236d36&redirect_uri=http://localhost:8080/main';">
+					<img src="/resources/images/kakao_login.png" />
 				</div>
 
-				<div class="input-box">
 
-					<input id="password" type="password" name="userPw"
-						placeholder="비밀번호"> <label for="password">비밀번호</label>
-				</div>
-				<div id="forgot">비밀번호 찾기</div>
-				<input type="submit" value="로그인">
-
-			</form>
-
-			<div
-				onClick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=ff7b89b43db02f47252b06a513236d36&redirect_uri=http://localhost:8080/main';">
-				<img src="/resources/images/kakao_login.png" />
 			</div>
 
+		</c:if>
 
-		</div>
 
-	</c:if>
-
-	<c:if test="${sessionScope.usersId != null}">
-		alert("로그인 성공");
-		<h2>${sessionScope.usersId}님어서오세요.</h2>
-	</c:if>
-
+	</p>
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 </body>

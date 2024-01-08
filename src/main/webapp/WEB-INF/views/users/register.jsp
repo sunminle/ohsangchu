@@ -61,29 +61,34 @@
 	
 
 	<body>
-	 <div class="wrapper">
+	 <div id=border>
 		<section id="container">
 	
 			<form action="/member/register" method="post">
-				<div class="form-group has-feedback">
-					<label class="control-label" for="realId">아이디</label>
-					<input class="form-control" type="text" id="realId" name="realId" />
+			
+				<div class="input-box">
+					<input id="realId" type="text" name="realId" placeholder="아이디">
+					<label for="realId">아이디</label>
 				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="userName">이 름</label>
-					<input class="form-control" type="text" id="userName" name="userName" />
+			
+				<div class="input-box">
+					<input id="userName" type="text" name="userName" placeholder="이름">
+					<label for="userName">이 름</label>
 				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="userPw">패스워드</label>
-					<input class="form-control" type="password" id="userPw" name="userPw" />
+				
+				<div class="input-box">
+					<input id="userPw" type="text" name="userPw" placeholder="패스워드">
+					<label for="userPw">패스워드</label>
 				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="nickname">닉네임</label>
-					<input class="form-control" type="text" id="nickname" name="nickname" />
+				
+				<div class="input-box">
+					<input id="nickname" type="text" name="nickname" placeholder="닉네임">
+					<label for="nickname">닉네임</label>
 				</div>
+				
 				<div class="form-group has-feedback">
-					<button class="btn btn-success" type="submit" id="submit">회원가입</button>
-					<button class="cancle btn btn-danger" type="button">취소</button>
+					<input type="submit" id="submit" value="회원가입">
+				
 				</div>
 			</form>
 			
