@@ -73,7 +73,7 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 <c:if test="${sessionScope.usersId != null}">
 	<center>
-		<a style="color: green;">${usersDTO.nickname}</a>님의 마이페이지.<br />
+		<a style="color: green;">${users.nickname}</a>님의 마이페이지.<br />
 
 		<button id="modifyInfo">정보수정</button>
 		<button id="modifyStoreInfo">상점정보수정</button>

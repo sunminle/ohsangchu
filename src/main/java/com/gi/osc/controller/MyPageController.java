@@ -1,15 +1,19 @@
 package com.gi.osc.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gi.osc.bean.PaymentDTO;
 import com.gi.osc.bean.ProductDTO;
 import com.gi.osc.bean.QNADTO;
 import com.gi.osc.bean.ReviewDTO;
@@ -43,10 +48,24 @@ public class MyPageController {
 	}
 
 	@RequestMapping("addProductPro")
-	public String addProductPro(ProductDTO dto, Model model, HttpSession session) {
+	public String addProductPro(HttpServletRequest request, ProductDTO dto, Model model, HttpSession session,@RequestParam("fileName") String[] fileName) {
 		String realId = (String) session.getAttribute("usersId");
 		dto.setRealId(realId);
+		List<String> liveFileName = new ArrayList<String>();
+		String copyPath = request.getServletContext().getRealPath("/resources/summernoteImage/");
+		String productPath = request.getServletContext().getRealPath("/resources/images/product/");
+		//List<String> dieFileName = new ArrayList<String>();
+		for(String file : fileName) {
+			if(dto.getProductIntro().contains(file)) {
+				liveFileName.add(file);
+			}
+			/*else {
+				dieFileName.add(file);
+			}*/
+		}
 		service.addProduct(dto);
+		service.addProductImg(liveFileName, dto, copyPath, productPath,fileName,realId);
+		
 		return "product/addProductPro";
 	}
 
@@ -61,13 +80,14 @@ public class MyPageController {
 			String originalFileName = multipartFile.getOriginalFilename();
 			String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
 			String savedFileName = UUID.randomUUID() + extension;
-
 			Path targetPath = Path.of(fileRoot, savedFileName);
 			Files.copy(multipartFile.getInputStream(), targetPath, StandardCopyOption.REPLACE_EXISTING);
 
 			String imageUrl = request.getContextPath() + "/resources/summernoteImage/" + savedFileName;
-			responseJson = objectMapper.createObjectNode().put("url", imageUrl).put("responseCode", "success");
-
+			responseJson = objectMapper.createObjectNode()
+					.put("url", imageUrl)
+					.put("responseCode", "success")
+					.put("fileName", savedFileName);
 			return ResponseEntity.ok(responseJson);
 		} catch (IOException e) {
 			responseJson = objectMapper.createObjectNode().put("responseCode", "error");
@@ -88,7 +108,7 @@ public class MyPageController {
 		if (session.getAttribute("usersId") != null) {
 			String realId = (String) session.getAttribute("usersId");
 			UsersDTO usersDTO = service.selectUsers(realId);
-			model.addAttribute("usersDTO", usersDTO);
+			model.addAttribute("users", usersDTO);
 		}
 		return "myPage/myPageMain";
 	}
@@ -196,8 +216,12 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("myProductBuyer")
-	public String myProductBuyer(int productId) {
-		
+	public String myProductBuyer(int productId, Model model,@RequestParam(value = "orderType" , defaultValue = "idDESC")String orderType) {
+		List<PaymentDTO> paymentList = service.myProductBuyer(productId,orderType);
+		ProductDTO productDTO = service.selectProductInfo(productId);
+		model.addAttribute("paymentList",paymentList);
+		model.addAttribute("product",productDTO);
+		model.addAttribute("orderType",orderType);
 		return "myPage/myProductBuyer";
 	}
 

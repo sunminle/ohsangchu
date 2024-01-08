@@ -9,6 +9,7 @@
 	href="/resources/css/summernote/summernote-lite.css">
 
 
+
 <script>
 $(document).ready(function() {
     $('#summernote').summernote({
@@ -48,8 +49,10 @@ function uploadSummernoteImageFile(file, editor) {
 		processData : false,
 		dataType: 'json',
 		success : function(data) {
+			$("#addProduct").append("<input type='hidden' name='fileName' value='"+data.fileName+"' />");
+			console.log(data.fileName);
         	//항상 업로드된 파일의 url이 있어야 한다.
-			$(editor).summernote('insertImage', data.url);
+			$(editor).summernote('insertImage', data.url);;
 		}
 	});
 }
@@ -74,8 +77,7 @@ $("div.note-editable").on('drop',function(e){
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 <center>
 	<h2>상품 등록</h2>
-	<form action="/my/addProductPro" method="post"
-		enctype="multipart/form-data">
+	<form action="/my/addProductPro" method="post" enctype="multipart/form-data" id="addProduct">
 		상품 이름 : <input type="text" name="productName"> <br /> 상품 가격 :
 		<input type="number" name="price"> <br /> 상품 수량 : <input
 			type="number" name="quantity"> <br /> 상품 소개 <br />
