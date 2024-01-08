@@ -2,66 +2,135 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace = "com.gi.osc.repository.MyPageMapper">
-	 <select id="selectUsers" resultType="UsersDTO">
-	 	select * from users where realId = #{realId}
-	 </select>
-	 
-	  <select id="selectUsersInfo" resultType="com.gi.osc.bean.UserInfoDTO">
-	 	select * from userinfo where userid = #{userId}
-	 </select>
-	 
-	 <select id="selectStoreInfo" resultType="com.gi.osc.bean.StoreDTO">
-	 	select * from store where userid = #{userId}
-	 </select>
-	
-	<insert id="addProduct" parameterType="com.gi.osc.bean.ProductDTO">
-		insert into product (storeid,productname,price,quantity,productintro,ispublic,categoryid)
-		values ((select id from store where userid = (select id from users where realid = #{realId})),
+<mapper namespace="com.gi.osc.repository.MyPageMapper">
+	<select id="selectUsers" resultType="UsersDTO">
+		select * from users where
+		realId = #{realId}
+	</select>
+
+	<select id="selectUsersInfo"
+		resultType="com.gi.osc.bean.UserInfoDTO">
+		select * from userinfo where userid = #{userId}
+	</select>
+
+	<select id="selectStoreInfo"
+		resultType="com.gi.osc.bean.StoreDTO">
+		select * from store where userid = #{userId}
+	</select>
+
+	<select id="selectProductInfo"
+		resultType="com.gi.osc.bean.ProductDTO">
+		select * from product where id = #{productId}
+	</select>
+
+	<insert id="addProduct"
+		parameterType="com.gi.osc.bean.ProductDTO">
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+			select product_seq.currval from dual
+		</selectKey>
+		insert into product
+		(storeid,productname,price,quantity,productintro,ispublic,categoryid)
+		values ((select id from store where userid = (select id from users
+		where realid = #{realId})),
 		#{productName},#{price},#{quantity},#{productIntro},#{isPublic},#{categoryId})
+		
 	</insert>
-	
+
 	<select id="productList" resultType="com.gi.osc.bean.ProductDTO">
-		select * from product where storeid = #{storeId} order by id desc
+		select * from product where
+		storeid = #{storeId} order by id desc
 	</select>
-	
+
 	<select id="nickCheck">
-		select count(nickname) from users where nickname = #{nickname}
+		select count(nickname) from users where nickname =
+		#{nickname}
 	</select>
-	
+
 	<update id="modifyUsers" parameterType="UsersDTO">
-		update users set nickname = #{nickname}, profile = #{profile} where realid = #{realId}
+		update users set nickname
+		= #{nickname}, profile = #{profile} where realid = #{realId}
 	</update>
-	
+
 	<select id="storeNameCheck">
-		select count(storename) from store where storename = #{storeName}
+		select count(storename) from store where storename =
+		#{storeName}
 	</select>
-	
-	<update id="modifyStore" parameterType="com.gi.osc.bean.StoreDTO">
-		update store set storename = #{storeName}, storeintro = #{storeIntro} where userid = #{userId}
+
+	<update id="modifyStore"
+		parameterType="com.gi.osc.bean.StoreDTO">
+		update store set storename = #{storeName}, storeintro =
+		#{storeIntro} where userid = #{userId}
 	</update>
-	
+
 	<select id="myReview" resultType="com.gi.osc.bean.ReviewDTO">
-		select p.productname, a.* from product p ,
+		select p.productname, a.* from
+		product p ,
 		(select * from review where userid = #{userId}) a
-		where p.id=a.productid order by a.id desc
+		where
+		p.id=a.productid order by a.id desc
 	</select>
-	
+
 	<delete id="myReviewDelete">
 		delete from review where id = #{reviewNum}
 	</delete>
-	
+
 	<select id="getReview" resultType="com.gi.osc.bean.ReviewDTO">
-		select p.productname , a.* from product p ,
-		(select * from review where productid in 
-		(select id from product where storeid = 
-		(select id from store where userid = 
+		select p.productname , a.*
+		from product p ,
+		(select * from review where productid in
+		(select id
+		from product where storeid =
+		(select id from store where userid =
 		(select id from users where realid = #{realId})))) a
-		where p.id=a.productid order by a.id desc
+		where
+		p.id=a.productid
+		order by a.id desc
+	</select>
+
+	<select id="myQNA" resultType="com.gi.osc.bean.QNADTO">
+		select * from qna where userid =
+		#{userId} order by id desc
+	</select>
+
+	
+
+	<select id="myProductBuyer"
+		resultType="com.gi.osc.bean.PaymentDTO">
+		<choose>
+			
+			<when test="orderType == 'idDESC'">
+				select u.nickname , a.* from users u,
+				(select * from payment where productid = #{productId}) a
+				where u.id = a.userid order by a.id desc
+			</when>
+			
+			<when test="orderType == 'idASC'">
+				select u.nickname , a.* from users u,
+				(select * from payment where productid = #{productId}) a
+				where u.id = a.userid order by a.id asc
+			</when>
+
+			<when test="orderType == 'status'">
+				select u.nickname , a.* from users u,
+				(select * from payment where productid = #{productId}) a
+				where u.id = a.userid order by a.status asc
+			</when>
+
+			<when test="orderType == 'paymentType'">
+				select u.nickname , a.* from users u,
+				(select * from payment where productid = #{productId}) a
+				where u.id = a.userid order by a.paymenttype asc
+			</when>
+		</choose>
 	</select>
 	
-	<select id="myQNA" resultType="com.gi.osc.bean.QNADTO">
-		select * from qna where userid = #{userId} order by id desc
+	<insert id="addProductImg">
+		insert into product_img (storeid,productid,img_url) values (#{storeId},#{productId},#{imgUrl})
+	</insert>
+	
+	<select id="storeId">
+		select id from store where userid = (select id from users
+		where realid = #{realId})
 	</select>
 	
 </mapper>

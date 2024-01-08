@@ -3,10 +3,14 @@ package com.gi.osc.service;
 import java.io.File;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gi.osc.bean.PaymentDTO;
 import com.gi.osc.bean.ProductDTO;
 import com.gi.osc.bean.QNADTO;
 import com.gi.osc.bean.ReviewDTO;
@@ -37,6 +41,12 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 	
 	@Override
+	public ProductDTO selectProductInfo(int productId) {
+		return mapper.selectProductInfo(productId);
+	}
+	
+	@Override
+	@Transactional
 	public void addProduct(ProductDTO dto) {
 		mapper.addProduct(dto);
 	}
@@ -112,6 +122,39 @@ public class MyPageServiceImpl implements MyPageService{
 		int userId = mapper.selectUsers(realId).getId();
 		return mapper.myQNA(userId);
 	}
+
+	@Override
+	public List<PaymentDTO> myProductBuyer(@Param("productId") int productId, @Param("orderType")String orderType) {
+		return mapper.myProductBuyer(productId,orderType);
+	}
+	
+	@Override
+	@Transactional
+	public void addProductImg(List<String>liveFileName,ProductDTO productDTO,String copyPath,String productPath, String[] fileName,String realId) {
+		int storeId = mapper.storeId(realId);
+		int productId = productDTO.getId();
+		for(String imgUrl : liveFileName) {
+		File copyFile = new File(copyPath+imgUrl);
+		File productFile = new File(productPath+imgUrl);
+		
+		try {
+			FileUtils.copyFile(copyFile, productFile);
+			mapper.addProductImg(storeId, productId, imgUrl);
+		}catch(Exception e) {e.printStackTrace();}
+		}
+		
+		for(String dummy : fileName) {
+			File dummyFile = new File(copyPath+dummy);
+			
+			try {
+				dummyFile.delete();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	
 
 	
 
