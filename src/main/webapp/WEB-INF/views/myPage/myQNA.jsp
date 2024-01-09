@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <h2>나의 문의 내역</h2>
-
+<c:if test="${!empty QNAList}">
 <c:forEach var="QNA" items="${QNAList}">
 	문의 제목 : <a href="/qna/dd?QNAId=${QNA.id}">${QNA.title}</a>
 	<br />
@@ -13,3 +13,7 @@
 			pattern="yyyy-MM-dd HH:mm" /><br />
 	<hr />
 </c:forEach>
+</c:if>
+<c:if test = "${empty QNAList}">
+문의내용이 없습니다.
+</c:if>

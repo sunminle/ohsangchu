@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gi.osc.bean.PaymentDTO;
 import com.gi.osc.bean.ProductDTO;
+import com.gi.osc.bean.ProductImgDTO;
 import com.gi.osc.bean.QNADTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
@@ -52,7 +53,10 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public List<ProductDTO> productList(String realId) {
 		int userId = mapper.selectUsers(realId).getId();
-		int storeId = mapper.selectStoreInfo(userId).getId();
+		int storeId = 0;
+		if(mapper.selectStoreInfo(userId) != null) {
+		storeId = mapper.selectStoreInfo(userId).getId();
+		}
 		return mapper.productList(storeId);
 	}
 
@@ -152,6 +156,16 @@ public class MyPageServiceImpl implements MyPageService{
 			}
 		}
 		}
+	}
+
+	@Override
+	public List<ProductDTO> myBuyList(String realId) {
+		return mapper.myBuyList(realId);
+	}
+
+	@Override
+	public List<ProductImgDTO> myBuyListImg(String realId) {
+		return mapper.myBuyListImg(realId);
 	}
 
 	

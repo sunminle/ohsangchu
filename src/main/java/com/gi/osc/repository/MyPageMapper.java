@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gi.osc.bean.PaymentDTO;
 import com.gi.osc.bean.ProductDTO;
+import com.gi.osc.bean.ProductImgDTO;
 import com.gi.osc.bean.QNADTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
@@ -31,4 +32,6 @@ public interface MyPageMapper {
 	public List<PaymentDTO> myProductBuyer(@Param("productId") int productId, @Param("orderType")String orderType);
 	public void addProductImg(@Param("storeId")int storeId, @Param("productId")int productId, @Param("imgUrl")String imgUrl);
 	public int storeId(String realId);
+	public List<ProductDTO> myBuyList(String realId);
+	public List<ProductImgDTO> myBuyListImg(String realId);
 }

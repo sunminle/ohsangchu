@@ -133,4 +133,12 @@
 		where realid = #{realId})
 	</select>
 	
+	<select id="myBuyList" resultType="com.gi.osc.bean.ProductDTO">
+		select p.*,pm.orderdate from product p join payment pm on p.id = pm.productid join users u on pm.userid = u.id where u.realid = #{realId} order by pm.id desc
+	</select>
+	
+	<select id="myBuyListImg" resultType="com.gi.osc.bean.ProductImgDTO">
+		select * from product_img where productid in (select productid from payment where userid=(select id from users where realid =#{realId}))order by id asc
+	</select>
+	
 </mapper>
