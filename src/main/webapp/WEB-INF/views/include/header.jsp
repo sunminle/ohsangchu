@@ -9,6 +9,7 @@
 				<b><a href="/main">OSangChu</a></b>
 			</h1>
 			<span><small>오늘의 상품 추천</small></span>
+			<img src="/resources/images/site/ppp.gif" class=""  style="width: 40px; height: 40px;" />
 		</div>
 		<div class="d-flex align-items-center m-2">
 			<div id="searchBox">
@@ -74,6 +75,10 @@
 		<%-- 세션에 아이디가 없을 경우 --%>
 		<c:if test="${sessionScope.usersId == null}">
 			<div>
+				<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" color="green" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+</svg>
 				<a href="/users/main">로그인</a> 
 				<a href="/users/register">회원가입</a>
 			</div>
