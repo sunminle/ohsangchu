@@ -18,7 +18,7 @@ $(document).ready(function() {
 		maxHeight: null,
 		focus: true,
         lang: "ko-KR",
-        placeholder: '상품의 이미지와 소개를 적어주세요.',
+        placeholder: '상품의 이미지와 소개를 적어주세요 상품정보는 수정이 불가능합니다.',
         callbacks: {	//여기 부분이 이미지를 첨부하는 부분
 			onImageUpload : function(files) {	
 				for(i = 0 ; i < files.length ; i++){
