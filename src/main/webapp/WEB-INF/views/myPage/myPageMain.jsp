@@ -60,6 +60,17 @@
 		});
 	});
 	
+	$(function(){
+		$("#myBuyList").click(function(){
+			$.ajax({
+				url : "/my/myBuyList",
+				success : function(e){
+					$("#modify").html(e);
+				}
+			});
+		});
+	});
+	
 	
 </script>
 <!-- css -->
@@ -81,6 +92,7 @@
 		<button id="reviewAll">리뷰 관리</button>
 		<button id="myQNA">문의 내역</button>
 		<button id="myProduct">구매자 관리</button>
+		<button id="myBuyList">구매목록</button>
 		<div id="modify"></div>
 	</center>
 </c:if>

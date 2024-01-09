@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gi.osc.bean.PaymentDTO;
 import com.gi.osc.bean.ProductDTO;
+import com.gi.osc.bean.ProductImgDTO;
 import com.gi.osc.bean.QNADTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
@@ -223,6 +224,18 @@ public class MyPageController {
 		model.addAttribute("product",productDTO);
 		model.addAttribute("orderType",orderType);
 		return "myPage/myProductBuyer";
+	}
+	
+	@RequestMapping("myBuyList")
+	public String myBuyList(HttpSession session, Model model) {
+		String realId = (String) session.getAttribute("usersId");
+		List<ProductDTO> productList = service.myBuyList(realId);
+		List<ProductImgDTO> imgList = service.myBuyListImg(realId);
+		
+		model.addAttribute("productList",productList);
+		model.addAttribute("imgList",imgList);
+		
+		return "myPage/myBuyList";
 	}
 
 }

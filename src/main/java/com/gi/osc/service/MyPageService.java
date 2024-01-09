@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gi.osc.bean.PaymentDTO;
 import com.gi.osc.bean.ProductDTO;
+import com.gi.osc.bean.ProductImgDTO;
 import com.gi.osc.bean.QNADTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
@@ -31,4 +32,6 @@ public interface MyPageService {
 	public List<QNADTO> myQNA(String realId);
 	public List<PaymentDTO> myProductBuyer(@Param("productId") int productId, @Param("orderType")String orderType);
 	public void addProductImg(List<String>liveFileName,ProductDTO productDTO,String copyPath,String productPath,String[] fileName,String realId);
+	public List<ProductDTO> myBuyList(String realId);
+	public List<ProductImgDTO> myBuyListImg(String realId);
 }
