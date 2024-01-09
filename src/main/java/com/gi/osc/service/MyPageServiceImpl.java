@@ -7,7 +7,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gi.osc.bean.PaymentDTO;
@@ -46,7 +45,6 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 	
 	@Override
-	@Transactional
 	public void addProduct(ProductDTO dto) {
 		mapper.addProduct(dto);
 	}
@@ -129,10 +127,10 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 	
 	@Override
-	@Transactional
 	public void addProductImg(List<String>liveFileName,ProductDTO productDTO,String copyPath,String productPath, String[] fileName,String realId) {
 		int storeId = mapper.storeId(realId);
 		int productId = productDTO.getId();
+		if(!liveFileName.isEmpty()) {
 		for(String imgUrl : liveFileName) {
 		File copyFile = new File(copyPath+imgUrl);
 		File productFile = new File(productPath+imgUrl);
@@ -142,7 +140,8 @@ public class MyPageServiceImpl implements MyPageService{
 			mapper.addProductImg(storeId, productId, imgUrl);
 		}catch(Exception e) {e.printStackTrace();}
 		}
-		
+		}
+		if(fileName != null && fileName.length>0) {
 		for(String dummy : fileName) {
 			File dummyFile = new File(copyPath+dummy);
 			
@@ -151,6 +150,7 @@ public class MyPageServiceImpl implements MyPageService{
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
+		}
 		}
 	}
 

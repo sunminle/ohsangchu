@@ -1,19 +1,16 @@
 package com.gi.osc.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,13 +45,15 @@ public class MyPageController {
 	}
 
 	@RequestMapping("addProductPro")
-	public String addProductPro(HttpServletRequest request, ProductDTO dto, Model model, HttpSession session,@RequestParam("fileName") String[] fileName) {
+	public String addProductPro(HttpServletRequest request, ProductDTO dto, Model model, HttpSession session,@RequestParam(value = "fileName", required = false) String[] fileName) {
 		String realId = (String) session.getAttribute("usersId");
 		dto.setRealId(realId);
+		dto.setProductIntro(dto.getProductIntro().replace("src=\"/resources/summernoteImage/", "src=\"/resources/images/product/"));
 		List<String> liveFileName = new ArrayList<String>();
 		String copyPath = request.getServletContext().getRealPath("/resources/summernoteImage/");
 		String productPath = request.getServletContext().getRealPath("/resources/images/product/");
 		//List<String> dieFileName = new ArrayList<String>();
+		if(fileName != null && fileName.length>0) {
 		for(String file : fileName) {
 			if(dto.getProductIntro().contains(file)) {
 				liveFileName.add(file);
@@ -62,6 +61,7 @@ public class MyPageController {
 			/*else {
 				dieFileName.add(file);
 			}*/
+		}
 		}
 		service.addProduct(dto);
 		service.addProductImg(liveFileName, dto, copyPath, productPath,fileName,realId);
