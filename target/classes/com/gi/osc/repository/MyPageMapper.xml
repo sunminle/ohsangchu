@@ -137,7 +137,7 @@
 		select p.*,pm.orderdate from product p join payment pm on p.id = pm.productid join users u on pm.userid = u.id where u.realid = #{realId} order by pm.id desc
 	</select>
 	
-	<select id="myBuyListImg" resultType="com.gi.osc.bean.ProductImgDTO">
+	<select id="myBuyListImg" resultType="com.gi.osc.bean.PostingImgDTO">
 		select * from product_img where productid in (select productid from payment where userid=(select id from users where realid =#{realId}))order by id asc
 	</select>
 	
@@ -145,7 +145,7 @@
 		select p.*,h.id heartid from product p join heart h on p.id=h.productid join users u on h.userid = u.id where u.realid = #{realId} order by h.id desc
 	</select>
 	
-	<select id="myHeartListImg" resultType = "com.gi.osc.bean.ProductImgDTO">
+	<select id="myHeartListImg" resultType = "com.gi.osc.bean.PostingImgDTO">
 		select * from product_img where productid in (select productid from heart where userid=(select id from users where realid = #{realId}))order by id asc
 	</select>
 	

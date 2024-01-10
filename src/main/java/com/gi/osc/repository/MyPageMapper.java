@@ -3,11 +3,10 @@ package com.gi.osc.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gi.osc.bean.PaymentDTO;
+import com.gi.osc.bean.PostingImgDTO;
 import com.gi.osc.bean.ProductDTO;
-import com.gi.osc.bean.ProductImgDTO;
 import com.gi.osc.bean.QNADTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
@@ -33,9 +32,9 @@ public interface MyPageMapper {
 	public void addProductImg(@Param("storeId")int storeId, @Param("productId")int productId, @Param("imgUrl")String imgUrl);
 	public int storeId(String realId);
 	public List<ProductDTO> myBuyList(String realId);
-	public List<ProductImgDTO> myBuyListImg(String realId);
+	public List<PostingImgDTO> myBuyListImg(String realId);
 	public List<ProductDTO> myHeartList(String realId);
-	public List<ProductImgDTO> myHeartListImg(String realId);
+	public List<PostingImgDTO> myHeartListImg(String realId);
 	public List<StoreDTO> mySubscribeList(String realId);
 	public ProductDTO product(int productId);
 }

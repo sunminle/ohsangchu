@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gi.osc.bean.PaymentDTO;
+import com.gi.osc.bean.PostingImgDTO;
 import com.gi.osc.bean.ProductDTO;
-import com.gi.osc.bean.ProductImgDTO;
 import com.gi.osc.bean.QNADTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
@@ -164,7 +164,7 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public List<ProductImgDTO> myBuyListImg(String realId) {
+	public List<PostingImgDTO> myBuyListImg(String realId) {
 		return mapper.myBuyListImg(realId);
 	}
 
@@ -174,7 +174,7 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public List<ProductImgDTO> myHeartListImg(String realId) {
+	public List<PostingImgDTO> myHeartListImg(String realId) {
 		return mapper.myHeartListImg(realId);
 	}
 

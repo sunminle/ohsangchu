@@ -24,8 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gi.osc.bean.PaymentDTO;
+import com.gi.osc.bean.PostingImgDTO;
 import com.gi.osc.bean.ProductDTO;
-import com.gi.osc.bean.ProductImgDTO;
 import com.gi.osc.bean.QNADTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
@@ -45,30 +45,30 @@ public class MyPageController {
 		return "product/addProduct";
 	}
 
-	@RequestMapping("addProductPro")
-	public String addProductPro(HttpServletRequest request, ProductDTO dto, Model model, HttpSession session,@RequestParam(value = "fileName", required = false) String[] fileName) {
-		String realId = (String) session.getAttribute("usersId");
-		dto.setRealId(realId);
-		dto.setProductIntro(dto.getProductIntro().replace("src=\"/resources/summernoteImage/", "src=\"/resources/images/product/"));
-		List<String> liveFileName = new ArrayList<String>();
-		String copyPath = request.getServletContext().getRealPath("/resources/summernoteImage/");
-		String productPath = request.getServletContext().getRealPath("/resources/images/product/");
-		//List<String> dieFileName = new ArrayList<String>();
-		if(fileName != null && fileName.length>0) {
-		for(String file : fileName) {
-			if(dto.getProductIntro().contains(file)) {
-				liveFileName.add(file);
-			}
-			/*else {
-				dieFileName.add(file);
-			}*/
-		}
-		}
-		service.addProduct(dto);
-		service.addProductImg(liveFileName, dto, copyPath, productPath,fileName,realId);
-		
-		return "product/addProductPro";
-	}
+//	@RequestMapping("addProductPro")
+//	public String addProductPro(HttpServletRequest request, ProductDTO dto, Model model, HttpSession session,@RequestParam(value = "fileName", required = false) String[] fileName) {
+//		String realId = (String) session.getAttribute("usersId");
+//		dto.setRealId(realId);
+//		dto.setProductIntro(dto.getProductIntro().replace("src=\"/resources/summernoteImage/", "src=\"/resources/images/product/"));
+//		List<String> liveFileName = new ArrayList<String>();
+//		String copyPath = request.getServletContext().getRealPath("/resources/summernoteImage/");
+//		String productPath = request.getServletContext().getRealPath("/resources/images/product/");
+//		//List<String> dieFileName = new ArrayList<String>();
+//		if(fileName != null && fileName.length>0) {
+//		for(String file : fileName) {
+//			if(dto.getProductIntro().contains(file)) {
+//				liveFileName.add(file);
+//			}
+//			/*else {
+//				dieFileName.add(file);
+//			}*/
+//		}
+//		}
+//		service.addProduct(dto);
+//		service.addProductImg(liveFileName, dto, copyPath, productPath,fileName,realId);
+//		
+//		return "product/addProductPro";
+//	}
 
 	@RequestMapping(value = "uploadSummernoteImageFile", produces = "application/json", consumes = "multipart/form-data")
 	public ResponseEntity<JsonNode> uploadSummernoteImageFile(@RequestPart("file") MultipartFile multipartFile,
@@ -230,7 +230,7 @@ public class MyPageController {
 	public String myBuyList(HttpSession session, Model model) {
 		String realId = (String) session.getAttribute("usersId");
 		List<ProductDTO> productList = service.myBuyList(realId);
-		List<ProductImgDTO> imgList = service.myBuyListImg(realId);
+		List<PostingImgDTO> imgList = service.myBuyListImg(realId);
 		
 		model.addAttribute("productList",productList);
 		model.addAttribute("imgList",imgList);
@@ -247,7 +247,7 @@ public class MyPageController {
 	public String heartList(Model model, HttpSession session) {
 		String realId = (String) session.getAttribute("usersId");
 		List<ProductDTO> productList = service.myHeartList(realId);
-		List<ProductImgDTO> imgList = service.myHeartListImg(realId);
+		List<PostingImgDTO> imgList = service.myHeartListImg(realId);
 		model.addAttribute("productList",productList);
 		model.addAttribute("imgList",imgList);
 		return "myPage/heartList";
