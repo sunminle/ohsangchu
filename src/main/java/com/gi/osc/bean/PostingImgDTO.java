@@ -3,9 +3,10 @@ package com.gi.osc.bean;
 import lombok.Data;
 
 @Data
-public class ProductImgDTO {
+public class PostingImgDTO {
+	
 	private int id;
 	private int storeId;
-	private int productId;
+	private int postingId;
 	private String img_URL;
 }
