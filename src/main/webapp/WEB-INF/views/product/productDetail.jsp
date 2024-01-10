@@ -62,7 +62,9 @@
 		<div id="storeNav">
 			<ul class="d-flex justify-content-start">
 				<li id="detailLi" class="d-flex justify-content-center align-items-center"><a href="#detail" class="scroll_move">상세설명</a></li>
+				<li id="buytab" class="d-flex justify-content-center align-items-center"><a href="#buy" class="scroll_move">구매</a></li>
 				<li id="reviewLi" class="d-flex justify-content-center align-items-center"><a href="#reviews" class="scroll_move">후기 <small class="ml-2">913</small></a></li>
+
 			</ul>
 		</div>
 
@@ -94,11 +96,43 @@
 				
 				<div class="d-flex justify-content-center">
 					<div id="likeShare" class="d-flex justify-content-center align-items-center">
-						<button>찜하기</button>
-						<button>공유하기</button>
+						<button>
+							<!-- 찜하기전 -->
+							<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"><path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/></svg>
+							<!-- 찜하고 난 후 
+							<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/></svg>
+							-->
+							찜 115개
+						</button>
+						<button>
+							<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16"><path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/></svg>
+							공유하기
+						</button>
 					</div>
 				</div>
+				
+				<hr>
+				
 			</div>
+			
+			<!-- 구매탭 -->
+			<div id="buy" class="d-flex justify-content-center">
+				<div>
+					<b>- 주문 상품 선택<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">  <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1"/></svg></b>
+					
+					<div class="products" class="d-flex justify-content-center align-items-center">
+						섹시 메이드복 세트(24,000원/개)
+					</div>
+					<div class="products" class="d-flex justify-content-center align-items-center">
+						미니 넥타이(6,700원/개)
+					</div>
+					<div class="products" class="d-flex justify-content-center align-items-center">
+						냥냥 보이 모자(11,000원/개)
+					</div>
+				</div>			
+			</div>
+			<!-- /구매탭 -->
+			
 			<div id="reviews" class="d-flex justify-content-center">
 				<div>
 					<div class="d-flex justify-content-between mb-3">
@@ -203,6 +237,7 @@ $(document).ready(function($) {
 
 $(function() {
 	var detail = $('#detail').offset().top;
+	var buy = $('#buy').offset().top;
 	var reviews = $('#reviews').offset().top;
 	var storeNav = $("#storeNav").offset().top;
 	
@@ -217,13 +252,19 @@ $(function() {
 		}
 	  
 	  	//스크롤시 메뉴바 변경
-	  	if(window<reviews-150){	//스크롤이 detail과 window 사이
+	  	if(window<buy){	//스크롤이 detail = buy 아래
 	  		$('#detailLi').addClass('clicked');
 	  	}else{
 	  		$('#detailLi').removeClass('clicked');
 	  	}
 	  	
-	  	if(window>=reviews-150){
+	  	if(window<reviews && window >= buy){	//스크롤이 buy과 reviews 사이
+	  		$('#buytab').addClass('clicked');
+	  	}else{
+	  		$('#buytab').removeClass('clicked');
+	  	}
+	  	
+	  	if(window>=reviews){
 	  		$('#reviewLi').addClass('clicked');
 	  	}else{
 	  		$('#reviewLi').removeClass('clicked');

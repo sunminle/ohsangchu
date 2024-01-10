@@ -114,12 +114,43 @@ li a {
 #detail #likeShare button{
 	width : 100px;
 	height : 25px;
-	font-size : 13px;
+	font-size : 12px;
 	margin-right : 5px;
-	border : 1px solid #9b9b9b;
-	border-radius :10px;
+	border : 1px solid #9B9B9B;
+	border-radius :5px;
 	background-color: transparent;
 }
+#detail #likeShare button svg{
+	margin-right: 8px;
+	margin-bottom : 3px;
+	color: #9B9B9B;
+}
+#detail hr{
+	width:1000px;
+	margin: 50px auto;
+	text-align: center;
+	color: #9B9B9B;
+}
+/**buy**/
+#buy{
+	min-height: 500px;
+}
+#buy b{
+	font-size: 17px;
+}
+#buy b svg{
+	color: red;
+	margin-bottom: 6px;
+}
+#buy .products{
+	width : 800px;
+	height : 70px;
+	background-color: #FAFAFA;
+	margin: 5px 0px;
+	padding: 10px;
+	font-size: 14px;
+}
+
 /**review**/
 #reviews{
 	width: 100%;
