@@ -71,6 +71,17 @@
 		});
 	});
 	
+	$(function(){
+		$("#HS").click(function(){
+			$.ajax({
+				url : "/my/HSList",
+				success : function(e){
+					$("#modify").html(e);
+				}
+			});
+		});
+	});
+	
 	
 </script>
 <!-- css -->
@@ -93,6 +104,7 @@
 		<button id="myQNA">문의 내역</button>
 		<button id="myProduct">구매자 관리</button>
 		<button id="myBuyList">구매목록</button>
+		<button id="HS">찜,구독 목록</button>
 		<div id="modify"></div>
 	</center>
 </c:if>

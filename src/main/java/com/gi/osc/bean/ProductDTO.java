@@ -23,4 +23,7 @@ public class ProductDTO {
 	
 	//주문날짜 뽑아오기위해
 	private Date orderDate;
+	
+	//찜아이디 뽑아오기위해
+	private int heartId;
 }

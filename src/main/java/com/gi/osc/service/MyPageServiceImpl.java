@@ -168,11 +168,24 @@ public class MyPageServiceImpl implements MyPageService{
 		return mapper.myBuyListImg(realId);
 	}
 
-	
+	@Override
+	public List<ProductDTO> myHeartList(String realId) {
+		return mapper.myHeartList(realId);
+	}
 
-	
+	@Override
+	public List<ProductImgDTO> myHeartListImg(String realId) {
+		return mapper.myHeartListImg(realId);
+	}
 
-	
-	
+	@Override
+	public List<StoreDTO> mySubscribeList(String realId) {
+		return mapper.mySubscribeList(realId);
+	}
+
+	@Override
+	public ProductDTO product(int productId) {
+		return mapper.product(productId);
+	}
 
 }
