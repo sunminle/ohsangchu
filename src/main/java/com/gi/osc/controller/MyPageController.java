@@ -237,5 +237,36 @@ public class MyPageController {
 		
 		return "myPage/myBuyList";
 	}
-
+	
+	@RequestMapping("HSList")
+	public String HSList() {
+		return "myPage/HSList";
+	}
+	
+	@RequestMapping("heartList")
+	public String heartList(Model model, HttpSession session) {
+		String realId = (String) session.getAttribute("usersId");
+		List<ProductDTO> productList = service.myHeartList(realId);
+		List<ProductImgDTO> imgList = service.myHeartListImg(realId);
+		model.addAttribute("productList",productList);
+		model.addAttribute("imgList",imgList);
+		return "myPage/heartList";
+	}
+	
+	@RequestMapping("subscribeList")
+	public String subscribeList(Model model, HttpSession session) {
+		String realId = (String) session.getAttribute("usersId");
+		List<StoreDTO> storeList = service.mySubscribeList(realId);
+		model.addAttribute("storeList",storeList);
+		return "myPage/subscribeList";
+	}
+	
+	@RequestMapping("product")
+	public String product(int productId,Model model) {
+		
+		ProductDTO product = service.product(productId);
+		model.addAttribute("product", product);
+		return "myPage/product";
+	}
+	
 }

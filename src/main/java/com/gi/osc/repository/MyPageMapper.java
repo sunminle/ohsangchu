@@ -34,4 +34,8 @@ public interface MyPageMapper {
 	public int storeId(String realId);
 	public List<ProductDTO> myBuyList(String realId);
 	public List<ProductImgDTO> myBuyListImg(String realId);
+	public List<ProductDTO> myHeartList(String realId);
+	public List<ProductImgDTO> myHeartListImg(String realId);
+	public List<StoreDTO> mySubscribeList(String realId);
+	public ProductDTO product(int productId);
 }

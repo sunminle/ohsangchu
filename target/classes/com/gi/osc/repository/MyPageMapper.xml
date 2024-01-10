@@ -141,4 +141,20 @@
 		select * from product_img where productid in (select productid from payment where userid=(select id from users where realid =#{realId}))order by id asc
 	</select>
 	
+	<select id="myHeartList" resultType="com.gi.osc.bean.ProductDTO">
+		select p.*,h.id heartid from product p join heart h on p.id=h.productid join users u on h.userid = u.id where u.realid = #{realId} order by h.id desc
+	</select>
+	
+	<select id="myHeartListImg" resultType = "com.gi.osc.bean.ProductImgDTO">
+		select * from product_img where productid in (select productid from heart where userid=(select id from users where realid = #{realId}))order by id asc
+	</select>
+	
+	<select id="mySubscribeList" resultType="com.gi.osc.bean.StoreDTO">
+		select s.* from store s join store_subscribe ss on ss.storeid = s.id join users u on ss.userid = u.id where u.realid = #{realId} order by ss.id desc
+	</select>
+	
+	<select id = "product" resultType="com.gi.osc.bean.ProductDTO">
+		select * from product where id = #{productId}
+	</select>
+	
 </mapper>
