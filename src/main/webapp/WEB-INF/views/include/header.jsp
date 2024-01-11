@@ -86,6 +86,7 @@
 		<%-- 세션에 아이디 존재 --%>
 		<c:if test="${sessionScope.usersId != null}">
 			<span><b>${sessionScope.usersId}</b></span> 님 환영합니다!
+			<a href="/my/myPageMain">마이페이지</a> 
 		</c:if>
 	</div>
 </header>

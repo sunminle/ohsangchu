@@ -108,7 +108,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -121,7 +121,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -134,7 +134,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -147,7 +147,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -160,7 +160,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -186,7 +186,7 @@
   <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146z"/>
 </svg>
 			<div id="newProList" class="d-flex justify-content-start">
-				<div class="pro" onclick="location.href='/product/detail';">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -199,7 +199,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -212,7 +212,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -225,7 +225,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -238,7 +238,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -251,7 +251,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -277,7 +277,7 @@
   <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zM8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098L8.16 4.1z"/>
 </svg>
 			<div id="newProList" class="d-flex justify-content-start">
-				<div class="pro" onclick="location.href='/product/detail';">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -290,7 +290,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -303,7 +303,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -316,7 +316,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -329,7 +329,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -342,7 +342,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -369,7 +369,7 @@
   <path d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z"/>
 </svg>
 			<div id="newProList" class="d-flex justify-content-start">
-				<div class="pro" onclick="location.href='/product/detail';">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -382,7 +382,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -395,7 +395,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -408,7 +408,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -421,7 +421,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
@@ -434,7 +434,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pro">
+				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
 					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
 					<div class="proDes">
 						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
