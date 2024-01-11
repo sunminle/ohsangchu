@@ -44,7 +44,7 @@
 
    <!-- 검색 결과가 있는 경우 -->
 <c:if test="${not empty productList}">
-   
+   		
             <!-- 각 제품에 대한 정보를 표시 -->
             <c:forEach var="product" items="${productList}">
             <div id="newProduct" class="parent">
@@ -55,24 +55,23 @@
 </svg>
 			<div id="newProList" class="d-flex justify-content-start">
 				<div class="child" onclick="location.href='/product/detail';">
-					
+
 					<div class="proDes">
 						<div class="proTitle">${product.productName}</div>
 						<div class="proPrice d-flex justify-content-end"><span>${product.price} 원</span></div>
-						<div class="proProfile d-flex align-items-center">
-							<div class="proImg">
-								<img src="${product.IMG_URL}" />
-							</div>
+						<div class="proProfile d-flex align-items-center">	
 							<span>${product.storeName}</span>
 						</div>
 					</div>
 				</div>
 				</div>
-				
-				
-                
+				</div>
+
+
+
             </c:forEach>
-        
+       
+       
 </c:if>
 
 </body>

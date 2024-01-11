@@ -14,15 +14,13 @@
     	</select>
     	
     	<select id="searchProductsByName" parameterType="java.lang.String" resultType="com.gi.osc.bean.ProductDTO">
-    SELECT s.storename, p.*, i.*
+    SELECT s.storename, p.*
     FROM store s
-    JOIN product p ON s.id = p.storeid
-    LEFT JOIN product_img i ON s.id = i.storeid
+    JOIN product p ON s.id = p.storeid(+)
     <where>
         <if test="searchKeyword != null and searchKeyword != ''">
             AND (p.productname LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%'
-            OR s.storename LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%'
-            OR i.IMG_URL LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%')
+            OR s.storename LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%')
         </if>
     </where>
 </select>
