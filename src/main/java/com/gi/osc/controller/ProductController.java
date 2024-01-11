@@ -47,7 +47,19 @@ public class ProductController {
 	@RequestMapping("store")
 	public String store(HttpServletRequest request, Model model) {
 		
+		//스토어넘버를 주면 해당 스토어 가져오기
+		//파라미터로 스토어 넘버 받기
+		int storeId = Integer.parseInt(request.getParameter("storeNum"));
+		StoreDTO store = service.getStore(storeId);
 		
+		//유저넘버를 주면 해당 유저 정보 가져오기
+		int userId = store.getUserId();
+		UsersDTO user = service.getUSer(userId);
+		
+		//뷰 페이지에 보내기
+		model.addAttribute("store", store);
+		model.addAttribute("user", user);
+	
 		
 		return "product/store";
 	}
