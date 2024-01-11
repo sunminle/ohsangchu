@@ -63,6 +63,14 @@ $("div.note-editable").on('drop',function(e){
     }
    e.preventDefault();
 })
+
+/* $(function(){
+		$("#plusProduct").click(function(){
+			$("#plusProduct").append("<input type='text' name='product' />");
+		});
+	}); */
+
+
 </script>
 </head>
 
@@ -80,8 +88,10 @@ $("div.note-editable").on('drop',function(e){
 	<form action="/my/addProductPro" method="post" enctype="multipart/form-data" id="addProduct">
 		상품 이름 : <input type="text" name="productName"> <br /> 상품 가격 :
 		<input type="number" name="price"> <br /> 상품 수량 : <input
-			type="number" name="quantity"> <br /> 상품 소개 <br />
-		<textarea id="summernote" name="productIntro"></textarea>
+			type="number" name="quantity"> <br /> 제목 : <input
+			type="text" name="title"> <br /> 상품 소개 <br />
+		<textarea id="summernote" name="content"></textarea>
+		<br /> 상품 추가 : <input type = "button" value = "+" id = "plusProduct">
 		<br /> 수량 공개 여부 : <select name="isPublic">
 			<option value="0">비공개</option>
 			<option value="1">공개</option>

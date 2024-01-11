@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gi.osc.bean.PaymentDTO;
+import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.PostingImgDTO;
 import com.gi.osc.bean.ProductDTO;
 import com.gi.osc.bean.QNADTO;
@@ -46,19 +47,20 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 	
 	@Override
-	public void addProduct(ProductDTO dto) {
-		mapper.addProduct(dto);
+	public PostingDTO selectPostingInfo(int postingId) {
+		return mapper.selectPostingInfo(postingId);
+	}
+	
+	@Override
+	public List<PostingDTO> postingList(String realId) {
+		return mapper.postingList(realId);
+	}
+	
+	@Override
+	public void addPosting(PostingDTO dto) {
+		mapper.addPosting(dto);
 	}
 
-	@Override
-	public List<ProductDTO> productList(String realId) {
-		int userId = mapper.selectUsers(realId).getId();
-		int storeId = 0;
-		if(mapper.selectStoreInfo(userId) != null) {
-		storeId = mapper.selectStoreInfo(userId).getId();
-		}
-		return mapper.productList(storeId);
-	}
 
 	@Override
 	public int nickCheck(String nickname) {
@@ -126,14 +128,14 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public List<PaymentDTO> myProductBuyer(@Param("productId") int productId, @Param("orderType")String orderType) {
-		return mapper.myProductBuyer(productId,orderType);
+	public List<PaymentDTO> myProductBuyer(@Param("postingId") int postingId, @Param("orderType")String orderType) {
+		return mapper.myProductBuyer(postingId,orderType);
 	}
 	
 	@Override
-	public void addProductImg(List<String>liveFileName,ProductDTO productDTO,String copyPath,String productPath, String[] fileName,String realId) {
+	public void addPostingImg(List<String>liveFileName,PostingDTO postingDTO,String copyPath,String productPath, String[] fileName,String realId) {
 		int storeId = mapper.storeId(realId);
-		int productId = productDTO.getId();
+		int postingId = postingDTO.getId();
 		if(!liveFileName.isEmpty()) {
 		for(String imgUrl : liveFileName) {
 		File copyFile = new File(copyPath+imgUrl);
@@ -141,7 +143,7 @@ public class MyPageServiceImpl implements MyPageService{
 		
 		try {
 			FileUtils.copyFile(copyFile, productFile);
-			mapper.addProductImg(storeId, productId, imgUrl);
+			mapper.addPostingImg(storeId, postingId, imgUrl);
 		}catch(Exception e) {e.printStackTrace();}
 		}
 		}
@@ -159,7 +161,7 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public List<ProductDTO> myBuyList(String realId) {
+	public List<PostingDTO> myBuyList(String realId) {
 		return mapper.myBuyList(realId);
 	}
 
@@ -169,7 +171,7 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public List<ProductDTO> myHeartList(String realId) {
+	public List<PostingDTO> myHeartList(String realId) {
 		return mapper.myHeartList(realId);
 	}
 
@@ -187,5 +189,9 @@ public class MyPageServiceImpl implements MyPageService{
 	public ProductDTO product(int productId) {
 		return mapper.product(productId);
 	}
+
+	
+
+	
 
 }
