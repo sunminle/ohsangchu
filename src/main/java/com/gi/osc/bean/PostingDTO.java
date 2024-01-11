@@ -16,4 +16,7 @@ public class PostingDTO {
 	
 	// realId받아오기위해
 		private String realId;
+	
+	//payment 쓸때 주문날짜 받아오기 위해
+		private Date orderDate;
 }
