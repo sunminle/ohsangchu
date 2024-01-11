@@ -15,5 +15,6 @@ public class ReviewDTO {
 	private Date regDate;
 	
 	//프로덕트id를 스트링으로 치환했을때 사용하려고 만듬.
-	private String productName;
+	//private String productName;
+	private String title;
 }

@@ -6,13 +6,13 @@
 <script src="/resources/js/jquery-3.7.1.min.js"></script>
 
 <script>
-	var productId = ${product.id};
+	var postingId = ${posting.id};
 
 	$(function(){
 		$("#orderType").change(function(){
 			var orderType = $(this).val();
 			$.ajax({
-				url : "/my/myProductBuyer?productId="+productId+"&orderType="+orderType,
+				url : "/my/myProductBuyer?postingId="+postingId+"&orderType="+orderType,
 				success : function(e){
 					$("#buyer").html(e);
 				}
@@ -23,7 +23,7 @@
 
 <div id="buyer">
 	<input type="button" value="뒤로가기" onclick="history.go(-1)"> <a
-		href="/product/productDetail?productId=${product.id}">${product.productName}</a>
+		href="/product/productDetail?postingId=${posting.id}">${posting.title}</a>
 	구매자 목록 <br />
 
 
