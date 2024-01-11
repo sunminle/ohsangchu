@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gi.osc.repository.PostingMapper">
+
+	<!-- selectOne : 포스트넘버주면 포스트 가져오기 -->
+	<select id="getPost" resultType="com.gi.osc.bean.PostingDTO">
+		select * from posting where id=#{id}
+	</select>
+	
+	<!-- selectOne : 스토어넘버주면 스토어 가져오기 -->
+	<select id="getStore" resultType="com.gi.osc.bean.StoreDTO">
+		select * from store where id=#{id}
+	</select>
+	
+	<!-- selectOne : 유저넘버주면 유저 가져오기 -->
+	<select id="getUser" resultType="com.gi.osc.bean.UsersDTO">
+		select * from users where id=#{id}
+	</select>
+	
+	
+	<!-- 
+		select * from dbo.store where delete_yn='N'
+		<choose>
+			<when test="type !=null and type.equals('storename')">
+				and storename like CONCAT('%', #{keyword}, '%')
+			</when>
+		</choose>
+	 -->
+	
+</mapper>
