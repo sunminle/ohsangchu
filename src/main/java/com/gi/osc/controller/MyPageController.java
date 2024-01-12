@@ -223,11 +223,7 @@ public class MyPageController {
 	public String myBuyList(HttpSession session, Model model) {
 		String realId = (String) session.getAttribute("usersId");
 		List<PostingDTO> postingList = service.myBuyList(realId);
-		List<PostingImgDTO> imgList = service.myBuyListImg(realId);
-		
 		model.addAttribute("postingList",postingList);
-		model.addAttribute("imgList",imgList);
-		
 		return "myPage/myBuyList";
 	}
 	
@@ -240,9 +236,7 @@ public class MyPageController {
 	public String heartList(Model model, HttpSession session) {
 		String realId = (String) session.getAttribute("usersId");
 		List<PostingDTO> postingList = service.myHeartList(realId);
-		List<PostingImgDTO> imgList = service.myHeartListImg(realId);
 		model.addAttribute("postingList",postingList);
-		model.addAttribute("imgList",imgList);
 		return "myPage/heartList";
 	}
 	

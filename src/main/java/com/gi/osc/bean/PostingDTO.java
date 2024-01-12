@@ -13,7 +13,7 @@ public class PostingDTO {
 	private int isPublic;
 	private int categoryId;
 	private Date regDate;
-	
+	private String thumnail;
 	// realId받아오기위해
 		private String realId;
 	

@@ -165,20 +165,12 @@ public class MyPageServiceImpl implements MyPageService{
 		return mapper.myBuyList(realId);
 	}
 
-	@Override
-	public List<PostingImgDTO> myBuyListImg(String realId) {
-		return mapper.myBuyListImg(realId);
-	}
 
 	@Override
 	public List<PostingDTO> myHeartList(String realId) {
 		return mapper.myHeartList(realId);
 	}
 
-	@Override
-	public List<PostingImgDTO> myHeartListImg(String realId) {
-		return mapper.myHeartListImg(realId);
-	}
 
 	@Override
 	public List<StoreDTO> mySubscribeList(String realId) {

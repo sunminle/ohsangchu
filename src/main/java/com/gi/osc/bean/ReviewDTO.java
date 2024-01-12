@@ -8,7 +8,7 @@ import lombok.Data;
 public class ReviewDTO {
 	private int id;
 	private int userId;
-	private int productId;
+	private int postingId;
 	private String content;
 	private float point;
 	private String img;

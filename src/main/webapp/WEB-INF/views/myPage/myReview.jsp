@@ -21,7 +21,7 @@
 <h2>내가 쓴 리뷰 목록</h2>
 <c:if test="${!empty myReviewList}">
 	<c:forEach var="myReview" items="${myReviewList}">
-	상품 이름 : <a href="/product/detail?id=${myReview.productId}">${myReview.title}</a>
+	상품 이름 : <a href="/product/detail?postNum=${myReview.postingId}">${myReview.title}</a>
 		<br />
 	리뷰 내용 : ${myReview.content}<br />
 	리뷰 별점 : <c:forEach var="point" begin="1" end="${myReview.point}">★</c:forEach><c:if test="${myReview.point % 1 != 0}">☆</c:if>
