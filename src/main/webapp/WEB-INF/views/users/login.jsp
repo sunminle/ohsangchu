@@ -6,8 +6,9 @@
 	<c:set var = "usersId" value = "${usersDTO.realId}" scope = "session" />
 	<script>
 	alert("로그인이 완료되었습니다.");
+	 history.go(-1);
 	</script>
-	<c:redirect url = "/main" />
+	
 </c:if>
 
 <c:if test = "${chk == 0}">

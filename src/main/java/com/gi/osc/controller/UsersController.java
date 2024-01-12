@@ -35,6 +35,12 @@ public class UsersController {
 		return "users/login";
 	}
 	
+	@RequestMapping("/logout")
+	public String logout() {
+		
+		return "users/logout";
+	}
+	
 	@RequestMapping("register")
 	public String register() {
 		
