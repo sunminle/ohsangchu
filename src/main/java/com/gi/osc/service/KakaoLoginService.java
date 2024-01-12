@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gi.osc.repository.IKakaoLoginService;
 
 @Service
 @Primary
@@ -23,7 +22,7 @@ public class KakaoLoginService implements IKakaoLoginService {
 
 	@Override
 	public String getAccessToken(String authorize_code) throws Exception {
-		String access_Token = "";
+		String access_Token = "NRgYm6RAXpu9ulV52lbDQtTMPEUTm6jhOGqCtrKdHNlSoJ7w4WbWGqV3KNgKPXUbAAABjPIBj_bMISgqRbFCUQ";
 		String refresh_Token = "";
 		String reqURL = "https://kauth.kakao.com/oauth/token";
 

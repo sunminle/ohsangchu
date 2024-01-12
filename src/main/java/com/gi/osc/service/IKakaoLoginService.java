@@ -1,4 +1,4 @@
-package com.gi.osc.repository;
+package com.gi.osc.service;
 
 import java.util.HashMap;
 
