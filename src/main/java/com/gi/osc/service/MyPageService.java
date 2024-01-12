@@ -35,9 +35,7 @@ public interface MyPageService {
 	public List<PaymentDTO> myProductBuyer(@Param("postingId") int postingId, @Param("orderType")String orderType);
 	public void addPostingImg(List<String>liveFileName,PostingDTO postingDTO,String copyPath,String productPath,String[] fileName,String realId);
 	public List<PostingDTO> myBuyList(String realId);
-	public List<PostingImgDTO> myBuyListImg(String realId);
 	public List<PostingDTO> myHeartList(String realId);
-	public List<PostingImgDTO> myHeartListImg(String realId);
 	public List<StoreDTO> mySubscribeList(String realId);
 	public ProductDTO product(int productId);
 }

@@ -137,16 +137,8 @@
 		select p.*,pm.orderdate from posting p join payment pm on p.id = pm.postingid join users u on pm.userid = u.id where u.realid = #{realId} order by pm.id desc
 	</select>
 	
-	<select id="myBuyListImg" resultType="com.gi.osc.bean.PostingImgDTO">
-		select * from posting_img where postingid in (select postingid from payment where userid=(select id from users where realid =#{realId}))order by id asc
-	</select>
-	
 	<select id="myHeartList" resultType="com.gi.osc.bean.PostingDTO">
 		select p.*,h.id heartid from posting p join heart h on p.id=h.postingid join users u on h.userid = u.id where u.realid = #{realId} order by h.id desc
-	</select>
-	
-	<select id="myHeartListImg" resultType = "com.gi.osc.bean.PostingImgDTO">
-		select * from posting_img where postingid in (select postingid from heart where userid=(select id from users where realid = #{realId}))order by id asc
 	</select>
 	
 	<select id="mySubscribeList" resultType="com.gi.osc.bean.StoreDTO">

@@ -34,9 +34,7 @@ public interface MyPageMapper {
 	public void addPostingImg(@Param("storeId")int storeId, @Param("postingId")int postingId, @Param("imgUrl")String imgUrl);
 	public int storeId(String realId);
 	public List<PostingDTO> myBuyList(String realId);
-	public List<PostingImgDTO> myBuyListImg(String realId);
 	public List<PostingDTO> myHeartList(String realId);
-	public List<PostingImgDTO> myHeartListImg(String realId);
 	public List<StoreDTO> mySubscribeList(String realId);
 	public ProductDTO product(int productId);
 }

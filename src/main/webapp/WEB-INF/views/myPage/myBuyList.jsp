@@ -4,22 +4,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <h2>구매 목록</h2>
-<c:if test = "${!empty postingList and !empty imgList}">
-<c:set var = "firstImg" value = "false"/>
+<c:if test = "${!empty postingList}">
+
 <c:forEach var = "posting" items = "${postingList}">
 주문일자 : <fmt:formatDate value="${posting.orderDate}"
 			pattern="yyyy-MM-dd HH:mm" /><br/>
-상품명 : <a href = "/my/product?postingId=${posting.id}">${posting.title}</a><br/>
-<c:forEach var = "img" items = "${imgList}">
-<c:if test="${img.postingId == posting.id and firstImg == false}">
-<c:set var = "firstImg" value = "true"/>
-<img style = "width:200px;" src = "/resources/images/posting/${img.img_URL}">
-</c:if>
-</c:forEach>
-<c:if test = "${firstImg == false}">
-<img style = "width:200px;" src = "/resources/images/posting/notImage.jpg">
-</c:if>
-<c:set var = "firstImg" value = "false"/>
+상품명 : <a href = "/product/detail?postNum=${posting.id}">${posting.title}</a><br/>
+<img style = "width:200px;" src = "/resources/images/posting/${posting.thumnail}">
 <hr/>
 </c:forEach>
 </c:if>

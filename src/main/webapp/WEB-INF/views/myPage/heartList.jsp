@@ -3,20 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <h2>찜상품 목록</h2>
-<c:if test = "${!empty postingList and !empty imgList}">
-<c:set var = "firstImg" value = "false"/>
+<c:if test = "${!empty postingList}">
 <c:forEach var = "posting" items = "${postingList}">
-상품명 : <a href = "/product/detail?postingId=${posting.id}">${posting.title}</a><br/>
-<c:forEach var = "img" items = "${imgList}">
-<c:if test="${img.postingId == posting.id and firstImg == false}">
-<c:set var = "firstImg" value = "true"/>
-<img style = "width:200px;" src = "/resources/images/posting/${img.img_URL}">
-</c:if>
-</c:forEach>
-<c:if test = "${firstImg == false}">
-<img style = "width:200px;" src = "/resources/images/posting/notImage.jpg">
-</c:if>
-<c:set var = "firstImg" value = "false"/>
+상품명 : <a href = "/product/detail?postNum=${posting.id}">${posting.title}</a><br/>
+<img style = "width:200px;" src = "/resources/images/posting/${posting.thumnail}">
 <hr/>
 </c:forEach>
 </c:if>
