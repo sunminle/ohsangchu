@@ -30,6 +30,11 @@ public class UsersServiceImpl implements UsersService{
 		
 		usersMapper.register(dto);
     }
+
+	@Override
+	public int getUserId(String userName) {
+		return mapper.getUserId(userName);
+	}
 		
 }
 
