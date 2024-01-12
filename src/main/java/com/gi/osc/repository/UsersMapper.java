@@ -7,5 +7,7 @@ public interface UsersMapper {
 
 	// 회원가입 처리
     void register(UsersDTO dto) throws Exception;
+    
+    public int getUserId(String realId);
 
 }

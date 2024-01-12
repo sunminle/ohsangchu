@@ -7,4 +7,7 @@ public interface UsersService {
 	
 	//회원가입 처리
 	void register(UsersDTO dto) throws Exception;
+	
+	//userName주면 userId 가져오기
+	public int getUserId(String userName);
 }

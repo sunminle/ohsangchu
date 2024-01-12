@@ -35,7 +35,7 @@
 			<div id="storeInfo" class="d-flex justify-content-center align-items-center">
 				<div id="storePro" class="d-flex justify-content-end col-4">
 					<div id="storeImg">
-						<img src="/resources/images/profiles/${user.profile}" alt="프로필이미지">
+						<img src="/resources/images/profiles/${storeUser.profile}" alt="프로필이미지">
 					</div>
 				</div>
 				<div id="storeDes" class="col-8">

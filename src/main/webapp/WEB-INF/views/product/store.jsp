@@ -32,7 +32,7 @@
 			<div id="storeInfo" class="d-flex justify-content-between align-items-center">
 				<div class="d-flex justify-content-start align-items-center">
 					<div id="storeImg">
-						<img src="/resources/images/profiles/${user.profile}" alt="프로필이미지">
+						<img src="/resources/images/profiles/${storeUser.profile}" alt="프로필이미지">
 					</div>
 					<div id="storeDes">
 						<div id="storeName" class="d-flex align-items-center" onclick="location.href='#';">
@@ -53,7 +53,16 @@
 					</div>
 				</div>	
 				<div class="d-flex justify-content-end align-items-start" id="contact">
-					<button id="follow"><b>팔로우</b></button>
+					<c:choose>
+						<%-- 팔로우중 --%>
+						<c:when test="${followCheck eq 1}">
+							<button class="fu" id="unfollow" data-store-id="${store.id}"><b>언팔로우</b></button>
+						</c:when>
+						<%-- 팔로우중이 아닐때 --%>
+						<c:otherwise>
+							<button class="fu" id="follow" data-store-id="${store.id}"><b>팔로우</b></button>
+						</c:otherwise>
+					</c:choose>
 					<button id="message"><b>메세지</b></button>
 				</div>
 			</div>
@@ -66,5 +75,42 @@
 	<!-- /footer -->
 	
 </body>
+
+<script>
+	$(document).ready(function() {
+		
+		//////////팔로우버튼
+		$(".fu").click(function() {
+			var uid = '<%=(String)session.getAttribute("usersId")%>';
+
+			if(uid == "null"){//로그인 안했을땐 로그인페이지로
+				alert("로그인이 필요합니다!");
+				window.location.href="/users/main";	
+			}else{//로그인 한 상태라면 팔언팔 동작
+				console.log("팔/언");
+			
+				let storeId = $(this).data('store-id');
+				
+				//alert(postId);
+				$.ajax({
+					url:"/store/follow/" + storeId
+					, success:function(data) {
+						if (data.code == 1) {
+							console.log(data.result);
+							location.reload(true);
+						} else {
+							alert(data.errorMessage);	
+						}
+					}
+					, error: function(e) {
+						alert("팔로우 에러. 다시 시도해주세요.");
+					}
+				});
+			}
+		});
+		//////////팔로우버튼
+		
+	});
+</script>
 
 </html>

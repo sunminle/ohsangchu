@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gi.osc.repository.StoreMapper">
+
+	<!-- select : follow check -->
+	<select id="followCheck" parameterType="com.gi.osc.bean.StoreSubDTO">
+		select count(*)
+		from store_subscribe
+		where userId = #{userId} and storeId = #{storeId}
+	</select>
+	
+	<!-- insert : follow -->
+	<insert id="follow" parameterType="com.gi.osc.bean.StoreSubDTO">
+		insert into store_subscribe (storeId, userId) values (#{storeId}, #{userId})
+	</insert>
+	
+	<!-- delete : unfollow -->
+	<delete id="unfollow" parameterType="com.gi.osc.bean.StoreSubDTO">
+		delete from store_subscribe where storeId=#{storeId} and userId=#{userId}
+	</delete>
+
+</mapper>
