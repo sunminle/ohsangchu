@@ -18,12 +18,15 @@ import com.gi.osc.bean.UsersDTO;
 
 public interface MyPageService {
 	public UsersDTO selectUsers(String realId);
+	public int selectStoreId(String realId);
+	public int postingCount(int StoreId);
 	public UserInfoDTO selectUsersInfo(int userId);
 	public StoreDTO selectStoreInfo(int userId);
 	public ProductDTO selectProductInfo(int productId);
 	public PostingDTO selectPostingInfo(int postingId);
 	public List<PostingDTO> postingList(String realId);
-	public void addPosting(PostingDTO dto);
+	public void addPosting(PostingDTO dto,MultipartFile thumnail,String productPath,String realId);
+	public void addproduct(ProductDTO dto);
 	public int nickCheck(String nickname);
 	public void modifyUsers(UsersDTO dto, MultipartFile file,String filePath,String realId);
 	public int storeNameCheck(String storeName);

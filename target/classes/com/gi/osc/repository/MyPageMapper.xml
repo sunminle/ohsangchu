@@ -7,7 +7,16 @@
 		select * from users where
 		realId = #{realId}
 	</select>
-
+	
+	<select id="selectStoreId">
+		select id from store where userid = (select id from users
+		where realid = #{realId})
+	</select>
+	
+	<select id="postingCount">
+		select count(storeid) from posting where storeid = #{storeId}
+	</select>
+	
 	<select id="selectUsersInfo"
 		resultType="com.gi.osc.bean.UserInfoDTO">
 		select * from userinfo where userid = #{userId}
@@ -33,10 +42,10 @@
 			select posting_seq.currval from dual
 		</selectKey>
 		insert into posting
-		(storeid,title,content,ispublic,categoryid)
+		(storeid,title,content,ispublic,categoryid,thumnail)
 		values ((select id from store where userid = (select id from users
 		where realid = #{realId})),
-		#{title},#{content},#{isPublic},#{categoryId})
+		#{title},#{content},#{isPublic},#{categoryId},#{thumnail})
 		
 	</insert>
 
@@ -152,5 +161,10 @@
 	<select id="postingList" resultType="com.gi.osc.bean.PostingDTO">
 		select * from posting where storeid = (select id from store where userid = (select id from users where realid = #{realId}))order by id desc
 	</select>
+	
+	<insert id="addproduct" parameterType="com.gi.osc.bean.ProductDTO">
+		insert into product (storeid,productname,price,quantity,postingid) values ((select id from store where userid = (select id from users
+		where realid = #{realId})),#{productName},#{price},#{quantity},#{postingId})
+	</insert>
 	
 </mapper>

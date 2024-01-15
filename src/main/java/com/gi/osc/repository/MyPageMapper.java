@@ -16,12 +16,15 @@ import com.gi.osc.bean.UsersDTO;
 
 public interface MyPageMapper {
 	public UsersDTO selectUsers(String realId);
+	public int selectStoreId(String realId);
+	public int postingCount(int StoreId);
 	public UserInfoDTO selectUsersInfo(int userId);
 	public StoreDTO selectStoreInfo(int userId);
 	public ProductDTO selectProductInfo(int productId);
 	public PostingDTO selectPostingInfo(int postingId);
 	public List<PostingDTO> postingList(String realId);
 	public void addPosting(PostingDTO dto);
+	public void addproduct(ProductDTO dto);
 	public int nickCheck(String nickname);
 	public void modifyUsers(UsersDTO dto);
 	public int storeNameCheck(String storeName);
