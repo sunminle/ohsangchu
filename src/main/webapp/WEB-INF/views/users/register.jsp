@@ -5,6 +5,17 @@
 <html>
 <head>
 
+<!-- bootstrap:css -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<!-- boot : js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<!--favicon-->
+<link rel="icon" href="/resources/images/site/leaf-solid.png">
+<!-- jQuery -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<!-- css -->
+<link href="/resources/css/include.css" rel="stylesheet">
+<link href="/resources/css/main.css" rel="stylesheet">
 <!-- CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -14,10 +25,13 @@
 
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link href="/resources/css/style.css" rel="stylesheet">
-<link href="/resources/css/include.css" rel="stylesheet">
 
+<link href="/resources/css/include.css" rel="stylesheet">
+<link href="/resources/css/style.css" rel="stylesheet">
+
+<!-- header -->
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
+<!-- /header -->
 
 
 <title>회원가입</title>
@@ -65,7 +79,7 @@
 		<section id="container">
 
 			<form action="/users/login" method="post">
-	<h3>JOIN</h3>
+	<h3>JOIN</h3><br><br><br>
 				<div class="input-box">
 					<input id="realId" type="text" name="realId" placeholder="아이디">
 					<label for="realId">아이디</label>
