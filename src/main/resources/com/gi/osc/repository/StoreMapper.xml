@@ -18,5 +18,15 @@
 	<delete id="unfollow" parameterType="com.gi.osc.bean.StoreSubDTO">
 		delete from store_subscribe where storeId=#{storeId} and userId=#{userId}
 	</delete>
+	
+	<!-- select : getFollow cnt -->
+	<select id="getFollow">
+		select count(*) from store_subscribe where userId=#{userId}
+	</select>
+		
+	<!-- select : getFollower cnt -->
+	<select id="getfollower">
+		select count(*) from store_subscribe where storeId=#{storeId}
+	</select>
 
 </mapper>

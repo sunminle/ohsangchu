@@ -157,7 +157,7 @@
 								</div>
 							</div>
 							<div class="reCon d-flex">
-								<img src="https://media.bunjang.co.kr/product/245451839_2_1702987673_w360.jpg">
+								<img src="/resources/images/review/review1.jpg">
 								<div>
 									너무 귀여워요! 집에 인형 10cm 아깅이들한테 겨울 기념으로 귀도리 하나씩 장만해줬는데 진짜 찰떡이에요!!
 									너무 귀여워요! 집에 인형 10cm 아깅이들한테 겨울 기념으로 귀도리 하나씩 장만해줬는데 진짜 찰떡이에요!!

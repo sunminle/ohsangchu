@@ -42,6 +42,7 @@ public class ProductRestController {
 		System.out.println("storeId : "+storeUserId+", userId : "+userId);
 		int fResult = storeService.following(storeUserId,userId);
 		
+		
 		if(fResult == 1) {	//팔로우
 			result.put("code", 1);
 			result.put("result", "팔로우완료");
