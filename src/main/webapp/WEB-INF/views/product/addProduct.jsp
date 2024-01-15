@@ -49,7 +49,7 @@ function uploadSummernoteImageFile(file, editor) {
 		processData : false,
 		dataType: 'json',
 		success : function(data) {
-			$("#addProduct").append("<input type='hidden' name='fileName' value='"+data.fileName+"' />");
+			$("#addProduct").append("<br/><input type='hidden' name='fileName' value='"+data.fileName+"' />");
 			console.log(data.fileName);
         	//항상 업로드된 파일의 url이 있어야 한다.
 			$(editor).summernote('insertImage', data.url);;
@@ -64,12 +64,19 @@ $("div.note-editable").on('drop',function(e){
    e.preventDefault();
 })
 
-/* $(function(){
+ $(function(){
 		$("#plusProduct").click(function(){
-			$("#plusProduct").append("<input type='text' name='product' />");
+			var plus = $("<div class = 'productGroup'>상품명 : <input type='text' name='product' />"+
+					" 수량 : <input type = 'number' name = 'quantity'/>"+
+					" 가격 : <input type = 'number' name = 'price'/>"+
+					"  <input type = 'button' id = 'remove' value = '삭제' /><br/></div>")
+			$("#addProduct .productInfo").append(plus);
+			
+			plus.find('#remove').click(function(){
+				plus.remove();
+			});
 		});
-	}); */
-
+	}); 
 
 </script>
 </head>
@@ -85,14 +92,23 @@ $("div.note-editable").on('drop',function(e){
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 <center>
 	<h2>상품 등록</h2>
-	<form action="/my/addProductPro" method="post" enctype="multipart/form-data" id="addProduct">
-		상품 이름 : <input type="text" name="productName"> <br /> 상품 가격 :
-		<input type="number" name="price"> <br /> 상품 수량 : <input
-			type="number" name="quantity"> <br /> 제목 : <input
-			type="text" name="title"> <br /> 상품 소개 <br />
+	<form action="/my/addProductPro" method="post"
+		enctype="multipart/form-data" id="addProduct">
+		제목 : <input type="text" name="title"> <br /> 
+		썸네일 : <input type ="file" name = "thumnails" accept="image/*"><br />
+		상품 소개 <br />
 		<textarea id="summernote" name="content"></textarea>
-		<br /> 상품 추가 : <input type = "button" value = "+" id = "plusProduct">
-		<br /> 수량 공개 여부 : <select name="isPublic">
+		<br /> 상품 정보<br />
+		<div class="productInfo">
+			<div class="productGroup">
+				상품명 : <input type="text" name="product"> 수량 : <input
+					type="number" name="quantity"> 가격 : <input type="number"
+					name="price">
+			</div>
+		</div>
+		<br />
+		<input type="button" value="상품추가" id="plusProduct"> <br /> 수량
+		공개 여부 : <select name="isPublic">
 			<option value="0">비공개</option>
 			<option value="1">공개</option>
 		</select> <br /> 카테고리 : <select name="categoryId">

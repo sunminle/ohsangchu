@@ -40,14 +40,16 @@ public class MyPageController {
 
 	@Autowired
 	private MyPageService service;
-
+	
 	@RequestMapping("addProduct")
 	public String addProduct() {
 		return "product/addProduct";
 	}
 
 	@RequestMapping("addProductPro")
-	public String addProductPro(HttpServletRequest request, ProductDTO productDTO,PostingDTO postingDTO, Model model, HttpSession session,@RequestParam(value = "fileName", required = false) String[] fileName) {
+	public String addProductPro(HttpServletRequest request,@RequestParam("quantity") int [] quantity, 
+			@RequestParam("price")int[] price, @RequestParam("product")String [] product,ProductDTO productDTO, PostingDTO postingDTO, Model model, 
+			HttpSession session,@RequestParam(value = "fileName", required = false) String[] fileName, @RequestParam(value = "thumnails", required = false) MultipartFile thumnails) {
 		String realId = (String) session.getAttribute("usersId");
 		postingDTO.setRealId(realId);
 		postingDTO.setContent(postingDTO.getContent().replace("src=\"/resources/summernoteImage/", "src=\"/resources/images/posting/"));
@@ -60,14 +62,22 @@ public class MyPageController {
 			if(postingDTO.getContent().contains(file)) {
 				liveFileName.add(file);
 			}
-			/*else {
-				dieFileName.add(file);
-			}*/
+//			else {
+//				dieFileName.add(file);
+//			}
 		}
 		}
-		service.addPosting(postingDTO);
+		service.addPosting(postingDTO, thumnails, productPath, realId);
 		service.addPostingImg(liveFileName, postingDTO, copyPath, productPath,fileName,realId);
 		
+		productDTO.setPostingId(postingDTO.getId());
+		productDTO.setRealId(realId);
+		for(int i = 0; i < product.length; i++) {
+		productDTO.setProductName(product[i]);
+		productDTO.setPrice(price[i]);
+		productDTO.setQuantity(quantity[i]);
+		service.addproduct(productDTO);
+		}
 		return "product/addProductPro";
 	}
 

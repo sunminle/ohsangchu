@@ -32,6 +32,16 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 	
 	@Override
+	public int selectStoreId(String realId) {
+		return mapper.selectStoreId(realId);
+	}
+	
+	@Override
+	public int postingCount(int StoreId) {
+		return mapper.postingCount(StoreId);
+	}
+	
+	@Override
 	public UserInfoDTO selectUsersInfo(int userId) {
 		return mapper.selectUsersInfo(userId);
 	}
@@ -57,10 +67,35 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 	
 	@Override
-	public void addPosting(PostingDTO dto) {
+	public void addPosting(PostingDTO dto, MultipartFile thumnails, String productPath, String realId) {
+		
+		String thumnailIMG;
+		int storeId = selectStoreId(realId);
+		int count = postingCount(storeId)+1;
+		
+		if(thumnails != null && !thumnails.isEmpty()) {
+			String orgName = thumnails.getOriginalFilename(); // 파일이름
+			if (orgName != null && orgName.contains(".")) {
+			String ext = orgName.substring(orgName.lastIndexOf("."));
+			thumnailIMG = storeId+"_"+count+ext;
+			dto.setThumnail(thumnailIMG);
+			
+			File copy = new File(productPath+thumnailIMG);
+			try {
+				thumnails.transferTo(copy);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			}
+			}
 		mapper.addPosting(dto);
 	}
-
+	
+	@Override
+	public void addproduct(ProductDTO dto) {
+		mapper.addproduct(dto);
+	}
+	
 
 	@Override
 	public int nickCheck(String nickname) {
@@ -181,6 +216,12 @@ public class MyPageServiceImpl implements MyPageService{
 	public ProductDTO product(int productId) {
 		return mapper.product(productId);
 	}
+
+	
+
+	
+
+	
 
 	
 
