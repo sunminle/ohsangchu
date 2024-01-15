@@ -1,5 +1,8 @@
 package com.gi.osc.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -67,13 +70,24 @@ public class ProductController {
 		model.addAttribute("store", store);
 		model.addAttribute("storeUser", user);
 		
+		//팔로잉&팔로우 유저수 표시
+		Map<String, Integer> folcnt = storeService.folcnt(storeId,store.getUserId());
+		
+		model.addAttribute("folcnt", folcnt);
+		
 		//팔로우 버튼 : 페이지 로드시
 		//로그인 유저 id
-		String userName = (String)session.getAttribute("usersId");
-		int loginUid = userService.getUserId(userName);
-		int followCheck = storeService.followCheck(storeId, loginUid);
+		if(session.getAttribute("usersId") != null) {
+			String userName = (String)session.getAttribute("usersId");
+			int loginUid = userService.getUserId(userName);
+			int followCheck = storeService.followCheck(storeId, loginUid);
+			
+			model.addAttribute("followCheck",followCheck);
+		}else {
+			int followCheck = 3;
+			model.addAttribute("followCheck",followCheck);
+		}
 		
-		model.addAttribute("followCheck",followCheck);
 		
 		return "product/store";
 	}

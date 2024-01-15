@@ -1,5 +1,8 @@
 package com.gi.osc.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +33,19 @@ public class StoreServiceImpl implements StoreService{
 	public int followCheck(int storeUserId, int userId) {
 		//팔로우중이면 1, 아니라면 0(null)
 		return mapper.followCheck(storeUserId, userId);
+	}
+
+	@Override
+	public Map<String, Integer> folcnt(int storeId, int storeUserId) {
+		Map<String, Integer> folcnt = new HashMap<String, Integer>();
+		int following = mapper.getFollow(storeUserId);
+		int follower = mapper.getfollower(storeId);
+		
+		//가져온 팔로잉 팔로워 풋
+		folcnt.put("following", following);
+		folcnt.put("follower", follower);
+		
+		return folcnt;
 	}
 
 }
