@@ -23,9 +23,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gi.osc.bean.HashtagDTO;
+import com.gi.osc.bean.HashtagPostingDTO;
 import com.gi.osc.bean.PaymentDTO;
 import com.gi.osc.bean.PostingDTO;
-import com.gi.osc.bean.PostingImgDTO;
 import com.gi.osc.bean.ProductDTO;
 import com.gi.osc.bean.QNADTO;
 import com.gi.osc.bean.ReviewDTO;
@@ -41,6 +42,12 @@ public class MyPageController {
 	@Autowired
 	private MyPageService service;
 	
+	@Autowired
+	private HashtagPostingDTO hashtagPostingDTO; 
+	
+	@Autowired
+	private HashtagDTO hashtagDTO;
+	
 	@RequestMapping("addProduct")
 	public String addProduct() {
 		return "product/addProduct";
@@ -49,7 +56,8 @@ public class MyPageController {
 	@RequestMapping("addProductPro")
 	public String addProductPro(HttpServletRequest request,@RequestParam("quantity") int [] quantity, 
 			@RequestParam("price")int[] price, @RequestParam("product")String [] product,ProductDTO productDTO, PostingDTO postingDTO, Model model, 
-			HttpSession session,@RequestParam(value = "fileName", required = false) String[] fileName, @RequestParam(value = "thumnails", required = false) MultipartFile thumnails) {
+			HttpSession session,@RequestParam(value = "fileName", required = false) String[] fileName, @RequestParam(value = "thumnails", required = false) MultipartFile thumnails
+			, @RequestParam(value = "hashtag", required = false) String[] hashtag ) {
 		String realId = (String) session.getAttribute("usersId");
 		postingDTO.setRealId(realId);
 		postingDTO.setContent(postingDTO.getContent().replace("src=\"/resources/summernoteImage/", "src=\"/resources/images/posting/"));
@@ -58,25 +66,35 @@ public class MyPageController {
 		String productPath = request.getServletContext().getRealPath("/resources/images/posting/");
 		//List<String> dieFileName = new ArrayList<String>();
 		if(fileName != null && fileName.length>0) {
-		for(String file : fileName) {
-			if(postingDTO.getContent().contains(file)) {
-				liveFileName.add(file);
-			}
+			for(String file : fileName) {
+				if(postingDTO.getContent().contains(file)) {
+					liveFileName.add(file);
+				}
 //			else {
 //				dieFileName.add(file);
 //			}
+			}
 		}
-		}
+		
 		service.addPosting(postingDTO, thumnails, productPath, realId);
 		service.addPostingImg(liveFileName, postingDTO, copyPath, productPath,fileName,realId);
 		
 		productDTO.setPostingId(postingDTO.getId());
 		productDTO.setRealId(realId);
+		
 		for(int i = 0; i < product.length; i++) {
-		productDTO.setProductName(product[i]);
-		productDTO.setPrice(price[i]);
-		productDTO.setQuantity(quantity[i]);
-		service.addproduct(productDTO);
+			productDTO.setProductName(product[i]);
+			productDTO.setPrice(price[i]);
+			productDTO.setQuantity(quantity[i]);
+			service.addproduct(productDTO);
+		}
+		
+		hashtagPostingDTO.setPostingId(postingDTO.getId());
+		
+		if(hashtag != null && hashtag.length>0) {
+		for(int i = 0; i < hashtag.length; i++) {
+			service.addHashtag(hashtagDTO, hashtagPostingDTO, hashtag[i]);
+		}
 		}
 		return "product/addProductPro";
 	}
@@ -260,10 +278,18 @@ public class MyPageController {
 	
 	@RequestMapping("product")
 	public String product(int productId,Model model) {
-		
 		ProductDTO product = service.product(productId);
 		model.addAttribute("product", product);
 		return "myPage/product";
+	}
+	
+	@RequestMapping("addHashtag")
+	public ResponseEntity<JsonNode> addHashtag(@RequestParam("tag") String tag) {
+		ObjectMapper objectMapper = new ObjectMapper();
+		JsonNode responseJson = objectMapper.createObjectNode()
+                .put("tag", tag)
+                .put("responseCode", "success");
+        return ResponseEntity.ok(responseJson);
 	}
 	
 }

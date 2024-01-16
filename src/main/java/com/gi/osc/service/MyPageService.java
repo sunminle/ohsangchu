@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gi.osc.bean.HashtagDTO;
+import com.gi.osc.bean.HashtagPostingDTO;
 import com.gi.osc.bean.PaymentDTO;
 import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.PostingImgDTO;
@@ -41,4 +43,5 @@ public interface MyPageService {
 	public List<PostingDTO> myHeartList(String realId);
 	public List<StoreDTO> mySubscribeList(String realId);
 	public ProductDTO product(int productId);
+	public void addHashtag(HashtagDTO hashtagDTO, HashtagPostingDTO hashtagPostingDTO, String hashtag);
 }
