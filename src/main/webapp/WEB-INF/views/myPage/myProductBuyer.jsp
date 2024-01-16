@@ -23,7 +23,7 @@
 
 <div id="buyer">
 	<input type="button" value="뒤로가기" onclick="history.go(-1)"> <a
-		href="/product/productDetail?postingId=${posting.id}">${posting.title}</a>
+		href="/product/detail?postNum=${posting.id}">${posting.title}</a>
 	구매자 목록 <br />
 
 

@@ -42,10 +42,18 @@
 			select posting_seq.currval from dual
 		</selectKey>
 		insert into posting
-		(storeid,title,content,ispublic,categoryid,thumnail)
+		(storeid,title,content,ispublic,categoryid
+			<if test="thumnail != null and thumnail != ''">
+				,thumnail
+			</if>
+		)
 		values ((select id from store where userid = (select id from users
 		where realid = #{realId})),
-		#{title},#{content},#{isPublic},#{categoryId},#{thumnail})
+		#{title},#{content},#{isPublic},#{categoryId}
+			<if test="thumnail != null and thumnail != ''">
+				,#{thumnail}
+			</if>
+		)
 		
 	</insert>
 
@@ -166,5 +174,24 @@
 		insert into product (storeid,productname,price,quantity,postingid) values ((select id from store where userid = (select id from users
 		where realid = #{realId})),#{productName},#{price},#{quantity},#{postingId})
 	</insert>
+	
+	<select id="hashtagChk">
+		select count(*) from hashtag where hashtagName = #{hashtagName}
+	</select>
+	
+	<insert id="addHashtag" parameterType="com.gi.osc.bean.HashtagDTO">
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+			select hashtag_seq.currval from dual
+		</selectKey>
+		insert into hashtag (hashtagName) values (#{hashtagName})
+	</insert>
+	
+	<insert id="addHashtagPosting" parameterType="com.gi.osc.bean.HashtagPostingDTO">
+		insert into hashtag_posting (hashtagid,postingid) values (#{hashtagId},#{postingId})
+	</insert>
+	
+	<select id="selectHashtagId">
+		select id from hashtag where hashtagName = #{hashtagName}
+	</select>
 	
 </mapper>

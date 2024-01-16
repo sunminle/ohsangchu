@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.gi.osc.bean.HashtagDTO;
+import com.gi.osc.bean.HashtagPostingDTO;
 import com.gi.osc.bean.PaymentDTO;
 import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.PostingImgDTO;
@@ -40,4 +42,8 @@ public interface MyPageMapper {
 	public List<PostingDTO> myHeartList(String realId);
 	public List<StoreDTO> mySubscribeList(String realId);
 	public ProductDTO product(int productId);
+	public int hashtagChk(String hashtag);
+	public void addHashtag(HashtagDTO hashtagDTO);
+	public void addHashtagPosting(HashtagPostingDTO hashtagPostingDTO);
+	public int selectHashtagId(String hashtag);
 }

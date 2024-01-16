@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gi.osc.bean.HashtagDTO;
+import com.gi.osc.bean.HashtagPostingDTO;
 import com.gi.osc.bean.PaymentDTO;
 import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.PostingImgDTO;
@@ -215,6 +217,24 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public ProductDTO product(int productId) {
 		return mapper.product(productId);
+	}
+
+	@Override
+	public void addHashtag(HashtagDTO hashtagDTO, HashtagPostingDTO hashtagPostingDTO, String hashtag) {
+		int chk = mapper.hashtagChk(hashtag);
+		hashtagDTO.setHashtagName(hashtag);
+		int hashtagId;
+		if(chk == 0) {
+		mapper.addHashtag(hashtagDTO);
+		hashtagPostingDTO.setHashtagId(hashtagDTO.getId());
+		mapper.addHashtagPosting(hashtagPostingDTO);
+		}
+		else if (chk == 1){
+			hashtagId = mapper.selectHashtagId(hashtag);
+			hashtagPostingDTO.setHashtagId(hashtagId);
+			mapper.addHashtagPosting(hashtagPostingDTO);
+		}
+		
 	}
 
 	
