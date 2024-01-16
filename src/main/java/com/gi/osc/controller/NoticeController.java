@@ -13,9 +13,9 @@ public class NoticeController {
 		return "notice/noticeboard";
 	}
 	
-	@RequestMapping("writeForm")
-	public String writeForm() {
+	@RequestMapping("addNotice")
+	public String addNotice() {
 		
-		return "notice/writeForm";
+		return "notice/addNotice";
 	}
 }
