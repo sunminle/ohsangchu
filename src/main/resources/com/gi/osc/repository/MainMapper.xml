@@ -13,17 +13,26 @@
     		 </choose>
     	</select>
     	
+    	<!--  상품검색 -->
     	<select id="searchProductsByName" parameterType="java.lang.String" resultType="com.gi.osc.bean.ProductDTO">
-    SELECT s.storename, p.*
-    FROM store s
-    JOIN product p ON s.id = p.storeid(+)
+    SELECT a.*, p.*
+    FROM posting a
+    JOIN product p ON a.id = p.postingid(+)
     <where>
         <if test="searchKeyword != null and searchKeyword != ''">
             AND (p.productname LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%'
-            OR s.storename LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%')
+            OR a.title LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%')
         </if>
     </where>
 </select>
+		
+	<!-- 상점 검색 -->
+		<select id="searchStoreByName" parameterType="java.lang.String" resultType="com.gi.osc.bean.StoreDTO">
+   			select * from store where storename LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%'
+		</select>
+	 
+
+
 
 
 

@@ -27,16 +27,16 @@ public class MainMController {
 		return "ma/view";
 	}
 	
-	@GetMapping("/getSearchList")
+	/*@GetMapping("/getSearchList")
 	@ResponseBody
 	private List<StoreDTO> getSearchList(@RequestParam("type") String type,
 			@RequestParam("keyword") String keyword, Model model) throws Exception{
 		StoreDTO dto = new StoreDTO();
 		dto.setType(type);
-		dto.setKeyword(keyword);
+		//dto.setKeyword(keyword);
 
 		return service.getSearchList(dto);
-	}
+	}*/
 
 
 
