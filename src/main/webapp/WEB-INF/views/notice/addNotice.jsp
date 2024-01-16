@@ -40,58 +40,43 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 <!-- /header -->
 
-<title>noticeboard</title>
 </head>
-<body>
-	<form id="addNotice">
-		<div class="page-wrapper">
-			<div class="container-fluid">
-				<div class="col-lg-8">
-					<!--게시판 넓이 -->
-					<div class="col-lg-12">
-						<h1 class="page-header">Notice</h1>
-					</div>
-					<div class="row">
-						<div class="col-lg-12">
-							<button type="button"
-								class="btn btn-outline btn-primary pull-right"
-								onclick="location.href='addNotice'">
-								<i class="fa fa-edit fa-fw"></i> 글쓰기
-							</button>
-						</div>
-					</div>
-					<br>
-					<div class="panel panel-default">
-						<div class="panel-heading">공지사항</div>
-						<div class="panel-body">
-							<table class="table table-hover">
-								<thead>
-									<tr>
-										<th>No.</th>
-										<th>제목</th>
-										<th>작성자</th>
-										<th>작성일</th>
-										<th>조회수</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>1</td>
-										<td>첫 공지사항</td>
-										<td>관리자</td>
-										<td>2024.01.10</td>
-										<td>1</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-	</form>
 
-	</div>
-	</div>
-	</div>
+<form id="addNotice" action="/notice/addNotice">
+	<div class="page-wrapper">
+		<div class="container-fluid">
+			<div class="col-lg-8">
+				<!--게시판 넓이 -->
+				<div class="col-lg-12">
+					<h1 class="page-header">공지사항 작성</h1>
+				</div>
 
-	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+				
+				<br> 제목 : <input type="text" name="title"> <br />
+
+
+				<textarea id="summernote" name="content"></textarea>
+				<br /> 내용<br />
+				<div>
+					<input type="text" name="product">
+				</div>
+
+				<br /> <input type="submit" value="등록하기">
+			</div>
+		</div>
+
+
+<div class="row">
+	<div class="col-lg-12">
+		<button type="button" class="btn btn-outline btn-primary pull-right"
+			onclick="location.href='noticeboard'">
+			<i class="fa fa-edit fa-fw"></i> 목록
+		</button>
+	</div>
+</div>
+
+</form>
+
+<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 </body>
 </html>
