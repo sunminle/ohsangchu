@@ -1,6 +1,6 @@
 package com.gi.osc.controller;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gi.osc.bean.PostingDTO;
+import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.bean.UsersDTO;
 import com.gi.osc.service.PostingService;
@@ -44,12 +45,22 @@ public class ProductController {
 		
 		//유저넘버를 주면 해당 유저 정보 가져오기
 		int userId = store.getUserId();
-		UsersDTO user = postService.getUSer(userId);
+		UsersDTO user = postService.getUser(userId);
+		
+		//포스트넘버를 주면 해당 포스트의 리뷰 가져오기
+		ArrayList<ReviewDTO> reviews = postService.getReviews(postNum);
+		//리뷰에 해당 유저 정보 추가하기
+		for(ReviewDTO review : reviews) {
+			review.setUsers(postService.getUser(review.getUserId()));
+			System.out.println(review.getContent());
+		}
+		System.out.println(reviews);
 		
 		//뷰 페이지에 보내기
 		model.addAttribute("post", post);
 		model.addAttribute("store", store);
 		model.addAttribute("storeUser", user);
+		model.addAttribute("reviews", reviews);
 		
 		return "product/productDetail";
 	}
@@ -64,7 +75,7 @@ public class ProductController {
 		
 		//유저넘버를 주면 해당 유저 정보 가져오기
 		int userId = store.getUserId();
-		UsersDTO user = postService.getUSer(userId);
+		UsersDTO user = postService.getUser(userId);
 		
 		//뷰 페이지에 보내기
 		model.addAttribute("store", store);

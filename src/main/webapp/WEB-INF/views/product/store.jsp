@@ -61,7 +61,7 @@
 						</c:when>
 						<%-- 로그인 중이 아닐때 --%>
 						<c:when test="${followCheck eq 3}">
-							<button id="follow" data-store-id="${store.id}" onclick="location.href='/users/main';"><b>팔로우</b></button>
+							<button id="follow" class="fu"  data-store-id="${store.id}"><b>팔로우</b></button>
 						</c:when>
 						<%-- 팔로우중이 아닐때 --%>
 						<c:otherwise>
@@ -86,11 +86,12 @@
 		
 		//////////팔로우버튼
 		$(".fu").click(function() {
-			var uid = '<%=(String)session.getAttribute("usersId")%>';
+			
+			var uid = '${sessionScope.usersId}';
 
-			if(uid == "null"){//로그인 안했을땐 로그인페이지로
+			if(uid == ''){//로그인 안했을땐 로그인페이지로
 				alert("로그인이 필요합니다!");
-				window.location.href="/users/main";	
+				window.location.href="/users/main?backURI="+window.location.pathname+window.location.search;	
 			}else{//로그인 한 상태라면 팔언팔 동작
 				console.log("팔/언");
 			

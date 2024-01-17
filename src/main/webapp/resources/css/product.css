@@ -171,11 +171,12 @@ li a {
 	margin-bottom: 15px;
 }
 .proProfile .proImg{
-	width: 35px;
-	height : 35px;
+	width: 42px;
+	height : 42px;
 	margin-right:10px;
 	border-radius: 70%;
     overflow: hidden;
+    padding : 0px !important;
 } 
 .proProfile  img{
 	width: 100%;
@@ -193,10 +194,16 @@ li a {
 	display : block;	
 	color : #75C573;
 }
+.re>div>div>div{
+	padding-bottom: 10px;	
+}
 .re>div>div>span{
 	font-size: 12px;
 	color : #9B9B9B;
 	margin-left: 10px; 
+}
+.re span small{
+	font-size: 11px;
 }
 .reCon{
 	margin-top: 10px;
