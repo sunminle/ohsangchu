@@ -13,6 +13,16 @@
 				src="/resources/images/site/ppp.gif" class=""
 				style="width: 40px; height: 40px;" />
 		</div>
+		
+		<div class="d-flex justify-content-between align-items-center">
+		<select class="form-select" aria-label="Default select example">
+  <option selected>메뉴</option>
+  <option value="1">상품</option>
+  <option value="2">상점</option>
+  <option value="3"></option>
+</select>
+</div>
+		
 		<div class="d-flex align-items-center m-2">
 			<div id="searchBox">
 				<form action="/main/search" method="get">

@@ -362,95 +362,22 @@
 		
 		<br />
 		
+		
+		<c:if test="${sessionScope.usersId != null}">
 		<div id="newProduct" class="m-3">
 			<span class="bold"><b class="green">my</b> 최근 본 상품</span>
 			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
   <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4z"/>
   <path d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z"/>
 </svg>
-			<div id="newProList" class="d-flex justify-content-start">
-				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
-					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
-					<div class="proDes">
-						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
-						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
-						<div class="proProfile d-flex align-items-center">
-							<div class="proImg">
-								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
-							</div>
-							<span>진짜이재현</span>
-						</div>
-					</div>
-				</div>
-				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
-					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
-					<div class="proDes">
-						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
-						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
-						<div class="proProfile d-flex align-items-center">
-							<div class="proImg">
-								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
-							</div>
-							<span>진짜이재현</span>
-						</div>
-					</div>
-				</div>
-				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
-					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
-					<div class="proDes">
-						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
-						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
-						<div class="proProfile d-flex align-items-center">
-							<div class="proImg">
-								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
-							</div>
-							<span>진짜이재현</span>
-						</div>
-					</div>
-				</div>
-				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
-					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
-					<div class="proDes">
-						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
-						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
-						<div class="proProfile d-flex align-items-center">
-							<div class="proImg">
-								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
-							</div>
-							<span>진짜이재현</span>
-						</div>
-					</div>
-				</div>
-				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
-					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
-					<div class="proDes">
-						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
-						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
-						<div class="proProfile d-flex align-items-center">
-							<div class="proImg">
-								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
-							</div>
-							<span>진짜이재현</span>
-						</div>
-					</div>
-				</div>
-				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
-					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
-					<div class="proDes">
-						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
-						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
-						<div class="proProfile d-flex align-items-center">
-							<div class="proImg">
-								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
-							</div>
-							<span>진짜이재현</span>
-						</div>
-					</div>
-				</div>
-				
-				
+
+<c:forEach var="store" items="${recentlyViewedStores}">
+    <!-- 여기에서 각 상점에 대한 출력 형식을 정의 -->
+    <p>${store.storeName}</p>
+    <!-- 다른 필요한 정보들을 출력 -->
+</c:forEach>
 			</div>
-		</div>
+			</c:if>	
 		
 	</section>
 	
