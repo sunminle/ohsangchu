@@ -18,6 +18,11 @@
 		select * from users where id=#{id}
 	</select>
 	
+	<!-- selectList : 포스트넘버를 주면 해당 포스트의 리뷰 가져오기 -->
+	<select id="getReviews" resultType="com.gi.osc.bean.ReviewDTO">
+		select * from review where postingid=#{postingid}
+	</select>
+	
 	
 	<!-- 
 		select * from dbo.store where delete_yn='N'

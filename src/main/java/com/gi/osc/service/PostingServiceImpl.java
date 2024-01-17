@@ -1,9 +1,12 @@
 package com.gi.osc.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gi.osc.bean.PostingDTO;
+import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.bean.UsersDTO;
 import com.gi.osc.repository.PostingMapper;
@@ -25,8 +28,13 @@ public class PostingServiceImpl implements PostingService{
 	}
 
 	@Override
-	public UsersDTO getUSer(int userId) {
+	public UsersDTO getUser(int userId) {
 		return mapper.getUser(userId);
+	}
+
+	@Override
+	public ArrayList<ReviewDTO> getReviews(int postNum) {
+		return mapper.getReviews(postNum);
 	}
 	
 
