@@ -14,28 +14,27 @@
 				style="width: 40px; height: 40px;" />
 		</div>
 		
-		<div class="d-flex justify-content-between align-items-center">
-		<select class="form-select" aria-label="Default select example">
-  <option selected>메뉴</option>
-  <option value="1">상품</option>
-  <option value="2">상점</option>
-  <option value="3"></option>
-</select>
-</div>
-		
 		<div class="d-flex align-items-center m-2">
-			<div id="searchBox">
-				<form action="/main/search" method="get">
-					<input size="10" type="text" placeholder="상품, 상점 이름을 검색하세요!"
-						id="searchKeyword" name="searchKeyword" required>
+		<form action="/main/search" method="get">
+		<div class="d-flex align-items-center m-2">
+		<div class="d-flex justify-content-between align-items-center">
+					<select class="form-select" aria-label="Default select example" name="searchColumn">
+	  					<option selected value="1">상품</option>
+	  					<option value="2">상점</option>
+					</select>
+				</div>
+			
+				<div id="searchBox">
+					<input size="10" type="text" placeholder="상품, 상점 이름을 검색하세요!" id="searchKeyword" name="searchKeyword" required>
 					<button>
-						<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
-							fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-						<path
-								d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" /></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+							<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+						</svg>
 					</button>
-				</form>
-			</div>
+					
+				</div>
+			</form>
+		</div>
 		</div>
 
 		<div id="chart" class="d-flex align-items-center">

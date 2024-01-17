@@ -19,8 +19,6 @@ public class ProductDTO {
 	private String title;
 	
 	private String storeName;
-	private String searchKeyword;
-	
 	
 	//주문날짜 뽑아오기위해
 	private Date orderDate;

@@ -7,8 +7,8 @@ import com.gi.osc.bean.ProductDTO;
 import com.gi.osc.bean.StoreDTO;
 
 public interface MainService {
-	public List<StoreDTO> searchStoreByName(StoreDTO dto);
-	public List<ProductDTO> searchProductsByName(ProductDTO dto);
+	public List<StoreDTO> searchStoreByName(String searchKeyword);
+	public List<ProductDTO> searchProductsByName(String searchKeyword);
 	public List<ProductDTO> getList(Criteria cri);
 	
 

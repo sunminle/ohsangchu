@@ -18,16 +18,13 @@ public class MainServiceImpl implements MainService {
 	private MainMapper mapper;
 
 	@Override
-	public List<StoreDTO> searchStoreByName(StoreDTO dto) {
-		// TODO Auto-generated method stub
-	
-		return mapper.searchStoreByName(dto);
+	public List<StoreDTO> searchStoreByName(String searchKeyword) {
+		return mapper.searchStoreByName(searchKeyword);
 	}
 
 	@Override
-	public List<ProductDTO> searchProductsByName(ProductDTO dto) {
-		// TODO Auto-generated method stub
-		return mapper.searchProductsByName(dto);
+	public List<ProductDTO> searchProductsByName(String searchKeyword) {
+		return mapper.searchProductsByName(searchKeyword);
 	}
 	
 	@Override

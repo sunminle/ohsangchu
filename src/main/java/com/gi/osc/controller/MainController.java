@@ -45,33 +45,49 @@ public class MainController {
 	public String showSearchForm() {
 	    return "main/main";
 	}
+	
+	@GetMapping("/view")
+	public String view() {
+	    return "main/view";
+	}
 
 
 	@GetMapping("/search")
-	public String searchProductsByName(@ModelAttribute("productDTO") ProductDTO productDTO,
-	                                  @RequestParam(name = "page", defaultValue = "1") int page,
+	public String searchProductsByName(@RequestParam(name = "page", defaultValue = "1") int page,
+	                                  int searchColumn, String searchKeyword,
 	                                  Model model) {
-	   
-	   String productName = productDTO.getProductName();
+	   		if(searchColumn == 1) {
+				List<ProductDTO> productList = service.searchProductsByName(searchKeyword);
+				// 페이징 처리를 위한 로직 추가
+				int pageSize = 10; // 페이지당 아이템 수
+			   int totalItems = productList.size();
+			   int pageCount = (totalItems + pageSize - 1) / pageSize;
+	
+			   // 현재 페이지의 제품 리스트 계산
+			   int startIdx = (page - 1) * pageSize;
+			   int endIdx = Math.min(startIdx + pageSize, totalItems);
+			   List<ProductDTO> currentPageProducts = productList.subList(startIdx, endIdx);
+	
+			   // 결과 및 페이징 정보를 모델에 추가하여 뷰에 전달
+			   model.addAttribute("productList", currentPageProducts);
+			   model.addAttribute("pageCount", pageCount);
+			   model.addAttribute("currentPage", page);
+		}else {
+			List<StoreDTO> storeList = service.searchStoreByName(searchKeyword);
+			int pageSize = 10; // 페이지당 아이템 수
+			int totalItems = storeList.size();
+			int pageCount = (totalItems + pageSize - 1) / pageSize;
 
-	   // ProductService에서 검색 메서드 호출 
-	   List<ProductDTO> productList = service.searchProductsByName(productDTO);
+			   // 현재 페이지의 제품 리스트 계산
+			int startIdx = (page - 1) * pageSize;
+			int endIdx = Math.min(startIdx + pageSize, totalItems);
+			List<StoreDTO> currentPageProducts = storeList.subList(startIdx, endIdx);
 
-	   // 페이징 처리를 위한 로직 추가
-	   int pageSize = 10; // 페이지당 아이템 수
-	   int totalItems = productList.size();
-	   int pageCount = (totalItems + pageSize - 1) / pageSize;
-
-	   // 현재 페이지의 제품 리스트 계산
-	   int startIdx = (page - 1) * pageSize;
-	   int endIdx = Math.min(startIdx + pageSize, totalItems);
-	   List<ProductDTO> currentPageProducts = productList.subList(startIdx, endIdx);
-
-	   // 결과 및 페이징 정보를 모델에 추가하여 뷰에 전달
-	   model.addAttribute("productList", currentPageProducts);
-	   model.addAttribute("pageCount", pageCount);
-	   model.addAttribute("currentPage", page);
-
+			   // 결과 및 페이징 정보를 모델에 추가하여 뷰에 전달
+			model.addAttribute("storeList", currentPageProducts);
+			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("currentPage", page);
+		}
 	   // 결과를 보여줄 뷰의 이름 반환
 	   return "main/search";
 	}
