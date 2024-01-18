@@ -78,7 +78,7 @@
 	<div id=border>
 		<section id="container">
 
-			<form action="/users/login" method="post">
+			<form action="/users/main" method="post">
 	<h3>JOIN</h3><br><br><br>
 				<div class="input-box">
 					<input id="realId" type="text" name="realId" placeholder="아이디">
@@ -110,6 +110,8 @@
 
 		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	</div>
+	
+	
 </body>
 
 </html>

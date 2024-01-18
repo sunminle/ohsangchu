@@ -4,13 +4,35 @@
 	xmlns:security="http://www.springframework.org/schema/security"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 		
 		<bean id="customLoginSuccess" class="com.gi.osc.security.CustomLoginHandler"/>
+		<bean id="userService" class="com.gi.osc.security.CustomUserDetailsService" />
 		<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+		
+		<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<!-- <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" /> -->
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@192.168.219.123:1521/orcl" />
+		<property name="username" value="final01" />
+		<property name="password" value="final01" />
+	</bean>
+	
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		<constructor-arg ref="hikariConfig" />
+	</bean>
+		
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
+		<property name="dataSource" ref="dataSource" />	
+	</bean>
+	
+	<mybatis-spring:scan base-package="com.gi.osc.repository" />
+		
 		<security:http>
 			<!--  
 			<security:intercept-url pattern="/sample/all" access="permitAll"/>
@@ -19,7 +41,10 @@
 			-->
 			<security:form-login login-page="/users/login" authentication-success-handler-ref="customLoginSuccess"/>
 			<security:logout logout-url="/users/logout" invalidate-session="true"/>
+			
+			<!-- 자동로그인 처리 -->
 			<security:remember-me data-source-ref="dataSource" token-validity-seconds="86400"/>
+			
 			<!-- 접근 권한 없는 URI 접근시 에러페이지 설정 -->
 			<security:access-denied-handler error-page = "/users/accessError"/>
 			
