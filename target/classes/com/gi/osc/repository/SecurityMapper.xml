@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gi.osc.repository.SecurityMapper">
+
+	<resultMap id="memberMap"
+		type="com.gi.osc.bean.UsersDTO">
+		<result property="realId" column="realId" />
+		<result property="userName" column="userName" />
+		<result property="userPw" column="userPw" />
+		<result property="nickname" column="nickname" />
+		<result property="profile" column="profile" />
+		<result property="regDate" column="regDate" />
+		<result property="modDate" column="modDate" />
+
+		<collection property="authList" resultMap="authMap" />     <!-- DTO의 List 사용시 -->
+	</resultMap>
+
+	<resultMap id="authMap" type="com.gi.osc.bean.AuthDTO">
+		<result property="realId" column="realId" />
+		<result property="auth" column="auth" />
+	</resultMap>
+
+	<select id="read" resultMap="memberMap">
+		select * from users u left outer
+		join userInfo ui
+		on u.realId = ui.realId
+		where
+		s.realId=#{realId}
+	</select>
+
+</mapper>

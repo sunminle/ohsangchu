@@ -112,7 +112,7 @@
 				<div class="d-flex">
 					<div class="box">
 						<img class="profile"
-							src="/resources/images/profiles/leaveourtears2.PNG">
+							src="/resources/images/profiles/${sessionScope.profile}">
 
 					</div>
 					<b>${sessionScope.usersId}</b>님 환영합니다♥

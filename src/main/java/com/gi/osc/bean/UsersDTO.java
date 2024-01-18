@@ -1,6 +1,7 @@
 package com.gi.osc.bean;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class UsersDTO {
 	private String auth;
 	private Date regDate;
 	private Date modDate; 
+	private List<AuthDTO> authList;  // 권한
 	
 	
 }
