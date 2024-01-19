@@ -69,7 +69,7 @@
 				</div>
 				<ul class="list-group list-group-flush" >
 				  <li class="list-group-item">${product.storeName}</li>
-				  <li class="list-group-item"></li>
+				  <li class="list-group-item">${product.thumnail}</li>
 				  <li class="list-group-item"></</li>
 				  </ul>
 				 
@@ -129,5 +129,6 @@
 			    </ul>
 			</div>
 </c:if>
+
 </body>
 </html>
