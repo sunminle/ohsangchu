@@ -17,6 +17,7 @@ public class ProductDTO {
 	private String IMG_URL;
 	private String content;
 	private String title;
+	private String thumnail;
 	
 	private String storeName;
 	

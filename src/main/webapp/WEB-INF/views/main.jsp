@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>OSangChu</title>
 
-<script language="javascript" src="/resources/js/search.js"></script>
+<script language="javascript" src="/resources/js/script.js"></script>
 
 
 <!-- bootstrap:css -->
@@ -363,13 +363,18 @@
 		<br />
 		
 		
-		<c:if test="${sessionScope.usersId != null}">
+		
 		<div id="newProduct" class="m-3">
 			<span class="bold"><b class="green">my</b> 최근 본 상품</span>
 			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
 		  <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4z"/>
 		  <path d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z"/>
 		</svg>
+
+<!-- 뷰에 데이터 출력 -->
+<script>
+    document.body.innerHTML += "<p> " + getVisitedPages() + "</p>";
+</script>
 
 
 <c:forEach var="store" items="${recentlyViewedStores}">
@@ -378,7 +383,7 @@
     <!-- 다른 필요한 정보들을 출력 -->
 </c:forEach>
 			</div>
-			</c:if>	
+			
 		
 	</section>
 	
