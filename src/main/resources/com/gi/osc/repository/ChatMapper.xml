@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gi.osc.repository.ChatMapper">
+	
+	<select id="selectUsersId">
+		select id from users where realId = #{realId}
+	</select>
+	
+	<select id="selectChattingList">
+		select id from chat where useraid = #{usersId} or userbid = #{usersId}
+	</select>
+	
+	<select id="selectChatDTO" resultType="com.gi.osc.bean.ChatDTO">
+		select * from chat where id = #{id}
+	</select>
+	
+	<select id="selectEnemyIdInfo" resultType="com.gi.osc.bean.UsersDTO">
+		select * from users where id = #{id}
+	</select>
+	
+	<select id="selectUsersNick">
+		select nickname from users where id = #{usersId}
+	</select>
+	
+	<select id = "selectChatid" resultType="com.gi.osc.bean.ChatDTO">
+		select * from chat where (userAId = #{user1Id} and userBId = #{user2Id}) or (userAId = #{user2Id} and userBId = #{user1Id})
+	</select>
+	
+	<insert id="insertChat" parameterType="com.gi.osc.bean.ChatDTO">
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+			select chat_seq.currval from dual
+		</selectKey>
+		insert into chat (useraid, userbid, chatlog) values (#{userAId},#{userBId},#{chatLog})
+	</insert>
+	
+	<select id="selectAllUsers" resultType="com.gi.osc.bean.UsersDTO">
+		select * from users where id != #{usersId}
+	</select>
+	
+</mapper>

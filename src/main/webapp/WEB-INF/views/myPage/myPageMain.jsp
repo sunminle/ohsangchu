@@ -82,6 +82,16 @@
 		});
 	});
 	
+	$(function(){
+		$("#chattingList").click(function(){
+			$.ajax({
+				url : "/chat/chattingList",
+				success : function(e){
+					$("#modify").html(e);
+				}
+			});
+		});
+	});
 	
 </script>
 <!-- css -->
@@ -105,6 +115,7 @@
 		<button id="myProduct">구매자 관리</button>
 		<button id="myBuyList">구매목록</button>
 		<button id="HS">찜,구독 목록</button>
+		<button id="chattingList">채팅</button>
 		<div id="modify"></div>
 	</center>
 </c:if>
