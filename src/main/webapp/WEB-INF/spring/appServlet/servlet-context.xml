@@ -35,7 +35,7 @@
 	
 	</beans:bean>
 	
-	
+	<beans:bean id = "chat" class = "com.gi.osc.controller.MessageChat"/>
 	
 	
 </beans:beans>

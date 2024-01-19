@@ -5,7 +5,7 @@
 <h2>구독상점 목록</h2>
 <c:if test = "${!empty storeList}">
 <c:forEach var = "store" items = "${storeList}">
-상점이름 : <a href = "/store/detail?storeId=${store.id}">${store.storeName}</a>
+상점이름 : <a href = "/product/store?storeNum=${store.id}">${store.storeName}</a>
 <hr>
 </c:forEach>
 </c:if>

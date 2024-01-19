@@ -191,17 +191,9 @@
             alert("모든 필수 항목을 작성하세요.");
             return false;
         }
-
-        if (isNaN(quantity) || isNaN(price)) {
-            alert("수량과 가격은 숫자여야 합니다.");
-            return false;
-        }
-
-
         return true;
     }
-	
-	
+
 </script>
 </head>
 
