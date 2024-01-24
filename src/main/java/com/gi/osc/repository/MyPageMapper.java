@@ -1,5 +1,6 @@
 package com.gi.osc.repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -24,23 +25,29 @@ public interface MyPageMapper {
 	public StoreDTO selectStoreInfo(int userId);
 	public ProductDTO selectProductInfo(int productId);
 	public PostingDTO selectPostingInfo(int postingId);
-	public List<PostingDTO> postingList(String realId);
+	public List<PostingDTO> postingList(HashMap pageMap);
 	public void addPosting(PostingDTO dto);
 	public void addproduct(ProductDTO dto);
 	public int nickCheck(String nickname);
 	public void modifyUsers(UsersDTO dto);
 	public int storeNameCheck(String storeName);
 	public void modifyStore(StoreDTO dto);
-	public List<ReviewDTO> myReview(int userId);
+	public int myReviewCount(int userId);
+	public List<ReviewDTO> myReview(HashMap pageMap);
 	public void myReviewDelete(int reviewNum);
-	public List<ReviewDTO> getReview(String realId);
-	public List<QNADTO> myQNA(int userId);
+	public int getReviewCount(String realId);
+	public List<ReviewDTO> getReview(HashMap pageMap);
+	public List<QNADTO> myQNA(HashMap pageMap);
+	public int myQNACount(int userId);
 	public List<PaymentDTO> myProductBuyer(@Param("postingId") int postingId, @Param("orderType")String orderType);
 	public void addPostingImg(@Param("storeId")int storeId, @Param("postingId")int postingId, @Param("imgUrl")String imgUrl);
 	public int storeId(String realId);
-	public List<PostingDTO> myBuyList(String realId);
-	public List<PostingDTO> myHeartList(String realId);
-	public List<StoreDTO> mySubscribeList(String realId);
+	public int myBuyListCount(String realId);
+	public List<PostingDTO> myBuyList(HashMap pageMap);
+	public int myHeartListCount(String realId);
+	public List<PostingDTO> myHeartList(HashMap pageMap);
+	public int mySubscribeListCount(String realId);
+	public List<StoreDTO> mySubscribeList(HashMap pageMap);
 	public ProductDTO product(int productId);
 	public int hashtagChk(String hashtag);
 	public void addHashtag(HashtagDTO hashtagDTO);

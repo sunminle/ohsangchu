@@ -75,7 +75,7 @@ public class MessageChat extends DefaultEmbeddableVerticle {
 						System.out.println(event.getString("msg")); 
 
 						try {
-
+							
 							FileWriter fileWriter = new FileWriter(filePath, true);
 
 							fileWriter.write(message);

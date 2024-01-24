@@ -93,7 +93,70 @@
 		});
 	});
 	
+	$(document).on("click", "#myProductPagination a", function(e){
+	    e.preventDefault();
+	    var pageNum = $(this).attr("href").split("pageNum=")[1];
+	    $.ajax({
+	        url: "/my/myProduct?pageNum=" + pageNum,
+	        success: function(e){
+	            $("#modify").html(e);
+	        }
+	    });
+	});
+	
+	
+	
 </script>
+
+<style>
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #container {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 50px auto;
+        }
+
+        #buttonContainer {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            width: 30%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #modify {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            width: 68%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: none;
+            background-color: #5cb85c;
+            color: #ffffff;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+
 <!-- css -->
 <link href="/resources/css/include.css" rel="stylesheet">
 <!-- bootstrap:css -->
@@ -106,17 +169,27 @@
 <c:if test="${sessionScope.usersId != null}">
 	<center>
 		<a style="color: green;">${users.nickname}</a>님의 마이페이지.<br />
-
-		<button id="modifyInfo">정보수정</button>
-		<button id="modifyStoreInfo">상점정보수정</button>
-		<button onclick="window.location='/my/addProduct'">상품등록</button>
-		<button id="reviewAll">리뷰 관리</button>
-		<button id="myQNA">문의 내역</button>
-		<button id="myProduct">구매자 관리</button>
-		<button id="myBuyList">구매목록</button>
-		<button id="HS">찜,구독 목록</button>
-		<button id="chattingList">채팅</button>
-		<div id="modify"></div>
+		
+		<div id="container">
+            <div id="buttonContainer">
+            	계정 정보<br/>
+				<button id="modifyInfo">정보수정</button>
+				판매자<br/>
+				<button id="modifyStoreInfo">상점정보수정</button>
+				<button id="myProduct">구매자 관리</button>
+				<button onclick="window.location='/my/addProduct'">상품등록</button>
+				리뷰<br/>
+				<button id="reviewAll">리뷰 관리</button>
+				Q&A<br/>
+				<button id="myQNA">문의 내역</button>
+				구매자<br/>
+				<button id="myBuyList">구매목록</button>
+				<button id="HS">찜,구독 목록</button>
+				채팅<br/>
+				<button id="chattingList">채팅</button>
+			</div>
+			<div id="modify"></div>
+		</div>
 	</center>
 </c:if>
 

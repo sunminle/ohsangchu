@@ -3,6 +3,7 @@ package com.gi.osc.service;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,22 +27,22 @@ public interface MyPageService {
 	public StoreDTO selectStoreInfo(int userId);
 	public ProductDTO selectProductInfo(int productId);
 	public PostingDTO selectPostingInfo(int postingId);
-	public List<PostingDTO> postingList(String realId);
+	public void postingList(String realId,int pageNum, Model model);
 	public void addPosting(PostingDTO dto,MultipartFile thumnail,String productPath,String realId);
 	public void addproduct(ProductDTO dto);
 	public int nickCheck(String nickname);
 	public void modifyUsers(UsersDTO dto, MultipartFile file,String filePath,String realId);
 	public int storeNameCheck(String storeName);
 	public void modifyStore(StoreDTO dto,String realId);
-	public List<ReviewDTO> myReview(String realId);
+	public void myReview(String realId,int pageNum, Model model);
 	public void myReviewDelete(int reviewNum);
-	public List<ReviewDTO> getReview(String realId);
-	public List<QNADTO> myQNA(String realId);
+	public void getReview(String realId,int pageNum, Model model);
+	public void myQNA(String realId,int pageNum, Model model);
 	public List<PaymentDTO> myProductBuyer(@Param("postingId") int postingId, @Param("orderType")String orderType);
 	public void addPostingImg(List<String>liveFileName,PostingDTO postingDTO,String copyPath,String productPath,String[] fileName,String realId);
-	public List<PostingDTO> myBuyList(String realId);
-	public List<PostingDTO> myHeartList(String realId);
-	public List<StoreDTO> mySubscribeList(String realId);
+	public void myBuyList(String realId,int pageNum, Model model);
+	public void myHeartList(String realId,int pageNum, Model model);
+	public void mySubscribeList(String realId,int pageNum, Model model);
 	public ProductDTO product(int productId);
 	public void addHashtag(HashtagDTO hashtagDTO, HashtagPostingDTO hashtagPostingDTO, String hashtag);
 }

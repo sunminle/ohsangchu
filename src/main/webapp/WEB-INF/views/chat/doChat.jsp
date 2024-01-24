@@ -5,7 +5,7 @@
 <script src = "/resources/js/socket.io.js"></script>
 <script>
 	$(function(){
-		var socket = io.connect("http://192.168.219.111:9999");
+		var socket = io.connect("http://192.168.219.102:9999");
 		var chatId = '${chatId}';
 		socket.emit("joinRoom", {user1Id: '${user1Id}'}, {user2Id: '${user2Id}'}, {chatId: '${chatId}'}); 
 		

@@ -194,18 +194,18 @@ public class MyPageController {
 	}
 
 	@RequestMapping("myReview")
-	public String myReview(HttpSession session, Model model) {
+	public String myReview(HttpSession session, Model model,@RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
 		String realId = (String) session.getAttribute("usersId");
-		List<ReviewDTO> myReviewList = service.myReview(realId);
-		model.addAttribute("myReviewList", myReviewList);
+		service.myReview(realId, pageNum, model);
+		
 		return "myPage/myReview";
 	}
 
 	@RequestMapping("getReview")
-	public String getReview(HttpSession session, Model model) {
+	public String getReview(HttpSession session, Model model,@RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
 		String realId = (String) session.getAttribute("usersId");
-		List<ReviewDTO> getReviewList = service.getReview(realId);
-		model.addAttribute("getReviewList", getReviewList);
+		service.getReview(realId, pageNum, model);
+		
 		return "myPage/getReview";
 	}
 
@@ -222,18 +222,16 @@ public class MyPageController {
 	}
 
 	@RequestMapping("myQNA")
-	public String myQNA(HttpSession session, Model model) {
+	public String myQNA(HttpSession session, Model model, @RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
 		String realId = (String) session.getAttribute("usersId");
-		List<QNADTO> QNAList = service.myQNA(realId);
-		model.addAttribute("QNAList", QNAList);
+		service.myQNA(realId, pageNum, model);
 		return "myPage/myQNA";
 	}
 	
 	@RequestMapping("myProduct")
-	public String myProduct(HttpSession session, Model model) {
+	public String myProduct(HttpSession session, Model model, @RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
 		String realId = (String) session.getAttribute("usersId");
-		List<PostingDTO> postingList = service.postingList(realId);
-		model.addAttribute("postingList",postingList);
+		service.postingList(realId, pageNum, model);
 		return "myPage/myProduct";
 	}
 	
@@ -248,10 +246,9 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("myBuyList")
-	public String myBuyList(HttpSession session, Model model) {
+	public String myBuyList(HttpSession session, Model model, @RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
 		String realId = (String) session.getAttribute("usersId");
-		List<PostingDTO> postingList = service.myBuyList(realId);
-		model.addAttribute("postingList",postingList);
+		service.myBuyList(realId, pageNum, model);
 		return "myPage/myBuyList";
 	}
 	
@@ -261,18 +258,16 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("heartList")
-	public String heartList(Model model, HttpSession session) {
+	public String heartList(Model model, HttpSession session, @RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
 		String realId = (String) session.getAttribute("usersId");
-		List<PostingDTO> postingList = service.myHeartList(realId);
-		model.addAttribute("postingList",postingList);
+		service.myHeartList(realId, pageNum, model);
 		return "myPage/heartList";
 	}
 	
 	@RequestMapping("subscribeList")
-	public String subscribeList(Model model, HttpSession session) {
+	public String subscribeList(Model model, HttpSession session, @RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
 		String realId = (String) session.getAttribute("usersId");
-		List<StoreDTO> storeList = service.mySubscribeList(realId);
-		model.addAttribute("storeList",storeList);
+		service.mySubscribeList(realId, pageNum, model);
 		return "myPage/subscribeList";
 	}
 	
