@@ -97,7 +97,7 @@
 							<button class="fu" id="follow" data-store-id="${store.id}"><b>팔로우</b></button>
 						</c:otherwise>
 					</c:choose>
-					<button id="message"><b>메세지</b></button>
+					<button id="message" onclick="location='/chat/doChat?enemyId=${storeUser.id}'"><b>메세지</b></button>
 				</div>
 			</div>
 		</div>

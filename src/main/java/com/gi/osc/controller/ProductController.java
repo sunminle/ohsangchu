@@ -49,6 +49,7 @@ public class ProductController {
 		
 		//포스트넘버를 주면 해당 포스트의 리뷰 가져오기
 		ArrayList<ReviewDTO> reviews = postService.getReviews(postNum);
+		int revCnt = reviews.size();
 		//리뷰에 해당 유저 정보 추가하기
 		for(ReviewDTO review : reviews) {
 			review.setUsers(postService.getUser(review.getUserId()));
@@ -61,6 +62,7 @@ public class ProductController {
 		model.addAttribute("store", store);
 		model.addAttribute("storeUser", user);
 		model.addAttribute("reviews", reviews);
+		model.addAttribute("revCnt", revCnt);
 		
 		return "product/productDetail";
 	}
