@@ -4,6 +4,7 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
     <mapper namespace="com.gi.osc.repository.MainMapper">
     	
+    	<!--
     	<select id="searchList" parameterType="com.gi.osc.bean.StoreDTO" resultType="com.gi.osc.bean.StoreDTO">
     		 select * from dbo.store where delete_yn='N' 
     		 <choose>
@@ -12,7 +13,7 @@
     		 	</when>
     		 </choose>
     	</select>
-    	
+    	-->
     	<!--  상품검색 -->
     	<select id="searchProductsByName" parameterType="String" resultType="com.gi.osc.bean.ProductDTO">
     SELECT a.*, p.*
@@ -21,14 +22,23 @@
     <where>
         <if test="searchKeyword != null and searchKeyword != ''">
             AND (p.productname LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%'
-            OR a.title LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%')
+            OR a.title LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%'
+            OR a.content LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%')
         </if>
     </where>
 </select>
 		
 	<!-- 상점 검색 -->
 		<select id="searchStoreByName" parameterType="String" resultType="com.gi.osc.bean.StoreDTO">
-   			select * from store where storename LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%'
+   			select s.*, u.* 
+			from users u
+			join store s on u.id = s.userId(+)
+			<where>
+				<if test="searchKeyword != null and searchKeyword != ''">
+ 					AND (s.storeName LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%'
+       				OR u.nickname LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%')
+        		</if>
+        	</where>
 		</select>
 	 
 

@@ -10,6 +10,7 @@ public class StoreDTO {
 	private String storeIntro;
 	
 	private String type;
-	private String keyword;
+	private String Keyword;
+	private String profile;
 
 }

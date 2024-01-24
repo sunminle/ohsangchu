@@ -20,43 +20,6 @@
 <title>상품상세</title>
 </head>
 
-<script>
-
-    function addVisitedPage() {
-        // 현재 페이지의 URL을 세션 스토리지에 저장
-        const currentPageUrl = window.location.href;
-
-        // 세션 스토리지에서 방문한 페이지 목록 가져오기
-        const visitedPages = JSON.parse(sessionStorage.getItem('visitedPages')) || [];
-
-        // 현재 페이지 URL이 목록에 없다면 추가
-        if (!visitedPages.includes(currentPageUrl)) {
-            visitedPages.push(currentPageUrl);
-            sessionStorage.setItem('visitedPages', JSON.stringify(visitedPages));
-        }
-    }
-
-    function getVisitedPages() {
-        // 세션 스토리지에서 방문한 페이지 목록 가져오기
-        return JSON.parse(sessionStorage.getItem('visitedPages')) || [];
-    }
-
-    // 페이지가 로드될 때 방문한 페이지 목록 출력
-    window.onload = function () {
-        const visitedPagesList = document.getElementById('visitedPagesList');
-        const visitedPages = getVisitedPages();
-        visitedPages.forEach(pageUrl => {
-            const listItem = document.createElement('li');
-            listItem.textContent = `Page URL: ${pageUrl}`;
-            visitedPagesList.appendChild(listItem);
-        });
-    };
-
-    // 페이지가 로드될 때 방문한 페이지 목록에 현재 페이지 추가
-    addVisitedPage();
-
-</script>
-
 <body>
 	
 	<!-- header -->
