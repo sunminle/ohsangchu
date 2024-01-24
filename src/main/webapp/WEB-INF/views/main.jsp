@@ -365,23 +365,74 @@
 		
 		
 		<div id="newProduct" class="m-3">
-			<span class="bold"><b class="green">my</b> 최근 본 상품</span>
+			<span class="bold"><b class="green">my</b> 최근 본 상점</span>
 			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
 		  <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4z"/>
 		  <path d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z"/>
 		</svg>
+		
+		
+<br />
 
-<!-- 뷰에 데이터 출력 -->
+<!-- 메인 뷰의 HTML 파일에 목록을 표시할 요소 -->
+<ul id="mainViewList" style="list-style: none; display: flex;"></ul>
+
+<!-- 출력을 위한 요소 -->
+<!-- <div id="output"></div> -->
+
 <script>
-    document.body.innerHTML += "<p> " + getVisitedPages() + "</p>";
+    // 세션 스토리지에서 방문한 스토어 정보 목록 가져오기
+    function getVisitedStores() {
+        return JSON.parse(sessionStorage.getItem('visitedStores')) || [];
+    }
+
+    window.onload = function () {
+        console.log("Main view script loaded.");
+
+        const mainViewList = document.getElementById('mainViewList');
+        const visitedStores = getVisitedStores();
+
+        // 기존 목록을 지우고 새로 목록을 출력
+        mainViewList.innerHTML = '';
+
+        if (visitedStores.length > 0) {
+            visitedStores.forEach(storeInfo => {
+                const listItem = document.createElement('li');
+                const imgElement = document.createElement('img');
+                imgElement.src = storeInfo.imageUrl;
+                imgElement.alt = "Store Image";
+                
+             // 이미지의 폭과 높이를 설정하여 크기 조정
+                imgElement.style.width = '200px'; // 원하는 폭으로 변경
+                imgElement.style.height = '200px'; // 원하는 높이로 변경
+
+                // 이미지를 클릭했을 때 상점 페이지로 이동하는 이벤트 추가
+                imgElement.addEventListener('click', function() {
+                    window.location.href = storeInfo.pageUrl;
+                });
+
+                listItem.appendChild(imgElement);
+                mainViewList.appendChild(listItem);
+            });
+        } else {
+            const noDataMessage = document.createElement('p');
+            noDataMessage.textContent = '다녀온 상점이 없어요';
+            mainViewList.appendChild(noDataMessage);
+        }
+
+        console.log("Main view script executed.");
+
+       
+        const outputElement = document.getElementById('output');
+        outputElement.innerHTML = "<p>Visited Stores: " + JSON.stringify(getVisitedStores()) + "</p><br />";
+    };
 </script>
 
 
-<c:forEach var="store" items="${recentlyViewedStores}">
-    <!-- 여기에서 각 상점에 대한 출력 형식을 정의 -->
-    <p>${store.storeName}</p>
-    <!-- 다른 필요한 정보들을 출력 -->
-</c:forEach>
+
+
+
+
 			</div>
 			
 		
