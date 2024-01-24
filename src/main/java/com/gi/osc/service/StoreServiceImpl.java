@@ -1,11 +1,13 @@
 package com.gi.osc.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.repository.StoreMapper;
 
 @Service
@@ -46,6 +48,11 @@ public class StoreServiceImpl implements StoreService{
 		folcnt.put("follower", follower);
 		
 		return folcnt;
+	}
+
+	@Override
+	public ArrayList<ReviewDTO> getReviews(int userId) {
+		return mapper.getReviews(userId);
 	}
 
 }

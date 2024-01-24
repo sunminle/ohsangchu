@@ -1,8 +1,11 @@
 package com.gi.osc.repository;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+
+import com.gi.osc.bean.ReviewDTO;
 
 public interface StoreMapper {
 	
@@ -14,5 +17,6 @@ public interface StoreMapper {
 						@Param("userId") int userId);
 	public int getFollow(int userId);
 	public int getfollower(int storeId);
+	public ArrayList<ReviewDTO> getReviews(int userId);
 	
 }
