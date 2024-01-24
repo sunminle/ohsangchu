@@ -78,35 +78,58 @@
 		update store set storename = #{storeName}, storeintro =
 		#{storeIntro} where userid = #{userId}
 	</update>
-
+	
+	<select id="myReviewCount">
+		select count(*) from review where userid = #{userId}
+	</select>
+	
 	<select id="myReview" resultType="com.gi.osc.bean.ReviewDTO">
-		select p.title, a.* from
-		posting p ,
-		(select * from review where userid = #{userId}) a
-		where
-		p.id=a.postingid order by a.id desc
+	<![CDATA[
+			select * from (select p.title, a.*, rownum r from posting p ,
+			(select * from review where userid = #{userId} order by id desc)a where p.id = a.postingid) where r >= #{start} and r <= #{end}
+		]]>
+		
 	</select>
 
 	<delete id="myReviewDelete">
 		delete from review where id = #{reviewNum}
 	</delete>
-
-	<select id="getReview" resultType="com.gi.osc.bean.ReviewDTO">
-		select p.title , a.*
-		from posting p ,
+	
+	<select id="getReviewCount">
+		select count(*) from posting p ,
 		(select * from review where postingid in
 		(select id
 		from posting where storeid =
 		(select id from store where userid =
 		(select id from users where realid = #{realId})))) a
 		where
-		p.id=a.postingid
-		order by a.id desc
+		p.id=a.postingid 
 	</select>
-
+	
+	
+	<select id="getReview" resultType="com.gi.osc.bean.ReviewDTO">
+		<![CDATA[
+		select * from (select p.title, a.*, rownum r from posting p ,(select * from review where postingid in
+		(select id
+		from posting where storeid =
+		(select id from store where userid =
+		(select id from users where realid = #{realId})))) a
+		where
+		p.id=a.postingid
+		order by a.id desc) where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+	
+	<select id="myQNACount">
+		select count(*) from qna where userid = #{userId}
+	</select>
+	
 	<select id="myQNA" resultType="com.gi.osc.bean.QNADTO">
-		select * from qna where userid =
-		#{userId} order by id desc
+		<![CDATA[
+		select * from (select q.*, rownum r from 
+		(select * from qna where userid = #{userId} order by id desc)q) 
+		where r >= #{start} and r <= #{end}
+		]]>
 	</select>
 
 	
@@ -150,16 +173,43 @@
 		where realid = #{realId})
 	</select>
 	
+	<select id="myBuyListCount">
+		select count(*) from posting p join payment pm on p.id = pm.postingid join users u on pm.userid = u.id where u.realid = #{realId}
+	</select>
+	
 	<select id="myBuyList" resultType="com.gi.osc.bean.PostingDTO">
-		select p.*,pm.orderdate from posting p join payment pm on p.id = pm.postingid join users u on pm.userid = u.id where u.realid = #{realId} order by pm.id desc
+		<![CDATA[
+		select * from (select a.*, rownum r from 
+		(select p.*,pm.orderdate from 
+		posting p join payment pm on p.id = pm.postingid join users u on pm.userid = u.id 
+		where u.realid = #{realId} order by pm.id desc)a) where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+	
+	<select id="myHeartListCount">
+		select count(*) from posting p join heart h on p.id=h.postingid join users u on h.userid = u.id where u.realid = #{realId} order by h.id desc
 	</select>
 	
 	<select id="myHeartList" resultType="com.gi.osc.bean.PostingDTO">
-		select p.*,h.id heartid from posting p join heart h on p.id=h.postingid join users u on h.userid = u.id where u.realid = #{realId} order by h.id desc
+		<![CDATA[
+		select * from 
+		(select a.*, rownum r from 
+		(select p.*,h.id heartid from posting p join heart h on p.id=h.postingid join users u on h.userid = u.id 
+		where u.realid = #{realId} order by h.id desc)a) where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+	
+	<select id="mySubscribeListCount">
+		select count(*) from store s join store_subscribe ss on ss.storeid = s.id join users u on ss.userid = u.id where u.realid = #{realId} order by ss.id desc
 	</select>
 	
 	<select id="mySubscribeList" resultType="com.gi.osc.bean.StoreDTO">
-		select s.* from store s join store_subscribe ss on ss.storeid = s.id join users u on ss.userid = u.id where u.realid = #{realId} order by ss.id desc
+		<![CDATA[
+		select * from 
+		(select a.*, rownum r from 
+		(select s.* from store s join store_subscribe ss on ss.storeid = s.id join users u on ss.userid = u.id 
+		where u.realid = #{realId} order by ss.id desc)a) where r >= #{start} and r <= #{end}
+		]]>
 	</select>
 	
 	<select id = "product" resultType="com.gi.osc.bean.ProductDTO">
@@ -167,7 +217,10 @@
 	</select>
 	
 	<select id="postingList" resultType="com.gi.osc.bean.PostingDTO">
-		select * from posting where storeid = (select id from store where userid = (select id from users where realid = #{realId}))order by id desc
+		<![CDATA[
+			select * from (select p.*, rownum r from (select * from posting where storeid = (select id from store where userid = 
+			(select id from users where realid = #{realId}))order by id desc)p) where r >= #{start} and r <= #{end}
+		]]>
 	</select>
 	
 	<insert id="addproduct" parameterType="com.gi.osc.bean.ProductDTO">
@@ -193,5 +246,6 @@
 	<select id="selectHashtagId">
 		select id from hashtag where hashtagName = #{hashtagName}
 	</select>
+
 	
 </mapper>

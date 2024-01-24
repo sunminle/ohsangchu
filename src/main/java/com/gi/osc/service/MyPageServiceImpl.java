@@ -1,12 +1,15 @@
 package com.gi.osc.service;
 
 import java.io.File;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gi.osc.bean.HashtagDTO;
@@ -22,12 +25,16 @@ import com.gi.osc.bean.UserInfoDTO;
 import com.gi.osc.bean.UsersDTO;
 import com.gi.osc.repository.MyPageMapper;
 
+
 @Service
 public class MyPageServiceImpl implements MyPageService{
 	
 	@Autowired
 	private MyPageMapper mapper;
-
+	
+	@Autowired
+	private HashMap pageMap;
+	
 	@Override
 	public UsersDTO selectUsers(String realId) {
 		return mapper.selectUsers(realId);
@@ -64,8 +71,37 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 	
 	@Override
-	public List<PostingDTO> postingList(String realId) {
-		return mapper.postingList(realId);
+	public void postingList(String realId,int pageNum, Model model) {
+		int storeId = mapper.selectStoreId(realId);
+		int pageSize = 10;
+		int startRow = (pageNum - 1) * pageSize + 1;
+		int endRow = pageNum * pageSize;
+		int count = mapper.postingCount(storeId);
+		
+		List<PostingDTO> list = Collections.EMPTY_LIST;
+		if(count > 0) {
+			pageMap.put("start",startRow);
+			pageMap.put("end",endRow);
+			pageMap.put("realId",realId);
+			list = mapper.postingList(pageMap);
+		}
+		model.addAttribute("list",list);
+		model.addAttribute("count",count);
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("pageSize",pageSize);
+		
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		int startPage = (pageNum/10)*10+1;
+		int pageBlock = 10;
+		int endPage = startPage + pageBlock-1;
+		if (endPage > pageCount){
+			endPage = pageCount;
+		}
+		model.addAttribute("pageCount",pageCount);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("pageBlock",pageBlock);
+		model.addAttribute("endPage",endPage);
+
 	}
 	
 	@Override
@@ -143,9 +179,40 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public List<ReviewDTO> myReview(String realId) {
+	public void myReview(String realId,int pageNum, Model model) {
 		int userId = mapper.selectUsers(realId).getId();
-		return mapper.myReview(userId);
+		
+		int pageSize = 10;
+		int startRow = (pageNum - 1) * pageSize + 1;
+		int endRow = pageNum * pageSize;
+		int count = mapper.myReviewCount(userId);
+		
+		List<ReviewDTO> list = Collections.EMPTY_LIST;
+		
+		if(count > 0) {
+			pageMap.put("start",startRow);
+			pageMap.put("end",endRow);
+			pageMap.put("userId",userId);
+			list = mapper.myReview(pageMap);
+		}
+		model.addAttribute("list",list);
+		model.addAttribute("count",count);
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("pageSize",pageSize);
+		
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		int startPage = (pageNum/10)*10+1;
+		int pageBlock = 10;
+		int endPage = startPage + pageBlock-1;
+		if (endPage > pageCount){
+			endPage = pageCount;
+		}
+		model.addAttribute("pageCount",pageCount);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("pageBlock",pageBlock);
+		model.addAttribute("endPage",endPage);
+		
+		
 	}
 
 	@Override
@@ -154,14 +221,74 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public List<ReviewDTO> getReview(String realId) {
-		return mapper.getReview(realId);
+	public void getReview(String realId,int pageNum, Model model) {
+		int pageSize = 10;
+		int startRow = (pageNum - 1) * pageSize + 1;
+		int endRow = pageNum * pageSize;
+		int count = mapper.getReviewCount(realId);
+		
+		List<ReviewDTO> list = Collections.EMPTY_LIST;
+		
+		if(count > 0) {
+			pageMap.put("start",startRow);
+			pageMap.put("end",endRow);
+			pageMap.put("realId",realId);
+			list = mapper.getReview(pageMap);
+		}
+		model.addAttribute("list",list);
+		model.addAttribute("count",count);
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("pageSize",pageSize);
+		
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		int startPage = (pageNum/10)*10+1;
+		int pageBlock = 10;
+		int endPage = startPage + pageBlock-1;
+		if (endPage > pageCount){
+			endPage = pageCount;
+		}
+		model.addAttribute("pageCount",pageCount);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("pageBlock",pageBlock);
+		model.addAttribute("endPage",endPage);
+
 	}
 
 	@Override
-	public List<QNADTO> myQNA(String realId) {
+	public void myQNA(String realId,int pageNum, Model model) {
 		int userId = mapper.selectUsers(realId).getId();
-		return mapper.myQNA(userId);
+		
+		int pageSize = 10;
+		int startRow = (pageNum - 1) * pageSize + 1;
+		int endRow = pageNum * pageSize;
+		int count = mapper.myQNACount(userId);
+		
+		List<QNADTO> list = Collections.EMPTY_LIST;
+		
+		if(count > 0) {
+			pageMap.put("start",startRow);
+			pageMap.put("end",endRow);
+			pageMap.put("userId",userId);
+			list = mapper.myQNA(pageMap);
+		}
+		model.addAttribute("list",list);
+		model.addAttribute("count",count);
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("pageSize",pageSize);
+		
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		int startPage = (pageNum/10)*10+1;
+		int pageBlock = 10;
+		int endPage = startPage + pageBlock-1;
+		if (endPage > pageCount){
+			endPage = pageCount;
+		}
+		model.addAttribute("pageCount",pageCount);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("pageBlock",pageBlock);
+		model.addAttribute("endPage",endPage);
+		
+	
 	}
 
 	@Override
@@ -198,20 +325,111 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public List<PostingDTO> myBuyList(String realId) {
-		return mapper.myBuyList(realId);
+	public void myBuyList(String realId,int pageNum, Model model) {
+		
+		int pageSize = 10;
+		int startRow = (pageNum - 1) * pageSize + 1;
+		int endRow = pageNum * pageSize;
+		int count = mapper.myBuyListCount(realId);
+		
+		List<PostingDTO> list = Collections.EMPTY_LIST;
+		
+		if(count > 0) {
+			pageMap.put("start",startRow);
+			pageMap.put("end",endRow);
+			pageMap.put("realId",realId);
+			list = mapper.myBuyList(pageMap);
+		}
+		model.addAttribute("list",list);
+		model.addAttribute("count",count);
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("pageSize",pageSize);
+		
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		int startPage = (pageNum/10)*10+1;
+		int pageBlock = 10;
+		int endPage = startPage + pageBlock-1;
+		if (endPage > pageCount){
+			endPage = pageCount;
+		}
+		model.addAttribute("pageCount",pageCount);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("pageBlock",pageBlock);
+		model.addAttribute("endPage",endPage);
+		
 	}
 
 
 	@Override
-	public List<PostingDTO> myHeartList(String realId) {
-		return mapper.myHeartList(realId);
+	public void myHeartList(String realId,int pageNum, Model model) {
+		
+		int pageSize = 10;
+		int startRow = (pageNum - 1) * pageSize + 1;
+		int endRow = pageNum * pageSize;
+		int count = mapper.myHeartListCount(realId);
+		
+		List<PostingDTO> list = Collections.EMPTY_LIST;
+		
+		if(count > 0) {
+			pageMap.put("start",startRow);
+			pageMap.put("end",endRow);
+			pageMap.put("realId",realId);
+			list = mapper.myHeartList(pageMap);
+		}
+		model.addAttribute("list",list);
+		model.addAttribute("count",count);
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("pageSize",pageSize);
+		
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		int startPage = (pageNum/10)*10+1;
+		int pageBlock = 10;
+		int endPage = startPage + pageBlock-1;
+		if (endPage > pageCount){
+			endPage = pageCount;
+		}
+		model.addAttribute("pageCount",pageCount);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("pageBlock",pageBlock);
+		model.addAttribute("endPage",endPage);
+		
+
 	}
 
 
 	@Override
-	public List<StoreDTO> mySubscribeList(String realId) {
-		return mapper.mySubscribeList(realId);
+	public void mySubscribeList(String realId,int pageNum, Model model) {
+		
+		int pageSize = 10;
+		int startRow = (pageNum - 1) * pageSize + 1;
+		int endRow = pageNum * pageSize;
+		int count = mapper.mySubscribeListCount(realId);
+		
+		List<StoreDTO> list = Collections.EMPTY_LIST;
+		
+		if(count > 0) {
+			pageMap.put("start",startRow);
+			pageMap.put("end",endRow);
+			pageMap.put("realId",realId);
+			list = mapper.mySubscribeList(pageMap);
+		}
+		model.addAttribute("list",list);
+		model.addAttribute("count",count);
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("pageSize",pageSize);
+		
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		int startPage = (pageNum/10)*10+1;
+		int pageBlock = 10;
+		int endPage = startPage + pageBlock-1;
+		if (endPage > pageCount){
+			endPage = pageCount;
+		}
+		model.addAttribute("pageCount",pageCount);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("pageBlock",pageBlock);
+		model.addAttribute("endPage",endPage);
+		
 	}
 
 	@Override

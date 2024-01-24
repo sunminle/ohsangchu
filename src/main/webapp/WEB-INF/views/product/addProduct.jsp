@@ -183,14 +183,30 @@
 	function validateForm() {
 		var title = document.forms["addProduct"]["title"].value;
         var content = document.forms["addProduct"]["content"].value;
-        var product = document.forms["addProduct"]["product"].value;
-        var quantity = document.forms["addProduct"]["quantity"].value;
-        var price = document.forms["addProduct"]["price"].value;
+        var productGroups = document.querySelectorAll('.productGroup');
+        for (var i = 0; i < productGroups.length; i++) {
+            var product = productGroups[i].querySelector('input[name="product"]').value;
+            var quantity = productGroups[i].querySelector('input[name="quantity"]').value;
+            var price = productGroups[i].querySelector('input[name="price"]').value;
 
-        if (title === "" || content === "" || product === "" || quantity === "" || price === "") {
-            alert("모든 필수 항목을 작성하세요.");
+            if (product === "" || quantity === "" || price === "") {
+                alert("상품 정보를 모두 작성하세요.");
+                return false;
+            }
+        }
+
+        // 초기 폼 필드 확인
+        if (title === "") {
+            alert("제목을 작성하세요.");
             return false;
         }
+        
+        if (content === "") {
+            alert("내용을 작성하세요.");
+            return false;
+        }
+        
+        
         return true;
     }
 
