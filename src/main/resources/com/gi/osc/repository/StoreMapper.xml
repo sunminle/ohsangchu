@@ -28,5 +28,13 @@
 	<select id="getfollower">
 		select count(*) from store_subscribe where storeId=#{storeId}
 	</select>
+	
+	<!-- selectList : 유저넘버를 주면 해당 유저의 리뷰 가져오기 -->
+	<select id="getReviews" resultType="com.gi.osc.bean.ReviewDTO">
+		select * from review
+				 where postingid in (select id from posting
+				 							   where storeid=(select id from store
+				 							   							where userid=#{userId}))
+	</select>
 
 </mapper>
