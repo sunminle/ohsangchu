@@ -49,13 +49,20 @@ public class ProductController {
 		
 		//포스트넘버를 주면 해당 포스트의 리뷰 가져오기
 		ArrayList<ReviewDTO> reviews = postService.getReviews(postNum);
-		int revCnt = reviews.size();
 		//리뷰에 해당 유저 정보 추가하기
 		for(ReviewDTO review : reviews) {
 			review.setUsers(postService.getUser(review.getUserId()));
-			System.out.println(review.getContent());
 		}
-		System.out.println(reviews);
+		int revCnt = reviews.size();
+		
+		//유저 넘버 주면 해당 유저 리뷰 평균
+		ArrayList<ReviewDTO> userRe = storeService.getReviews(userId);
+		double sum = 0;
+		for(ReviewDTO r:userRe) {
+			sum += r.getPoint();
+		}
+		double revAvg = sum/(userRe.size());
+		
 		
 		//뷰 페이지에 보내기
 		model.addAttribute("post", post);
@@ -63,6 +70,7 @@ public class ProductController {
 		model.addAttribute("storeUser", user);
 		model.addAttribute("reviews", reviews);
 		model.addAttribute("revCnt", revCnt);
+		model.addAttribute("revAvg", revAvg);
 		
 		return "product/productDetail";
 	}
@@ -78,6 +86,7 @@ public class ProductController {
 		//유저넘버를 주면 해당 유저 정보 가져오기
 		int userId = store.getUserId();
 		UsersDTO user = postService.getUser(userId);
+		
 		
 		//뷰 페이지에 보내기
 		model.addAttribute("store", store);
