@@ -8,8 +8,9 @@ public class StoreDTO {
 	private int userId;
 	private String storeName;
 	private String storeIntro;
-	
+	 
 	private String type;
-	private String keyword;
+	private String Keyword;
+	private String profile;
 
 }

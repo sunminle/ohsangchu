@@ -62,6 +62,9 @@
             <c:forEach var="product" items="${productList}">
 				<div id="newProList" class="card" style="width: 18rem;">
 				<%-- <img src="${product.IMG_URL}" class="card-img-top" alt="..."> --%>
+				<div id="storeImg">
+						<img src="/resources/images/posting/${product.thumnail}" alt="프로필이미지" width="300px" height="300px">
+					</div>
 				<div class="child" onclick="location.href='/product/detail?postNum=${product.id}';">
 				   <h5 class="card-title">${product.title}</h5>
 				   <p class="card-text">${product.productName}</p> 
@@ -69,7 +72,7 @@
 				</div>
 				<ul class="list-group list-group-flush" >
 				  <li class="list-group-item">${product.storeName}</li>
-				  <li class="list-group-item">${product.thumnail}</li>
+				  <li class="list-group-item"></li>
 				  <li class="list-group-item"></</li>
 				  </ul>
 				 
@@ -100,12 +103,12 @@
 				<div id="newProList" class="card" style="width: 18rem;">
 				<%-- <img src="${product.IMG_URL}" class="card-img-top" alt="..."> --%>
 				<div id="storeImg">
-						<img src="/resources/images/profiles/${storeUser.profile}" alt="프로필이미지">
+						<img src="/resources/images/profiles/${store.profile}" alt="프로필이미지" width="300px" height="300px">
 					</div>
 				<div class="child" onclick="location.href='/product/store?storeNum=${store.id}';">
 				  <h5 class="card-title">${store.storeName}</h5>
 				  <p class="card-text">${store.storeIntro}</p>
-				</div>
+				</div> 
 				
 				 
 				</div>

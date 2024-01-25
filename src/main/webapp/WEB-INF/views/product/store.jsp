@@ -21,29 +21,43 @@
 </head>
 
 <script>
-    // 세션 스토리지에서 방문한 스토어 정보 목록 가져오기
-    function getVisitedStores() {
-        return JSON.parse(sessionStorage.getItem('visitedStores')) || [];
-    }
+//세션 스토리지에서 방문한 스토어 정보 목록 가져오기
+function getVisitedStores() {
+    return JSON.parse(sessionStorage.getItem('visitedStores')) || [];
+}
 
-    // 이미지 URL과 페이지 URL을 세션 스토리지에 추가하는 함수
-    function addVisitedStore(imageUrl, pageUrl) {
-        const visitedStores = getVisitedStores();
-        const storeInfo = { imageUrl, pageUrl };
+// 이미지 URL은 중복돼도 추가, 페이지 URL은 중복되면 삭제하고 추가
+function addVisitedStore(imageUrl, pageUrl) {
+    const visitedStores = getVisitedStores();
+    const storeInfo = { imageUrl, pageUrl };
 
-        if (!visitedStores.some(store => store.imageUrl === imageUrl)) {
-            visitedStores.push(storeInfo);
-            sessionStorage.setItem('visitedStores', JSON.stringify(visitedStores));
-            console.log("Visited Stores:", visitedStores);
+    // 페이지 URL이 중복되는 값이 세션 스토리지에 있을 경우 삭제
+    visitedStores.forEach((store, index) => {
+        if (store.pageUrl === pageUrl) {
+            visitedStores.splice(index, 1);
         }
+    });
+
+    // 최근 6개 유지
+    if (visitedStores.length >= 6) {
+        visitedStores.pop(); // 배열의 마지막 항목 제거
     }
 
-    // 페이지가 로드될 때 방문한 스토어 정보를 세션 스토리지에 추가
-    window.onload = function () {
-        const storeImageUrl = "/resources/images/profiles/${storeUser.profile}";
-        const storePageUrl = window.location.href;
-        addVisitedStore(storeImageUrl, storePageUrl);
-    };
+    // 새로운 항목을 배열 앞에 추가
+    visitedStores.unshift(storeInfo);
+
+    sessionStorage.setItem('visitedStores', JSON.stringify(visitedStores));
+    console.log("Visited Stores:", visitedStores);
+}
+
+// 페이지가 로드될 때 방문한 스토어 정보를 세션 스토리지에 추가
+window.onload = function () {
+    const storeImageUrl = "/resources/images/profiles/${storeUser.profile}";
+    const storePageUrl = window.location.href;
+    addVisitedStore(storeImageUrl, storePageUrl);
+};
+
+
 </script>
 
 
