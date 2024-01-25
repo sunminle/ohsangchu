@@ -108,7 +108,7 @@
 				<div class="child" onclick="location.href='/product/store?storeNum=${store.id}';">
 				  <h5 class="card-title">${store.storeName}</h5>
 				  <p class="card-text">${store.storeIntro}</p>
-				</div>
+				</div> 
 				
 				 
 				</div>

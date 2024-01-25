@@ -26,14 +26,26 @@ function getVisitedStores() {
     return JSON.parse(sessionStorage.getItem('visitedStores')) || [];
 }
 
-// 이미지 URL은 중복돼도 추가, 최근 6개만 유지
+// 이미지 URL은 중복돼도 추가, 페이지 URL은 중복되면 삭제하고 추가
 function addVisitedStore(imageUrl, pageUrl) {
     const visitedStores = getVisitedStores();
     const storeInfo = { imageUrl, pageUrl };
 
+    // 페이지 URL이 중복되는 값이 세션 스토리지에 있을 경우 삭제
+    visitedStores.forEach((store, index) => {
+        if (store.pageUrl === pageUrl) {
+            visitedStores.splice(index, 1);
+        }
+    });
+
     // 최근 6개 유지
-    visitedStores.unshift(storeInfo); // 새로운 항목을 배열 앞에 추가
-    visitedStores.splice(6); // 배열에서 6번째 이후 항목 제거
+    if (visitedStores.length >= 6) {
+        visitedStores.pop(); // 배열의 마지막 항목 제거
+    }
+
+    // 새로운 항목을 배열 앞에 추가
+    visitedStores.unshift(storeInfo);
+
     sessionStorage.setItem('visitedStores', JSON.stringify(visitedStores));
     console.log("Visited Stores:", visitedStores);
 }
@@ -44,6 +56,7 @@ window.onload = function () {
     const storePageUrl = window.location.href;
     addVisitedStore(storeImageUrl, storePageUrl);
 };
+
 
 </script>
 

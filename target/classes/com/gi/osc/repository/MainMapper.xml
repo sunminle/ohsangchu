@@ -18,7 +18,7 @@
     	<select id="searchProductsByName" parameterType="String" resultType="com.gi.osc.bean.ProductDTO">
     SELECT a.*, p.*
     FROM posting a
-    JOIN product p ON a.id = p.postingid(+)
+    JOIN product p ON a.id = p.postingid(+)  
     <where>
         <if test="searchKeyword != null and searchKeyword != ''">
             AND (p.productname LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%'
@@ -27,6 +27,7 @@
         </if>
     </where>
 </select>
+		
 		
 	<!-- 상점 검색 -->
 		<select id="searchStoreByName" parameterType="String" resultType="com.gi.osc.bean.StoreDTO">
