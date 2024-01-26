@@ -18,7 +18,8 @@
 		<form action="/main/search" method="get">
 		<div class="d-flex align-items-center m-2">
 		<div class="d-flex justify-content-between align-items-center">
-					<select class="form-select" aria-label="Default select example" name="searchColumn">
+					<select class="form-select" aria-label="Default select example" 
+					name="searchColumn">
 	  					<option selected value="1">상품</option>
 	  					<option value="2">상점</option>
 					</select>
@@ -82,6 +83,20 @@
 							//				}, 20000); //20초후 정지
 
 						});
+				$(document).ready(function() {
+				    // AJAX를 사용하여 프로필 이미지 URL을 가져오기
+				    $.ajax({
+				        url: '/users/header',
+				        method: 'GET',
+				        success: function(response) {
+				            // 가져온 프로필 이미지 URL을 이미지에 설정
+				            $('#profileImage').attr('src', response);
+				        }
+				    });
+				});
+
+				
+				
 			</script>
 
 			<div id="ranking"></div>
@@ -111,8 +126,7 @@
 			<div class="text-end">
 				<div class="d-flex">
 					<div class="box">
-						<img class="profile"
-							src="/resources/images/profiles/${sessionScope.profile}">
+						 <img id = "profileImage" src="/resources/images/profiles/${usersDTO.profile}">
 
 					</div>
 					<b>${sessionScope.usersId}</b>님 환영합니다♥

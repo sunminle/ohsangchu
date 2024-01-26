@@ -46,7 +46,7 @@
 	<form id="addNotice">
 		<div class="page-wrapper">
 			<div class="container-fluid">
-				<div class="col-lg-8">
+				
 					<!--게시판 넓이 -->
 					<div class="col-lg-12">
 						<h1 class="page-header">Notice</h1>
@@ -86,11 +86,12 @@
 							</table>
 						</div>
 					</div>
+					</div>
+					</div>
 	</form>
 
-	</div>
-	</div>
-	</div>
+	
+	
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 </body>

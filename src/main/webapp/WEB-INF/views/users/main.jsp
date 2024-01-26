@@ -53,7 +53,7 @@
 				<br>
 
 				<form action="/users/login" method="post">
-
+					<input type="hidden" value="${backURI}" name="backURI" />
 					<div class="input-box">
 						<input id="username" type="text" name="realId" placeholder="아이디">
 						<label for="username">아이디</label>
@@ -61,8 +61,7 @@
 
 					<div class="input-box">
 
-						<input id="password" type="password" name="userPw"
-							placeholder="비밀번호"> <label for="password">비밀번호</label>
+						<input id="password" type="password" name="userPw" placeholder="비밀번호"> <label for="password">비밀번호</label>	
 					</div>
 					<div id="forgot">
 						<a href="">아이디 찾기</a> <a href="">비밀번호 찾기</a>
