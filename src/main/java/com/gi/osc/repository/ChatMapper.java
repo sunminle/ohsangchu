@@ -19,4 +19,5 @@ public interface ChatMapper {
 	public List<UsersDTO> selectAllUsers(int usersId);
 	public void insertChatAlarm(AlarmDTO alarmDTO);
 	public void deleteChatAlarm(@Param("userId")int userId, @Param("chatId")int chatId);
+	public int chatAlarmCount(@Param("userId") int userId, @Param("chatId")int chatId);
 }

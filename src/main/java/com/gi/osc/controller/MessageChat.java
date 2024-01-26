@@ -33,8 +33,6 @@ public class MessageChat extends DefaultEmbeddableVerticle {
 	@Autowired
 	private MyPageService myPageService;
 	
-	private String currentUserId;
-	
 	@Autowired
 	private AlarmDTO alarmDTO;
 	
@@ -80,6 +78,7 @@ public class MessageChat extends DefaultEmbeddableVerticle {
 						    userList = new ArrayList<>();
 						    onlineUsers.put(Integer.parseInt(chatId), userList);
 						}
+						if(!onlineUsers.get(Integer.parseInt(chatId)).contains(Integer.valueOf(id)))
 						userList.add(Integer.parseInt(id));
 						// onlineUsers에 누가 있는지 확인하고 로그 출력
 	                    logger.info("Online users: {}", onlineUsers);
@@ -150,8 +149,6 @@ public class MessageChat extends DefaultEmbeddableVerticle {
 							if (!onlineUsers.get(Integer.parseInt(chatId)).contains(alarmDTO.getUserId())) {
 	                            service.insertChatAlarm(alarmDTO);
 	                        }
-		                        
-							//service.insertChatAlarm(alarmDTO);
 
 						} catch (Exception e) {
 							e.printStackTrace();

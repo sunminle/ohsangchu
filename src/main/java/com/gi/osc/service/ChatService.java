@@ -19,4 +19,5 @@ public interface ChatService {
 	public List<UsersDTO> selectAllUsers(int usersId);
 	public void insertChatAlarm(AlarmDTO alarmDTO);
 	public void deleteChatAlarm(@Param("realUserId")int userId, @Param("chatId")int chatId);
+	public int chatAlarmCount(@Param("user1Id")int userId, @Param("chatId")int chatId);
 }

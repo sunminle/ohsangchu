@@ -25,7 +25,7 @@
 			var id = '${sessionScope.usersId}';
 			var chatId = '${chatId}';
 			$.ajax({
-				url : "/chat/test?id="+id+"&chatId="+chatId,
+				url : "/chat/disconnect?id="+id+"&chatId="+chatId,
 				success : function(e){
 					
 				}

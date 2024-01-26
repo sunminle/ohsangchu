@@ -47,4 +47,8 @@
 		delete from alarm where userid = #{userId} and chatid = #{chatId}
 	</select>
 	
+	<select id="chatAlarmCount">
+		select count(*) from alarm where userid = #{userId} and chatid = #{chatId}
+	</select>
+	
 </mapper>

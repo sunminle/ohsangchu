@@ -65,4 +65,9 @@ public class ChatServiceImpl implements ChatService{
 		mapper.deleteChatAlarm(userId, chatId);
 	}
 
+	@Override
+	public int chatAlarmCount(int userId, int chatId) {
+		return mapper.chatAlarmCount(userId,chatId);
+	}
+
 }
