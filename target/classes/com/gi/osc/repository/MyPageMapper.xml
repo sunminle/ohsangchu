@@ -17,6 +17,10 @@
 		select count(storeid) from posting where storeid = #{storeId}
 	</select>
 	
+	<select id="storeCount">
+		select count(*) from store where userid = #{userId}
+	</select>
+	
 	<select id="selectUsersInfo"
 		resultType="com.gi.osc.bean.UserInfoDTO">
 		select * from userinfo where userid = #{userId}
@@ -246,6 +250,8 @@
 	<select id="selectHashtagId">
 		select id from hashtag where hashtagName = #{hashtagName}
 	</select>
-
+	
+	
+	
 	
 </mapper>

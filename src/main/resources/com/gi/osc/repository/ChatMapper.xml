@@ -39,4 +39,12 @@
 		select * from users where id != #{usersId}
 	</select>
 	
+	<select id = "insertChatAlarm" parameterType="com.gi.osc.bean.AlarmDTO">
+		insert into alarm (userid,chatid,code,prefix) values (#{userId},#{chatId},#{code},#{prefix})
+	</select>
+	
+	<select id = "deleteChatAlarm">
+		delete from alarm where userid = #{userId} and chatid = #{chatId}
+	</select>
+	
 </mapper>

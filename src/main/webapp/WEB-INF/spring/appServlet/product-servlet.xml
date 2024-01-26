@@ -13,4 +13,6 @@
 	<beans:bean id="chatDTO" class="com.gi.osc.bean.ChatDTO" />
 	<beans:bean id="usersDTO" class="com.gi.osc.bean.UsersDTO" />
 	<beans:bean id = "pageMap" class = "java.util.HashMap" />
+	<beans:bean id="alarmDTO" class="com.gi.osc.bean.AlarmDTO" />
+	<beans:bean id="onlineUsers" class="java.util.HashMap" />
 </beans:beans>

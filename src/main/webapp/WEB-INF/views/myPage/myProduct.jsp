@@ -46,8 +46,9 @@ function paginationClickHandler() {
 
 <c:if test="${count > 0}">
 	<c:forEach var="posting" items="${list}">
-		상품이름 : <a href="/my/myProductBuyer?postingId=${posting.id}">${posting.title}</a>
+		상품이름 : ${posting.title}
 		<br />
+		<a href="/my/myProductBuyer?postingId=${posting.id}">구매자 목록</a><br/>
 		<img src="/resources/images/posting/${posting.thumnail}" width="360"
 			height="270">
 		<br />
