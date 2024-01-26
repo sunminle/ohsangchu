@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gi.osc.bean.UsersDTO;
 import com.gi.osc.repository.UsersMapper;
@@ -35,12 +36,12 @@ public class UsersServiceImpl implements UsersService{
 	public int getUserId(String userName) {
 		return mapper.getUserId(userName);
 	}
+
+	public void headerprofile(UsersDTO usersDTO, MultipartFile file, String filePath, String realId) {
+		// TODO Auto-generated method stub
+		
+	}
 		
 }
-
-	
-	
-	
-
 	
 

@@ -17,7 +17,7 @@ public class CustomLoginHandler implements AuthenticationSuccessHandler{
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication auth) throws IOException, ServletException {
 			List<String> roleNames = new ArrayList<>();
-			// security-context.xml ¼³Á¤µÈ USER - ¸ðµç±ÇÇÑ ÀÌ¸§ °¡Á®¿À±â
+			// security-context.xml ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ USER - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			auth.getAuthorities().forEach(au ->{
 				roleNames.add(au.getAuthority());
 			});
@@ -29,5 +29,4 @@ public class CustomLoginHandler implements AuthenticationSuccessHandler{
 			}*/
 			response.sendRedirect(rdir);
 	}
-	
 }
