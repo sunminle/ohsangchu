@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+h4{
+	font-size: 15px;
+	color: #75C573;
+}
+/**rating**/
+.rating {
+    font-size: 2em;
+}
+.star {
+    cursor: pointer;
+}
+.star.active:before {
+    content: "★";
+    color: #75C573;
+}
+/**img**/
+#img-add img{
+	width: 600px;
+	margin: 10px;
+}
