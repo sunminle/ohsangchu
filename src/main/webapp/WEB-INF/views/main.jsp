@@ -273,96 +273,62 @@
 		<br />
 		
 		<div id="newProduct" class="m-3">
-			<span class="bold"><b class="green">NEW</b> 최신 등록 상품</span>
+			<span class="bold"><b class="green">NEW</b> 최근 본 상품</span>
 			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmark-star-fill" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zM8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098L8.16 4.1z"/>
 </svg>
-			<div id="newProList" class="d-flex justify-content-start">
-				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
-					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
-					<div class="proDes">
-						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
-						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
-						<div class="proProfile d-flex align-items-center">
-							<div class="proImg">
-								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
-							</div>
-							<span>진짜이재현</span>
-						</div>
-					</div>
-				</div>
-				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
-					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
-					<div class="proDes">
-						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
-						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
-						<div class="proProfile d-flex align-items-center">
-							<div class="proImg">
-								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
-							</div>
-							<span>진짜이재현</span>
-						</div>
-					</div>
-				</div>
-				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
-					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
-					<div class="proDes">
-						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
-						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
-						<div class="proProfile d-flex align-items-center">
-							<div class="proImg">
-								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
-							</div>
-							<span>진짜이재현</span>
-						</div>
-					</div>
-				</div>
-				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
-					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
-					<div class="proDes">
-						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
-						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
-						<div class="proProfile d-flex align-items-center">
-							<div class="proImg">
-								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
-							</div>
-							<span>진짜이재현</span>
-						</div>
-					</div>
-				</div>
-				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
-					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
-					<div class="proDes">
-						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
-						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
-						<div class="proProfile d-flex align-items-center">
-							<div class="proImg">
-								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
-							</div>
-							<span>진짜이재현</span>
-						</div>
-					</div>
-				</div>
-				<div class="pro" onclick="location.href='/product/detail?postNum=5';">
-					<img src="https://id.ktown4u.com/goods_files/SH0164/goods_images/000096/GD00095887.default.1.jpg">
-					<div class="proDes">
-						<div class="proTitle">더보이즈 리빌 3종 애플뮤직 미개봉 미공포(특전)포함 일괄 판매 + 개봉 미공포 판매(영훈, 현재, 주연, 선우)</div>
-						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
-						<div class="proProfile d-flex align-items-center">
-							<div class="proImg">
-								<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
-							</div>
-							<span>진짜이재현</span>
-						</div>
-					</div>
-				</div>
-				
-				
-			</div>
+			 <!-- 방문한 항목을 표시할 컨테이너 -->
+    <div id="mainContainer" style="list-style: none; display: flex;"></div>
+
+    <script>
+        // 세션 스토리지에서 방문한 정보 목록 가져오기
+        function getVisitedItems() {
+            return JSON.parse(sessionStorage.getItem('visitedItems')) || [];
+        }
+
+        // 출력 부분
+        const mainContainer = document.getElementById('mainContainer');
+        const visitedItems = getVisitedItems();
+
+        // 기존 목록을 지우고 새로 목록을 출력
+        mainContainer.innerHTML = '';
+
+        if (visitedItems.length > 0) {
+            mainContainer.classList.add('hasData');
+            visitedItems.forEach(item => {
+                const itemContainer = document.createElement('div');
+                itemContainer.className = 'visited-item';
+
+                const imgElement = document.createElement('img');
+                imgElement.src = item.imageUrl;
+                imgElement.alt = '방문한 항목 썸네일';
+
+                // 이미지의 폭과 높이를 설정하여 크기 조정
+                imgElement.style.width = '245px'; // 원하는 폭으로 변경
+                imgElement.style.height = '250px'; // 원하는 높이로 변경
+
+                // 이미지를 클릭했을 때 저장된 페이지 URL로 이동하는 이벤트 추가
+                imgElement.addEventListener('click', function() {
+                    window.location.href = item.pageUrl;
+                });
+
+                itemContainer.appendChild(imgElement);
+                mainContainer.appendChild(itemContainer);
+            });
+        } else {
+            mainContainer.classList.add('noData');
+            const noDataMessage = document.createElement('p');
+            noDataMessage.textContent = '오늘 본 상품이 없어요';
+            noDataMessage.style.color = 'gray';
+            noDataMessage.style.fontSize = '20px';
+            noDataMessage.style.fontWeight = 'bold';
+            noDataMessage.style.margin = '0 auto';
+
+            mainContainer.appendChild(noDataMessage);
+        }
+    </script>
+		
 		</div>
-		
-		<br />
-		
 		
 		
 		<div id="newProduct" class="m-3">
@@ -372,8 +338,7 @@
 		  <path d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z"/>
 		</svg>
 		
-		
-<br />
+
 
 <!-- 메인 뷰의 HTML 파일에 목록을 표시할 요소 -->
 <ul id="mainViewList" style="list-style: none; display: flex;"></ul>
@@ -397,6 +362,7 @@
         mainViewList.innerHTML = '';
 
         if (visitedStores.length > 0) {
+        	mainViewList.classList.add('hasData');
             visitedStores.forEach(storeInfo => {
                 const listItem = document.createElement('li');
                 const imgElement = document.createElement('img');
@@ -404,8 +370,8 @@
                 imgElement.alt = "Store Image";
                 
              // 이미지의 폭과 높이를 설정하여 크기 조정
-                imgElement.style.width = '200px'; // 원하는 폭으로 변경
-                imgElement.style.height = '200px'; // 원하는 높이로 변경
+                imgElement.style.width = '245px'; // 원하는 폭으로 변경
+                imgElement.style.height = '250px'; // 원하는 높이로 변경
 
                 // 이미지를 클릭했을 때 상점 페이지로 이동하는 이벤트 추가
                 imgElement.addEventListener('click', function() {
@@ -416,8 +382,14 @@
                 mainViewList.appendChild(listItem);
             });
         } else {
+        	mainViewList.classList.add('noData');
             const noDataMessage = document.createElement('p');
             noDataMessage.textContent = '다녀온 상점이 없어요';
+            noDataMessage.style.color = 'gray';
+            noDataMessage.style.fontSize = '20px';
+            noDataMessage.style.fontWeight = 'bold';
+            noDataMessage.style.margin = '0 auto';
+            
             mainViewList.appendChild(noDataMessage);
         }
 
@@ -428,12 +400,6 @@
         outputElement.innerHTML = "<p>Visited Stores: " + JSON.stringify(getVisitedStores()) + "</p><br />";
     };
 </script>
-
-
-
-
-
-
 			</div>
 			
 		
