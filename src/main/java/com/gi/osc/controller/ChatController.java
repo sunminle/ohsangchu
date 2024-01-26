@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -73,6 +74,11 @@ public class ChatController {
 		
 		for(int id : enemyIdList) {
 			usersDTO = service.selectEnemyIdInfo(id);
+			int user1Id = usersId;
+			int user2Id = usersDTO.getId();
+			int chatId = service.selectChatid(user1Id, user2Id).getId();
+			int chatAlarm = service.chatAlarmCount(user1Id, chatId);
+			usersDTO.setChatAlarmCount(chatAlarm);
 			usersDTOList.add(usersDTO);
 		}
 		}
@@ -178,7 +184,7 @@ public class ChatController {
 		return "chat/newChat";
 	}
 	
-	@RequestMapping("test")
+	@RequestMapping("disconnect")
 	public @ResponseBody void test(String id, int chatId){
 
 		id = String.valueOf(myPageService.selectUsers(id).getId());
@@ -190,6 +196,6 @@ public class ChatController {
 				onlineUsers.replace(chatId, userList);
 		}
 	}
-
+	
 	
 }

@@ -21,6 +21,6 @@ public class UsersDTO {
 	private Date regDate;
 	private Date modDate; 
 	private List<AuthDTO> authList;  // 권한
-	
+	private int chatAlarmCount;
 	
 }

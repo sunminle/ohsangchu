@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<script src="/resources/js/jquery-3.7.1.min.js"></script>
+
 <h2>채팅 목록</h2>
 <c:choose>
 <c:when test="${!empty usersDTOList}">
 <c:forEach var = "usersDTO" items="${usersDTOList}">
-채팅상대 : <a href = "/chat/doChat?enemyId=${usersDTO.id}">${usersDTO.nickname}</a><br/>
+채팅상대 : <a href = "/chat/doChat?enemyId=${usersDTO.id}">${usersDTO.nickname}(${usersDTO.chatAlarmCount})</a><br/>
 </c:forEach>
 <a href = "/chat/newChat">새채팅</a>
 </c:when>
