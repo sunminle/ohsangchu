@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gi.osc.bean.AlarmDTO;
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.HashtagPostingDTO;
 import com.gi.osc.bean.PaymentDTO;
@@ -23,6 +24,7 @@ public interface MyPageService {
 	public UsersDTO selectUsers(String realId);
 	public int selectStoreId(String realId);
 	public int postingCount(int StoreId);
+	public int storeCount(int userId);
 	public UserInfoDTO selectUsersInfo(int userId);
 	public StoreDTO selectStoreInfo(int userId);
 	public ProductDTO selectProductInfo(int productId);
@@ -45,4 +47,5 @@ public interface MyPageService {
 	public void mySubscribeList(String realId,int pageNum, Model model);
 	public ProductDTO product(int productId);
 	public void addHashtag(HashtagDTO hashtagDTO, HashtagPostingDTO hashtagPostingDTO, String hashtag);
+	
 }

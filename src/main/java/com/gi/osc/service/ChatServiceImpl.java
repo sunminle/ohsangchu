@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gi.osc.bean.AlarmDTO;
 import com.gi.osc.bean.ChatDTO;
 import com.gi.osc.bean.UsersDTO;
 import com.gi.osc.repository.ChatMapper;
@@ -52,6 +53,16 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public List<UsersDTO> selectAllUsers(int usersId) {
 		return mapper.selectAllUsers(usersId);
+	}
+	
+	@Override
+	public void insertChatAlarm(AlarmDTO alarmDTO) {
+		mapper.insertChatAlarm(alarmDTO);
+	}
+
+	@Override
+	public void deleteChatAlarm(int userId, int chatId) {
+		mapper.deleteChatAlarm(userId, chatId);
 	}
 
 }

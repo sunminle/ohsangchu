@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
 	function openPopup(url, width, height) {
 	  var storeName = document.getElementsByName("storeName")[0].value;
@@ -7,6 +8,7 @@
 	  window.open(url + '?storeName=' + encodeURIComponent(storeName), 'Popup', popupOptions);
 	}
 </script>
+<c:if test="${storeCount > 0 }">
 <center>
 	<h2>판매자 정보 수정</h2>
 	<br />
@@ -19,3 +21,9 @@
 		<br /> <input type="submit" value="수정">
 	</form>
 </center>
+</c:if>
+
+<c:if test="${storeCount == 0 }">
+	아직 상점을 개설하지 않으셨습니다.
+	<a href = "/my/createStore">상점 개설</a>
+</c:if>

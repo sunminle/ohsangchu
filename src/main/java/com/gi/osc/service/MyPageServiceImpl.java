@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gi.osc.bean.AlarmDTO;
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.HashtagPostingDTO;
 import com.gi.osc.bean.PaymentDTO;
@@ -48,6 +49,11 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public int postingCount(int StoreId) {
 		return mapper.postingCount(StoreId);
+	}
+	
+	@Override
+	public int storeCount(int userId) {
+		return mapper.storeCount(userId);
 	}
 	
 	@Override
@@ -454,6 +460,11 @@ public class MyPageServiceImpl implements MyPageService{
 		}
 		
 	}
+
+	
+
+	
+	
 
 	
 

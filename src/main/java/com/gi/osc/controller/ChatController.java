@@ -9,7 +9,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,10 +23,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gi.osc.bean.ChatDTO;
 import com.gi.osc.bean.UsersDTO;
 import com.gi.osc.service.ChatService;
+import com.gi.osc.service.MyPageService;
 
 @Controller
 @RequestMapping("/chat/*")
@@ -33,76 +38,16 @@ public class ChatController {
 	private ChatService service;
 	
 	@Autowired
+	private HashMap<Integer,List<Integer>> onlineUsers;
+	
+	@Autowired
 	private ChatDTO chatDTO;
 	
 	@Autowired
 	private UsersDTO usersDTO;
 	
-	
-	/*@RequestMapping("chatList")
-	public String chatList(String user1Id , String user2Id, HttpSession session, Model model, int chatId) {
-		
-		
-		String temp;
-		
-		
-		String directoryPath = "D:\\ide\\chatLog";
-		File directory = new File(directoryPath);
-        List<String> textFileNames = new ArrayList<>();
-
-        // 디렉토리가 존재하고 디렉토리인지 확인
-        if (directory.exists() && directory.isDirectory()) {
-            Collection<File> files = FileUtils.listFiles(directory, new String[]{"txt"}, true);
-
-            // 디렉토리 내의 모든 텍스트 파일에 대해 검색
-            if (files != null) {
-                for (File file : files) {
-                    textFileNames.add(file.getName());
-                }
-            }
-        } else {
-            System.out.println("유효한 디렉토리 경로가 아닙니다.");
-        }
-        
-        for(String fn : textFileNames) {
-        	if(fn.equals(user2Id + "," + user1Id + ".txt")) {
-        		temp = user1Id;
-        		user1Id = user2Id;
-        		user2Id = temp;
-        	}
-        }
-        String fileName = user1Id+","+user2Id+".txt";
-		String path = "D:\\ide\\chatLog\\";
-		String filePath = path+fileName;
-		List<String> lineList = Collections.EMPTY_LIST;
-        String line = "";
-		try {
-			File file = new File(filePath);
-			if(file.exists()) {
-			
-            FileReader fileReader = new FileReader(filePath);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            if((line = bufferedReader.readLine()) != null) {
-            	lineList = new ArrayList<String>();
-            	lineList.add(line);
-            }
-            
-            while ((line = bufferedReader.readLine()) != null) {
-                lineList.add(line);
-            }
-
-            bufferedReader.close();
-			}
-        }catch(Exception e) {
-        	e.printStackTrace();
-        }
-		model.addAttribute("lineList",lineList);
-		model.addAttribute("user1Id",user1Id);
-		model.addAttribute("user2Id",user2Id);
-		model.addAttribute("chatId",chatId);
-		return "chat/chatList";
-	}*/
-	
+	@Autowired
+	private MyPageService myPageService;
 	
 	@RequestMapping("chattingList")
 	public String chattingList (HttpSession session, Model model) {
@@ -148,17 +93,15 @@ public class ChatController {
 		String user1Nick = service.selectUsersNick(user1Id);
 		int chatId=0;
 		int temp;
-		
+		int realUserId = user1Id;
 		
 		String directoryPath = request.getServletContext().getRealPath("/resources/file/chat/");
 		File directory = new File(directoryPath);
         List<String> textFileNames = new ArrayList<>();
 
-        // 디렉토리가 존재하고 디렉토리인지 확인
         if (directory.exists() && directory.isDirectory()) {
             Collection<File> files = FileUtils.listFiles(directory, new String[]{"txt"}, true);
 
-            // 디렉토리 내의 모든 텍스트 파일에 대해 검색
             if (files != null) {
                 for (File file : files) {
                     textFileNames.add(file.getName());
@@ -174,6 +117,7 @@ public class ChatController {
         		user1Id = user2Id;
         		user2Id = temp;
         	}
+        	
         }
         String fileName = user1Id+","+user2Id+".txt";
 		String path = request.getServletContext().getRealPath("/resources/file/chat/");
@@ -205,7 +149,9 @@ public class ChatController {
             while ((line = bufferedReader.readLine()) != null) {
                 lineList.add(line);
             }
-
+            System.out.println("읽은유저 아이디 ====="+realUserId);
+            System.out.println("채팅 아이디 ====="+chatId);
+            service.deleteChatAlarm(realUserId, chatId);
             bufferedReader.close();
 			}
 			
@@ -231,5 +177,19 @@ public class ChatController {
 		model.addAttribute("usersList",usersList);
 		return "chat/newChat";
 	}
+	
+	@RequestMapping("test")
+	public @ResponseBody void test(String id, int chatId){
+
+		id = String.valueOf(myPageService.selectUsers(id).getId());
+		List<Integer> userList = onlineUsers.get((chatId));
+		userList.remove(Integer.valueOf(id));
+		if(userList.isEmpty()) {
+			onlineUsers.remove(chatId);
+		}else {
+				onlineUsers.replace(chatId, userList);
+		}
+	}
+
 	
 }

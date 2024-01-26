@@ -151,8 +151,10 @@ public class MyPageController {
 		String realId = (String) session.getAttribute("usersId");
 		UsersDTO usersDTO = service.selectUsers(realId);
 		int userId = usersDTO.getId();
+		int storeCount = service.storeCount(userId);
 		StoreDTO storeDTO = service.selectStoreInfo(userId);
 		model.addAttribute("storeDTO", storeDTO);
+		model.addAttribute("storeCount",storeCount);
 		return "myPage/modifyStore";
 	}
 
