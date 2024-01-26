@@ -245,10 +245,28 @@
 					<div class="d-flex justify-content-between mb-3">
 						<div>후기(${revCnt})</div>
 						<div class="green">
-							<a data-bs-toggle="modal" data-bs-target="#modal_addReview">
-								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg>
-								후기작성
-							</a>
+							<c:choose>
+								<%-- 로그인 중이 아닐때 --%>
+								<c:when test="${empty sessionScope.usersId}">
+									<a onclick="login()">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg>
+									후기작성
+									</a>
+									<script type="text/javascript">
+										function login() {
+											alert("로그인이 필요합니다!");
+											window.location.href="/users/main?backURI="+window.location.pathname+window.location.search;
+										};
+									</script>
+								</c:when>
+								<%-- 로그인 중 일때 --%>
+								<c:otherwise>
+									<a data-bs-toggle="modal" data-bs-target="#modal_addReview">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg>
+									후기작성
+									</a>
+								</c:otherwise>
+							</c:choose>
 						</div>
 						
 						<!-- Review Modal -->
@@ -438,6 +456,44 @@
 </body>
 
 <script>
+
+//세션 스토리지에서 방문한 정보 목록 가져오기
+function getVisitedItems() {
+    return JSON.parse(sessionStorage.getItem('visitedItems')) || [];
+}
+
+// 이미지 URL은 중복돼도 추가, 페이지 URL은 중복되면 삭제하고 추가
+function addVisitedItem(imageUrl, pageUrl) {
+    const visitedItems = getVisitedItems();
+    const itemInfo = { imageUrl, pageUrl };
+
+    // 페이지 URL이 중복되는 값이 세션 스토리지에 있을 경우 삭제
+    visitedItems.forEach((item, index) => {
+        if (item.pageUrl === pageUrl) {
+            visitedItems.splice(index, 1);
+        }
+    });
+
+    // 최근 6개 유지
+    if (visitedItems.length >= 6) {
+        visitedItems.pop(); // 배열의 마지막 항목 제거
+    }
+
+    // 새로운 항목을 배열 앞에 추가
+    visitedItems.unshift(itemInfo);
+
+    sessionStorage.setItem('visitedItems', JSON.stringify(visitedItems));
+    console.log("Visited Items:", visitedItems);
+}
+
+// 페이지가 로드될 때 방문한 정보를 세션 스토리지에 추가
+window.onload = function () {
+    // 이미지 URL과 페이지 URL을 동적으로 생성
+    const itemImageUrl = "/resources/images/posting/${post.thumnail}";
+    const itemPageUrl = window.location.href;
+    addVisitedItem(itemImageUrl, itemPageUrl);
+};
+
 
 //이미지모달
 $(function(){
