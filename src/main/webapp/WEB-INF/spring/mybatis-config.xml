@@ -7,4 +7,7 @@
 	<typeAliases>
 		<typeAlias type="com.gi.osc.bean.UsersDTO" alias="UsersDTO"/>
 	</typeAliases>
+	<mappers>
+        <mapper resource="com/gi/osc/repository/UsersMapper.xml"/>
+    </mappers>
 </configuration>

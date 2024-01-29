@@ -1,10 +1,6 @@
 package com.gi.osc.controller;
 
-import java.io.IOException;
-
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -18,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.gi.osc.bean.UsersDTO;
 import com.gi.osc.service.MyPageServiceImpl;
@@ -26,11 +21,16 @@ import com.gi.osc.service.UsersService;
 import com.gi.osc.service.UsersServiceImpl;
 
 @Controller
-@RequestMapping("/users/*")
+@RequestMapping("/users")
 public class UsersController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
+	
+	@Inject
+	UsersService service;
+	
 	@Autowired
-	private UsersServiceImpl service;
+	private UsersServiceImpl serviceImpl;
 	
 	@Autowired
 	private MyPageServiceImpl myPageService;
@@ -44,6 +44,7 @@ public class UsersController {
 	@RequestMapping("/login")
 	public String login(UsersDTO dto,String backURI, String profile,Model model) {
 		int chk = service.loginChk(dto);
+		dto = service.aaa(dto.getRealId());
 		model.addAttribute("chk",chk);
 		model.addAttribute("usersDTO",dto);
 		model.addAttribute("backURI", backURI);
@@ -56,67 +57,52 @@ public class UsersController {
 		
 		return "users/logout";
 	}
-	
-	@RequestMapping("register")
-	public String register() {
-		
-		
-		return "users/register";
-	}
-	
-	@RequestMapping("/registerPro")
-	public String registerPro(UsersDTO dto, Model model) {
-		int chk = service.loginChk(dto);
-		model.addAttribute("chk",chk);
-		model.addAttribute("usersDTO",dto);
-		return "users/registerPro";
-	}
-	//---------------------------
-//	@RequestMapping("/header")
-//	public String modifyMePro(UsersDTO usersDTO, MultipartFile file, HttpServletRequest request, HttpSession session, Model model) {
-//		String realId = (String) session.getAttribute("usersId");
-////		String filePath = request.getServletContext().getRealPath("/resources/images/profiles/");
-////		service.headerprofile(usersDTO, file, filePath, realId);
-//		
-//		usersDTO = myPageService.selectUsers(realId);
-//		System.out.println(usersDTO.getProfile());
-//		model.addAttribute("usersDTO",usersDTO);
-//		return "include/header";
-//	}
-	
-	//---------------------------
 
-	        
-		private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
-		
-		@Inject
-		UsersService usersservice;
-		
+	//-------회원가입--------
+	
 		// 회원가입 get
 		@RequestMapping(value = "/register", method = RequestMethod.GET)
 		public void getRegister() throws Exception {
-			logger.info("get register");
+			logger.info("get 회원가입");
 		}
 		
 		// 회원가입 post
-		@RequestMapping(value = "/register", method = RequestMethod.POST)
-		public String postRegister(UsersDTO dto) throws Exception {
-			logger.info("post register");
-			
-			service.register(dto);
-			
-			return null;
-	}
+		@RequestMapping(value = "/registerPro", method = RequestMethod.POST)
+		public String postRegister(UsersDTO dto, Model model) throws Exception {
+		    logger.info("post 회원가입");
+		    logger.info(dto.toString());
 
+		    // 회원 가입 처리
+		    boolean registrationSuccess = service.registerPro(dto);
+
+		    if (registrationSuccess) {
+		        // 회원 가입 성공 시
+		        model.addAttribute("message", "Registration successful!");
+		        return "redirect:/users/main"; // 로그인 페이지로 리다이렉트
+		    } else {
+		        // 회원 가입 실패 시
+		        model.addAttribute("error", "Registration failed. Please try again.");
+		        return "users/register"; // 회원 가입 폼 페이지로 이동 
+		    }
+		}
+
+	
+		
+		
 		@RequestMapping(value = "/header", method = RequestMethod.GET)
 	    @ResponseBody
 	    public ResponseEntity<String> getProfileImage(HttpSession session) {
-	        String realId = (String) session.getAttribute("usersId");
-	        UsersDTO usersDTO = myPageService.selectUsers(realId);
+			if(session.getAttribute("usersId")!=null) {
+				String realId = (String) session.getAttribute("usersId");
+				UsersDTO usersDTO = myPageService.selectUsers(realId);
 
-	        String profileImageUrl = "/resources/images/profiles/" + usersDTO.getProfile();
-
-	        return new ResponseEntity<>(profileImageUrl, HttpStatus.OK);
+				String profileImageUrl = "/resources/images/profiles/" + usersDTO.getProfile();
+				return new ResponseEntity<>(profileImageUrl, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.OK);	
+			}
+			
+	        
 	    }
 		
 		

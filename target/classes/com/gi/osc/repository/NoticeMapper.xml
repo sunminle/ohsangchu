@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gi.osc.repository.NoticeMapper">
+
+
+	<!-- 글 등록 -->
+	<insert id="addNotice" parameterType="com.gi.osc.bean.NoticeDTO">
+		insert into notice (
+		userId
+		, title
+		, content
+		, regDate
+		
+		) values (
+		
+		'admin'
+		, #{title}
+		, #{content}
+		, #{regDate}
+		)
+</insert>
+
+	
+	<!-- 모든 글 조회 -->
+	<select id="noticeList" resultType="com.gi.osc.bean.NoticeDTO">
+		select * from notice
+	</select>
+
+</mapper>
+
