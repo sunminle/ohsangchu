@@ -3,18 +3,23 @@ package com.gi.osc.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.gi.osc.service.ReviewService;
 import com.gi.osc.service.StoreService;
 import com.gi.osc.service.UsersService;
 
-@RequestMapping("/store/*")
+@RequestMapping("/store")
 @RestController
 public class ProductRestController {
 	
@@ -22,6 +27,10 @@ public class ProductRestController {
 	private StoreService storeService;
 	@Autowired
 	private UsersService userService;
+	@Autowired
+	private ReviewService reviewService;
+	
+	
 	/**
 	 * alt+shift+j
 	 * 팔로우
@@ -51,6 +60,43 @@ public class ProductRestController {
 			result.put("result", "언팔로우!");
 		}
 		
+
+		return result;
+	}
+	
+	
+	/**
+	 * 리뷰업로드
+	 * @param session
+	 * @param request
+	 * @param uploadFiles
+	 * @return
+	 */
+	@PostMapping("/add_review")
+	public Map<String, Object> addReview(HttpSession session,HttpServletRequest request,
+									@RequestParam("content") String content,
+									@RequestParam("postingId") int postingId,
+									@RequestParam("point") float point,
+									@RequestParam("img") MultipartFile img) {
+
+		Map<String, Object> result = new HashMap<>();
+		
+		//세션에서 유저 아이디 받아오기
+		String realId = (String)session.getAttribute("usersId");
+		//realId주면 userId 가져오기
+		int userId = userService.getUserId(realId);
+		
+		//DB INSERT: 해당 유저 넘버로 저장
+		int row = reviewService.addReview(userId,content,postingId,point,img);
+		
+		
+		if(row > 0) {
+			result.put("code", 1);
+			result.put("result", "성공");
+		}else {
+			result.put("code", 500);
+			result.put("errorMessage", "리뷰가 업로드 되지 않았습니다.");
+		}
 
 		return result;
 	}

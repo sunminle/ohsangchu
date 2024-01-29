@@ -4,17 +4,42 @@ h4{
 	font-size: 15px;
 	color: #75C573;
 }
+
+
 /**rating**/
 .rating {
     font-size: 2em;
+    user-select: none;
+}
+.starwi{
+	width: 20px;
+	overflow: hidden;
+	cursor: pointer;
+	color:#75C573;
 }
 .star {
-    cursor: pointer;
+	width: 20px;
+	height: 40px;
+    display: block;
+    position: relative;
+    margin: 0;
+    left: 0;
+    background-image: url('/resources/images/site/star.svg');
+    background-repeat: no-repeat;
+    background-size: 40px;
 }
-.star.active:before {
-    content: "★";
-    color: #75C573;
+.full {
+	background-position: right;
 }
+.half {
+	background-position: left;
+}
+.star.active,
+.star:hover {
+    background-image: url('/resources/images/site/star-fill.svg');
+    background-repeat: no-repeat;
+}
+
 /**img**/
 #img-add img{
 	width: 600px;

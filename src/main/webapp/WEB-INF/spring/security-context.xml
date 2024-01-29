@@ -47,7 +47,7 @@
 			
 			<!-- 접근 권한 없는 URI 접근시 에러페이지 설정 -->
 			<security:access-denied-handler error-page = "/users/accessError"/>
-			
+			<security:csrf disabled="true" />
 		</security:http>
 		
 		<security:authentication-manager>
