@@ -9,6 +9,7 @@ public class PaymentDTO {
 	
 	private int id;
 	private int userId;
+	private int postingId;
 	private int productId;
 	private int categoryId;
 	private int amount;

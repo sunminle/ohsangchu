@@ -16,29 +16,13 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <!-- css -->
 <link href="/resources/css/include.css" rel="stylesheet">
-<link href="/resources/css/main.css" rel="stylesheet">
 
 <style>
-        #newProList {
-            float: left;
-           
-        }
 
-        .pagination {
-            display: flex;
-            list-style: none;
-            padding: 0;
-        }
+.btn-default {background: #75C573;  color: #fff;}
 
-        .page-item {
-            margin: 0 5px;
-        }
+</style>
 
-        .page-link {
-            text-decoration: none;
-            color: #007bff;
-        }
-    </style>
 </head>
 <body>
 
@@ -58,80 +42,101 @@
 
    <!-- 검색 결과가 있는 경우 -->
 	<c:if test="${productList != null}">
-            <!-- 각 제품에 대한 정보를 표시 -->
-            <c:forEach var="product" items="${productList}">
-				<div id="newProList" class="card" style="width: 18rem;">
-				<%-- <img src="${product.IMG_URL}" class="card-img-top" alt="..."> --%>
-				<div id="storeImg">
-						<img src="/resources/images/posting/${product.thumnail}" alt="프로필이미지" width="300px" height="300px">
-					</div>
-				<div class="child" onclick="location.href='/product/detail?postNum=${product.id}';">
-				   <h5 class="card-title">${product.title}</h5>
-				   <p class="card-text">${product.productName}</p> 
-				  <p class="card-text">${product.price} 원</p>  
-				</div>
-				<ul class="list-group list-group-flush" >
-				  <li class="list-group-item">${product.storeName}</li>
-				  <li class="list-group-item"></li>
-				  <li class="list-group-item"></</li>
-				  </ul>
-				 
-				</div>
-            </c:forEach>    
+    <!-- 각 제품에 대한 정보를 표시 -->
+    <div class="row justify-content-around">
+    <c:forEach var="product" items="${productList}" varStatus="loop">
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+            <div class="pro" onclick="location.href='/product/detail?postNum=${product.id}';">
+                <img src="/resources/images/posting/${product.thumnail}" alt="프로필이미지" width="300px" height="300px">
+                <div class="proDes">
+                    <div class="proTitle">${product.title}</div>
+                    <div class="proPrice d-flex justify-content-end"><span>${product.price} 원</span></div>
+                    <div class="proProfile d-flex align-items-center">
+                        <div class="proImg">
+                            <img src="">
+                        </div>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <c:if test="${loop.index % 5 == 4 or loop.last}">
+        </div><div class="row justify-content-around">
+    </c:if>
+    </c:forEach>
+</div>
+    
+            <br />
+            
              <!-- 페이징 컨트롤 표시 -->
-			<div class="position-absolute bottom-0 start-50 translate-middle-x">
-			    <ul class="pagination">
+			<div class="d-flex justify-content-center">
+				<div class="btn-group">
 			        <c:if test="${currentPage > 1}">
-			            <li><a href="?page=1&searchColumn=1&searchKeyword=${param.searchKeyword}">처음</a></li>
-			            <li><a href="?page=${currentPage - 1}&searchColumn=1&searchKeyword=${param.searchKeyword}">이전</a></li>
+			            <a class="btn btn-default" href="?page=1&searchColumn=1&searchKeyword=${param.searchKeyword}"><<</a>
+			            <a class="btn btn-default" href="?page=${currentPage - 1}&searchColumn=1&searchKeyword=${param.searchKeyword}"><</a>
 			        </c:if>
 			
 			        <c:forEach begin="1" end="${pageCount}" varStatus="loop">
-			            <li><a href="?page=${loop.index}&searchColumn=1&searchKeyword=${param.searchKeyword}">${loop.index}</a></li>
+			            <a class="btn btn-default" href="?page=${loop.index}&searchColumn=1&searchKeyword=${param.searchKeyword}">${loop.index}</a>
 			        </c:forEach>
 			
 			        <c:if test="${currentPage < pageCount}">
-			            <li><a href="?page=${currentPage + 1}&searchColumn=1&searchKeyword=${param.searchKeyword}">다음</a></li>
-			            <li><a href="?page=${pageCount}&searchColumn=1&searchKeyword=${param.searchKeyword}">마지막</a></li>
+			            <a class="btn btn-default" href="?page=${currentPage + 1}&searchColumn=1&searchKeyword=${param.searchKeyword}">></a>
+			            <a class="btn btn-default" href="?page=${pageCount}&searchColumn=1&searchKeyword=${param.searchKeyword}">>></a>
 			        </c:if>
-			    </ul>
+			  	</div>
 			</div>
+		<br />
 </c:if>
 <c:if test="${storeList != null}">
             <!-- 각 제품에 대한 정보를 표시 -->
-            <c:forEach var="store" items="${storeList}">
-				<div id="newProList" class="card" style="width: 18rem;">
-				<%-- <img src="${product.IMG_URL}" class="card-img-top" alt="..."> --%>
-				<div id="storeImg">
-						<img src="/resources/images/profiles/${store.profile}" alt="프로필이미지" width="300px" height="300px">
-					</div>
-				<div class="child" onclick="location.href='/product/store?storeNum=${store.id}';">
-				  <h5 class="card-title">${store.storeName}</h5>
-				  <p class="card-text">${store.storeIntro}</p>
-				</div> 
-				
-				 
-				</div>
-            </c:forEach>    
+            <div class="row justify-content-around">
+    <c:forEach var="store" items="${storeList}" varStatus="loop">
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+            <div class="pro" onclick="location.href='/product/store?storeNum=${store.id}';">
+                <img src="/resources/images/profiles/${store.profile}" alt="프로필이미지" width="300px" height="300px">
+                <div class="proDes">
+                    <div class="proTitle">${store.storeName}</div>
+                    <div class="proPrice d-flex justify-content-end"><span>${store.nickname}</span></div>
+                    <div class="proProfile d-flex align-items-center">
+                        <div class="proImg">
+                            <img src="">
+                        </div>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <c:if test="${loop.index % 5 == 4 or loop.last}">
+        </div><div class="row justify-content-around">
+    </c:if>
+    </c:forEach>
+</div>
+            
+            <br />
+            
              <!-- 페이징 컨트롤 표시 -->
-			<div class="position-absolute bottom-0 start-50 translate-middle-x">
-			    <ul class="pagination">
+             <div class="d-flex justify-content-center">
+			    <div class="btn-group">
 			        <c:if test="${currentPage > 1}">
-			            <li><a href="?page=1&searchColumn=2&searchKeyword=${param.searchKeyword}">처음</a></li>
-			            <li><a href="?page=${currentPage - 1}&searchColumn=2&searchKeyword=${param.searchKeyword}">이전</a></li>
+			            <a class="btn btn-default" href="?page=1&searchColumn=2&searchKeyword=${param.searchKeyword}"><<</a>
+			            <a class="btn btn-default" href="?page=${currentPage - 1}&searchColumn=2&searchKeyword=${param.searchKeyword}"><</a>
 			        </c:if>
 			
 			        <c:forEach begin="1" end="${pageCount}" varStatus="loop">
-			            <li><a href="?page=${loop.index}&searchColumn=2&searchKeyword=${param.searchKeyword}">${loop.index}</a></li>
+			            <a class="btn btn-default" href="?page=${loop.index}&searchColumn=2&searchKeyword=${param.searchKeyword}">${loop.index}</a>
 			        </c:forEach>
 			
 			        <c:if test="${currentPage < pageCount}">
-			            <li><a href="?page=${currentPage + 1}&searchColumn=2&searchKeyword=${param.searchKeyword}">다음</a></li>
-			            <li><a href="?page=${pageCount}&searchColumn=2&searchKeyword=${param.searchKeyword}">마지막</a></li>
+			            <a class="btn btn-default" href="?page=${currentPage + 1}&searchColumn=2&searchKeyword=${param.searchKeyword}">></a>
+			            <a class="btn btn-default" href="?page=${pageCount}&searchColumn=2&searchKeyword=${param.searchKeyword}">>></a>
 			        </c:if>
-			    </ul>
-			</div>
+			    </div>
+			  </div>
+		<br />
 </c:if>
-
+	<!-- footer -->
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	<!-- /footer -->	
 </body>
 </html>
