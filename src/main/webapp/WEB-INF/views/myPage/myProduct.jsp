@@ -38,31 +38,35 @@ function paginationClickHandler() {
 </script>
 
 <h2>판매중 상품</h2>
-
-<c:if test="${count == 0}">
-	<h2>판매중인 상품이 없습니다.</h2>
+<c:if test="${storeCount>0}">
+	<c:if test="${count == 0}">
+		<h2>판매중인 상품이 없습니다.</h2>
+	</c:if>
+	
+	
+	<c:if test="${count > 0}">
+		<c:forEach var="posting" items="${list}">
+			상품이름 : ${posting.title}
+			<br />
+			<a href="/my/myProductBuyer?postingId=${posting.id}">구매자 목록</a><br/>
+			<img src="/resources/images/posting/${posting.thumnail}" width="360"
+				height="270">
+			<br />
+			<hr />
+		</c:forEach>
+		<c:if test="${startPage > 10 }">
+		<a href="/my/myProduct?pageNum=${startPage - 10}" class="myProductPagination">이전</a>
+		</c:if>
+		<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+			<a href="#" class="myProductPagination">${i}</a>
+		</c:forEach>
+		<c:if test="${endPage < pageCount}">
+			<a href="/my/myProduct?pageNum=${startPage + 10}" class="myProductPagination">다음</a>
+		</c:if>
+	</c:if>
 </c:if>
 
-
-<c:if test="${count > 0}">
-	<c:forEach var="posting" items="${list}">
-		상품이름 : ${posting.title}
-		<br />
-		<a href="/my/myProductBuyer?postingId=${posting.id}">구매자 목록</a><br/>
-		<img src="/resources/images/posting/${posting.thumnail}" width="360"
-			height="270">
-		<br />
-		<hr />
-	</c:forEach>
-	<c:if test="${startPage > 10 }">
-	<a href="/my/myProduct?pageNum=${startPage - 10}" class="myProductPagination">이전</a>
-	</c:if>
-	<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-		<a href="#" class="myProductPagination">${i}</a>
-	</c:forEach>
-	<c:if test="${endPage < pageCount}">
-		<a href="/my/myProduct?pageNum=${startPage + 10}" class="myProductPagination">다음</a>
-	</c:if>
+<c:if test="${storeCount == 0}">
+상점개설 후 이용가능합니다.
 </c:if>
-
 

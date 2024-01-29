@@ -251,6 +251,10 @@
 		select id from hashtag where hashtagName = #{hashtagName}
 	</select>
 	
+	<insert id="addStore">
+		insert into store (userid,storename,storeintro) values(#{userId},#{storeName},#{storeIntro})
+	</insert>
+	
 	
 	
 	
