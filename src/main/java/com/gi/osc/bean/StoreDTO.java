@@ -12,5 +12,6 @@ public class StoreDTO {
 	private String type;
 	private String Keyword;
 	private String profile;
+	private String nickname;
 
 }

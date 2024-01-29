@@ -1,6 +1,12 @@
 package com.gi.osc.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.ProductDTO;
 import com.gi.osc.bean.RecentlyViewedProducts;
 import com.gi.osc.bean.RecentlyViewedStores;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.service.MainService;
+import com.gi.osc.service.PostingService;
 
 @Controller
 @RequestMapping("/main")
@@ -25,18 +33,11 @@ public class MainController {
 	private MainService service;
 	
 	@Autowired
-    private RecentlyViewedProducts recentlyViewedProducts;  // RecentlyViewedProducts 추가
-	
-	@Autowired
-    private RecentlyViewedStores recentlyViewedStores;
+	private PostingService postService;
 
-    @RequestMapping("")
+
+	@RequestMapping("")
     public String main(Model model) {
-        // 최근 본 상품 목록을 모델에 추가
-        List<ProductDTO> recentlyViewedProductsList = recentlyViewedProducts.getRecentlyViewedProducts();
-        model.addAttribute("recentlyViewedProducts", recentlyViewedProductsList);
-        List<StoreDTO> recentlyViewedStoresList = recentlyViewedStores.getRecentlyViewedStores();
-        model.addAttribute("recentlyViewedStores", recentlyViewedStoresList);
         
         return "main";
     }
