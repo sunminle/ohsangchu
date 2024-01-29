@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
 <script src="/resources/js/jquery-3.7.1.min.js"></script>
 <script src="/resources/js/summernote/summernote-lite.js"></script>
@@ -212,7 +213,7 @@
 
 </script>
 </head>
-
+<c:if test="${storeCount > 0}">
 <!-- css -->
 <link href="/resources/css/include.css" rel="stylesheet">
 <!-- bootstrap:css -->
@@ -264,3 +265,11 @@
 
 </center>
 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
+</c:if>
+
+<c:if test="${storeCount == 0 }">
+	<script>
+		alert("상점개설 후 이용가능합니다.");
+		history.go(-1);
+	</script>
+</c:if>

@@ -183,6 +183,13 @@ public class MyPageServiceImpl implements MyPageService{
 		dto.setUserId(userId);
 		mapper.modifyStore(dto);
 	}
+	
+	@Override
+	public void addStore(StoreDTO dto, String realId) {
+		int userId = mapper.selectUsers(realId).getId();
+		dto.setUserId(userId);
+		mapper.addStore(dto);
+	}
 
 	@Override
 	public void myReview(String realId,int pageNum, Model model) {
@@ -460,6 +467,8 @@ public class MyPageServiceImpl implements MyPageService{
 		}
 		
 	}
+
+	
 
 	
 

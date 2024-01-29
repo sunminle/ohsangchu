@@ -36,6 +36,7 @@ public interface MyPageService {
 	public void modifyUsers(UsersDTO dto, MultipartFile file,String filePath,String realId);
 	public int storeNameCheck(String storeName);
 	public void modifyStore(StoreDTO dto,String realId);
+	public void addStore(StoreDTO dto,String realId);
 	public void myReview(String realId,int pageNum, Model model);
 	public void myReviewDelete(int reviewNum);
 	public void getReview(String realId,int pageNum, Model model);

@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -49,7 +50,10 @@ public class MyPageController {
 	private HashtagDTO hashtagDTO;
 	
 	@RequestMapping("addProduct")
-	public String addProduct() {
+	public String addProduct(Model model, HttpSession session) {
+		String realId = (String) session.getAttribute("usersId");
+		int storeCount = service.storeCount(service.selectUsers(realId).getId());
+		model.addAttribute("storeCount",storeCount);
 		return "product/addProduct";
 	}
 
@@ -157,13 +161,29 @@ public class MyPageController {
 		model.addAttribute("storeCount",storeCount);
 		return "myPage/modifyStore";
 	}
+	
+	@RequestMapping("addStore")
+	public String addStore() {
+		return "myPage/addStore";
+	}
+	
+	@RequestMapping("addStorePro")
+	public String addStorePro(HttpSession session,StoreDTO storeDTO) {
+		String realId = (String) session.getAttribute("usersId");
+		service.addStore(storeDTO, realId);
+		return "myPage/addStorePro";
+	}
+	
 
 	@RequestMapping("nickCheck")
-	public String nickCheck(String nickname, Model model) {
-		int check = service.nickCheck(nickname);
-		model.addAttribute("check", check);
+	public @ResponseBody ResponseEntity<String> nickCheck(String nickname) {
+		int count = service.nickCheck(nickname);
+		String check = "0";
+		if(count == 0) {
+			check = "1";
+		}
 
-		return "myPage/nickCheck";
+		return new ResponseEntity<>(check, HttpStatus.OK);
 	}
 
 	@RequestMapping("modifyMePro")
@@ -176,11 +196,13 @@ public class MyPageController {
 	}
 
 	@RequestMapping("storeNameCheck")
-	public String storeNameCheck(String storeName, Model model) {
-		int check = service.storeNameCheck(storeName);
-		model.addAttribute("check", check);
-
-		return "myPage/storeNameCheck";
+	public @ResponseBody ResponseEntity<String> storeNameCheck(String storeName) {
+		int count = service.storeNameCheck(storeName);
+		String check = "0";
+		if(count == 0) {
+			check = "1";
+		}
+		return new ResponseEntity<>(check, HttpStatus.OK);
 	}
 
 	@RequestMapping("modifyStorePro")
@@ -233,7 +255,11 @@ public class MyPageController {
 	@RequestMapping("myProduct")
 	public String myProduct(HttpSession session, Model model, @RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
 		String realId = (String) session.getAttribute("usersId");
+		int storeCount = service.storeCount(service.selectUsers(realId).getId());
+		if(storeCount > 0) {
 		service.postingList(realId, pageNum, model);
+		}
+		model.addAttribute("storeCount",storeCount);
 		return "myPage/myProduct";
 	}
 	

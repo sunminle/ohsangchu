@@ -33,6 +33,7 @@ public interface MyPageMapper {
 	public int nickCheck(String nickname);
 	public void modifyUsers(UsersDTO dto);
 	public int storeNameCheck(String storeName);
+	public void addStore(StoreDTO dto);
 	public void modifyStore(StoreDTO dto);
 	public int myReviewCount(int userId);
 	public List<ReviewDTO> myReview(HashMap pageMap);
