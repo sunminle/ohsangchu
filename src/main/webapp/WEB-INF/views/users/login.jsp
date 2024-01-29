@@ -4,8 +4,9 @@
 
 <c:if test = "${chk == 1}">
 	<c:set var = "usersId" value = "${usersDTO.realId}" scope = "session" />
-	<script>
+	<c:set var = "usersProfile" value = "${usersDTO.profile}" scope = "session" />
 	
+	<script>
 	alert("로그인이 완료되었습니다.");
 	
 	// 뒤로 갈 히스토리가 있는 경우 및 우리 시스템에서 링크를 통해 유입된 경우aaa
@@ -26,5 +27,5 @@
       history.go(1);
       
 	</script>
-</c:if>
+</c:if>	
 

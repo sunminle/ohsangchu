@@ -11,6 +11,8 @@
 				cache: false,
 				success : function(e){
 					$("#modify").html(e);
+					console.log("${sessionScope.usersId}");
+					console.log("${sessionScope.usersProfile}");
 				}
 			});
 		});

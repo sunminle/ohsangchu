@@ -5,23 +5,26 @@
 <mapper namespace="com.gi.osc.repository.UsersMapper">
 
 	<select id="loginChk" parameterType="com.gi.osc.bean.UsersDTO" resultType="int">
-		select count(*) from users where realId = #{realId} and userPw =
-		#{userPw}
+		select count(*) from users 
+		where realId = #{realId} and userPw = #{userPw}
 	</select>
 
-	<insert id="register">
+	<insert id="register" parameterType="com.gi.osc.bean.UsersDTO">
 		insert into users (
 		realId
 		, userName
 		, userPw
 		, nickname
+		, profile
+		
 
 		) values (
 		#{realId}
 		, #{userName}
 		, #{userPw}
 		, #{nickname}
-
+		, 'default.png'
+		
 		)
 	</insert>
 
@@ -29,7 +32,11 @@
 	<select id="getUserId">
 		select id from users where realId = #{realId}
 	</select>
-
+	
+	<select id="aaa">
+	
+		select * from users where realId = #{realId}
+	</select>
 
 	<!-- userinfo 
 	<insert id="addUserInfo"
