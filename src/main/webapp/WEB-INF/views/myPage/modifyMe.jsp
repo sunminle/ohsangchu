@@ -13,9 +13,9 @@ $(function(){
 			success : function(result){
 				nickCheckValue = result;
 				if (nickCheckValue === "1") {
-                    $("#nickCheckResult").html("사용 가능한 닉네임입니다.");
+                    $("#nickCheckResult").html("사용 가능한 닉네임입니다.").css("color", "green");
                 } else {
-                    $("#nickCheckResult").html("이미 사용 중인 닉네임입니다.");
+                    $("#nickCheckResult").html("이미 사용 중인 닉네임입니다.").css("color", "red");
                 }
 			}
 		});

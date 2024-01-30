@@ -94,7 +94,7 @@
 	
 	$("#plusTag").on("click", function () {
 		self = $("#tag");
-		tagValue = "#"+self.val(); // 입력값
+		tagValue = self.val(); // 입력값
        //null값이아니라면
 		if (tagValue !== "") {
 			// 같은 태그가 있는지 검사, 해당값이 array 로 return
@@ -111,11 +111,15 @@
 					data: { tag: tagValue },
 					success: function (response) {
 						console.log(response);
-						$("#tag-list").append("<li class='tag-item'>"
+						if(response.responseCode === "error"){
+							alert("특수문자는 포함할 수 없습니다.");
+						}else{
+						$("#tag-list").append("<li class='tag-item'>#"
 						+ tagValue
 						+ "<span class='del-btn close-icon' idx='" + counter + "'>X</span><input type = 'hidden' value = '" + tagValue + "' name = 'hashtag'/></li>");
 						addTag(tagValue);
 						self.val("");
+						}
 					},
 					error: function (error) {
 						console.error(error);

@@ -309,6 +309,15 @@ public class MyPageController {
 	@RequestMapping("addHashtag")
 	public ResponseEntity<JsonNode> addHashtag(@RequestParam("tag") String tag) {
 		ObjectMapper objectMapper = new ObjectMapper();
+		
+		if (!tag.matches("^[a-zA-Z0-9ㄱ-힣]+$")) {
+	        // 특수 문자가 포함된 경우
+			JsonNode responseJson = objectMapper.createObjectNode()
+	                .put("error", "특수문자는 포함할 수 없습니다.")
+	                .put("responseCode", "error");
+			return ResponseEntity.ok(responseJson);
+	    }
+		
 		JsonNode responseJson = objectMapper.createObjectNode()
                 .put("tag", tag)
                 .put("responseCode", "success");
