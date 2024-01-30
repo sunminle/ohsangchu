@@ -70,12 +70,12 @@ function addReview(){
 				//성공
 				alert("리뷰가 업로드 되었습니다");
 				//모달 닫기
-				$("#modal_addReview").modal('hide');
+				$("#modal_addReviewAnswer").modal('hide');
 				location.reload(true);
 			}else if(data.code==2){
 				initialize();
 				alert("이미 답변을 등록하셨습니다.")
-				$("#modal_addReview").modal('hide');
+				$("#modal_addReviewAnswer").modal('hide');
 			}
 			else{
 				//실패
