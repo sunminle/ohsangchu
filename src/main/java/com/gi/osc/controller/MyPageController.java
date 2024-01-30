@@ -5,7 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -30,6 +33,7 @@ import com.gi.osc.bean.PaymentDTO;
 import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.ProductDTO;
 import com.gi.osc.bean.QNADTO;
+import com.gi.osc.bean.ReviewAnswerDTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.bean.UserInfoDTO;
@@ -48,6 +52,9 @@ public class MyPageController {
 	
 	@Autowired
 	private HashtagDTO hashtagDTO;
+	
+	@Autowired
+	private ReviewAnswerDTO reviewAnswerDTO;
 	
 	@RequestMapping("addProduct")
 	public String addProduct(Model model, HttpSession session) {
@@ -322,6 +329,50 @@ public class MyPageController {
                 .put("tag", tag)
                 .put("responseCode", "success");
         return ResponseEntity.ok(responseJson);
+	}
+	
+	@PostMapping("addReviewAnswer")
+	public @ResponseBody Map<String, Object> addReviewAnswer(HttpSession session,
+									@RequestParam("content") String content, @RequestParam("reviewId") int reviewId) {
+
+		Map<String, Object> result = new HashMap<>();
+		
+		//세션에서 유저 아이디 받아오기
+		String realId = (String)session.getAttribute("usersId");
+		int count = service.selectReviewAnswerCount(reviewId);
+		//realId주면 userId 가져오기
+		int userId = service.selectUsers(realId).getId();
+		reviewAnswerDTO.setContent(content);
+		reviewAnswerDTO.setReviewId(reviewId);
+		reviewAnswerDTO.setUserId(userId);
+		//DB INSERT: 해당 유저 넘버로 저장
+		int row = 0;
+		if(count == 0) {
+		row = service.addReviewAnswer(reviewAnswerDTO);
+		}
+		else if(count >0) {
+			row = 2;
+		}
+		System.out.println("row==========="+row);
+		if(row == 1) {
+			result.put("code", 1);
+			result.put("result", "성공");
+		}else if(row == 2) {
+			result.put("code", 2);
+			result.put("result", "이미 답변을 등록하셨습니다.");
+		}else{
+			result.put("code", 500);
+			result.put("errorMessage", "리뷰가 업로드 되지 않았습니다.");
+		}
+
+		return result;
+	}
+	
+	@RequestMapping("getReviewAnswerCount")
+	public @ResponseBody ResponseEntity<String> getReviewAnswerCount(@RequestParam("reviewId")int reviewId) {
+		String count = String.valueOf(service.selectReviewAnswerCount(reviewId));
+		
+		return new ResponseEntity<>(count, HttpStatus.OK);
 	}
 	
 }

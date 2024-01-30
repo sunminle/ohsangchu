@@ -255,7 +255,12 @@
 		insert into store (userid,storename,storeintro) values(#{userId},#{storeName},#{storeIntro})
 	</insert>
 	
+	<insert id="addReviewAnswer">
+		insert into review_answer (reviewId,userId,content) values (#{reviewId},#{userId},#{content})
+	</insert>
 	
-	
+	<select id="selectReviewAnswerCount">
+	select count(*) from review_answer where reviewid=#{reviewId}
+	</select>
 	
 </mapper>

@@ -20,6 +20,7 @@ import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.PostingImgDTO;
 import com.gi.osc.bean.ProductDTO;
 import com.gi.osc.bean.QNADTO;
+import com.gi.osc.bean.ReviewAnswerDTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.bean.UserInfoDTO;
@@ -466,6 +467,16 @@ public class MyPageServiceImpl implements MyPageService{
 			mapper.addHashtagPosting(hashtagPostingDTO);
 		}
 		
+	}
+
+	@Override
+	public int addReviewAnswer(ReviewAnswerDTO reviewAnswerDTO) {
+		return mapper.addReviewAnswer(reviewAnswerDTO);
+	}
+
+	@Override
+	public int selectReviewAnswerCount(int reviewId) {
+		return mapper.selectReviewAnswerCount(reviewId);
 	}
 
 	
