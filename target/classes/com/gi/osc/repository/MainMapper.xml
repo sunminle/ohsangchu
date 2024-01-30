@@ -16,17 +16,17 @@
     	-->
     	<!--  상품검색 -->
     	<select id="searchProductsByName" parameterType="String" resultType="com.gi.osc.bean.ProductDTO">
-    SELECT a.*, p.*
-    FROM posting a
-    JOIN product p ON a.id = p.postingid(+)  
-    <where>
-        <if test="searchKeyword != null and searchKeyword != ''">
-            AND (p.productname LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%'
-            OR a.title LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%'
-            OR a.content LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%')
-        </if>
-    </where>
-</select>
+		    SELECT a.*, p.*
+		    FROM posting a
+		    JOIN product p ON a.id = p.postingid(+)  
+    		<where>
+        		<if test="searchKeyword != null and searchKeyword != ''">
+		            AND (p.productname LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%'
+		            OR a.title LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%'
+		            OR a.content LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%')
+		        </if>
+   			</where>
+		</select>
 		
 		
 	<!-- 상점 검색 -->
@@ -41,7 +41,24 @@
         		</if>
         	</where>
 		</select>
-	 
+	 	
+	 	<!-- 판매량이 높은 제품 조회 -->
+		<select id="countPopularProducts" resultType="com.gi.osc.bean.PaymentDTO">
+    <![CDATA[
+    SELECT * FROM (
+        SELECT po.id, COUNT(*) as totalCount, po.title, po.thumnail
+        FROM payment pm
+        JOIN posting po ON pm.postingId = po.id
+        GROUP BY po.id, po.title, po.thumnail
+        ORDER BY totalCount DESC
+    )
+    WHERE ROWNUM <= 6
+    ]]>
+</select>
+
+
+
+
 
 
 
