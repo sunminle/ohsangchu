@@ -39,7 +39,7 @@ public class ProductRestController {
 	 * @return
 	 */
 	@GetMapping("/follow/{storeUserId}")
-	public Map<String, Object> like(@PathVariable int storeUserId,HttpSession session) {
+	public Map<String, Object> follow(@PathVariable int storeUserId,HttpSession session) {
 
 		Map<String, Object> result = new HashMap<>();
 		
@@ -61,6 +61,30 @@ public class ProductRestController {
 		}
 		
 
+		return result;
+	}
+	
+	@GetMapping("/like/{postingId}")
+	public Map<String, Object> like(@PathVariable int postingId,HttpSession session) {
+
+		Map<String, Object> result = new HashMap<>();
+		
+		// 찜 중이면 삭제, 없으면 추가
+		String userName = (String)session.getAttribute("usersId");
+		// userName주면 userId 가져오기
+		int userId = userService.getUserId(userName);
+		// 로그인중인 유저 아이디와 해당 포스트 아이디를 주면 찜/해제
+		System.out.println("postingId : "+postingId+", userId : "+userId);
+		int hResult = storeService.like(postingId,userId);
+		
+		if(hResult == 1) {	//찜
+			result.put("code", 1);
+			result.put("result", "팔로우완료");
+		}else {	//찜not
+			result.put("code", 1);
+			result.put("result", "언팔로우!");
+		}
+		
 		return result;
 	}
 	

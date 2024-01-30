@@ -196,21 +196,37 @@
 				</div>
 
 				<div id="tags" class="d-flex justify-content-center align-itemts-center">
-					<div class="tag green">#더보이즈</div>
-					<div class="tag green">#10cm인형</div>
-					<div class="tag green">#뜨개옷</div>
+					<c:forEach var="hash" items="${hashes}">
+						<div class="tag green">#${hash.hashtagName}</div>
+					</c:forEach>
 				</div>
 				
 				<div class="d-flex justify-content-center">
 					<div id="likeShare" class="d-flex justify-content-center align-items-center">
-						<button>
-							<!-- 찜하기전 -->
-							<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"><path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/></svg>
-							<!-- 찜하고 난 후 
-							<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/></svg>
-							-->
-							찜 115개
-						</button>
+						<c:choose>
+							<%-- 찜하기전 --%>
+							<c:when test="${heartCheck eq 0}">
+								<button class="hearCh" id="clickH" data-posting-id="${post.id}">
+									<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"><path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/></svg>
+									찜 ${likeCnt}개
+								</button>
+							</c:when>
+							<%-- 로그인 중이 아닐때 --%>
+							<c:when test="${heartCheck eq 3}">
+								<button class="hearCh" data-posting-id="${post.id}">
+									<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"><path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/></svg>
+									찜 ${likeCnt}개
+								</button>
+							</c:when>
+							<%-- 찜하고난 후 --%>
+							<c:otherwise>
+								<button class="hearCh bg-secondary text-white" id="noH" data-posting-id="${post.id}">
+									<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/></svg>
+									찜 ${likeCnt}개
+								</button>
+							</c:otherwise>
+						</c:choose>
+						
 						<button>
 							<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16"><path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/></svg>
 							공유하기
@@ -456,6 +472,43 @@
 </body>
 
 <script>
+
+$(document).ready(function() {
+	
+	//////////좋아요
+	$(".hearCh").click(function() {
+		
+		var uid = '${sessionScope.usersId}';
+
+		if(uid == ''){//로그인 안했을땐 로그인페이지로
+			alert("로그인이 필요합니다!");
+			window.location.href="/users/main?backURI="+window.location.pathname+window.location.search;	
+		}else{//로그인 한 상태라면 팔언팔 동작
+			console.log("좋/취");
+		
+			let postingId = $(this).data('posting-id');
+			
+			$.ajax({
+				//rq
+				url:"/store/like/" + postingId
+				//rs
+				,success:function(data) {
+					if (data.code == 1) {
+						console.log(data.result);
+						location.reload(true);
+					} else {
+						alert(data.errorMessage);	
+					}
+				}
+				, error: function(e) {
+					alert("찜하기 에러. 다시 시도해주세요.");
+				}
+			});
+		}
+	});
+	//////////좋아요
+	
+});
 
 //세션 스토리지에서 방문한 정보 목록 가져오기
 function getVisitedItems() {

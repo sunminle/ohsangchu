@@ -2,6 +2,9 @@ package com.gi.osc.repository;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
@@ -13,5 +16,9 @@ public interface PostingMapper {
 	public StoreDTO getStore(int id);
 	public UsersDTO getUser(int id);
 	public ArrayList<ReviewDTO> getReviews(int postingid);
+	public ArrayList<HashtagDTO> getHashes(int postingid);
+	public int getHearts(int postingid);
+	public int heartCheck(@Param("postingId") int postingId,
+						  @Param("userId") int userId);
 
 }

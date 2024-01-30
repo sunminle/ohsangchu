@@ -18,5 +18,9 @@ public interface StoreMapper {
 	public int getFollow(int userId);
 	public int getfollower(int storeId);
 	public ArrayList<ReviewDTO> getReviews(int userId);
+	public int like(@Param("postingId") int postingId,
+			  		@Param("userId") int userId);
+	public int unlike(@Param("postingId") int postingId,
+					  @Param("userId") int userId);
 	
 }
