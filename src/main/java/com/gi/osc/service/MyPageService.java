@@ -15,6 +15,7 @@ import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.PostingImgDTO;
 import com.gi.osc.bean.ProductDTO;
 import com.gi.osc.bean.QNADTO;
+import com.gi.osc.bean.ReviewAnswerDTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.bean.UserInfoDTO;
@@ -48,5 +49,7 @@ public interface MyPageService {
 	public void mySubscribeList(String realId,int pageNum, Model model);
 	public ProductDTO product(int productId);
 	public void addHashtag(HashtagDTO hashtagDTO, HashtagPostingDTO hashtagPostingDTO, String hashtag);
+	public int addReviewAnswer(ReviewAnswerDTO reviewAnswerDTO);
+	public int selectReviewAnswerCount(int reviewId);
 	
 }

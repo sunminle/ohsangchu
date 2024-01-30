@@ -158,7 +158,8 @@
             background-color: #4cae4c;
         }
     </style>
-
+<!--favicon-->
+<link rel="icon" href="/resources/images/site/leaf-solid.png">
 <!-- css -->
 <link href="/resources/css/include.css" rel="stylesheet">
 <!-- bootstrap:css -->

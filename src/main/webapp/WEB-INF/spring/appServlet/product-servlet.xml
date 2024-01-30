@@ -15,4 +15,5 @@
 	<beans:bean id = "pageMap" class = "java.util.HashMap" />
 	<beans:bean id="alarmDTO" class="com.gi.osc.bean.AlarmDTO" />
 	<beans:bean id="onlineUsers" class="java.util.HashMap" />
+	<beans:bean id="reviewAnswerDTO" class="com.gi.osc.bean.ReviewAnswerDTO" />
 </beans:beans>
