@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
@@ -35,6 +36,21 @@ public class PostingServiceImpl implements PostingService{
 	@Override
 	public ArrayList<ReviewDTO> getReviews(int postNum) {
 		return mapper.getReviews(postNum);
+	}
+
+	@Override
+	public ArrayList<HashtagDTO> getHashes(int postNum) {
+		return mapper.getHashes(postNum);
+	}
+
+	@Override
+	public int getHearts(int postNum) {
+		return mapper.getHearts(postNum);
+	}
+
+	@Override
+	public int heartCheck(int postNum, int loginUid) {
+		return mapper.heartCheck(postNum,loginUid);
 	}
 	
 

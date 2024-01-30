@@ -125,41 +125,41 @@ window.onload = function () {
 </body>
 
 <script>
-	$(document).ready(function() {
+$(document).ready(function() {
+	
+	//////////팔로우버튼
+	$(".fu").click(function() {
 		
-		//////////팔로우버튼
-		$(".fu").click(function() {
-			
-			var uid = '${sessionScope.usersId}';
+		var uid = '${sessionScope.usersId}';
 
-			if(uid == ''){//로그인 안했을땐 로그인페이지로
-				alert("로그인이 필요합니다!");
-				window.location.href="/users/main?backURI="+window.location.pathname+window.location.search;	
-			}else{//로그인 한 상태라면 팔언팔 동작
-				console.log("팔/언");
-			
-				let storeId = $(this).data('store-id');
-				
-				//alert(postId);
-				$.ajax({
-					url:"/store/follow/" + storeId
-					, success:function(data) {
-						if (data.code == 1) {
-							console.log(data.result);
-							location.reload(true);
-						} else {
-							alert(data.errorMessage);	
-						}
-					}
-					, error: function(e) {
-						alert("팔로우 에러. 다시 시도해주세요.");
-					}
-				});
-			}
-		});
-		//////////팔로우버튼
+		if(uid == ''){//로그인 안했을땐 로그인페이지로
+			alert("로그인이 필요합니다!");
+			window.location.href="/users/main?backURI="+window.location.pathname+window.location.search;	
+		}else{//로그인 한 상태라면 팔언팔 동작
+			console.log("팔/언");
 		
+			let storeId = $(this).data('store-id');
+			
+			//alert(postId);
+			$.ajax({
+				url:"/store/follow/" + storeId
+				, success:function(data) {
+					if (data.code == 1) {
+						console.log(data.result);
+						location.reload(true);
+					} else {
+						alert(data.errorMessage);	
+					}
+				}
+				, error: function(e) {
+					alert("팔로우 에러. 다시 시도해주세요.");
+				}
+			});
+		}
 	});
+	//////////팔로우버튼
+	
+});
 </script>
 
 </html>

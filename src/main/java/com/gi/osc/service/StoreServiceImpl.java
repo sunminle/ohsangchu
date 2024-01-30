@@ -15,6 +15,8 @@ public class StoreServiceImpl implements StoreService{
 
 	@Autowired
 	private StoreMapper mapper;
+	@Autowired
+	private PostingServiceImpl postService;
 	
 	@Override
 	public int following(int storeUserId, int userId) {
@@ -53,6 +55,22 @@ public class StoreServiceImpl implements StoreService{
 	@Override
 	public ArrayList<ReviewDTO> getReviews(int userId) {
 		return mapper.getReviews(userId);
+	}
+
+	@Override
+	public int like(int postingId, int userId) {
+		//찜 중인지 아닌지 체크
+		int hc = postService.heartCheck(postingId, userId);
+		//if 팔로우중이면 언팔로우, 언팔중이면 팔로우
+		if(hc == 1) {	//찜하고 있음
+			mapper.unlike(postingId, userId);
+			System.out.println("찜 해제!");
+			return 0;
+		}else {	//찜 안하고 있음
+			mapper.like(postingId, userId);
+			System.out.println("찜 완료!");
+			return 1;
+		}
 	}
 
 }

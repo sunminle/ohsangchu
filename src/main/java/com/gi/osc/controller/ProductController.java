@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
@@ -31,7 +32,8 @@ public class ProductController {
 	private UsersService userService;
 
 	@RequestMapping("detail")
-	public String productDetail(HttpServletRequest request, Model model) {
+	public String productDetail(HttpServletRequest request, Model model
+								,HttpSession session) {
 		
 		//파라미터로 포스팅 넘버받아오기
 		int postNum = Integer.parseInt(request.getParameter("postNum"));
@@ -46,6 +48,12 @@ public class ProductController {
 		//유저넘버를 주면 해당 유저 정보 가져오기
 		int userId = store.getUserId();
 		UsersDTO user = postService.getUser(userId);
+		
+		//포스트넘버를 주면 해당 포스트의 해시태그 가져오기
+		ArrayList<HashtagDTO> hashes = postService.getHashes(postNum);
+		
+		//포스트넘버를 주면 해당 포스트의 찜갯수 가져오기
+		int likeCnt = postService.getHearts(postNum); 
 		
 		//포스트넘버를 주면 해당 포스트의 리뷰 가져오기
 		ArrayList<ReviewDTO> reviews = postService.getReviews(postNum);
@@ -63,6 +71,18 @@ public class ProductController {
 		}
 		double revAvg = sum/(userRe.size());
 		
+		//찜 버튼 : 페이지 로드시
+		//로그인 유저 id
+		if(session.getAttribute("usersId") != null) {
+			String userName = (String)session.getAttribute("usersId");
+			int loginUid = userService.getUserId(userName);
+			int heartCheck = postService.heartCheck(postNum, loginUid);
+			
+			model.addAttribute("heartCheck",heartCheck);
+		}else {
+			int heartCheck = 3;
+			model.addAttribute("heartCheck",heartCheck);
+		}
 		
 		//뷰 페이지에 보내기
 		model.addAttribute("post", post);
@@ -71,6 +91,8 @@ public class ProductController {
 		model.addAttribute("reviews", reviews);
 		model.addAttribute("revCnt", revCnt);
 		model.addAttribute("revAvg", revAvg);
+		model.addAttribute("hashes", hashes);
+		model.addAttribute("likeCnt", likeCnt);
 		
 		return "product/productDetail";
 	}

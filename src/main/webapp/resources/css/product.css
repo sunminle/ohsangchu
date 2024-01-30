@@ -278,8 +278,8 @@ li a {
 	left: 50%;
 	transform: translate(-50%, -20%);
 	background-color: #ffffff;
-	width: 30%;
-	height: 30%;
+	width: 60%;
+	height: auto;
 	text-align: center;
 }
 

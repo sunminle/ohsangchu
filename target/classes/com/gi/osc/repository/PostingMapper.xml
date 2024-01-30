@@ -20,9 +20,23 @@
 	
 	<!-- selectList : 포스트넘버를 주면 해당 포스트의 리뷰 가져오기 -->
 	<select id="getReviews" resultType="com.gi.osc.bean.ReviewDTO">
-		select * from review where postingid=#{postingid}
+		select * from review where postingid=#{postingid} order by id desc 
 	</select>
 	
+	<!-- selectList : 포스트넘버를 주면 해당 포스트의 해시태그 가져오기 -->
+	<select id="getHashes" resultType="com.gi.osc.bean.HashtagDTO">
+		select * from hashtag where id in (select hashtagId from hashtag_posting where postingid=#{postingid}) 
+	</select>
+	
+	<!-- selectOne : 포스트넘버를 주면 해당 포스트의 찜 갯수 가져오기 -->
+	<select id="getHearts">
+		select count(*) from heart where postingid=#{postingid} 
+	</select>
+	
+	<!-- selectOne : 포스트넘버와 유저 정보 주면 해당 포스트 찜 여부 판단 -->
+	<select id="heartCheck">
+		select count(*) from heart where postingid=#{postingId} and userId=#{userId}
+	</select>
 	
 	<!-- 
 		select * from dbo.store where delete_yn='N'

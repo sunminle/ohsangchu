@@ -36,5 +36,15 @@
 				 							   where storeid=(select id from store
 				 							   							where userid=#{userId}))
 	</select>
+	
+	<!-- insert : like -->
+	<insert id="like" parameterType="com.gi.osc.bean.HeartDTO">
+		insert into heart (userid,postingId) values (#{userId},#{postingId})
+	</insert>
+	
+	<!-- delete : unlike -->
+	<delete id="unlike" parameterType="com.gi.osc.bean.HeartDTO">
+		delete from heart where postingId=#{postingId} and userId=#{userId}
+	</delete>
 
 </mapper>
