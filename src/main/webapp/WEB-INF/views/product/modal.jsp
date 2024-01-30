@@ -8,39 +8,57 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="staticBackdropLabel">장소 추가하기</h1>
+				<h1 class="modal-title fs-5" id="staticBackdropLabel">리뷰 추가하기</h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 				<form id="img-add">
 					<%-- 별점 --%>
-					<div claa="d-flex">
-						<div class="rating" data-rating="0">
-					        <span class="star" data-value="1">☆</span>
-					        <span class="star" data-value="2">☆</span>
-					        <span class="star" data-value="3">☆</span>
-					        <span class="star" data-value="4">☆</span>
-					        <span class="star" data-value="5">☆</span>
+					<div class="d-flex justify-content-center">
+						<div class="rating d-flex justify-content-center" data-rating="0">
+					        <div class="starwi"><span class="star half" data-value="0.5"></span></div>
+					        <div class="starwi"><span class="star full" data-value="1.0"></span></div>
+					        <div class="starwi"><span class="star half" data-value="1.5"></span></div>
+					        <div class="starwi"><span class="star full" data-value="2.0"></span></div>
+					        <div class="starwi"><span class="star half" data-value="2.5"></span></div>
+					        <div class="starwi"><span class="star full" data-value="3.0"></span></div>
+					        <div class="starwi"><span class="star half" data-value="3.5"></span></div>
+					        <div class="starwi"><span class="star full" data-value="4.0"></span></div>
+					        <div class="starwi"><span class="star half" data-value="4.5"></span></div>
+					        <div class="starwi"><span class="star full" data-value="5.0"></span></div>
 					    </div>
 					</div>
 				    <script type="text/javascript">
 				    document.addEventListener('DOMContentLoaded', function () {
-				        const stars = document.querySelectorAll('.star');
+				        const ratingContainer = document.querySelector('.rating');
+				        const stars = ratingContainer.querySelectorAll('.star');
+				        
+				        selectedRating = null;
 
 				        stars.forEach(star => {
 				            star.addEventListener('click', () => {
-				                const rating = star.getAttribute('data-value');
-				                setRating(rating);
+				                const value = parseFloat(star.getAttribute('data-value'));
+				                ratingContainer.setAttribute('data-rating', value.toFixed(1));
+				                selectedRating = value;
+				                updateStars(value);
+				            });
+
+				            star.addEventListener('mouseenter', () => {
+				                const value = parseFloat(star.getAttribute('data-value'));
+				                updateStars(value);
+				            });
+
+				            star.addEventListener('mouseleave', () => {
+				                const currentRating = parseFloat(ratingContainer.getAttribute('data-rating'));
+				                updateStars(currentRating);
 				            });
 				        });
 
-				        function setRating(rating) {
+				        function updateStars(rating) {
 				            stars.forEach(star => {
-				                const value = star.getAttribute('data-value');
+				                const value = parseFloat(star.getAttribute('data-value'));
 				                star.classList.toggle('active', value <= rating);
 				            });
-
-				            document.querySelector('.rating').setAttribute('data-rating', rating);
 				        }
 				    });
 				    </script>
@@ -58,12 +76,12 @@
 					</div>
 				</form>
 			</div>
-
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-primary" onclick="addReview()">작성완료</button>
+			</div>
 		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-			<button type="button" class="btn btn-primary" onclick="addReview()">작성완료</button>
-		</div>
+		
 	</div>
 </div>
 
@@ -111,15 +129,72 @@ const upload = () => {
 
 //추가하기버튼 클릭시
 function addReview(){
-	var des = $('#description').val();
-	var file = uploadFile;
-	console.log()
+	
+	//유효성 검사
+    //point
+	if (selectedRating === null) {
+        alert('별점을 선택해주세요!');
+        return; // 별점이 선택되지 않았으면 더 이상 진행하지 않음
+    }
+    if (isNaN(selectedRating) || selectedRating < 0 || selectedRating > 5) {
+        alert('별점은 0부터 5까지의 값을 가져야 합니다.');
+        return; // 유효하지 않은 별점이면 더 이상 진행하지 않음
+    }
+	//file
+	if(typeof uploadFile=="undefined"){
+		var file=null;
+	}else{
+		var file=uploadFile;
+	}
+	//des
+	if ($("#description").val().length < 20) {
+		alert("후기는 20자 이상 입력해주세요!");
+		return;
+	}
+	
+	var userId='${sessionScope.usersId}';
+	var postingId='${post.id}';
+	var des=$('#description').val();
+	var point = selectedRating;	
+    
+	console.log(file);
+	console.log("후기 : "+des+", img : "+file+", userId : "+userId+", postingId : "+postingId+", point : "+point);
+	
+	var formData = new FormData();
+	formData.append("content",des);
+	formData.append("img", file);
+	formData.append("userId", userId);
+	formData.append("postingId", postingId);
+	formData.append("point", point);
 	
 	//데이터 저장 및 새로고침
+	$.ajax({
+		type:"POST",
+		url : '/store/add_review',
+		//dataType : 'json',
+		enctype: 'multipart/form-data',
+		contentType: false,
+        processData: false,
+        //traditional : true,
+		cache: false,
+		data : formData,	//json일땐, JSON.stringify(data)
+		success:function(data){
+			if(data.code==1){
+				//성공
+				alert("리뷰가 업로드 되었습니다");
+				//모달 닫기
+				$("#modal_addReview").modal('hide');
+				location.reload(true);
+			}else{
+				//실패
+				alert(data.errorMessage);
+			}
+		}
+		,error:function(e){
+			console.log("리뷰업로드 실패")
+		}
+	});
 	
-	
-	//모달 닫기
-	//$("#modal_addPlace").modal('hide');
 }
 
 //초기화
