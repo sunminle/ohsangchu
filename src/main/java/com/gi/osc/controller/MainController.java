@@ -1,12 +1,6 @@
 package com.gi.osc.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gi.osc.bean.PaymentDTO;
 import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.ProductDTO;
-import com.gi.osc.bean.RecentlyViewedProducts;
-import com.gi.osc.bean.RecentlyViewedStores;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.service.MainService;
 import com.gi.osc.service.PostingService;
@@ -37,10 +30,15 @@ public class MainController {
 
 
 	@RequestMapping("")
-    public String main(Model model) {
-        
-        return "main";
-    }
+	public String main(Model model) {
+	    List<PaymentDTO> popularProducts = service.countPopularProducts(1);
+
+	    model.addAttribute("popularProducts", popularProducts);
+
+	    return "main";
+	}
+
+
 	
 	@GetMapping("/main")
 	public String showSearchForm() {

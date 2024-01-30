@@ -18,6 +18,10 @@ public class PaymentDTO {
 	private int status;
 	private Date orderDate;
 	
+	private int totalCount;
+	private String title;
+    private String thumnail;
+    
 	// 닉네임 받기위해
 	private String nickname;
 	

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.gi.osc.bean.Criteria;
+import com.gi.osc.bean.PaymentDTO;
 import com.gi.osc.bean.ProductDTO;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.repository.MainMapper;
@@ -27,11 +27,16 @@ public class MainServiceImpl implements MainService {
 		return mapper.searchProductsByName(searchKeyword);
 	}
 	
-	@Override
-	public List<ProductDTO> getList(Criteria cri) {
 
-		return mapper.getListWithPaging(cri);
+	@Override
+	public List<PaymentDTO> countPopularProducts(int rownum) {
+	    List<PaymentDTO> popularProducts = mapper.countPopularProducts(rownum);
+	    System.out.println("Popular Products from Service: " + popularProducts);
+	    return popularProducts;
 	}
+
+
+	
 	
 	
 
