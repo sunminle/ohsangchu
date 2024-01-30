@@ -14,9 +14,9 @@ $(function(){
 			success : function(result){
 				StoreNameCheckValue = result;
 				if (StoreNameCheckValue === "1") {
-                    $("#storeNameCheckResult").html("사용 가능한 상점 이름입니다.");
+                    $("#storeNameCheckResult").html("사용 가능한 상점 이름입니다.").css("color", "green");
                 } else {
-                    $("#storeNameCheckResult").html("이미 사용 중인 상점 이름입니다.");
+                    $("#storeNameCheckResult").html("이미 사용 중인 상점 이름입니다.").css("color", "red");
                 }
 			}
 		});
