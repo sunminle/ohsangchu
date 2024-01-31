@@ -24,17 +24,12 @@ public class MainController {
 	
 	@Autowired
 	private MainService service;
-	
-	@Autowired
-	private PostingService postService;
 
 
 	@RequestMapping("")
 	public String main(Model model) {
 	    List<PaymentDTO> popularProducts = service.countPopularProducts(1);
-
 	    model.addAttribute("popularProducts", popularProducts);
-
 	    return "main";
 	}
 

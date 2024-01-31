@@ -97,16 +97,16 @@
 </svg>
 			<div id="newProList" class="d-flex justify-content-start">
 			<c:forEach var="product" items="${popularProducts}">
-				<div class="pro" onclick="location.href='/product/detail?postNum=${product.id}';">
+				<div class="pro" onclick="location.href='/product/detail?postNum=${product.postingId}';">
 					<img src="/resources/images/posting/${product.thumnail}" alt="프로필이미지" width="300px" height="300px">
 					<div class="proDes">
 						<div class="proTitle">${product.title}</div>
-						<div class="proPrice d-flex justify-content-end"><span>112,400 원</span></div>
+						<div class="proPrice d-flex justify-content-end"><span>${product.price} 원</span></div>
 						<div class="proProfile d-flex align-items-center">
 							<div class="proImg">
-								<img src="/resources/images/posting/${product.thumnail}" alt="프로필이미지" width="300px" height="300px">
+								<img src="/resources/images/profiles/${product.profile}" alt="프로필이미지" width="300px" height="300px">
 							</div>
-							<span>진짜이재현</span>
+							<span>${product.storeName}</span>
 						</div>
 					</div>
 				</div>
@@ -240,8 +240,8 @@
                 imgElement.alt = '방문한 항목 썸네일';
 
                 // 이미지의 폭과 높이를 설정하여 크기 조정
-                imgElement.style.width = '245px'; // 원하는 폭으로 변경
-                imgElement.style.height = '250px'; // 원하는 높이로 변경
+                imgElement.style.width = '280px'; // 원하는 폭으로 변경
+                imgElement.style.height = '280px'; // 원하는 높이로 변경
 
                 // 이미지를 클릭했을 때 저장된 페이지 URL로 이동하는 이벤트 추가
                 imgElement.addEventListener('click', function() {
@@ -300,13 +300,14 @@
         	mainViewList.classList.add('hasData');
             visitedStores.forEach(storeInfo => {
                 const listItem = document.createElement('li');
+                listItem.classList.add('visited-item');
                 const imgElement = document.createElement('img');
                 imgElement.src = storeInfo.imageUrl;
                 imgElement.alt = "Store Image";
                 
              // 이미지의 폭과 높이를 설정하여 크기 조정
-                imgElement.style.width = '245px'; // 원하는 폭으로 변경
-                imgElement.style.height = '250px'; // 원하는 높이로 변경
+                imgElement.style.width = '280px'; // 원하는 폭으로 변경
+                imgElement.style.height = '280px'; // 원하는 높이로 변경
 
                 // 이미지를 클릭했을 때 상점 페이지로 이동하는 이벤트 추가
                 imgElement.addEventListener('click', function() {
@@ -335,6 +336,14 @@
         outputElement.innerHTML = "<p>Visited Stores: " + JSON.stringify(getVisitedStores()) + "</p><br />";
     };
 </script>
+
+<style>
+    .visited-item {
+        margin: 0 15px 20px 15px; /* 상, 우, 하, 좌의 여백 설정 (원하는 크기로 조정) */
+    }
+</style>
+
+
 			</div>
 
 		

@@ -31,7 +31,6 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public List<PaymentDTO> countPopularProducts(int rownum) {
 	    List<PaymentDTO> popularProducts = mapper.countPopularProducts(rownum);
-	    System.out.println("Popular Products from Service: " + popularProducts);
 	    return popularProducts;
 	}
 
