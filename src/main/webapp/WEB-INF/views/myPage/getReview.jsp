@@ -12,6 +12,8 @@
 <!-- css -->
 <link href="/resources/css/include.css" rel="stylesheet">
 <link href="/resources/css/product.css" rel="stylesheet">
+<!-- style -->
+<link href="/resources/css/addReview.css" rel="stylesheet">
 <script>
 function paginationClickHandler() {
     // 이 부분에 paginationClickHandler의 로직을 추가
@@ -42,21 +44,43 @@ function paginationClickHandler() {
             }
         });
     });
-    
 
-    function openReviewAnswerModal(reviewId) {
+    var myModal = document.getElementById('modal_addReviewAnswer')
+    myModal.addEventListener('show.bs.modal', function (e) {      
+    	console.log(e);
+    	var ids = e.relatedTarget.id;
+    	var c = $("#"+ids).attr("reviewcount");
+    	var reviewId = $("#"+ids).attr("reviewid");
+    	if(c > 0){
+    		alert("이미 답변을 등록하셨습니다.");
+    		e.preventDefault();
+    	}
+    	else{
+    		$("#modal_addReviewAnswer").data('reviewId', reviewId);
+    		$("#modal_addReviewAnswer").data('myModal', myModal);
+    	}
+    });
+    
+    	
+    function openReviewAnswerModal(reviewId,reviewAnswerCount,count) {
         // reviewId를 모달에 전달하거나 필요한 처리를 수행할 수 있습니다.
         // 모달에 reviewId 설정
+    	if(reviewAnswerCount > 0){
+			alert("이미 답변을 등록하셨습니다.");
+			$("#model_"+count).attr("data-bs-target","");
+			return false;
+		}
 		$("#modal_addReviewAnswer").data('reviewId', reviewId);
+		$("#modal_addReviewAnswer").data('reviewAnswerCount', reviewAnswerCount);
 		console.log("Review ID:", reviewId);
-        
-        // 여기서 모달을 열거나 필요한 작업을 수행하세요.
+		console.log("reviewAnswerCount:", reviewAnswerCount);
+	
     }
 
 </script>
 <h2>나에게 쓴 리뷰 목록</h2>
 <c:if test="${!empty list}">
-	<c:forEach var="getReview" items="${list}">
+	<c:forEach var="getReview" items="${list}" varStatus="i">
 	상품 이름 : <a href="/product/detail?postNum=${getReview.postingId}">${getReview.title}</a>
 		<br />
 	리뷰 내용 : ${getReview.content}<br />
@@ -70,14 +94,15 @@ function paginationClickHandler() {
 	작성일 : <fmt:formatDate value="${getReview.regDate}"
 			pattern="yyyy-MM-dd HH:mm" />
 		<br />
-		<a data-bs-toggle="modal" data-bs-target="#modal_addReviewAnswer" onclick="openReviewAnswerModal(${getReview.id})">
-									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg>
-									답글작성
-									</a>
+		<a id="model_${i.count}" data-bs-toggle="modal" data-bs-target="#modal_addReviewAnswer" reviewcount="${getReview.reviewAnswerCount}"  reviewid="${getReview.id}">
+			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg>
+			답글작성
+		</a>
 									
 		<hr>
 	</c:forEach>
 	<jsp:include page="reviewAnswer.jsp" />
+	
 	<c:if test="${startPage > 10 }">
 	<a href="/my/getReview?pageNum=${startPage - 10}" class="getReviewPagination">이전</a>
 	</c:if>

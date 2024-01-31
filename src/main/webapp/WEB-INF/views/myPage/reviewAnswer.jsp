@@ -70,12 +70,12 @@ function addReview(){
 				//성공
 				alert("리뷰가 업로드 되었습니다");
 				//모달 닫기
-				$("#modal_addReviewAnswer").modal('hide');
+				$("#myModal").modal('hide');
 				location.reload(true);
 			}else if(data.code==2){
 				initialize();
 				alert("이미 답변을 등록하셨습니다.")
-				$("#modal_addReviewAnswer").modal('hide');
+				$("#myModal").modal('hide');
 			}
 			else{
 				//실패
@@ -95,34 +95,6 @@ function initialize(){
 	$('#description').val(undefined);
 }
 
-// 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
-function displayPagination(pagination) {
-	var paginationEl = document.getElementById('pagination'), fragment = document
-			.createDocumentFragment(), i;
 
-	// 기존에 추가된 페이지번호를 삭제합니다
-	while (paginationEl.hasChildNodes()) {
-		paginationEl.removeChild(paginationEl.lastChild);
-	}
-
-	for (i = 1; i <= pagination.last; i++) {
-		var el = document.createElement('a');
-		el.href = "#";
-		el.innerHTML = i;
-
-		if (i === pagination.current) {
-			el.className = 'on';
-		} else {
-			el.onclick = (function(i) {
-				return function() {
-					pagination.gotoPage(i);
-				}
-			})(i);
-		}
-
-		fragment.appendChild(el);
-	}
-	paginationEl.appendChild(fragment);
-}
 
 </script>
