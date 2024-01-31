@@ -113,14 +113,16 @@
 	
 	<select id="getReview" resultType="com.gi.osc.bean.ReviewDTO">
 		<![CDATA[
-		select * from (select p.title, a.*, rownum r from posting p ,(select * from review where postingid in
-		(select id
-		from posting where storeid =
-		(select id from store where userid =
-		(select id from users where realid = #{realId})))) a
-		where
-		p.id=a.postingid
-		order by a.id desc) where r >= #{start} and r <= #{end}
+		select * from (select p.title, a.*, rownum r,
+		(select count(*) from review_answer ra where ra.reviewid = a.id) 
+		as reviewAnswerCount from posting p,
+        (select * from review where postingid IN 
+        (select id from posting where storeid = 
+        (select id from store where userid = 
+        (select id from users where realid = #{realId})))) a
+		where p.id = a.postingid
+		order by a.id desc) 
+		where r >= #{start} and r <= #{end}
 		]]>
 	</select>
 	
