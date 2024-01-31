@@ -21,7 +21,9 @@ public class PaymentDTO {
 	private int totalCount;
 	private String title;
     private String thumnail;
-    
+    private int price;
+    private String storeName;
+    private String profile;
 	// 닉네임 받기위해
 	private String nickname;
 	
