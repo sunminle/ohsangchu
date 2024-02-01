@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.gi.osc.bean.HashtagDTO;
+import com.gi.osc.bean.HashtagPostingDTO;
 import com.gi.osc.bean.PaymentDTO;
 import com.gi.osc.bean.ProductDTO;
 import com.gi.osc.bean.StoreDTO;
@@ -32,6 +33,12 @@ public class MainServiceImpl implements MainService {
 	public List<PaymentDTO> countPopularProducts(int rownum) {
 	    List<PaymentDTO> popularProducts = mapper.countPopularProducts(rownum);
 	    return popularProducts;
+	}
+
+	@Override
+	public List<HashtagDTO> searchHashtagByName(String searchKeyword) {
+		// TODO Auto-generated method stub
+		return mapper.searchHashtagByName(searchKeyword);
 	}
 
 

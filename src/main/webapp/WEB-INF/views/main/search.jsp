@@ -36,7 +36,7 @@
 </svg></h2>
 <br />
     <!-- 검색 결과가 비어있는 경우 -->
-   <c:if test="${empty productList and empty storeList}">
+   <c:if test="${empty productList and empty storeList and empty hashtagList}">
     <p>검색 결과가 없어요ㅠㅠ..</p>
 </c:if>
 
@@ -133,6 +133,53 @@
 			        </c:if>
 			    </div>
 			  </div>
+		<br />
+</c:if>
+<c:if test="${hashtagList != null}">
+    <!-- 각 제품에 대한 정보를 표시 -->
+    <div class="row justify-content-around">
+    <c:forEach var="hashtag" items="${hashtagList}" varStatus="loop">
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+            <div class="pro" onclick="location.href='/product/detail?postNum=${hashtag.id}';">
+                <img src="/resources/images/posting/${hashtag.thumnail}" alt="프로필이미지" width="300px" height="300px">
+                <div class="proDes">
+                    <div class="proTitle">${hashtag.title}</div>
+                    <div class="proPrice d-flex justify-content-end"><span></span></div>
+                    <div class="proProfile d-flex align-items-center">
+                        <div class="proImg">
+                            
+                        </div>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <c:if test="${loop.index % 5 == 4 or loop.last}">
+        </div><div class="row justify-content-around">
+    </c:if>
+    </c:forEach>
+</div>
+    
+            <br />
+            
+             <!-- 페이징 컨트롤 표시 -->
+			<div class="d-flex justify-content-center">
+				<div class="btn-group">
+			        <c:if test="${currentPage > 1}">
+			            <a class="btn btn-default" href="?page=1&searchColumn=3&searchKeyword=${param.searchKeyword}"><<</a>
+			            <a class="btn btn-default" href="?page=${currentPage - 1}&searchColumn=3&searchKeyword=${param.searchKeyword}"><</a>
+			        </c:if>
+			
+			        <c:forEach begin="1" end="${pageCount}" varStatus="loop">
+			            <a class="btn btn-default" href="?page=${loop.index}&searchColumn=3&searchKeyword=${param.searchKeyword}">${loop.index}</a>
+			        </c:forEach>
+			
+			        <c:if test="${currentPage < pageCount}">
+			            <a class="btn btn-default" href="?page=${currentPage + 1}&searchColumn=3&searchKeyword=${param.searchKeyword}">></a>
+			            <a class="btn btn-default" href="?page=${pageCount}&searchColumn=3&searchKeyword=${param.searchKeyword}">>></a>
+			        </c:if>
+			  	</div>
+			</div>
 		<br />
 </c:if>
 	<!-- footer -->
