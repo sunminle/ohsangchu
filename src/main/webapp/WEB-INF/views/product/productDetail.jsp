@@ -243,7 +243,7 @@
 				<div>
 					<b>- 주문 상품 선택<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">  <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1"/></svg></b>
 					
-					<c:forEach var="prod" items="${pList}">
+					<c:forEach var="prod" items="${pList}" varStatus="">
 						<div class="products" class="d-flex justify-content-center align-items-center">
 						${prod.productName}(<fmt:formatNumber type="number" maxFractionDigits="3" value="${prod.price}" />원/개)
 						<c:if test="${post.isPublic == 1}">
@@ -253,7 +253,7 @@
 								<c:when test="${prod.quantity gt 0}">
 									<div class="d-flex justify-content-end align-items-center" data-product-id="${prod.id}" data-qtt="${prod.quantity}">
 										<input class="button m-1 plus" type='button' value='+' />
-										<input class='result text-center' type="text" value="0"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onchange = "hoisted(this)">
+										<input class='result text-center' type="text" value="0"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 										<input class="button m-1 minus" type='button' value='-' />
 									</div>
 								</c:when>
@@ -271,35 +271,18 @@
 			</div>
 			
 			<script type="text/javascript">
-			/*
-			$(".result").on('keyup', function() {
-				console.log("=============");
-			  	var v = this.value;
-			  	this.value = v.replace(/[^a-z0-9]/gi, '');
-			  	
-			  	var clicked = $(this).parent();
-				var qtt = clicked.data('qtt');
-				console.log(qtt);
-				
-				if(v > qtt){
-				 alert('남은 수량 이상 입력할수 없습니다!');
-				 return
-				}
-			});*/
-			
-			function hoisted(obj) {
-				var v = obj.value;			  	
-			  	var clicked = $(this).parent();
-				var qtt = clicked.data('qtt');
-				
-				console.log(v);
-				console.log(qtt);
-				
-				if(v > qtt){
-				 alert('남은 수량 이상 입력할수 없습니다!');
-				 return
-				}
-			}
+			$(function(){
+				$(".result").on('keyup', function(e) {
+				  	var v = this.value;
+					var qtt = e.target.parentNode.dataset.qtt;
+					//console.log(qtt);
+					
+					if(v > qtt){
+					 alert('남은 수량 이상 입력할수 없습니다!');
+					 this.value = 0;
+					}
+				});
+			});
 			
 			$(".plus ").click(function(){
 				var clicked = $(this).parent();
@@ -346,7 +329,9 @@
 			</script>
 
 			
-				
+			<div>
+			
+			</div>
 				
 				
 			<!-- /구매탭 -->
@@ -678,6 +663,7 @@ const lessText = document.querySelector('.less-text');
 
 // 더보기 텍스트 클릭시 이벤트
 moreText.addEventListener('click', () => {
+	console.log("더보기");
 	moreText.style.display = 'none'; // 더보기 텍스트 삭제
 	lessText.style.display = 'inline-block'; // 줄이기 텍스트 표시
 	text.style.display = 'inline-block'; // 텍스트의 속성을 -webkit-box에서 일반 inline-block 으로 변경
