@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.PostingDTO;
+import com.gi.osc.bean.ProductDTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.bean.UsersDTO;
@@ -51,6 +52,11 @@ public class PostingServiceImpl implements PostingService{
 	@Override
 	public int heartCheck(int postNum, int loginUid) {
 		return mapper.heartCheck(postNum,loginUid);
+	}
+
+	@Override
+	public ArrayList<ProductDTO> getProducts(int postNum) {
+		return mapper.getProducts(postNum);
 	}
 	
 

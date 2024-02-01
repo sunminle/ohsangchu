@@ -243,17 +243,112 @@
 				<div>
 					<b>- 주문 상품 선택<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">  <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1"/></svg></b>
 					
-					<div class="products" class="d-flex justify-content-center align-items-center">
-						섹시 메이드복 세트(24,000원/개)
-					</div>
-					<div class="products" class="d-flex justify-content-center align-items-center">
-						미니 넥타이(6,700원/개)
-					</div>
-					<div class="products" class="d-flex justify-content-center align-items-center">
-						냥냥 보이 모자(11,000원/개)
-					</div>
-				</div>			
+					<c:forEach var="prod" items="${pList}">
+						<div class="products" class="d-flex justify-content-center align-items-center">
+						${prod.productName}(<fmt:formatNumber type="number" maxFractionDigits="3" value="${prod.price}" />원/개)
+						<c:if test="${post.isPublic == 1}">
+							<span class="text-secondary"><small>(남은 수량:${prod.quantity})</small></span>
+						</c:if>
+							<c:choose>
+								<c:when test="${prod.quantity gt 0}">
+									<div class="d-flex justify-content-end align-items-center" data-product-id="${prod.id}" data-qtt="${prod.quantity}">
+										<input class="button m-1 plus" type='button' value='+' />
+										<input class='result text-center' type="text" value="0"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onchange = "hoisted(this)">
+										<input class="button m-1 minus" type='button' value='-' />
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div class="d-flex justify-content-end align-items-center" data-product-id="${prod.id}">
+										품절
+										<input type="hidden" value="0">
+									</div>
+								</c:otherwise>
+							</c:choose>
+							
+						</div>	
+					</c:forEach>
+				</div>
 			</div>
+			
+			<script type="text/javascript">
+			/*
+			$(".result").on('keyup', function() {
+				console.log("=============");
+			  	var v = this.value;
+			  	this.value = v.replace(/[^a-z0-9]/gi, '');
+			  	
+			  	var clicked = $(this).parent();
+				var qtt = clicked.data('qtt');
+				console.log(qtt);
+				
+				if(v > qtt){
+				 alert('남은 수량 이상 입력할수 없습니다!');
+				 return
+				}
+			});*/
+			
+			function hoisted(obj) {
+				var v = obj.value;			  	
+			  	var clicked = $(this).parent();
+				var qtt = clicked.data('qtt');
+				
+				console.log(v);
+				console.log(qtt);
+				
+				if(v > qtt){
+				 alert('남은 수량 이상 입력할수 없습니다!');
+				 return
+				}
+			}
+			
+			$(".plus ").click(function(){
+				var clicked = $(this).parent();
+				var qtt = clicked.data('qtt');
+				console.log("+ : "+clicked.data('product-id'));
+				
+				//var result = clicked.find("div");
+				var result = clicked.children('input:eq(1)');
+				//var number = result.html();
+				var number = result.val();
+				//console.log(number);
+				
+				//수량만큼 유효성 검사
+				if(number > qtt-1){
+					alert('남은 수량 이상 입력할수 없습니다!');
+					return
+				}else{
+					number = parseInt(number) + 1;
+					result.val(number);
+				}
+				
+				result.html(number);
+			});
+						
+			$(".minus ").click(function(){
+				var clicked = $(this).parent();
+				console.log("- : "+clicked.data('product-id'));
+				
+				var result = clicked.children('input:eq(1)');
+				var number = result.val();
+				//console.log(number);
+				
+				//유효성검사
+				if(number <= 0){
+					alert('0미만의 숫자는 입력할 수 없습니다!');
+					return
+				}else{
+					number = parseInt(number) - 1;
+					result.val(number);
+				}
+				
+				result.html(number);
+			});
+			</script>
+
+			
+				
+				
+				
 			<!-- /구매탭 -->
 			
 			<div id="reviews" class="d-flex justify-content-center">
