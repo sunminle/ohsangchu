@@ -66,7 +66,7 @@
 		    JOIN posting p ON hp.postingId = p.id
 		    <where>
 		        <if test="searchKeyword != null and searchKeyword != ''">
-		            AND (h.hashtagName LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%')
+		             AND h.hashtagName = #{searchKeyword, jdbcType=VARCHAR}
 		        </if>
 		    </where>
 		</select>
