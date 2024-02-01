@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.PostingDTO;
+import com.gi.osc.bean.ProductDTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.bean.UsersDTO;
@@ -63,6 +64,9 @@ public class ProductController {
 		}
 		int revCnt = reviews.size();
 		
+		//포스트넘버를 주면 해당 포스트의 상품목록 가져오기
+		ArrayList<ProductDTO> pList = postService.getProducts(postNum);
+		
 		//유저 넘버 주면 해당 유저 리뷰 평균
 		ArrayList<ReviewDTO> userRe = storeService.getReviews(userId);
 		double sum = 0;
@@ -93,6 +97,7 @@ public class ProductController {
 		model.addAttribute("revAvg", revAvg);
 		model.addAttribute("hashes", hashes);
 		model.addAttribute("likeCnt", likeCnt);
+		model.addAttribute("pList", pList);
 		
 		return "product/productDetail";
 	}

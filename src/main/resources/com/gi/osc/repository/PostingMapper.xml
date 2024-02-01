@@ -46,5 +46,10 @@
 			</when>
 		</choose>
 	 -->
+	 
+	 <!-- selectList : 포스트넘버를 주면 해당 포스트의 해시태그 가져오기 -->
+	<select id="getProducts" resultType="com.gi.osc.bean.ProductDTO">
+		select * from product where postingid=#{postingid}
+	</select>
 	
 </mapper>

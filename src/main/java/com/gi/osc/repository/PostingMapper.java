@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.PostingDTO;
+import com.gi.osc.bean.ProductDTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.bean.UsersDTO;
@@ -20,5 +21,6 @@ public interface PostingMapper {
 	public int getHearts(int postingid);
 	public int heartCheck(@Param("postingId") int postingId,
 						  @Param("userId") int userId);
+	public ArrayList<ProductDTO> getProducts(int postingId);
 
 }
