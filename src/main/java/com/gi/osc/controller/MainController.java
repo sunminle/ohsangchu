@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gi.osc.bean.HashtagDTO;
+import com.gi.osc.bean.HashtagPostingDTO;
 import com.gi.osc.bean.PaymentDTO;
 import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.ProductDTO;
@@ -66,7 +68,7 @@ public class MainController {
 			   model.addAttribute("productList", currentPageProducts);
 			   model.addAttribute("pageCount", pageCount);
 			   model.addAttribute("currentPage", page);
-		}else {
+		}else if(searchColumn == 2) {
 			List<StoreDTO> storeList = service.searchStoreByName(searchKeyword);
 			int pageSize = 10; // 페이지당 아이템 수
 			int totalItems = storeList.size();
@@ -79,6 +81,21 @@ public class MainController {
 
 			   // 결과 및 페이징 정보를 모델에 추가하여 뷰에 전달
 			model.addAttribute("storeList", currentPageProducts);
+			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("currentPage", page);
+		}else if(searchColumn == 3){
+			List<HashtagDTO> hashtagList = service.searchHashtagByName(searchKeyword);
+			int pageSize = 10; // 페이지당 아이템 수
+			int totalItems = hashtagList.size();
+			int pageCount = (totalItems + pageSize - 1) / pageSize;
+
+			   // 현재 페이지의 제품 리스트 계산
+			int startIdx = (page - 1) * pageSize;
+			int endIdx = Math.min(startIdx + pageSize, totalItems);
+			List<HashtagDTO> currentPageProducts = hashtagList.subList(startIdx, endIdx);
+
+			   // 결과 및 페이징 정보를 모델에 추가하여 뷰에 전달
+			model.addAttribute("hashtagList", currentPageProducts);
 			model.addAttribute("pageCount", pageCount);
 			model.addAttribute("currentPage", page);
 		}

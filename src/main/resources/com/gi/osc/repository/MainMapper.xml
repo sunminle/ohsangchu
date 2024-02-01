@@ -59,6 +59,17 @@
 				]]>
 		</select>
 
+		<select id="searchHashtagByName" parameterType="java.lang.String" resultType="com.gi.osc.bean.HashtagDTO">
+		    SELECT h.hashtagName, p.*
+		    FROM hashtag_posting hp
+		    JOIN hashtag h ON hp.hashtagId = h.id
+		    JOIN posting p ON hp.postingId = p.id
+		    <where>
+		        <if test="searchKeyword != null and searchKeyword != ''">
+		            AND (h.hashtagName LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%')
+		        </if>
+		    </where>
+		</select>
 
 
 

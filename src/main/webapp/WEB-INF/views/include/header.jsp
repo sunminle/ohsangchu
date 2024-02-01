@@ -22,6 +22,7 @@
 					name="searchColumn">
 	  					<option selected value="1">상품</option>
 	  					<option value="2">상점</option>
+	  					<option value="3">해시태그</option>
 					</select>
 				</div>
 			
