@@ -15,17 +15,11 @@ import com.gi.osc.repository.NoticeMapper;
 public class NoticeServiceImpl implements NoticeService{
 
 	@Autowired
-	NoticeMapper mapper;
-	
+	private NoticeMapper mapper;
 
 	
 	@Override
-	public List<NoticeDTO> noticeList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
+	@Transactional
 	public boolean addNoticePro(NoticeDTO dto) throws Exception {
 		 try {
        	  mapper.addNotice(dto);  //db insert
@@ -38,6 +32,28 @@ public class NoticeServiceImpl implements NoticeService{
            throw e;
        }
    }
+	
+	@Override
+	public List<NoticeDTO> noticeList() {
+	    try {
+	        // 데이터베이스에서 공지사항 목록 조회
+	        List<NoticeDTO> noticeList = mapper.getNoticeList();
+	        return noticeList;
+	    } catch (Exception e) {
+	        // 예외 처리 로직 추가
+	        throw e;
+
+	    }
+	}
+
+	@Override
+	public NoticeDTO getNoticeById(Long id) {
+	
+		return mapper.getNoticeById(id);
+	}
+
+
+
 
 	
 

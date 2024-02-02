@@ -46,52 +46,54 @@
 	<form id="addNotice">
 		<div class="page-wrapper">
 			<div class="container-fluid">
-				
-					<!--게시판 넓이 -->
+
+				<!--게시판 넓이 -->
+				<div class="col-lg-12">
+					<h1 class="page-header">Notice</h1>
+				</div>
+				<div class="row">
 					<div class="col-lg-12">
-						<h1 class="page-header">Notice</h1>
+						<button type="button"
+							class="btn btn-outline btn-primary pull-right"
+							onclick="location.href='addNotice'">
+							<i class="fa fa-edit fa-fw"></i> 글쓰기
+						</button>
 					</div>
-					<div class="row">
-						<div class="col-lg-12">
-							<button type="button"
-								class="btn btn-outline btn-primary pull-right"
-								onclick="location.href='addNotice'">
-								<i class="fa fa-edit fa-fw"></i> 글쓰기
-							</button>
-						</div>
+				</div>
+				<br>
+				<div class="panel panel-default">
+					<div class="panel-heading">공지사항</div>
+					<div class="panel-body">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>No.</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>작성일</th>
+								</tr>
+							</thead>
+							 <c:forEach var="notice" items="${noticeList}">
+          
+							<tbody>
+								<tr>
+									<td>${notice.id}</td>
+									<td><a href="noticeDetail">${notice.title}</td>
+									<td>${notice.userId}</td>
+									<td>${notice.regDate}</td>
+								</tr>
+							</tbody>
+							</c:forEach>
+							
+						</table>
 					</div>
-					<br>
-					<div class="panel panel-default">
-						<div class="panel-heading">공지사항</div>
-						<div class="panel-body">
-							<table class="table table-hover">
-								<thead>
-									<tr>
-										<th>No.</th>
-										<th>제목</th>
-										<th>작성자</th>
-										<th>작성일</th>
-										<th>조회수</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>1</td>
-										<td>첫 공지사항</td>
-										<td>관리자</td>
-										<td>2024.01.10</td>
-										<td>1</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-					</div>
-					</div>
+				</div>
+			</div>
+		</div>
 	</form>
 
-	
-	
+
+
 
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 </body>

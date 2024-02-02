@@ -40,6 +40,7 @@
 <script src="/resources/js/summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet"
 	href="/resources/css/summernote/summernote-lite.css">
+	
 <script>
 	$(document).ready(function() {
 
