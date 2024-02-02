@@ -153,6 +153,24 @@ li a {
 	padding: 10px;
 	font-size: 14px;
 }
+#purchase{
+	margin-top : 20px;
+	width: 800px;
+	color : white;
+	background-color: #75C573;
+}
+#delievery{
+	width: 800px;
+	min-height:80px;
+	color:#495057;
+	font-size : 14px;
+	border: 1px solid #ced4da;
+	border-radius: 5px;
+}
+#delievery input{
+	margin-left: 15px;
+	margin-right: 3px;
+}
 
 /**review**/
 #reviews{
@@ -211,18 +229,20 @@ li a {
 .reCon{
 	margin-top: 10px;
 }
-.reCon .text{
-	width:auto;
-	font-size: 12px;
+.reCon .moreT{
 	/*줄바꿈*/
     overflow: hidden;
     text-overflow: ellipsis;
+  	-webkit-line-clamp: 4;
+}
+.reCon .text{
+	width:auto;
+	font-size: 12px;
+	height: auto;
     line-height: 1.7;
-    height: auto;
     white-space: normal;
 	display: -webkit-box;
   	word-wrap: break-word;
-  	-webkit-line-clamp: 4;
   	-webkit-box-orient: vertical;
   	word-break: break-all;
 }

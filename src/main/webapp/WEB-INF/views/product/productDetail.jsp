@@ -240,7 +240,7 @@
 			
 			<!-- 구매탭 -->
 			<div id="buy" class="d-flex justify-content-center">
-				<div>
+				<form action="#" method="get">
 					<b>- 주문 상품 선택<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">  <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1"/></svg></b>
 					
 					<c:forEach var="prod" items="${pList}" varStatus="">
@@ -267,10 +267,30 @@
 							
 						</div>	
 					</c:forEach>
-				</div>
+					
+					<b>- 배송 방법 선택<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">  <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1"/></svg></b>
+					
+					<div id="delievery" class="d-flex justify-content-center align-items-center">
+						<input type="radio" name="chk_info" value="HTML"> 일반택배 3500원
+						<input type="radio" name="chk_info" value="CSS" checked="checked"> 반값택배 1800원
+						<input type="radio" name="chk_info" value="웹디자인"> 준등기 1800원
+					</div>
+					
+					<button type="button" id="purchase" class="button btn">구 매</button>
+				</form>
 			</div>
 			
 			<script type="text/javascript">
+			$(document).ready(function() {
+				$("#purchase").on("click",function(){
+					console.log("구매");
+					
+					//버튼의 형제(products)의 자식요소(product)들 가져오기
+					
+					
+				});
+			});
+			
 			$(function(){
 				$(".result").on('keyup', function(e) {
 				  	var v = this.value;
@@ -280,6 +300,7 @@
 					if(v > qtt){
 					 alert('남은 수량 이상 입력할수 없습니다!');
 					 this.value = 0;
+					 return;
 					}
 				});
 			});
@@ -327,11 +348,6 @@
 				result.html(number);
 			});
 			</script>
-
-			
-			<div>
-			
-			</div>
 				
 				
 			<!-- /구매탭 -->
@@ -514,7 +530,7 @@
 									<div class="text-wrapper">
 										<c:choose>
 											<c:when test="${fn:length(rev.content) gt 340}">
-												<span class="text">${rev.content}</span>
+												<span id="longT" class="text moreT">${rev.content}</span>
 												<!-- 더보기, 줄이기 텍스트 -->
 												<span class="more-text">더보기</span>
 												<span class="less-text">줄이기</span>
@@ -666,14 +682,16 @@ moreText.addEventListener('click', () => {
 	console.log("더보기");
 	moreText.style.display = 'none'; // 더보기 텍스트 삭제
 	lessText.style.display = 'inline-block'; // 줄이기 텍스트 표시
-	text.style.display = 'inline-block'; // 텍스트의 속성을 -webkit-box에서 일반 inline-block 으로 변경
+	//text.style.display = 'inline-block'; // 텍스트의 속성을 -webkit-box에서 일반 inline-block 으로 변경
+	$("#longT").removeClass("moreT");
 });
 
 // 줄이기 텍스트 클릭시 이벤트
 lessText.addEventListener('click', () => {
 	lessText.style.display = 'none'; // 줄이기 텍스트 삭제
 	moreText.style.display = 'inline-block'; // 더보기 텍스트 표시
-	text.style.display = '-webkit-box'; // 텍스트의 속성을 다시 -webkit-box로 표시
+	//text.style.display = '-webkit-box'; // 텍스트의 속성을 다시 -webkit-box로 표시
+	$("#longT").addClass("moreT");
 });
 
 $(document).ready(function($) {
