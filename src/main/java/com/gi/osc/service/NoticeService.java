@@ -13,4 +13,17 @@ public interface NoticeService {
 	
 	 
 	 public List<NoticeDTO> noticeList();
+
+
+
+	public static String processHtmlContent(String htmlContent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	public NoticeDTO getNoticeById(Long id);
+
+
 }

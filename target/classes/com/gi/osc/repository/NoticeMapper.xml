@@ -8,25 +8,26 @@
 	<!-- 글 등록 -->
 	<insert id="addNotice" parameterType="com.gi.osc.bean.NoticeDTO">
 		insert into notice (
-		userId
+		id
+		, userId
 		, title
 		, content
 		, regDate
 		
 		) values (
 		
-		'admin'
+		3
+		, 22
 		, #{title}
 		, #{content}
-		, #{regDate}
+		, sysdate
 		)
 </insert>
 
 	
 	<!-- 모든 글 조회 -->
-	<select id="noticeList" resultType="com.gi.osc.bean.NoticeDTO">
-		select * from notice
+	<select id="getNoticeList" resultType="com.gi.osc.bean.NoticeDTO">
+		select * from notice order by regDate DESC
 	</select>
 
 </mapper>
-

@@ -1,7 +1,6 @@
 package com.gi.osc.bean;
 
 import java.util.Date;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,9 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class NoticeDTO {
 	//  글번호
-    private int id;
+    private long id;
     
-    private String userid;
+    private int userId;
     //  제목
     private String title;
     //  내용
@@ -23,6 +22,15 @@ public class NoticeDTO {
     //  작성일
     private Date regDate;
  
- 
+   
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userid) {
+        this.userId = userid;
+    }
+
+    private String detailUrl;
 
 }
