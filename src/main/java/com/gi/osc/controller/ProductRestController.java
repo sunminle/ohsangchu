@@ -101,7 +101,7 @@ public class ProductRestController {
 									@RequestParam("content") String content,
 									@RequestParam("postingId") int postingId,
 									@RequestParam("point") float point,
-									@RequestParam("img") MultipartFile img) {
+									@RequestParam(value="img", required = false) MultipartFile img) {
 
 		Map<String, Object> result = new HashMap<>();
 		
@@ -112,7 +112,7 @@ public class ProductRestController {
 		
 		//DB INSERT: 해당 유저 넘버로 저장
 		int row = reviewService.addReview(userId,content,postingId,point,img);
-		
+		System.out.println("리뷰 "+row+"개 작성완료!");
 		
 		if(row > 0) {
 			result.put("code", 1);
