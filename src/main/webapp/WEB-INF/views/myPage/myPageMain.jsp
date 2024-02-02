@@ -1,10 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="/resources/js/jquery-3.7.1.min.js"></script>
+<style>
+    table {
+        width: 50%;
+        border-collapse: collapse;
+        margin: 20px auto;
+    }
 
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        position: relative;
+        font-size: 14px; /* 테이블 셀의 기본 폰트 크기 설정 */
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .number {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: bold;
+        font-size: 14px; /* 숫자의 폰트 크기 설정 */
+        color: #555;
+    }
+</style>
 <script>
-	$(function(){
+	/* $(function(){
 		$("#modifyInfo").click(function(){
 			$.ajax({
 				url : "/my/modifyMe",
@@ -83,7 +112,7 @@
 			});
 		});
 	});
-	
+	*/
 	$(function(){
 		$("#chattingList").click(function(){
 			$.ajax({
@@ -93,9 +122,9 @@
 				}
 			});
 		});
-	});
+	}); 
 	
-	$(document).on("click", "#myProductPagination a", function(e){
+	/* $(document).on("click", "#myProductPagination a", function(e){
 	    e.preventDefault();
 	    var pageNum = $(this).attr("href").split("pageNum=")[1];
 	    $.ajax({
@@ -104,63 +133,17 @@
 	            $("#modify").html(e);
 	        }
 	    });
-	});
+	}); */
 	
 	
 	
 </script>
 
-<style>
-        body {
-            background-color: #f4f4f4;
-            font-family: 'Arial', sans-serif;
-        }
 
-        #container {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            max-width: 1200px;
-            margin: 50px auto;
-        }
-
-        #buttonContainer {
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 15px;
-            width: 30%;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        }
-
-        #modify {
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 15px;
-            width: 68%;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        }
-
-        button {
-            display: block;
-            width: 100%;
-            margin-bottom: 20px;
-            padding: 15px;
-            border: none;
-            background-color: #5cb85c;
-            color: #ffffff;
-            font-size: 18px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #4cae4c;
-        }
-    </style>
 <!--favicon-->
 <link rel="icon" href="/resources/images/site/leaf-solid.png">
 <!-- css -->
+<link href="/resources/css/myPage.css" rel="stylesheet">
 <link href="/resources/css/include.css" rel="stylesheet">
 <!-- bootstrap:css -->
 <link
@@ -176,22 +159,58 @@
 		<div id="container">
             <div id="buttonContainer">
             	계정 정보<br/>
-				<button id="modifyInfo">정보수정</button>
+				<button onclick="window.location='/my/modifyMe'">정보수정</button>
 				판매자<br/>
-				<button id="modifyStoreInfo">상점정보수정</button>
-				<button id="myProduct">구매자 관리</button>
+				<button onclick="window.location='/my/modifyStore'">상점정보수정</button>
+				<button onclick="window.location='/my/myProduct'">구매자 관리</button>
 				<button onclick="window.location='/my/addProduct'">상품등록</button>
 				리뷰<br/>
-				<button id="reviewAll">리뷰 관리</button>
+				<button onclick="window.location='/my/reviewAll'">리뷰 관리</button>
 				Q&A<br/>
-				<button id="myQNA">문의 내역</button>
+				<button onclick="window.location='/my/myQNA'">문의 내역</button>
 				구매자<br/>
-				<button id="myBuyList">구매목록</button>
-				<button id="HS">찜,구독 목록</button>
+				<button onclick="window.location='/my/myBuyList'">구매목록</button>
+				<button onclick="window.location='/my/HSList'">찜,구독 목록</button>
 				채팅<br/>
 				<button id="chattingList">채팅</button>
 			</div>
-			<div id="modify"></div>
+			<div id="modify">
+				<h5>최근주문내역</h5>
+				<table>
+				<tr>
+				<th>썸네일</th>
+				<th>포스팅</th>
+				<th>주문날짜</th>
+				</tr>
+				<c:forEach var = "recentList" items = "${recentPaymentList}">
+				<tr>
+				<td>
+				<img src = "/resources/images/posting/${recentList.thumnail}" width = "80">
+				</td>
+				<td>
+				<a href = "/product/detail?postNum=${recentList.id}">${recentList.title}</a>
+				</td>
+				<td>
+				<fmt:formatDate value="${recentList.orderDate}" pattern="yyyy-MM-dd HH:mm" />
+				</td>
+				<tr/>
+				
+				</c:forEach>
+				</table>
+				<br/>
+				<br/>
+				<a href = "/my/reviewAll">리뷰 관리</a>
+				<table border="1">
+				<tr>
+				<th>나의 리뷰</th>
+				<th>받은 리뷰</th>
+				</tr>
+				<tr>
+				<td><span class="number">${myReviewCount}</span></td>
+				<td><span class="number">${getReviewCount}</span></td>
+				</tr>
+				</table>
+			</div>
 		</div>
 	</center>
 </c:if>

@@ -64,8 +64,6 @@
 		작성일 : <fmt:formatDate value="${myReview.regDate}"
 				pattern="yyyy-MM-dd HH:mm" />
 		<br />
-		<input type="button" value="수정"
-			onclick="window.location='/my/myReviewUpdate?reviewNum=${myReview.id}'">
 		<input type="button" value="삭제" onclick="deleteChk(${myReview.id});">
 		<hr>
 	</c:forEach>
