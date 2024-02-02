@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gi.osc.bean.AlarmDTO;
+import com.gi.osc.bean.DeliveryTypeDTO;
+import com.gi.osc.bean.DeliveryTypePostingDTO;
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.HashtagPostingDTO;
 import com.gi.osc.bean.PaymentDTO;
@@ -51,5 +53,8 @@ public interface MyPageService {
 	public void addHashtag(HashtagDTO hashtagDTO, HashtagPostingDTO hashtagPostingDTO, String hashtag);
 	public int addReviewAnswer(ReviewAnswerDTO reviewAnswerDTO);
 	public int selectReviewAnswerCount(int reviewId);
-	
+	public List<PostingDTO> selectRecentPayment(int userId);
+	public int myReviewCount(int userId);
+	public int getReviewCount(String realId);
+	public void addDeliveryType(DeliveryTypeDTO deliveryTypeDTO, DeliveryTypePostingDTO deliveryTypePostingDTO, String deliveryTypeName,String deliveryTypePrice);
 }

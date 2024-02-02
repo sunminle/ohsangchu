@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.gi.osc.bean.AlarmDTO;
+import com.gi.osc.bean.DeliveryTypeDTO;
+import com.gi.osc.bean.DeliveryTypePostingDTO;
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.HashtagPostingDTO;
 import com.gi.osc.bean.PaymentDTO;
@@ -59,6 +61,10 @@ public interface MyPageMapper {
 	public int selectHashtagId(String hashtag);
 	public int addReviewAnswer(ReviewAnswerDTO reviewAnswerDTO);
 	public int selectReviewAnswerCount(int reviewId);
-	
+	public List<PostingDTO> selectRecentPayment(int userId);
+	public int deliveryTypeNameChk(String deliveryTypeName);
+	public void addDeliveryType(DeliveryTypeDTO deliveryTypeDTO);
+	public void addDeliveryTypePosting(DeliveryTypePostingDTO deliveryTypePostingDTO);
+	public int selectDeliveryTypeId(String deliveryTypeName);
 
 }

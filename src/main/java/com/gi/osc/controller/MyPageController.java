@@ -27,6 +27,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gi.osc.bean.DeliveryTypeDTO;
+import com.gi.osc.bean.DeliveryTypePostingDTO;
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.HashtagPostingDTO;
 import com.gi.osc.bean.PaymentDTO;
@@ -56,11 +58,19 @@ public class MyPageController {
 	@Autowired
 	private ReviewAnswerDTO reviewAnswerDTO;
 	
+	@Autowired
+	private DeliveryTypePostingDTO deliveryTypePostingDTO;
+	
+	@Autowired
+	private DeliveryTypeDTO deliveryTypeDTO;
+	
 	@RequestMapping("addProduct")
 	public String addProduct(Model model, HttpSession session) {
+		if (session.getAttribute("usersId") != null) {
 		String realId = (String) session.getAttribute("usersId");
 		int storeCount = service.storeCount(service.selectUsers(realId).getId());
 		model.addAttribute("storeCount",storeCount);
+		}
 		return "product/addProduct";
 	}
 
@@ -68,7 +78,11 @@ public class MyPageController {
 	public String addProductPro(HttpServletRequest request,@RequestParam("quantity") int [] quantity, 
 			@RequestParam("price")int[] price, @RequestParam("product")String [] product,ProductDTO productDTO, PostingDTO postingDTO, Model model, 
 			HttpSession session,@RequestParam(value = "fileName", required = false) String[] fileName, @RequestParam(value = "thumnails", required = false) MultipartFile thumnails
-			, @RequestParam(value = "hashtag", required = false) String[] hashtag ) {
+			, @RequestParam(value = "hashtag", required = false) String[] hashtag 
+			,@RequestParam(value = "deliveryTypeName" ,required = false) String[] deliveryTypeName
+			,@RequestParam(value = "deliveryTypePrice" ,required = false) String[] deliveryTypePrice
+			) {
+		if (session.getAttribute("usersId") != null) {
 		String realId = (String) session.getAttribute("usersId");
 		postingDTO.setRealId(realId);
 		postingDTO.setContent(postingDTO.getContent().replace("src=\"/resources/summernoteImage/", "src=\"/resources/images/posting/"));
@@ -107,6 +121,25 @@ public class MyPageController {
 			service.addHashtag(hashtagDTO, hashtagPostingDTO, hashtag[i]);
 		}
 		}
+		
+		 deliveryTypePostingDTO.setPostingId(postingDTO.getId());
+		 
+		 for(String s : deliveryTypePrice) {
+				System.out.println("deliveryPrice======="+s);
+				}
+		 
+		 if(deliveryTypeName != null && deliveryTypeName.length>0) {
+			 for(int i = 0; i < deliveryTypeName.length; i++) {
+				 service.addDeliveryType(deliveryTypeDTO, deliveryTypePostingDTO, deliveryTypeName[i],deliveryTypePrice[i]);
+			 }
+			 
+		 }
+		
+		
+		}
+		for(String s : deliveryTypeName) {
+		System.out.println("deliveryType======="+s);
+		}
 		return "product/addProductPro";
 	}
 
@@ -141,24 +174,35 @@ public class MyPageController {
 		if (session.getAttribute("usersId") != null) {
 			String realId = (String) session.getAttribute("usersId");
 			UsersDTO usersDTO = service.selectUsers(realId);
+			
+			List<PostingDTO> recentPaymentList = service.selectRecentPayment(usersDTO.getId());
+			
+			int myReviewCount = service.myReviewCount(usersDTO.getId());
+			int getReviewCount = service.getReviewCount(realId);
 			model.addAttribute("users", usersDTO);
+			model.addAttribute("recentPaymentList",recentPaymentList);
+			model.addAttribute("myReviewCount",myReviewCount);
+			model.addAttribute("getReviewCount",getReviewCount);
 		}
 		return "myPage/myPageMain";
 	}
 
 	@RequestMapping("modifyMe")
 	public String modifyMe(HttpSession session, Model model) {
+		if(session.getAttribute("usersId") != null) {
 		String realId = (String) session.getAttribute("usersId");
 		UsersDTO usersDTO = service.selectUsers(realId);
 		int userId = usersDTO.getId();
 		UserInfoDTO userInfoDTO = service.selectUsersInfo(userId);
 		model.addAttribute("usersDTO", usersDTO);
 		model.addAttribute("userInfoDTO", userInfoDTO);
+		}
 		return "myPage/modifyMe";
 	}
 
 	@RequestMapping("modifyStore")
 	public String modifyStore(HttpSession session, Model model) {
+		if(session.getAttribute("usersId") != null) {
 		String realId = (String) session.getAttribute("usersId");
 		UsersDTO usersDTO = service.selectUsers(realId);
 		int userId = usersDTO.getId();
@@ -166,6 +210,8 @@ public class MyPageController {
 		StoreDTO storeDTO = service.selectStoreInfo(userId);
 		model.addAttribute("storeDTO", storeDTO);
 		model.addAttribute("storeCount",storeCount);
+		model.addAttribute("usersDTO",usersDTO);
+		}
 		return "myPage/modifyStore";
 	}
 	
@@ -183,9 +229,14 @@ public class MyPageController {
 	
 
 	@RequestMapping("nickCheck")
-	public @ResponseBody ResponseEntity<String> nickCheck(String nickname) {
+	public @ResponseBody ResponseEntity<String> nickCheck(String nickname, HttpSession session) {
+		String realId = (String) session.getAttribute("usersId");
+		String realNickname = service.selectUsers(realId).getNickname();
 		int count = service.nickCheck(nickname);
 		String check = "0";
+		if(nickname.equals(realNickname)) {
+			check = "1";
+		}
 		if(count == 0) {
 			check = "1";
 		}
@@ -203,9 +254,15 @@ public class MyPageController {
 	}
 
 	@RequestMapping("storeNameCheck")
-	public @ResponseBody ResponseEntity<String> storeNameCheck(String storeName) {
+	public @ResponseBody ResponseEntity<String> storeNameCheck(String storeName,HttpSession session) {
+		String realId = (String) session.getAttribute("usersId");
+		int userId = service.selectUsers(realId).getId();
 		int count = service.storeNameCheck(storeName);
 		String check = "0";
+		String realStoreName = service.selectStoreInfo(userId).getStoreName();
+		if(storeName.equals(realStoreName)) {
+			check = "1";
+		}
 		if(count == 0) {
 			check = "1";
 		}
@@ -220,23 +277,30 @@ public class MyPageController {
 	}
 
 	@RequestMapping("reviewAll")
-	public String reviewAll() {
+	public String reviewAll(HttpSession session, Model model) {
+		if (session.getAttribute("usersId") != null) {
+			String realId = (String) session.getAttribute("usersId");
+			UsersDTO usersDTO = service.selectUsers(realId);
+			model.addAttribute("users", usersDTO);
+		}
 		return "myPage/reviewAll";
 	}
 
 	@RequestMapping("myReview")
 	public String myReview(HttpSession session, Model model,@RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
+		if(session.getAttribute("usersId") != null) {
 		String realId = (String) session.getAttribute("usersId");
 		service.myReview(realId, pageNum, model);
-		
+		}
 		return "myPage/myReview";
 	}
 
 	@RequestMapping("getReview")
 	public String getReview(HttpSession session, Model model,@RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
+		if(session.getAttribute("usersId") != null) {
 		String realId = (String) session.getAttribute("usersId");
 		service.getReview(realId, pageNum, model);
-		
+		}
 		return "myPage/getReview";
 	}
 
@@ -246,27 +310,30 @@ public class MyPageController {
 		return "myPage/myReviewUpdate";
 	}
 
-	@RequestMapping("myReviewDelete")
-	public String myReviewDelete(@RequestParam("reviewNum") int reviewNum) {
-		service.myReviewDelete(reviewNum);
-		return "myPage/myReviewDelete";
-	}
 
 	@RequestMapping("myQNA")
 	public String myQNA(HttpSession session, Model model, @RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
+		if(session.getAttribute("usersId") != null) {
 		String realId = (String) session.getAttribute("usersId");
+		UsersDTO usersDTO = service.selectUsers(realId);
+		model.addAttribute("users", usersDTO);
 		service.myQNA(realId, pageNum, model);
+		}
 		return "myPage/myQNA";
 	}
 	
 	@RequestMapping("myProduct")
 	public String myProduct(HttpSession session, Model model, @RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
+		if(session.getAttribute("usersId") != null) {
 		String realId = (String) session.getAttribute("usersId");
+		UsersDTO usersDTO = service.selectUsers(realId);
+		model.addAttribute("users", usersDTO);
 		int storeCount = service.storeCount(service.selectUsers(realId).getId());
 		if(storeCount > 0) {
 		service.postingList(realId, pageNum, model);
 		}
 		model.addAttribute("storeCount",storeCount);
+		}
 		return "myPage/myProduct";
 	}
 	
@@ -282,27 +349,40 @@ public class MyPageController {
 	
 	@RequestMapping("myBuyList")
 	public String myBuyList(HttpSession session, Model model, @RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
+		if(session.getAttribute("usersId") != null) {
 		String realId = (String) session.getAttribute("usersId");
 		service.myBuyList(realId, pageNum, model);
+		UsersDTO usersDTO = service.selectUsers(realId);
+		model.addAttribute("users", usersDTO);
+		}
 		return "myPage/myBuyList";
 	}
 	
 	@RequestMapping("HSList")
-	public String HSList() {
+	public String HSList(HttpSession session, Model model) {
+		if (session.getAttribute("usersId") != null) {
+			String realId = (String) session.getAttribute("usersId");
+			UsersDTO usersDTO = service.selectUsers(realId);
+			model.addAttribute("users", usersDTO);
+		}
 		return "myPage/HSList";
 	}
 	
 	@RequestMapping("heartList")
 	public String heartList(Model model, HttpSession session, @RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
+		if(session.getAttribute("usersId") != null) {
 		String realId = (String) session.getAttribute("usersId");
 		service.myHeartList(realId, pageNum, model);
+		}
 		return "myPage/heartList";
 	}
 	
 	@RequestMapping("subscribeList")
 	public String subscribeList(Model model, HttpSession session, @RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
+		if(session.getAttribute("usersId") != null) {
 		String realId = (String) session.getAttribute("usersId");
 		service.mySubscribeList(realId, pageNum, model);
+		}
 		return "myPage/subscribeList";
 	}
 	
@@ -327,6 +407,15 @@ public class MyPageController {
 		
 		JsonNode responseJson = objectMapper.createObjectNode()
                 .put("tag", tag)
+                .put("responseCode", "success");
+        return ResponseEntity.ok(responseJson);
+	}
+	
+	@RequestMapping("addDeliveryType")
+	public ResponseEntity<JsonNode> addDeliveryType(@RequestParam("type") String type) {
+		ObjectMapper objectMapper = new ObjectMapper();
+		JsonNode responseJson = objectMapper.createObjectNode()
+                .put("type", type)
                 .put("responseCode", "success");
         return ResponseEntity.ok(responseJson);
 	}
@@ -375,4 +464,8 @@ public class MyPageController {
 		return new ResponseEntity<>(count, HttpStatus.OK);
 	}
 	
+	@RequestMapping("test")
+	public String test() {
+		return "myPage/test";
+	}
 }

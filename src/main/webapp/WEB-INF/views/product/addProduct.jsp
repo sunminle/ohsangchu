@@ -27,13 +27,32 @@
 		border-radius: 10px;
 		color: #000;
 		}
-
+	
+	ul li.type-item {
+		padding: 4px 8px;
+		border: solid 1px #dddd;
+		border-radius: 10px;
+		color: #000;
+		}
+	
 	.tag-item:hover {
+		background-color: #dddd;
+		color: gray;
+		}
+		
+	.type-item:hover {
 		background-color: #dddd;
 		color: gray;
 		}
 
 	.del-btn {
+		font-size: 12px;
+		font-weight: bold;
+		cursor: pointer;
+		margin-left: 8px;
+		}
+		
+		.DeliveryDel-btn {
 		font-size: 12px;
 		font-weight: bold;
 		cursor: pointer;
@@ -136,6 +155,104 @@
 			e.preventDefault();
 			}
 		})
+		
+		
+		
+		
+		//배달 방식
+	var typeCounter = 0;
+	var typePriceCounter = 0;
+	function addType(value1,value2) {
+		type[typeCounter] = value1; // 태그를 Object 안에 추가
+		typeCounter++; // counter 증가 삭제를 위한 del-btn 의 고유 id 가 된다.
+		types.push(value1);   //태그값을 tags에 넣기
+		
+		typePrice[typePriceCounter] = value2;
+		typePriceCounter++;
+		typePrices.push(value2);
+    };
+    //서버에 넘길때 tag값들을 array type 으로 
+	function marginType() {
+		return Object.values(type).filter(function (word1) {
+			return word1 !== "";
+		});
+	};
+	
+	function marginTypePrice() {
+		return Object.values(typePrice).filter(function (word2) {
+			return word2 !== "";
+		});
+	};
+	
+	var selfType ;
+	var typeValue ;
+	var types = [];
+	var selfTypePrice ;
+	var typePriceValue ;
+	var typePrices = [];
+	$("#plusType").on("click", function () {
+		selfType = $("#type");
+		typeValue = selfType.val(); // 입력값
+		selfTypePrice = $("#typePrice");
+		typePriceValue = selfTypePrice.val();
+       //null값이아니라면
+		if (typeValue !== "" && typePriceValue != "") {
+			// 같은 태그가 있는지 검사, 해당값이 array 로 return
+			var result1 = Object.values(type).filter(function (word1) {
+				return word1 === typeValue;
+			});
+			var result2 = Object.values(typePrice).filter(function (word2) {
+				return word2 === typePriceValue;
+			});
+
+            // 태그 중복 검사
+			if (result1.length == 0) {
+       	   
+				$.ajax({
+					type: "POST",
+					url: "/my/addDeliveryType",  
+					data: { type: typeValue,
+							typePrice : typePriceValue},
+					success: function (response) {
+						console.log(response);
+						if(response.responseCode === "error"){
+							alert("오류.");
+						}else{
+						$("#type-list").append("<li class='type-item'>"
+						+ typeValue
+						+ "<span class='DeliveryDel-btn close-icon' idx='" + typeCounter + "'>X</span><input type = 'hidden' value = '" + typeValue + "' name = 'deliveryTypeName'/></li>"
+						+"<li class='type-item'>"
+						+ typePriceValue
+						+ "<span class='DeliveryDel-btn close-icon' idx='" + typePriceCounter + "'>X</span><input type = 'hidden' value = '" + typePriceValue + "' name = 'deliveryTypePrice'/></li>"
+						);
+						addType(typeValue,typePriceValue);
+						selfType.val("");
+						selfTypePrice.val("");
+						}
+					},
+					error: function (error) {
+						console.error(error);
+					}
+				});
+			}else{
+				alert("배달방식이 중복됩니다.");
+				}
+			}
+		}); 
+	
+	$("#type").on("keypress", function(e){
+		if(e.which === 13){
+			e.preventDefault();
+			}
+		})
+	
+	$("#typePrice").on("keypress", function(e){
+		if(e.which === 13){
+			e.preventDefault();
+			}
+		})	
+		
+		
 	});
 
 	function uploadSummernoteImageFile(file, editor) {
@@ -184,6 +301,14 @@
 		$(this).parent().remove();
 		tags.splice(index, 1);
 	});
+	
+	$(document).on("click", ".DeliveryDel-btn", function (e) {
+		var index = $(this).attr("idx");
+		var itemToRemove = $(this).parent();
+	    itemToRemove.prev().remove(); // 이전 형제 노드 (이름 또는 금액)
+	    itemToRemove.remove(); // 현재 노드 (x 버튼)
+	    tags.splice(index, 2); // 배열에서 이름과 금액 두 개의 요소 삭제
+	});
 
 	function validateForm() {
 		var title = document.forms["addProduct"]["title"].value;
@@ -214,7 +339,13 @@
         
         return true;
     }
-
+	
+	
+	
+	
+	
+	
+	
 </script>
 </head>
 <c:if test="${storeCount > 0}">
@@ -261,6 +392,21 @@
 			<input type="button" value="추가하기" id="plusTag">
 		</div>
 		<ul id="tag-list"></ul>
+		
+		<!-- 배달방식 추가 -->
+		<div class="m-2 d-flex align-items-center justify-content-center">
+			<div class="col-1">
+				<label for="type"></label><span style="width: 100px;">배달방식 입력<br/>ex)제주도,택배</span><br/>
+				<label for="type"></label><span style="width: 100px;">금액 입력(숫자만)</span>
+			</div>
+			<div class="col-2">
+				<input class=" form-control" type="text" id="type" size="20" /><br/>
+				<input class=" form-control" type="number" id="typePrice" size="20" />
+			</div>
+			<input type="button" value="추가하기" id="plusType">
+		</div>
+		<ul id="type-list"></ul>
+		
 		<input type="submit" value="등록하기">
 	</form>
 
@@ -269,7 +415,7 @@
 
 </center>
 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
-</c:if>
+</c:if> 
 
 <c:if test="${storeCount == 0 }">
 	<script>

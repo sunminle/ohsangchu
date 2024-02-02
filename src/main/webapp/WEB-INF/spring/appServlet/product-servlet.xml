@@ -16,4 +16,6 @@
 	<beans:bean id="alarmDTO" class="com.gi.osc.bean.AlarmDTO" />
 	<beans:bean id="onlineUsers" class="java.util.HashMap" />
 	<beans:bean id="reviewAnswerDTO" class="com.gi.osc.bean.ReviewAnswerDTO" />
+	<beans:bean id="deliveryTypeDTO" class="com.gi.osc.bean.DeliveryTypeDTO"/>
+	<beans:bean id="deliveryTypePostingDTO" class="com.gi.osc.bean.DeliveryTypePostingDTO" />
 </beans:beans>

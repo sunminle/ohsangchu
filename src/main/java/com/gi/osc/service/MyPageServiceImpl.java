@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gi.osc.bean.AlarmDTO;
+import com.gi.osc.bean.DeliveryTypeDTO;
+import com.gi.osc.bean.DeliveryTypePostingDTO;
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.HashtagPostingDTO;
 import com.gi.osc.bean.PaymentDTO;
@@ -468,7 +470,27 @@ public class MyPageServiceImpl implements MyPageService{
 		}
 		
 	}
-
+	
+	@Override
+	public void addDeliveryType(DeliveryTypeDTO deliveryTypeDTO, DeliveryTypePostingDTO deliveryTypePostingDTO,
+			String deliveryTypeName, String deliveryTypePrice) {
+		int chk = mapper.deliveryTypeNameChk(deliveryTypeName);
+		deliveryTypeDTO.setDeliveryTypeName(deliveryTypeName);
+		deliveryTypeDTO.setDeliveryTypePrice(Integer.valueOf(deliveryTypePrice));
+		int deliveryTypeId;
+		if(chk == 0) {
+			mapper.addDeliveryType(deliveryTypeDTO);
+			deliveryTypePostingDTO.setDeliveryTypeId(deliveryTypeDTO.getId());
+			mapper.addDeliveryTypePosting(deliveryTypePostingDTO);
+		}
+		else if(chk == 1) {
+			deliveryTypeId = mapper.selectDeliveryTypeId(deliveryTypeName);
+			deliveryTypePostingDTO.setDeliveryTypeId(deliveryTypeId);
+			mapper.addDeliveryTypePosting(deliveryTypePostingDTO);
+		}
+	}
+	
+	
 	@Override
 	public int addReviewAnswer(ReviewAnswerDTO reviewAnswerDTO) {
 		return mapper.addReviewAnswer(reviewAnswerDTO);
@@ -478,6 +500,23 @@ public class MyPageServiceImpl implements MyPageService{
 	public int selectReviewAnswerCount(int reviewId) {
 		return mapper.selectReviewAnswerCount(reviewId);
 	}
+
+	@Override
+	public List<PostingDTO> selectRecentPayment(int userId) {
+		return mapper.selectRecentPayment(userId);
+	}
+
+	@Override
+	public int myReviewCount(int userId) {
+		return mapper.myReviewCount(userId);
+	}
+
+	@Override
+	public int getReviewCount(String realId) {
+		return mapper.getReviewCount(realId);
+	}
+
+	
 
 	
 

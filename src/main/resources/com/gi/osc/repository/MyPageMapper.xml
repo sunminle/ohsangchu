@@ -265,4 +265,27 @@
 	select count(*) from review_answer where reviewid=#{reviewId}
 	</select>
 	
+	<select id="selectRecentPayment" resultType="com.gi.osc.bean.PostingDTO">
+		select p.*,pm.orderdate from posting p join payment pm on p.id = pm.postingid where pm.userid = #{userId} order by pm.orderdate desc
+	</select>
+	
+	<select id="deliveryTypeNameChk">
+		select count(*) from deliverytype where deliveryTypeName = #{deliveryTypeName}
+	</select>
+	
+	<insert id="addDeliveryType" parameterType="com.gi.osc.bean.DeliveryTypeDTO">
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+			select deliverytype_seq.currval from dual
+		</selectKey>
+		insert into deliverytype (deliveryTypeName,deliveryTypePrice) values (#{deliveryTypeName},#{deliveryTypePrice})
+	</insert>
+	
+	<insert id="addDeliveryTypePosting" parameterType="com.gi.osc.bean.DeliveryTypePostingDTO">
+		insert into deliverytype_posting (deliverytypeid,postingid) values (#{deliveryTypeId},#{postingId})
+	</insert>
+	
+	<select id="selectDeliveryTypeId">
+		select id from deliverytype where deliverytypeName = #{deliveryTypeName}
+	</select>
+	
 </mapper>
