@@ -46,14 +46,14 @@
 			select posting_seq.currval from dual
 		</selectKey>
 		insert into posting
-		(storeid,title,content,ispublic,categoryid
+		(storeid,title,content,ispublic,categoryid,paymenttype
 			<if test="thumnail != null and thumnail != ''">
 				,thumnail
 			</if>
 		)
 		values ((select id from store where userid = (select id from users
 		where realid = #{realId})),
-		#{title},#{content},#{isPublic},#{categoryId}
+		#{title},#{content},#{isPublic},#{categoryId},#{paymentType}
 			<if test="thumnail != null and thumnail != ''">
 				,#{thumnail}
 			</if>
