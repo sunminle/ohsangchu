@@ -131,7 +131,7 @@
 					success: function (response) {
 						console.log(response);
 						if(response.responseCode === "error"){
-							alert("특수문자는 포함할 수 없습니다.");
+							alert("특수문자,공백은 포함할 수 없습니다.");
 						}else{
 						$("#tag-list").append("<li class='tag-item'>#"
 						+ tagValue
@@ -223,7 +223,7 @@
 						+ "<span class='DeliveryDel-btn close-icon' idx='" + typeCounter + "'>X</span><input type = 'hidden' value = '" + typeValue + "' name = 'deliveryTypeName'/></li>"
 						+"<li class='type-item'>"
 						+ typePriceValue
-						+ "<span class='DeliveryDel-btn close-icon' idx='" + typePriceCounter + "'>X</span><input type = 'hidden' value = '" + typePriceValue + "' name = 'deliveryTypePrice'/></li>"
+						+ "원<span class='DeliveryDel-btn close-icon' idx='" + typePriceCounter + "'>X</span><input type = 'hidden' value = '" + typePriceValue + "' name = 'deliveryTypePrice'/></li>"
 						);
 						addType(typeValue,typePriceValue);
 						selfType.val("");
@@ -406,6 +406,13 @@
 			<input type="button" value="추가하기" id="plusType">
 		</div>
 		<ul id="type-list"></ul>
+		
+		
+		<!-- 결제방식 -->
+		<h5>결제방식</h5>
+		<input type="radio" name="paymentType" value="무통장 입금">무통장 입금<br>
+		<input type="radio" name="paymentType" value="카카오 페이">카카오 페이<br/><br/><br/>
+
 		
 		<input type="submit" value="등록하기">
 	</form>

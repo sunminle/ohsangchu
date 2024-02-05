@@ -81,10 +81,12 @@ public class MyPageController {
 			, @RequestParam(value = "hashtag", required = false) String[] hashtag 
 			,@RequestParam(value = "deliveryTypeName" ,required = false) String[] deliveryTypeName
 			,@RequestParam(value = "deliveryTypePrice" ,required = false) String[] deliveryTypePrice
+			,@RequestParam("paymentType") String paymentType
 			) {
 		if (session.getAttribute("usersId") != null) {
 		String realId = (String) session.getAttribute("usersId");
 		postingDTO.setRealId(realId);
+		postingDTO.setPaymentType(paymentType);
 		postingDTO.setContent(postingDTO.getContent().replace("src=\"/resources/summernoteImage/", "src=\"/resources/images/posting/"));
 		List<String> liveFileName = new ArrayList<String>();
 		String copyPath = request.getServletContext().getRealPath("/resources/summernoteImage/");

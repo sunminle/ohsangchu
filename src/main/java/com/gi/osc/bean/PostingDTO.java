@@ -14,6 +14,7 @@ public class PostingDTO {
 	private int categoryId;
 	private Date regDate;
 	private String thumnail;
+	private String paymentType;
 	// realId받아오기위해
 		private String realId;
 	
