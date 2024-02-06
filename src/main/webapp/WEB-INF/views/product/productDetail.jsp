@@ -276,7 +276,7 @@
 						<input type="radio" name="delievery" value="준등기"> 준등기 1800원
 					</div>
 					
-					<button type="submit" id="purchase" class="button btn"><b>주문하기</b></button>
+					<button type="submit" id="purchase" class="button btn" data-posting-id="${post.id}"><b>주문하기</b></button>
 				</div>
 			</div>
 			
@@ -307,33 +307,67 @@
 					
 			     	// 배송 방법 정보 추출
 			        var deliveryMethod = document.querySelector('input[name="delievery"]:checked').value;
+			     	
+			     	//포스팅넘버
+			     	var postNum = $("#purchase").data("posting-id");
 
-			        // Form Data 생성
-			        var formData = new FormData();
-			        formData.append('products', JSON.stringify(productsData));
-			        formData.append('deliveryMethod', deliveryMethod);
-			        
 			        
 			        console.log("상품목록 : "+productsData);
 			        console.log("배송방법 : "+deliveryMethod);
+			        console.log("포스터넘버 : "+postNum);
 			        
-			        var obj = {"products": productsData , "deliveryMethod": deliveryMethod};
+			        var formData = new FormData();
+			        formData.append("deliveryMethod", deliveryMethod);
+			        formData.append("postingId", postNum);
 			        
+			        productsData.forEach(function(product, index) {
+			            formData.append("products[" + index + "].productId", product.productId);
+			            formData.append("products[" + index + "].quantity", product.quantity);
+			        });
+			        
+			        /*
+			        var formData = {
+			        		"products": productsData ,
+			        		"deliveryMethod": deliveryMethod,
+			        		"postingId":postNum
+			        };
+			    
 			        //ajax
 			        $.ajax({
 			            type: 'POST',
 			            url: '/product/purchase',
-			            data: JSON.stringify(obj),
+			            data: JSON.stringify(formData),
 			            contentType : 'application/json; charset=utf-8',
 			            success: function(data) {
 			                // 성공 시의 처리
-			                console.log(data);
+			                console.log("리다이렉트!");
+			            	window.location.href = "/product/orderDetail";
 			            },
 			            error: function(error) {
 			                // 오류 시의 처리
 			                console.error(error);
 			            }
 			        });
+			        */
+			        
+			     	// form 생성 및 데이터 추가
+			        var form = document.createElement('form'); // form 태그 생성
+		            form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
+		            form.setAttribute('action', '/product/orderDetail'); // 전송할 url 지정
+		            form.style.display = 'none'; // 숨김 처리
+
+		         	// formData를 form에 추가
+		            for (var pair of formData.entries()) {
+		                var input = document.createElement('input');
+		                input.setAttribute('type', 'hidden');
+		                input.setAttribute('name', pair[0]);
+		                input.setAttribute('value', pair[1]);
+		                form.appendChild(input);
+		            }
+		            
+		         	// form을 body에 추가하고 제출
+				    document.body.appendChild(form);
+		            form.submit();
 			        
 				});
 			});

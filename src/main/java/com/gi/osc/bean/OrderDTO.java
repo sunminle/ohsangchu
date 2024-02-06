@@ -9,5 +9,6 @@ public class OrderDTO {
 	
 	private List<ProductData> products;
 	private String deliveryMethod;
+	private String postingId;
 
 }
