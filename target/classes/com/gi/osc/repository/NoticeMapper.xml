@@ -16,7 +16,7 @@
 		
 		) values (
 		
-		3
+		   notice_seq.nextval
 		, 22
 		, #{title}
 		, #{content}
@@ -29,5 +29,12 @@
 	<select id="getNoticeList" resultType="com.gi.osc.bean.NoticeDTO">
 		select * from notice order by regDate DESC
 	</select>
+	
+	<!-- 사용자 ID에 해당하는 데이터 가져오기 -->
+    <select id="getNoticeById"  resultType="com.gi.osc.bean.NoticeDTO">
+        SELECT * FROM notice WHERE id = #{id}
+    </select>
+    
+ 
 
 </mapper>

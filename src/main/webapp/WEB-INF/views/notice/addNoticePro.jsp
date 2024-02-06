@@ -8,7 +8,7 @@
 <script>
 	alert("공지사항이 등록되었습니다.");
 	
-	 location.href = "<c:url value='notice/noticeboard'/>"; // 공지메인페이지로
+	 location.href = "<c:url value='notice/noticeList'/>"; // 공지메인페이지로
 </script>
 
 </c:if>

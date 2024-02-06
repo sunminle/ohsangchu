@@ -36,7 +36,12 @@
   <a class="navbar-brand" href="#">Home</a>
   <a class="navbar-brand" href="#">Features</a>
   <a class="navbar-brand" href="#">Pricing</a>
-  <a class="navbar-brand" href="/notice/noticeList">Notice</a>
+  <c:if test="${usersId != null && usersId == 'admin'}">
+  	<a class="navbar-brand" href="/notice/noticeListAdmin">Notice</a>
+  </c:if>
+  <c:if test="${ usersId != 'admin'}">
+  	<a class="navbar-brand" href="/notice/noticeList">Notice</a>
+  </c:if>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
      

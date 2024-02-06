@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gi.osc.bean.NoticeDTO;
 import com.gi.osc.service.NoticeService;
@@ -32,20 +33,7 @@ public class NoticeController {
 	@Autowired
 	private NoticeServiceImpl serviceImpl;
 
-	@RequestMapping("noticeboard")
-	public String noticeboard() {
 
-		return "notice/noticeboard";
-	}
-	/*
-	 * @RequestMapping("addNotice") public String addNotice() {
-	 * 
-	 * return "notice/addNotice"; }
-	 * 
-	 * @RequestMapping("addNoticePro") public String addNoticePro() {
-	 * 
-	 * return "notice/addNoticePro"; }
-	 */
 
 	// 공지글 get
 	@RequestMapping(value = "/addNotice", method = RequestMethod.GET)
@@ -66,7 +54,7 @@ public class NoticeController {
 		        if (registrationSuccess) {
 		            // 글 등록 성공 시
 		            model.addAttribute("message", "Registration successful!");
-		            return "redirect:/notice/noticeboard"; // 공지글 메인으로 리다이렉트
+		            return "redirect:/notice/noticeList"; // 공지글 메인으로 리다이렉트
 		        } else {
 		            // 글 등록 실패 시
 		            model.addAttribute("error", "Registration failed. Please try again.");
@@ -102,13 +90,45 @@ public class NoticeController {
 	        return "notice/noticeList";
 	    }
 	  
+	  //공지글 리스트 _Admin용
+	  @GetMapping("/noticeListAdmin")
+	    public String noticeListAdmin(Model model) {
+	        List<NoticeDTO> noticeList = service.noticeList();
+	        
+	        // 각 공지사항의 detailUrl 설정
+	       // for (NoticeDTO notice : noticeListAdmin) {
+	      //      notice.setDetailUrl("/notice/detail/" + notice.getId());
+	      //  }
+
+	        model.addAttribute("noticeList", noticeList);
+	        return "notice/noticeListAdmin";
+	    }
+	  
 	    // 상세 페이지 매핑
 	    @GetMapping("/noticeDetail/{id}") // {id}는 실제 공지사항의 ID 값
-	    public String noticeDetail(@PathVariable("id") Long id, Model model) {
+	    public String noticeDetail(@PathVariable("id") long id, Model model) {
 	        // 공지사항 상세 정보를 가져와서 model에 추가
 	        NoticeDTO notice = service.getNoticeById(id);
 	        model.addAttribute("notice", notice);
 
 	        return "notice/noticeDetail"; 
 	    }
-}
+	    
+	    //공지 페이지 admin, 일반 분리
+	    @GetMapping("/checkRealId")
+	    public String checkRealId(@RequestParam("realId") String realId, Model model) {
+	        // Service 메서드 호출
+	        boolean checkRealId = service.checkRealId(realId);
+
+	        if (checkRealId) {
+	            // 사용자 realId가 'admin'일 경우 noticeListAdmin.jsp로 이동
+	            return "notice/noticeListAdmin";
+	        } else {
+	            // 다른 경우에는 noticeList.jsp로 이동 
+	            return "notice/noticeList";
+	        }
+	        
+	   
+
+	    
+}}
