@@ -20,4 +20,5 @@ public class PostingDTO {
 	
 	//payment 쓸때 주문날짜 받아오기 위해
 		private Date orderDate;
+		private int reviewCount;
 }

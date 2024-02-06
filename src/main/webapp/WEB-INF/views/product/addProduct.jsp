@@ -314,6 +314,7 @@
 		var title = document.forms["addProduct"]["title"].value;
         var content = document.forms["addProduct"]["content"].value;
         var productGroups = document.querySelectorAll('.productGroup');
+        var selectedPaymentType = document.querySelector('input[name="paymentType"]:checked');
         for (var i = 0; i < productGroups.length; i++) {
             var product = productGroups[i].querySelector('input[name="product"]').value;
             var quantity = productGroups[i].querySelector('input[name="quantity"]').value;
@@ -333,6 +334,11 @@
         
         if (content === "") {
             alert("내용을 작성하세요.");
+            return false;
+        }
+        
+        if (!selectedPaymentType) {
+            alert("결제방식을 선택하세요.");
             return false;
         }
         
@@ -378,8 +384,10 @@
 			<option value="0">비공개</option>
 			<option value="1">공개</option>
 		</select> <br /> 카테고리 : <select name="categoryId">
-			<option value="100">전자기기</option>
-			<option value="200">학용품</option>
+			<c:forEach var = "cat" items = "${catDTO}">
+			<option value="${cat.id}">${cat.categoryName}</option>
+			</c:forEach>
+			
 		</select> <br />
 		<!-- 태그추가 -->
 		<div class="m-2 d-flex align-items-center justify-content-center">

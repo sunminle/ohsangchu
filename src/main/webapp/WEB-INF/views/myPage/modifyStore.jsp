@@ -57,7 +57,8 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 <c:if test="${sessionScope.usersId != null}">
 	<center>
-		<a style="color: green;">${usersDTO.nickname}</a>님의 마이페이지.<br />
+		<br/>
+		<a href = "/my/myPageMain" style="color: green;">${usersDTO.nickname}</a>님의 마이페이지.<br />
 
 		<div id="container">
 			<div id="buttonContainer">

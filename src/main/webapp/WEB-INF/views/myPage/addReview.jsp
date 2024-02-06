@@ -156,7 +156,8 @@ function addReview(){
 	var postingId=document.getElementById('postingId').value;
 	var des=$('#description').val();
 	var point = selectedRating;	
-    
+	var reviewCount=document.getElementById('reviewCount').value;
+	
 	console.log(file);
 	console.log("후기 : "+des+", img : "+file+", userId : "+userId+", postingId : "+postingId+", point : "+point);
 	
@@ -166,8 +167,13 @@ function addReview(){
 	formData.append("userId", userId);
 	formData.append("postingId", postingId);
 	formData.append("point", point);
-	
+	if(reviewCount > 0){
+		alert("이미 후기를 작성하셨습니다.");
+		$("#modal_addReview").modal('hide');
+		location.reload(true);
+	}
 	//데이터 저장 및 새로고침
+	else if(reviewCount == 0){
 	$.ajax({
 		type:"POST",
 		url : '/store/add_review',
@@ -194,6 +200,7 @@ function addReview(){
 			console.log("리뷰업로드 실패")
 		}
 	});
+	}
 	
 }
 

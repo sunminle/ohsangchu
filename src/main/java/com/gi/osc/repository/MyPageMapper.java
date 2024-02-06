@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.gi.osc.bean.AlarmDTO;
+import com.gi.osc.bean.CategoryDTO;
 import com.gi.osc.bean.DeliveryTypeDTO;
 import com.gi.osc.bean.DeliveryTypePostingDTO;
 import com.gi.osc.bean.HashtagDTO;
@@ -66,5 +67,5 @@ public interface MyPageMapper {
 	public void addDeliveryType(DeliveryTypeDTO deliveryTypeDTO);
 	public void addDeliveryTypePosting(DeliveryTypePostingDTO deliveryTypePostingDTO);
 	public int selectDeliveryTypeId(String deliveryTypeName);
-
+	public List<CategoryDTO> selectCategoryAll();
 }

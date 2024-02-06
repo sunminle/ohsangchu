@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gi.osc.bean.CategoryDTO;
 import com.gi.osc.bean.DeliveryTypeDTO;
 import com.gi.osc.bean.DeliveryTypePostingDTO;
 import com.gi.osc.bean.HashtagDTO;
@@ -69,7 +70,9 @@ public class MyPageController {
 		if (session.getAttribute("usersId") != null) {
 		String realId = (String) session.getAttribute("usersId");
 		int storeCount = service.storeCount(service.selectUsers(realId).getId());
+		List<CategoryDTO> catDTO = service.selectCategoryAll();
 		model.addAttribute("storeCount",storeCount);
+		model.addAttribute("catDTO",catDTO);
 		}
 		return "product/addProduct";
 	}
@@ -126,9 +129,7 @@ public class MyPageController {
 		
 		 deliveryTypePostingDTO.setPostingId(postingDTO.getId());
 		 
-		 for(String s : deliveryTypePrice) {
-				System.out.println("deliveryPrice======="+s);
-				}
+		 
 		 
 		 if(deliveryTypeName != null && deliveryTypeName.length>0) {
 			 for(int i = 0; i < deliveryTypeName.length; i++) {
@@ -139,9 +140,7 @@ public class MyPageController {
 		
 		
 		}
-		for(String s : deliveryTypeName) {
-		System.out.println("deliveryType======="+s);
-		}
+		
 		return "product/addProductPro";
 	}
 
@@ -306,10 +305,10 @@ public class MyPageController {
 		return "myPage/getReview";
 	}
 
-	@RequestMapping("myReviewUpdate")
+	@RequestMapping("myReviewDelete")
 	public String myReviewUpdate(@RequestParam("reviewNum") int reviewNum, Model model) {
-		model.addAttribute("reviewNum", reviewNum);
-		return "myPage/myReviewUpdate";
+		service.myReviewDelete(reviewNum);
+		return "myPage/myReviewDelete";
 	}
 
 
@@ -469,5 +468,24 @@ public class MyPageController {
 	@RequestMapping("test")
 	public String test() {
 		return "myPage/test";
+	}
+	
+	@RequestMapping("orderDetail")
+	public String orderDetail( Model model) {
+		String productName; int quantity; String deliveryTypeName; int price;
+		productName = "감귤1박스";
+		quantity = 5;
+		deliveryTypeName = "반값택배";
+		price = 50000;
+		model.addAttribute("productName",productName);
+		model.addAttribute("quantity",quantity);
+		model.addAttribute("deliveryTypeName",deliveryTypeName);
+		model.addAttribute("price",price);
+		return "myPage/orderDetail";
+	}
+	
+	@RequestMapping("orderSuccess")
+	public String orderSuccess() {
+		return "myPage/orderSuccess";
 	}
 }
