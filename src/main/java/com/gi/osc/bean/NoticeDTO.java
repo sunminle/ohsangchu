@@ -33,4 +33,10 @@ public class NoticeDTO {
 
     private String detailUrl;
 
+
+	public NoticeDTO orElse(Object object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

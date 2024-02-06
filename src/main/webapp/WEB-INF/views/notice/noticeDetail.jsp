@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>공지사항 상세 페이지</title>
+    <title>Notice Detail</title>
 </head>
 <body>
 
 <h2>공지사항 상세 페이지</h2>
 
-<c:out value="${notice.title}"/>
-<br>
-<c:out value="${notice.content}"/>
+<!-- Thymeleaf 템플릿을 사용하여 notice 객체의 title과 content를 출력 -->
+<p th:text="${notice.title}">${notice.title}</p>
+<p th:text="${notice.content}">${notice.content}</p>
 
 </body>
 </html>

@@ -33,10 +33,10 @@ public class NoticeServiceImpl implements NoticeService{
        }
    }
 	
+	// 공지사항 목록 _ 일반 user
 	@Override
 	public List<NoticeDTO> noticeList() {
 	    try {
-	        // 데이터베이스에서 공지사항 목록 조회
 	        List<NoticeDTO> noticeList = mapper.getNoticeList();
 	        return noticeList;
 	    } catch (Exception e) {
@@ -45,17 +45,31 @@ public class NoticeServiceImpl implements NoticeService{
 
 	    }
 	}
+	 // 공지사항 목록 _ admin
+		@Override
+		public List<NoticeDTO> noticeListAdmin() {
+			  try {
+			        List<NoticeDTO> noticeList = mapper.getNoticeList();
+			        return noticeList;
+			    } catch (Exception e) {
+			        // 예외 처리 로직 추가
+			        throw e;
 
-	@Override
-	public NoticeDTO getNoticeById(Long id) {
-	
-		return mapper.getNoticeById(id);
-	}
+			    }
+		}
+		
+	private final NoticeMapper noticeMapper;
 
+    @Autowired
+    public NoticeServiceImpl(NoticeMapper noticeMapper) {
+        this.noticeMapper = noticeMapper;
+    }
 
+    @Override
+    public NoticeDTO getNoticeById(Long id) {
+        return noticeMapper.getNoticeById(id);
+    }
 
-
-	
 
 
 	
