@@ -240,11 +240,11 @@
 			
 			<!-- 구매탭 -->
 			<div id="buy" class="d-flex justify-content-center">
-				<form action="#" method="get">
+				<div>
 					<b>- 주문 상품 선택<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">  <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1"/></svg></b>
 					
 					<c:forEach var="prod" items="${pList}" varStatus="">
-						<div class="products" class="d-flex justify-content-center align-items-center">
+						<div class="products" class="d-flex justify-content-center align-items-center" data-product-id="${prod.id}">
 						${prod.productName}(<fmt:formatNumber type="number" maxFractionDigits="3" value="${prod.price}" />원/개)
 						<c:if test="${post.isPublic == 1}">
 							<span class="text-secondary"><small>(남은 수량:${prod.quantity})</small></span>
@@ -271,31 +271,80 @@
 					<b>- 배송 방법 선택<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">  <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1"/></svg></b>
 					
 					<div id="delievery" class="d-flex justify-content-center align-items-center">
-						<input type="radio" name="chk_info" value="HTML"> 일반택배 3500원
-						<input type="radio" name="chk_info" value="CSS" checked="checked"> 반값택배 1800원
-						<input type="radio" name="chk_info" value="웹디자인"> 준등기 1800원
+						<input type="radio" name="delievery" value="일반택배"> 일반택배 3500원
+						<input type="radio" name="delievery" value="반값택배" checked="checked"> 반값택배 1800원
+						<input type="radio" name="delievery" value="준등기"> 준등기 1800원
 					</div>
 					
-					<button type="button" id="purchase" class="button btn">구 매</button>
-				</form>
+					<button type="submit" id="purchase" class="button btn"><b>주문하기</b></button>
+				</div>
 			</div>
 			
-			<script type="text/javascript">
+			<script type="text/javascript">		
+			
+			//주문
 			$(document).ready(function() {
 				$("#purchase").on("click",function(){
 					console.log("구매");
 					
-					//버튼의 형제(products)의 자식요소(product)들 가져오기
+					// products 정보 추출
+			        var productsData = [];
+			        var productElements = document.getElementsByClassName('products');
+			        for (var i = 0; i < productElements.length; i++) {
+			        	var productId = productElements[i].getAttribute('data-product-id');
+			            var quantity = 0;
+
+			            if (productElements[i].querySelector('.result')) {
+			                quantity = parseInt(productElements[i].querySelector('.result').value);
+			            }
+
+			            productsData.push({
+			                productId: productId,
+			                quantity: quantity
+			            });
+			            //console.log(productId+","+quantity)
+			        }
 					
-					
+			     	// 배송 방법 정보 추출
+			        var deliveryMethod = document.querySelector('input[name="delievery"]:checked').value;
+
+			        // Form Data 생성
+			        var formData = new FormData();
+			        formData.append('products', JSON.stringify(productsData));
+			        formData.append('deliveryMethod', deliveryMethod);
+			        
+			        
+			        console.log("상품목록 : "+productsData);
+			        console.log("배송방법 : "+deliveryMethod);
+			        
+			        var obj = {"products": productsData , "deliveryMethod": deliveryMethod};
+			        
+			        //ajax
+			        $.ajax({
+			            type: 'POST',
+			            url: '/product/purchase',
+			            data: JSON.stringify(obj),
+			            contentType : 'application/json; charset=utf-8',
+			            success: function(data) {
+			                // 성공 시의 처리
+			                console.log(data);
+			            },
+			            error: function(error) {
+			                // 오류 시의 처리
+			                console.error(error);
+			            }
+			        });
+			        
 				});
 			});
 			
-			$(function(){
+			//수량 유효성 검사
+			$(document).ready(function() {
 				$(".result").on('keyup', function(e) {
-				  	var v = this.value;
-					var qtt = e.target.parentNode.dataset.qtt;
-					//console.log(qtt);
+				  	var v = parseInt(this.value);
+					var qtt = parseInt(e.target.parentNode.dataset.qtt);
+					console.log(v);
+					console.log(qtt);
 					
 					if(v > qtt){
 					 alert('남은 수량 이상 입력할수 없습니다!');
@@ -305,6 +354,7 @@
 				});
 			});
 			
+			//+
 			$(".plus ").click(function(){
 				var clicked = $(this).parent();
 				var qtt = clicked.data('qtt');
@@ -324,10 +374,10 @@
 					number = parseInt(number) + 1;
 					result.val(number);
 				}
-				
 				result.html(number);
 			});
-						
+			
+			//-
 			$(".minus ").click(function(){
 				var clicked = $(this).parent();
 				console.log("- : "+clicked.data('product-id'));
@@ -344,9 +394,9 @@
 					number = parseInt(number) - 1;
 					result.val(number);
 				}
-				
 				result.html(number);
 			});
+			
 			</script>
 				
 				

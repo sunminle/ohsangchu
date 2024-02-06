@@ -1,6 +1,9 @@
 package com.gi.osc.controller;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,11 +12,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gi.osc.bean.HashtagDTO;
+import com.gi.osc.bean.OrderDTO;
 import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.ProductDTO;
+import com.gi.osc.bean.ProductData;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.bean.UsersDTO;
@@ -141,4 +149,19 @@ public class ProductController {
 		return "product/store";
 	}
 	
+	
+	@PostMapping("purchase")
+	@ResponseBody
+	public String purchase(@RequestBody OrderDTO dto) {
+		
+        System.out.println(dto.getDeliveryMethod());
+        //System.out.println(dto.getProducts().get(0).get("productId"));
+        System.out.println(dto.getProducts().get(0).getProductId());
+		
+		return "/product/purchase";
+	}
+	
 }
+
+
+
