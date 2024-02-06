@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gi.osc.bean.AlarmDTO;
+import com.gi.osc.bean.CategoryDTO;
 import com.gi.osc.bean.DeliveryTypeDTO;
 import com.gi.osc.bean.DeliveryTypePostingDTO;
 import com.gi.osc.bean.HashtagDTO;
@@ -57,4 +58,5 @@ public interface MyPageService {
 	public int myReviewCount(int userId);
 	public int getReviewCount(String realId);
 	public void addDeliveryType(DeliveryTypeDTO deliveryTypeDTO, DeliveryTypePostingDTO deliveryTypePostingDTO, String deliveryTypeName,String deliveryTypePrice);
+	public List<CategoryDTO> selectCategoryAll();
 }

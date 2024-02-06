@@ -185,7 +185,7 @@
 	
 	<select id="myBuyList" resultType="com.gi.osc.bean.PostingDTO">
 		<![CDATA[
-		select * from (select a.*, rownum r from 
+		select * from (select a.*, rownum r, (select count(*)from review r where r.postingid = a.id and userid = (select id from users where realid = #{realId})) as reviewCount from 
 		(select p.*,pm.orderdate from 
 		posting p join payment pm on p.id = pm.postingid join users u on pm.userid = u.id 
 		where u.realid = #{realId} order by pm.id desc)a) where r >= #{start} and r <= #{end}
@@ -286,6 +286,10 @@
 	
 	<select id="selectDeliveryTypeId">
 		select id from deliverytype where deliverytypeName = #{deliveryTypeName}
+	</select>
+	
+	<select id="selectCategoryAll" resultType="com.gi.osc.bean.CategoryDTO">
+		select * from category
 	</select>
 	
 </mapper>
