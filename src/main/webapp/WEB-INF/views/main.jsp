@@ -7,7 +7,12 @@
 <meta charset="UTF-8">
 <title>OSangChu</title>
 
-<script language="javascript" src="/resources/js/script.js"></script>
+
+
+<!-- 부트스트랩 JS 및 Popper.js, jQuery 추가 -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
 <!-- bootstrap:css -->
@@ -29,34 +34,169 @@
 	<!-- /header -->
 	
 	
-	<nav class="navbar">
-	
-  <div class="container-fluid">
-  <a class="navbar-brand" href="#"><b class="green">Navbar</b></a>
-  <a class="navbar-brand" href="#">Home</a>
-  <a class="navbar-brand" href="#">Features</a>
-  <a class="navbar-brand" href="#">Pricing</a>
-  <c:if test="${usersId != null && usersId == 'admin'}">
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+         <c:if test="${usersId != null && usersId == 'admin'}">
   	<a class="navbar-brand" href="/notice/noticeListAdmin">Notice</a>
   </c:if>
   <c:if test="${ usersId != 'admin'}">
   	<a class="navbar-brand" href="/notice/noticeList">Notice</a>
   </c:if>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-     
-    </button>
-  </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                 <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+       식품
+    </a>
+    <ul class="dropdown-menu">
+        <!-- 각 카테고리에 대한 메뉴 아이템 -->
+        <c:forEach items="${categories}" var="category">
+            <c:choose>
+                <c:when test="${category.id ge 100 and category.id lt 200}">
+                    <!-- 각 카테고리에 대한 폼 -->
+                    <li>
+                        <form action="/main/view" method="get">
+                            <!-- hidden input을 사용하여 카테고리 아이디 전달 -->
+                            <input type="hidden" name="categoryId" value="${category.id}">
+                            <!-- 실제로 클릭되는 링크 -->
+                            <button type="submit" class="dropdown-item">${category.categoryName}</button>
+                        </form>
+                    </li>
+                </c:when>
+            </c:choose>
+        </c:forEach>
+    </ul>
+</li>
+               
+           <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+       패션
+    </a>
+    <ul class="dropdown-menu">
+        <!-- 각 카테고리에 대한 메뉴 아이템 -->
+        <c:forEach items="${categories}" var="category">
+            <c:choose>
+                <c:when test="${category.id ge 200 and category.id lt 300}">
+                    <!-- 각 카테고리에 대한 폼 -->
+                    <li>
+                        <form action="/main/view" method="get">
+                            <!-- hidden input을 사용하여 카테고리 아이디 전달 -->
+                            <input type="hidden" name="categoryId" value="${category.id}">
+                            <!-- 실제로 클릭되는 링크 -->
+                            <button type="submit" class="dropdown-item">${category.categoryName}</button>
+                        </form>
+                    </li>
+                </c:when>
+            </c:choose>
+        </c:forEach>
+    </ul>
+</li>
+                
+                 <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+       홈데코
+    </a>
+    <ul class="dropdown-menu">
+        <!-- 각 카테고리에 대한 메뉴 아이템 -->
+        <c:forEach items="${categories}" var="category">
+            <c:choose>
+                <c:when test="${category.id ge 300 and category.id lt 400}">
+                    <!-- 각 카테고리에 대한 폼 -->
+                    <li>
+                        <form action="/main/view" method="get">
+                            <!-- hidden input을 사용하여 카테고리 아이디 전달 -->
+                            <input type="hidden" name="categoryId" value="${category.id}">
+                            <!-- 실제로 클릭되는 링크 -->
+                            <button type="submit" class="dropdown-item">${category.categoryName}</button>
+                        </form>
+                    </li>
+                </c:when>
+            </c:choose>
+        </c:forEach>
+    </ul>
+</li>
+            
+            <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+       케이스/문구
+    </a>
+    <ul class="dropdown-menu">
+        <!-- 각 카테고리에 대한 메뉴 아이템 -->
+        <c:forEach items="${categories}" var="category">
+            <c:choose>
+                <c:when test="${category.id ge 400 and category.id lt 500}">
+                    <!-- 각 카테고리에 대한 폼 -->
+                    <li>
+                        <form action="/main/view" method="get">
+                            <!-- hidden input을 사용하여 카테고리 아이디 전달 -->
+                            <input type="hidden" name="categoryId" value="${category.id}">
+                            <!-- 실제로 클릭되는 링크 -->
+                            <button type="submit" class="dropdown-item">${category.categoryName}</button>
+                        </form>
+                    </li>
+                </c:when>
+            </c:choose>
+        </c:forEach>
+    </ul>
+</li>
+                       
+            <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+       뷰티
+    </a>
+    <ul class="dropdown-menu">
+        <!-- 각 카테고리에 대한 메뉴 아이템 -->
+        <c:forEach items="${categories}" var="category">
+            <c:choose>
+                <c:when test="${category.id ge 500 and category.id lt 600}">
+                    <!-- 각 카테고리에 대한 폼 -->
+                    <li>
+                        <form action="/main/view" method="get">
+                            <!-- hidden input을 사용하여 카테고리 아이디 전달 -->
+                            <input type="hidden" name="categoryId" value="${category.id}">
+                            <!-- 실제로 클릭되는 링크 -->
+                            <button type="submit" class="dropdown-item">${category.categoryName}</button>
+                        </form>
+                    </li>
+                </c:when>
+            </c:choose>
+        </c:forEach>
+    </ul>
+</li>
+            
+            <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+       공예
+    </a>
+    <ul class="dropdown-menu">
+        <!-- 각 카테고리에 대한 메뉴 아이템 -->
+        <c:forEach items="${categories}" var="category">
+            <c:choose>
+                <c:when test="${category.id ge 600}">
+                    <!-- 각 카테고리에 대한 폼 -->
+                    <li>
+                        <form action="/main/view" method="get">
+                            <!-- hidden input을 사용하여 카테고리 아이디 전달 -->
+                            <input type="hidden" name="categoryId" value="${category.id}">
+                            <!-- 실제로 클릭되는 링크 -->
+                            <button type="submit" class="dropdown-item">${category.categoryName}</button>
+                        </form>
+                    </li>
+                </c:when>
+            </c:choose>
+        </c:forEach>
+    </ul>
+</li>
+            
+            </ul>
+            
+        </div>
+    </div>
 </nav>
-	<div class="collapse" id="navbarToggleExternalContent" data-bs-theme="">
-  <div class="p-4">
-    <ul class="navbar-nav d-flex justify-content-between">
-					<li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Features</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
-				</ul>
-  </div>
-</div>
 
 
 	<section class="mb-8">

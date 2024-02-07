@@ -71,8 +71,23 @@
 		    </where>
 		</select>
 
+	<select id="getCategoriesByRange" resultType="com.gi.osc.bean.CategoryDTO">
+        SELECT c.categoryName, p.title, p.thumnail, p.id, p.categoryId
+        FROM category c
+        JOIN posting p ON c.id = p.categoryId
+        WHERE c.ID BETWEEN 100 AND 699
+    </select>
 
-
+		<select id="getCategories" resultType="com.gi.osc.bean.CategoryDTO">
+			select * from category
+		</select>
+		
+		<select id="getPostingsByCategoryId" resultType="com.gi.osc.bean.PostingDTO" parameterType="Long">
+		    SELECT p.id, p.title, p.thumnail
+		    FROM posting p
+		    JOIN category c ON p.categoryId = c.id
+		    WHERE c.id = #{categoryId}
+		</select>
 
 
 
