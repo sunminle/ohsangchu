@@ -76,24 +76,56 @@
 			<form action="/users/registerPro" method="post">
 	<h3>JOIN</h3><br><br><br>
 				<div class="input-box">
-					<input id="realId" type="text" name="realId" placeholder="아이디">
-					<label for="realId">아이디</label>
+					<input id="realId" type="text" name="realId" placeholder="아이디"  style="color: blue;">
+					<label for="realId">ID</label>
 				</div>
 
 				<div class="input-box">
 					<input id="userName" type="text" name="userName" placeholder="이름">
-					<label for="userName">이 름</label>
+					<label for="userName">NAME</label>
 				</div>
 
 				<div class="input-box">
 					<input id="userPw" type="text" name="userPw" placeholder="패스워드">
-					<label for="userPw">패스워드</label>
+					<label for="userPw">PASSWORD</label>
 				</div>
 
 				<div class="input-box">
 					<input id="nickname" type="text" name="nickname" placeholder="닉네임">
-					<label for="nickname">닉네임</label>
+					<label for="nickname">NICKNAME</label>
 				</div>
+				
+				<div class="input-box">
+					<input id="tel" type="text" name="tel" placeholder="전화번호">
+					<label for="tel">TEL</label>
+				</div>
+				
+				<div class="input-box">
+					<input id="email" type="text" name="email" placeholder="이메일">
+					<label for="email">EMAIL</label>
+				</div>
+				
+				<div class="input-box">
+					<input id="address" type="text" name="address" placeholder="주소">
+					<label for="address">ADDRESS</label>
+				</div>
+				
+				<div class="input-box">
+					<input id="bank" type="text" name="bank" placeholder="은행">
+					<label for="bank">BANKNAME</label>
+				</div>
+				
+				<div class="input-box">
+					<input id="account" type="text" name="account" placeholder="계좌">
+					<label for="account">ACCOUNT</label>
+				</div>
+				
+				<div class="input-box">
+					<input id="birth" type="number" name="birth" placeholder="생년월일">
+					<label for="birth">BIRTH</label>
+				</div>
+				
+			
 
 				<div class="form-group has-feedback">
 					<input type="submit" id="submit" value="회원가입">

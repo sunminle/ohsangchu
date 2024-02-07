@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gi.osc.repository.QnaMapper">
+
+
+	<!-- 글 등록 -->
+	<insert id="addQna" parameterType="com.gi.osc.bean.QNADTO">
+		insert into qna (
+		id
+		, userId
+		, title
+		, content
+		, regDate
+		
+		) values (
+		
+		   qna_seq.nextval
+		, 22
+		, #{title}
+		, #{content}
+		, sysdate
+		)
+</insert>
+
+	
+	<!-- 모든 글 조회 -->
+	<select id="getQnaList" resultType="com.gi.osc.bean.QNADTO">
+		select * from qna order by regDate DESC
+	</select>
+	
+	<!-- 사용자 ID에 해당하는 데이터 가져오기 -->
+    <select id="getQnaById"  resultType="com.gi.osc.bean.QNADTO">
+        SELECT * FROM qna WHERE id = #{id}
+    </select>
+    
+ 
+
+</mapper>

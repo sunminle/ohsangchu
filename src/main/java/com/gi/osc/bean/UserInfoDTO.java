@@ -10,5 +10,6 @@ public class UserInfoDTO {
 	private String address;
 	private String bankName;
 	private String account;
+	private String birth;
 	private int social;
 }

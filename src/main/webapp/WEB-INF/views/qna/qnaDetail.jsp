@@ -40,32 +40,33 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 <!-- /header -->
 
-<title>noticeDetail</title>
+<title>qnaDetail</title>
 </head>
 <body>
-	<form id="addNotice">
+	<form id="addqna">
 		<div class="page-wrapper">
 			<div class="container-fluid">
 
 				<!--게시판 넓이 -->
 				<div class="col-lg-12">
-					<h1 class="page-header">Notice</h1>
+					<h1 class="page-header">qna</h1>
 				</div>
 				
 				<br>
 				<div class="panel panel-default">
-					<div class="panel-heading">작성일 : <td><fmt:formatDate value="${notice.regDate}" pattern="yy.MM.dd aa hh:mm" /></td></div>
+					<div class="panel-heading">작성일 : <td><fmt:formatDate value="${qna.regDate}" pattern="yy.MM.dd aa hh:mm" /></td></div>
+					
 					<div class="panel-body">
 						<table class="table table-hover">
 							
 							
 								<tr>
-									<p th:text="${notice.title}"><h3>${notice.title}</h3></p>
+									<p th:text="${qna.title}"><h3>${qna.title}</h3></p>
 									
 								</tr>
 						<hr><br>
 								<tr>
-									<p th:text="${notice.content}">${notice.content}</p>
+									<p th:text="${qna.content}">${qna.content}</p>
 								</tr>
 						
 							

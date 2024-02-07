@@ -40,40 +40,42 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 <!-- /header -->
 
-<title>noticeDetail</title>
+<title>qnaListAdmin</title>
 </head>
 <body>
-	<form id="addNotice">
+	<form id="addqna">
 		<div class="page-wrapper">
 			<div class="container-fluid">
 
 				<!--게시판 넓이 -->
 				<div class="col-lg-12">
-					<h1 class="page-header">Notice</h1>
+					<h1 class="page-header">QnA</h1>
 				</div>
-				
+			
 				<br>
 				<div class="panel panel-default">
-					<div class="panel-heading">작성일 : <td><fmt:formatDate value="${notice.regDate}" pattern="yy.MM.dd aa hh:mm" /></td></div>
+					<div class="panel-heading">QnA</div>
 					<div class="panel-body">
 						<table class="table table-hover">
-							
-							
+							<thead>
 								<tr>
-									<p th:text="${notice.title}"><h3>${notice.title}</h3></p>
-									
+									<th>No.</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>작성일</th>
 								</tr>
-						<hr><br>
-								<tr>
-									<p th:text="${notice.content}">${notice.content}</p>
-								</tr>
-						
-							
-							
-						
-						
+							</thead>
+							 <c:forEach var="qna" items="${qnaList}">
           
-							
+							<tbody>
+								<tr>
+									<td>${qna.id}</td>
+									<td><a href="qnaDetail/${qna.id}">${qna.title}</td>
+									<td>${qna.userId}</td>
+									<td><fmt:formatDate value="${qna.regDate}" pattern="yy.MM.dd aa hh:mm" /></td>
+								</tr>
+							</tbody>
+							</c:forEach>
 							
 						</table>
 					</div>

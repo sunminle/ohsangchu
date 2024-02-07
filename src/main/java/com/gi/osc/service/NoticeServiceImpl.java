@@ -70,6 +70,12 @@ public class NoticeServiceImpl implements NoticeService{
         return noticeMapper.getNoticeById(id);
     }
 
+	@Override
+	public void updateNotice(NoticeDTO noticeDTO) {
+		// 공지사항 수정
+		
+	}
+
 
 
 	
