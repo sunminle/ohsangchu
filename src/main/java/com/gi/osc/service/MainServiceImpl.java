@@ -1,13 +1,16 @@
 package com.gi.osc.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gi.osc.bean.CategoryDTO;
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.HashtagPostingDTO;
 import com.gi.osc.bean.PaymentDTO;
+import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.ProductDTO;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.repository.MainMapper;
@@ -39,6 +42,23 @@ public class MainServiceImpl implements MainService {
 	public List<HashtagDTO> searchHashtagByName(String searchKeyword) {
 		// TODO Auto-generated method stub
 		return mapper.searchHashtagByName(searchKeyword);
+	}
+
+	 @Override
+	    public List<CategoryDTO> getCategoriesByRange() {
+	        return mapper.getCategoriesByRange();
+	    }
+
+	@Override
+	public List<CategoryDTO> getCategories() {
+		// TODO Auto-generated method stub
+		 return mapper.getCategories();
+	}
+
+	@Override
+	public List<PostingDTO> getPostingsByCategoryId(Long categoryId) {
+		// TODO Auto-generated method stub
+		return mapper.getPostingsByCategoryId(categoryId);
 	}
 
 
