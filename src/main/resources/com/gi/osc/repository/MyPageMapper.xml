@@ -180,7 +180,7 @@
 	</select>
 	
 	<select id="myBuyListCount">
-		select count(*) from posting p join payment pm on p.id = pm.postingid join users u on pm.userid = u.id where u.realid = #{realId}
+		select count(*) from posting p join payment pm on p.id = pm.postingid join users u on pm.userid = u.id where u.realid = #{realId} and pm.status != 0
 	</select>
 	
 	<select id="myBuyList" resultType="com.gi.osc.bean.PostingDTO">
@@ -188,9 +188,24 @@
 		select * from (select a.*, rownum r, (select count(*)from review r where r.postingid = a.id and userid = (select id from users where realid = #{realId})) as reviewCount from 
 		(select p.*,pm.orderdate from 
 		posting p join payment pm on p.id = pm.postingid join users u on pm.userid = u.id 
-		where u.realid = #{realId} order by pm.id desc)a) where r >= #{start} and r <= #{end}
+		where u.realid = #{realId} and pm.status !=0 order by pm.id desc)a) where r >= #{start} and r <= #{end}
 		]]>
 	</select>
+	
+	<select id="myOrderListCount">
+		select count(*) from posting p join payment pm on p.id = pm.postingid join users u on pm.userid = u.id where u.realid = #{realId} and pm.status = 0
+	</select>
+	
+	<select id="myOrderList">
+		<![CDATA[
+		select * from (select a.*, rownum r, (select count(*)from review r where r.postingid = a.id and userid = (select id from users where realid = #{realId})) as reviewCount from 
+		(select p.*,pm.orderdate from 
+		posting p join payment pm on p.id = pm.postingid join users u on pm.userid = u.id 
+		where u.realid = #{realId} and pm.status = 0 order by pm.id desc)a) where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+	
+	
 	
 	<select id="myHeartListCount">
 		select count(*) from posting p join heart h on p.id=h.postingid join users u on h.userid = u.id where u.realid = #{realId} order by h.id desc

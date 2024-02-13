@@ -42,7 +42,6 @@
 				<tr>
 					<th>순번</th>
 					<th>닉네임</th>
-					<th>수량</th>
 					<th>주소</th>
 					<th>입금방식</th>
 					<th>주문상태</th>
@@ -54,7 +53,6 @@
 					<tr>
 						<td align="center">${i.index+1}</td>
 						<td>${payment.nickname}</td>
-						<td align="center">${payment.amount}</td>
 						<td>${payment.address}</td>
 						<td>${payment.paymentType}</td>
 						<c:if test="${payment.status == 0}">

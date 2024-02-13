@@ -38,17 +38,18 @@
 		
 		<div id="container">
             <div id="buttonContainer">
-            	계정 정보<br/>
+            	🔒계정 정보🔒<br/>
 				<button onclick="window.location='/my/modifyMe'">정보수정</button>
-				판매자<br/>
+				👨‍💼판매자👨‍💼<br/>
 				<button onclick="window.location='/my/modifyStore'">상점정보수정</button>
 				<button onclick="window.location='/my/myProduct'">구매자 관리</button>
 				<button onclick="window.location='/my/addProduct'">상품등록</button>
-				리뷰<br/>
+				🗨리뷰🗨<br/>
 				<button onclick="window.location='/my/reviewAll'">리뷰 관리</button>
-				Q&A<br/>
+				❓Q&A❓<br/>
 				<button onclick="window.location='/my/myQNA'">문의 내역</button>
-				구매자<br/>
+				🙍‍♂️구매자🙍‍♂️<br/>
+				<button onclick="window.location='/my/myOrderList'">주문목록</button>
 				<button onclick="window.location='/my/myBuyList'">구매목록</button>
 				<button onclick="window.location='/my/HSList'">찜,구독 목록</button>
 				채팅<br/>

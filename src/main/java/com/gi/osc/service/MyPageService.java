@@ -59,4 +59,5 @@ public interface MyPageService {
 	public int getReviewCount(String realId);
 	public void addDeliveryType(DeliveryTypeDTO deliveryTypeDTO, DeliveryTypePostingDTO deliveryTypePostingDTO, String deliveryTypeName,String deliveryTypePrice);
 	public List<CategoryDTO> selectCategoryAll();
+	public void myOrderList(String realId,int pageNum, Model model);
 }
