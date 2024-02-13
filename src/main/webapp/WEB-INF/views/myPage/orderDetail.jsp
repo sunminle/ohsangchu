@@ -99,7 +99,7 @@ $(document).ready(function () {
         주문목록
     </div>
 
-    <form action="/my/orderSuccess" method="post">
+    <form action="/my/orderSuccessPro" method="post">
     	<c:forEach var = "productDetail" items = "${productDetail}">
         <div class="form-group">
             <label for="productName">상품명:${productDetail.productName}</label>
