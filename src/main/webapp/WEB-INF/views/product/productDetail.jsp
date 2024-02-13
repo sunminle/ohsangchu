@@ -269,11 +269,10 @@
 					</c:forEach>
 					
 					<b>- 배송 방법 선택<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">  <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1"/></svg></b>
-					
 					<div id="delievery" class="d-flex justify-content-center align-items-center">
-						<input type="radio" name="delievery" value="일반택배"> 일반택배 3500원
-						<input type="radio" name="delievery" value="반값택배" checked="checked"> 반값택배 1800원
-						<input type="radio" name="delievery" value="준등기"> 준등기 1800원
+						<c:forEach var="deli" items="${post.deliveryType}">
+							<input type="radio" name="delievery" value="${deli.deliveryTypeId }"> ${deli.deliveryTypeName} ${deli.deliveryTypePrice }원
+						</c:forEach>
 					</div>
 					
 					<button type="submit" id="purchase" class="button btn" data-posting-id="${post.id}"><b>주문하기</b></button>
@@ -285,6 +284,13 @@
 			//주문
 			$(document).ready(function() {
 				$("#purchase").on("click",function(){
+					//유효성검사
+					//배송타입 체크 안되어 있을시
+					if ($("input[name=delievery]:radio:checked").length < 1) {
+				    	alert("배송방법을 선택하세요");
+				    	return false;
+				  	}
+				
 					console.log("구매");
 					
 					// products 정보 추출
@@ -306,18 +312,18 @@
 			        }
 					
 			     	// 배송 방법 정보 추출
-			        var deliveryMethod = document.querySelector('input[name="delievery"]:checked').value;
+			        var deliveryTypeId = document.querySelector('input[name="delievery"]:checked').value;
 			     	
 			     	//포스팅넘버
 			     	var postNum = $("#purchase").data("posting-id");
 
 			        
 			        console.log("상품목록 : "+productsData);
-			        console.log("배송방법 : "+deliveryMethod);
+			        console.log("배송방법 : "+deliveryTypeId);
 			        console.log("포스터넘버 : "+postNum);
 			        
 			        var formData = new FormData();
-			        formData.append("deliveryMethod", deliveryMethod);
+			        formData.append("deliveryMethod", deliveryTypeId);
 			        formData.append("postingId", postNum);
 			        
 			        productsData.forEach(function(product, index) {

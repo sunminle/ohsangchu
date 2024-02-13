@@ -162,7 +162,13 @@ public class ProductController {
 	public String orderDetail(@ModelAttribute OrderDTO order, Model model){
 		
 		// 받은 데이터 처리
-        System.out.println(order);
+		System.out.println("===================================================");
+        System.out.println(order.getProducts());
+        System.out.println(order.getDeliveryTypeId());
+        System.out.println(order.getPostingId());
+        
+        
+        model.addAttribute("order", order);
 		
 		return "/product/orderDetail";
 	}

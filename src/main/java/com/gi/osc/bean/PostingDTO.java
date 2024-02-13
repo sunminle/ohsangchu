@@ -1,5 +1,6 @@
 package com.gi.osc.bean;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import lombok.Data;
@@ -15,6 +16,11 @@ public class PostingDTO {
 	private Date regDate;
 	private String thumnail;
 	private String paymentType;
+	
+	//배송방식
+	private ArrayList<DeliveryTypeDTO> deliveryType;
+	
+	
 	// realId받아오기위해
 		private String realId;
 	

@@ -8,7 +8,7 @@ import lombok.Data;
 public class OrderDTO {
 	
 	private List<ProductData> products;
-	private String deliveryMethod;
+	private String deliveryTypeId;
 	private String postingId;
 
 }

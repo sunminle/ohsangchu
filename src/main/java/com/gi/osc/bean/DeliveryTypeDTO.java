@@ -7,4 +7,7 @@ public class DeliveryTypeDTO {
 	private int id;
 	private String deliveryTypeName;
 	private int deliveryTypePrice;
+	
+	private int deliveryTypeId;
+	private int postingId;
 }
