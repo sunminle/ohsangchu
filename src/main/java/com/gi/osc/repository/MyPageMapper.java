@@ -12,6 +12,8 @@ import com.gi.osc.bean.DeliveryTypePostingDTO;
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.HashtagPostingDTO;
 import com.gi.osc.bean.PaymentDTO;
+import com.gi.osc.bean.PaymentEtcDTO;
+import com.gi.osc.bean.PaymentProductDTO;
 import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.PostingImgDTO;
 import com.gi.osc.bean.ProductDTO;
@@ -70,5 +72,11 @@ public interface MyPageMapper {
 	public List<CategoryDTO> selectCategoryAll();
 	public int myOrderListCount(String realId);
 	public List<PostingDTO> myOrderList(HashMap pageMap);
+	public int selectCategoryIdPosting(int postingId);
+	public String selectPaymentTypePosting(int postingId);
+	public DeliveryTypeDTO selectDeliveryTypeInfo(int deliveryTypeId);
+	public void addPayment(PaymentDTO paymentDTO);
+	public void addPaymentEtc(PaymentEtcDTO paymentEtcDTO);
+	public void addPaymentProduct(PaymentProductDTO paymentProductDTO);
 	
 }

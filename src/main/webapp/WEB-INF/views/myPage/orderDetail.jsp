@@ -116,8 +116,17 @@ $(document).ready(function () {
         </c:forEach>
 
         <div class="form-group">
-            <label for="deliveryTypeName">배송 방법:${deliveryMethod}</label>
-            <input type = "hidden" name = "deliveryMethod" value = "${deliveryMethod}">
+            <label for="deliveryTypeName">배송 방법:${deliveryTypeDTO.deliveryTypeName}</label>
+            <label for="deliveryTypeName">배송 가격:${deliveryTypeDTO.deliveryTypePrice}</label>
+            <input type = "hidden" name = "deliveryTypeId" value = "${deliveryTypeId}">
+            <input type = "hidden" name = "postingId" value = "${postingId}">
+            <input type = "hidden" name = "categoryId" value = "${categoryId}">
+            <input type = "hidden" name = "paymentType" value = "${paymentType}">
+            <c:forEach var = "productData" items = "${productData}">
+            <input type = "hidden" name = "productId" value = "${productData.productId}">
+            <input type = "hidden" name = "amount" value = "${productData.quantity}">
+            
+            </c:forEach>
         </div>
 
        

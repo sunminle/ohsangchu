@@ -483,8 +483,11 @@ public class MyPageController {
 	@RequestMapping("orderDetail")
 	public String orderDetail(@ModelAttribute OrderDTO order, Model model) {
 		List<ProductData> productData = order.getProducts(); 
-		String deliveryMethod = order.getDeliveryMethod();
+		int deliveryTypeId = Integer.parseInt(order.getDeliveryTypeId());
 		int postingId = Integer.parseInt(order.getPostingId());
+		int categoryId = service.selectCategoryIdPosting(postingId);
+		String paymentType = service.selectPaymentTypePosting(postingId);
+		DeliveryTypeDTO deliveryTypeDTO = service.selectDeliveryTypeInfo(deliveryTypeId);
 		List<ProductDTO> productDetail = new ArrayList<ProductDTO>();
 		for(int i = 0; i <productData.size(); i++) {
 		productDTO = service.selectProductInfo(Integer.parseInt(productData.get(i).getProductId()));
@@ -493,18 +496,34 @@ public class MyPageController {
 		System.out.println("productDetailAfter================"+productDetail);
 		}
 		model.addAttribute("productDetail",productDetail);
-		model.addAttribute("deliveryMethod",deliveryMethod);
+		model.addAttribute("deliveryTypeId",deliveryTypeId);
 		model.addAttribute("postingId",postingId);
+		model.addAttribute("categoryId",categoryId);
+		model.addAttribute("paymentType",paymentType);
+		model.addAttribute("deliveryTypeDTO",deliveryTypeDTO);
+		model.addAttribute("productData",productData);
 		return "myPage/orderDetail";
 	}
 	
 	@RequestMapping("orderSuccess")
-	public String orderSuccess(String address1,String address2,PaymentDTO paymentDTO, PaymentEtcDTO paymentEtcDTO, PaymentProductDTO paymentProductDTO, Model model) {
+	public String orderSuccess(HttpSession session, String address1, String address2, PaymentDTO paymentDTO, PaymentEtcDTO paymentEtcDTO, PaymentProductDTO paymentProductDTO, Model model, String[] productId, String []amount) {
+		if(session.getAttribute("usersId") != null) {
+		String realId = (String) session.getAttribute("usersId");
+		int userId = service.selectUsers(realId).getId();
 		paymentDTO.setAddress(address1+" "+address2);
-		
-		model.addAttribute("paymentDTO",paymentDTO);
-		model.addAttribute("paymentEtcDTO",paymentEtcDTO);
-		model.addAttribute("paymentProductDTO",paymentProductDTO);
+		paymentDTO.setUserId(userId);
+		service.addPayment(paymentDTO);
+		paymentEtcDTO.setPaymentId(paymentDTO.getId());
+		paymentProductDTO.setPaymentId(paymentDTO.getId());
+		service.addPaymentEtc(paymentEtcDTO);
+		for(int i = 0; i <productId.length; i++) {
+			if(Integer.parseInt(amount[i])!=0) {
+				paymentProductDTO.setProductId(Integer.parseInt(productId[i]));
+				paymentProductDTO.setAmount(Integer.parseInt(amount[i]));
+				service.addPaymentProduct(paymentProductDTO);
+			}
+		}
+		}
 		return "myPage/orderSuccess";
 	}
 	

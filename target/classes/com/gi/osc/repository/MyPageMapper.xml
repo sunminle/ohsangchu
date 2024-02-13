@@ -39,7 +39,15 @@
 	<select id = "selectPostingInfo" resultType="com.gi.osc.bean.PostingDTO">
 		select * from posting where id = #{postingId}
 	</select>
-
+	
+	<select id="selectCategoryIdPosting">
+		select categoryid from posting where id = #{postingId}
+	</select>
+	
+	<select id="selectPaymentTypePosting">
+		select paymentType from posting where id = #{postingId}
+	</select>
+	
 	<insert id="addPosting"
 		parameterType="com.gi.osc.bean.PostingDTO">
 		<selectKey keyProperty="id" resultType="int" order="AFTER">
@@ -306,5 +314,32 @@
 	<select id="selectCategoryAll" resultType="com.gi.osc.bean.CategoryDTO">
 		select * from category
 	</select>
+	
+	<select id="selectDeliveryTypeInfo" resultType="com.gi.osc.bean.DeliveryTypeDTO">
+		select * from deliveryType where id = #{deliveryTypeId}
+	</select>
+	
+	<insert id="addPayment" parameterType="com.gi.osc.bean.PaymentDTO">
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+			select payment_seq.currval from dual
+		</selectKey>
+		insert into payment (userid,postingid,categoryid,address,paymenttype) values(#{userId},#{postingId},#{categoryId},#{address},#{paymentType})
+	</insert>
+	
+	<insert id="addPaymentEtc" parameterType="com.gi.osc.bean.PaymentEtcDTO">
+		insert into payment_etc (paymentid,deliverytypeid,gettername,gettertel,postcode,bankname,account,accountholder
+		<if test="note != null and note != ''">
+			,note
+		</if>
+		) values(#{paymentId},#{deliveryTypeId},#{getterName},#{getterTel},#{postCode},#{bankName},#{account},#{accountHolder}
+		<if test="note != null and note != ''">
+			,#{note}
+		</if>
+		)
+	</insert>
+	
+	<insert id="addPaymentProduct" parameterType="com.gi.osc.bean.PaymentProductDTO">
+		insert into payment_product (paymentid,productid,amount) values(#{paymentId},#{productId},#{amount})
+	</insert>
 	
 </mapper>
