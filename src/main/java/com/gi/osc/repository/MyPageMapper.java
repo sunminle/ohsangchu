@@ -68,4 +68,7 @@ public interface MyPageMapper {
 	public void addDeliveryTypePosting(DeliveryTypePostingDTO deliveryTypePostingDTO);
 	public int selectDeliveryTypeId(String deliveryTypeName);
 	public List<CategoryDTO> selectCategoryAll();
+	public int myOrderListCount(String realId);
+	public List<PostingDTO> myOrderList(HashMap pageMap);
+	
 }

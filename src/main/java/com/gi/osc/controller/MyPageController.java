@@ -13,11 +13,13 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,9 +34,13 @@ import com.gi.osc.bean.DeliveryTypeDTO;
 import com.gi.osc.bean.DeliveryTypePostingDTO;
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.HashtagPostingDTO;
+import com.gi.osc.bean.OrderDTO;
 import com.gi.osc.bean.PaymentDTO;
+import com.gi.osc.bean.PaymentEtcDTO;
+import com.gi.osc.bean.PaymentProductDTO;
 import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.ProductDTO;
+import com.gi.osc.bean.ProductData;
 import com.gi.osc.bean.QNADTO;
 import com.gi.osc.bean.ReviewAnswerDTO;
 import com.gi.osc.bean.ReviewDTO;
@@ -64,6 +70,10 @@ public class MyPageController {
 	
 	@Autowired
 	private DeliveryTypeDTO deliveryTypeDTO;
+	
+	@Autowired
+	private ProductDTO productDTO;
+	
 	
 	@RequestMapping("addProduct")
 	public String addProduct(Model model, HttpSession session) {
@@ -471,21 +481,41 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("orderDetail")
-	public String orderDetail( Model model) {
-		String productName; int quantity; String deliveryTypeName; int price;
-		productName = "감귤1박스";
-		quantity = 5;
-		deliveryTypeName = "반값택배";
-		price = 50000;
-		model.addAttribute("productName",productName);
-		model.addAttribute("quantity",quantity);
-		model.addAttribute("deliveryTypeName",deliveryTypeName);
-		model.addAttribute("price",price);
+	public String orderDetail(@ModelAttribute OrderDTO order, Model model) {
+		List<ProductData> productData = order.getProducts(); 
+		String deliveryMethod = order.getDeliveryMethod();
+		int postingId = Integer.parseInt(order.getPostingId());
+		List<ProductDTO> productDetail = new ArrayList<ProductDTO>();
+		for(int i = 0; i <productData.size(); i++) {
+		productDTO = service.selectProductInfo(Integer.parseInt(productData.get(i).getProductId()));
+		productDTO.setQuantity(Integer.parseInt(productData.get(i).getQuantity()));
+		productDetail.add(productDTO);
+		System.out.println("productDetailAfter================"+productDetail);
+		}
+		model.addAttribute("productDetail",productDetail);
+		model.addAttribute("deliveryMethod",deliveryMethod);
+		model.addAttribute("postingId",postingId);
 		return "myPage/orderDetail";
 	}
 	
 	@RequestMapping("orderSuccess")
-	public String orderSuccess() {
+	public String orderSuccess(String address1,String address2,PaymentDTO paymentDTO, PaymentEtcDTO paymentEtcDTO, PaymentProductDTO paymentProductDTO, Model model) {
+		paymentDTO.setAddress(address1+" "+address2);
+		
+		model.addAttribute("paymentDTO",paymentDTO);
+		model.addAttribute("paymentEtcDTO",paymentEtcDTO);
+		model.addAttribute("paymentProductDTO",paymentProductDTO);
 		return "myPage/orderSuccess";
+	}
+	
+	@RequestMapping("myOrderList")
+	public String myOrderList(HttpSession session, Model model, @RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
+		if (session.getAttribute("usersId") != null) {
+			String realId = (String) session.getAttribute("usersId");
+			UsersDTO usersDTO = service.selectUsers(realId);
+			service.myOrderList(realId, pageNum, model);
+			model.addAttribute("users", usersDTO);
+		}
+		return "myPage/myOrderList";
 	}
 }

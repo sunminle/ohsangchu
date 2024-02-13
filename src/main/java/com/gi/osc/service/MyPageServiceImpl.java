@@ -522,6 +522,40 @@ public class MyPageServiceImpl implements MyPageService{
 		return mapper.selectCategoryAll();
 	}
 
+	@Override
+	public void myOrderList(String realId, int pageNum, Model model) {
+		int pageSize = 10;
+		int startRow = (pageNum - 1) * pageSize + 1;
+		int endRow = pageNum * pageSize;
+		int count = mapper.myOrderListCount(realId);
+		
+		List<PostingDTO> list = Collections.EMPTY_LIST;
+		
+		if(count > 0) {
+			pageMap.put("start",startRow);
+			pageMap.put("end",endRow);
+			pageMap.put("realId",realId);
+			list = mapper.myOrderList(pageMap);
+		}
+		model.addAttribute("list",list);
+		model.addAttribute("count",count);
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("pageSize",pageSize);
+		
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		int startPage = (pageNum/10)*10+1;
+		int pageBlock = 10;
+		int endPage = startPage + pageBlock-1;
+		if (endPage > pageCount){
+			endPage = pageCount;
+		}
+		model.addAttribute("pageCount",pageCount);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("pageBlock",pageBlock);
+		model.addAttribute("endPage",endPage);
+		
+	}
+
 	
 
 	

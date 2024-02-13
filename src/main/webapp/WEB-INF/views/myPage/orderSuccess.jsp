@@ -17,4 +17,7 @@
 주문이 완료되었습니다!<br/>
 주문목록에서 결제를 진행해주세요.
 </center>
+${paymentDTO} <hr/>
+${paymentEtcDTO}<hr/>
+${paymentProductDTO}
 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
