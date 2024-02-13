@@ -505,8 +505,8 @@ public class MyPageController {
 		return "myPage/orderDetail";
 	}
 	
-	@RequestMapping("orderSuccess")
-	public String orderSuccess(HttpSession session, String address1, String address2, PaymentDTO paymentDTO, PaymentEtcDTO paymentEtcDTO, PaymentProductDTO paymentProductDTO, Model model, String[] productId, String []amount) {
+	@RequestMapping("orderSuccessPro")
+	public String orderSuccessPro(HttpSession session, String address1, String address2, PaymentDTO paymentDTO, PaymentEtcDTO paymentEtcDTO, PaymentProductDTO paymentProductDTO, Model model, String[] productId, String []amount) {
 		if(session.getAttribute("usersId") != null) {
 		String realId = (String) session.getAttribute("usersId");
 		int userId = service.selectUsers(realId).getId();
@@ -524,8 +524,14 @@ public class MyPageController {
 			}
 		}
 		}
+		return "redirect:/my/orderSuccess";
+	}
+	
+	@RequestMapping("orderSuccess")
+	public String orderSuccess() {
 		return "myPage/orderSuccess";
 	}
+	
 	
 	@RequestMapping("myOrderList")
 	public String myOrderList(HttpSession session, Model model, @RequestParam(value="pageNum", defaultValue = "1") int pageNum) {
