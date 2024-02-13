@@ -1,6 +1,8 @@
 package com.gi.osc.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gi.osc.bean.CategoryDTO;
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.HashtagPostingDTO;
 import com.gi.osc.bean.PaymentDTO;
@@ -32,6 +35,10 @@ public class MainController {
 	public String main(Model model) {
 	    List<PaymentDTO> popularProducts = service.countPopularProducts(1);
 	    model.addAttribute("popularProducts", popularProducts);
+	    
+	    List<CategoryDTO> categories = service.getCategories();
+        model.addAttribute("categories", categories);
+        
 	    return "main";
 	}
 
@@ -43,7 +50,15 @@ public class MainController {
 	}
 	
 	@GetMapping("/view")
-	public String view() {
+	public String view(@RequestParam("categoryId") Long categoryId, Model model) {
+	    List<PostingDTO> postings = service.getPostingsByCategoryId(categoryId);
+	    model.addAttribute("postings", postings);
+		
+		//List<CategoryDTO> category = service.getCategoriesByRange();
+        //model.addAttribute("category", category);
+        
+        //List<CategoryDTO> categories = service.getCategories();
+        //model.addAttribute("categories", categories);
 	    return "main/view";
 	}
 
