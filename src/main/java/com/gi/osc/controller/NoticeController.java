@@ -131,4 +131,15 @@ public class NoticeController {
 	   
 
 	    
-}}
+}
+	  /*  
+	    @PostMapping("/updateNotice")
+	    public String updateNotice(NoticeDTO noticeDTO) {
+	        service.updateNotice(noticeDTO);
+	        return "redirect:/noticeDetail?id=" + noticeDTO.getId(); // 수정된 공지사항을 확인할 페이지로 리다이렉트
+	    }
+
+*/
+
+
+}

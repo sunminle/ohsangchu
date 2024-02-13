@@ -26,6 +26,31 @@
 		, 'default.png'
 		
 		)
+		</insert>
+		
+		<insert id="registerUserInfo" parameterType="com.gi.osc.bean.UserInfoDTO">
+		insert into userInfo (
+		userId
+		, tel
+		, email
+		, address
+		, bankName
+		, account
+		, birth
+		, social
+		
+
+		) values (
+		userInfo_seq.nextval
+		, #{tel}
+		, #{email}
+		, #{address}
+		, #{bankName}
+		, #{account}
+		, #{birth}
+		, 1
+		
+		)
 	</insert>
 
 	<!-- select : realId 받으면 userId 돌려줌 -->

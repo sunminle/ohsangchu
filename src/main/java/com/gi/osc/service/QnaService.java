@@ -4,22 +4,23 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.gi.osc.bean.NoticeDTO;
+import com.gi.osc.bean.QNADTO;
+
 
 @Service
-public interface NoticeService {
+public interface QnaService {
 
 	// 글 작성 처리
-	public boolean addNoticePro(NoticeDTO dto) throws Exception;
+	public boolean addQnaPro(QNADTO dto) throws Exception;
 
-	public List<NoticeDTO> noticeList();
+	public List<QNADTO> qnaList();
 
 	public static String processHtmlContent(String htmlContent) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public NoticeDTO getNoticeById(Long id);
+	public QNADTO getQnaById(Long id);
 
 	// realId check
 	public default boolean checkRealId(String realId) {
@@ -28,9 +29,7 @@ public interface NoticeService {
 		return admin.equals(realId);
 	    }
 
-	public List<NoticeDTO> noticeListAdmin();
-
-	public void updateNotice(NoticeDTO noticeDTO);
+	public List<QNADTO> qnaListAdmin();
 	
 	
 }
