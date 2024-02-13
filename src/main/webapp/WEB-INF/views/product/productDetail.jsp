@@ -323,7 +323,7 @@
 			        console.log("포스터넘버 : "+postNum);
 			        
 			        var formData = new FormData();
-			        formData.append("deliveryMethod", deliveryTypeId);
+			        formData.append("deliveryTypeId", deliveryTypeId);
 			        formData.append("postingId", postNum);
 			        
 			        productsData.forEach(function(product, index) {
