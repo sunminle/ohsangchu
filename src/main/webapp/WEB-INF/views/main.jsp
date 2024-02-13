@@ -34,31 +34,18 @@
 	<!-- /header -->
 	
 	
-	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+	<nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
          <c:if test="${usersId != null && usersId == 'admin'}">
-  	<a class="navbar-brand" href="/notice/noticeListAdmin">Notice</a>
+  	<a class="navbar-brand" href="/notice/noticeListAdmin"><b class="green">Notice</b></a>
   </c:if>
   <c:if test="${ usersId != 'admin'}">
-  	<a class="navbar-brand" href="/notice/noticeList">Notice</a>
+  	<a class="navbar-brand" href="/notice/noticeList"><b class="green">Notice</b></a>
   </c:if>
-  <c:if test="${usersId != null && usersId == 'admin'}">
-  	<a class="navbar-brand" href="/qna/qnaListAdmin">QnA</a>
-  </c:if>
-  <c:if test="${ usersId != 'admin'}">
-  	<a class="navbar-brand" href="/qna/qnaList">QnA</a>
-  </c:if>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-     
-    </button>
-  </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  
+
+       
+            
                  <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
        식품
@@ -203,10 +190,15 @@
     </ul>
 </li>
             
-            </ul>
+           <c:if test="${usersId != null && usersId == 'admin'}">
+  	<a class="navbar-brand" href="/qna/qnaListAdmin"><b class="green">QnA</b></a>
+  </c:if>
+  <c:if test="${ usersId != 'admin'}">
+  	<a class="navbar-brand" href="/qna/qnaList"><b class="green">QnA</b></a>
+  </c:if> 
             
         </div>
-    </div>
+
 </nav>
 
 
