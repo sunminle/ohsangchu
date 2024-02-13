@@ -100,3 +100,53 @@ section {
     margin: 110px 0; /* 데이터가 없는 경우의 여백 설정 */
 }
 
+.bg-body-tertiary {
+    background-color: #fff;
+  }
+container-fluid {
+   padding-left:10px;
+
+padding-right:10px;
+}
+
+.navbar-expand-lg .navbar-nav .nav-item.dropdown {
+    padding-left:10px;
+
+padding-right:10px;
+}
+
+@font-face {
+    font-family: 'PyeongChangPeace';
+    font-weight: 300;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/PyeongChang/PyeongChangPeace-Light.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/PyeongChang/PyeongChangPeace-Light.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/PyeongChang/PyeongChangPeace-Light.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/PyeongChang/PyeongChangPeace-Light.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/PyeongChang/PyeongChangPeace-Light.ttf') format("truetype");
+    font-display: swap;
+} 
+@font-face {
+    font-family: 'Cafe24ClassicType-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Cafe24ClassicType-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'TiquiTaca-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/TiquiTaca-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+.dropdown-menu .dropdown-item {
+    font-family: 'PyeongChangPeace', sans-serif;
+}
+.nav-item.dropdown{
+	font-family: 'Cafe24ClassicType-Regular', sans-serif;
+}
+.navbar-brand b {
+	font-family: 'TiquiTaca-Regular', sans-serif;
+}
+
+
+

@@ -21,6 +21,23 @@
 
 .btn-default {background: #75C573;  color: #fff;}
 
+@font-face {
+    font-family: 'Dovemayo_wild';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/Dovemayo_wild.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'EF_watermelonSalad';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_watermelonSalad.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.proDes {font-family: 'Dovemayo_wild', sans-serif;}
+
+h2 {font-family: 'EF_watermelonSalad', sans-serif;}
+
 </style>
 
 </head>

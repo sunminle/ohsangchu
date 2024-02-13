@@ -50,9 +50,20 @@ public class MainController {
 	}
 	
 	@GetMapping("/view")
-	public String view(@RequestParam("categoryId") Long categoryId, Model model) {
+	public String view(@RequestParam(name = "page", defaultValue = "1") int page,
+			@RequestParam("categoryId") Long categoryId, Model model) {
 	    List<PostingDTO> postings = service.getPostingsByCategoryId(categoryId);
-	    model.addAttribute("postings", postings);
+	    int pageSize = 10; 
+		   int totalItems = postings.size();
+		   int pageCount = (totalItems + pageSize - 1) / pageSize;
+
+		   int startIdx = (page - 1) * pageSize;
+		   int endIdx = Math.min(startIdx + pageSize, totalItems);
+		   List<PostingDTO> currentPageProducts = postings.subList(startIdx, endIdx);
+
+		   model.addAttribute("pageCount", pageCount);
+		   model.addAttribute("currentPage", page);
+		   model.addAttribute("postings", currentPageProducts);
 		
 		//List<CategoryDTO> category = service.getCategoriesByRange();
         //model.addAttribute("category", category);
