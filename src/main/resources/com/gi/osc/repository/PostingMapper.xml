@@ -8,6 +8,20 @@
 		select * from posting where id=#{id}
 	</select>
 	
+	<!-- selectList : 포스트넘버주면 배달방식 가져오기 -->
+	<select id="getDelivery" resultType="com.gi.osc.bean.DeliveryTypeDTO">
+		select  dp.id,
+		        dp.deliverytypeid,
+		        dp.postingid,
+		        d.deliverytypeprice,
+		        d.deliverytypename
+		from deliverytype_posting dp
+		inner join deliverytype d
+		on d.id= dp.deliverytypeid
+		where postingid=#{postingId}
+		order by d.id asc
+	</select>
+	
 	<!-- selectOne : 스토어넘버주면 스토어 가져오기 -->
 	<select id="getStore" resultType="com.gi.osc.bean.StoreDTO">
 		select * from store where id=#{id}

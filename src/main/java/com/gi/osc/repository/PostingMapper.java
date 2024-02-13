@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.gi.osc.bean.DeliveryTypeDTO;
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.ProductDTO;
@@ -14,6 +15,7 @@ import com.gi.osc.bean.UsersDTO;
 public interface PostingMapper {
 	
 	public PostingDTO getPost(int id);
+	public ArrayList<DeliveryTypeDTO> getDelivery(int postingId);
 	public StoreDTO getStore(int id);
 	public UsersDTO getUser(int id);
 	public ArrayList<ReviewDTO> getReviews(int postingid);
