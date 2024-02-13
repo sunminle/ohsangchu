@@ -14,6 +14,8 @@ import com.gi.osc.bean.DeliveryTypePostingDTO;
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.HashtagPostingDTO;
 import com.gi.osc.bean.PaymentDTO;
+import com.gi.osc.bean.PaymentEtcDTO;
+import com.gi.osc.bean.PaymentProductDTO;
 import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.PostingImgDTO;
 import com.gi.osc.bean.ProductDTO;
@@ -60,4 +62,10 @@ public interface MyPageService {
 	public void addDeliveryType(DeliveryTypeDTO deliveryTypeDTO, DeliveryTypePostingDTO deliveryTypePostingDTO, String deliveryTypeName,String deliveryTypePrice);
 	public List<CategoryDTO> selectCategoryAll();
 	public void myOrderList(String realId,int pageNum, Model model);
+	public int selectCategoryIdPosting(int postingId);
+	public String selectPaymentTypePosting(int postingId);
+	public DeliveryTypeDTO selectDeliveryTypeInfo(int deliveryTypeId);
+	public void addPayment(PaymentDTO paymentDTO);
+	public void addPaymentEtc(PaymentEtcDTO paymentEtcDTO);
+	public void addPaymentProduct(PaymentProductDTO paymentProductDTO);
 }

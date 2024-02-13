@@ -15,9 +15,7 @@
 <center>
 <img src = "/resources/images/orderComplete.png" width = "150" height = "150"><br/>
 주문이 완료되었습니다!<br/>
-주문목록에서 결제를 진행해주세요.
+주문목록에서 결제를 진행해주세요.<br/>
+<button onclick="window.location='/my/myOrderList'">주문목록 바로가기</button>
 </center>
-${paymentDTO} <hr/>
-${paymentEtcDTO}<hr/>
-${paymentProductDTO}
 <jsp:include page="/WEB-INF/views/include/footer.jsp" />

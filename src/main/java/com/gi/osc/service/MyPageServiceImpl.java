@@ -19,6 +19,8 @@ import com.gi.osc.bean.DeliveryTypePostingDTO;
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.HashtagPostingDTO;
 import com.gi.osc.bean.PaymentDTO;
+import com.gi.osc.bean.PaymentEtcDTO;
+import com.gi.osc.bean.PaymentProductDTO;
 import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.PostingImgDTO;
 import com.gi.osc.bean.ProductDTO;
@@ -553,6 +555,37 @@ public class MyPageServiceImpl implements MyPageService{
 		model.addAttribute("startPage",startPage);
 		model.addAttribute("pageBlock",pageBlock);
 		model.addAttribute("endPage",endPage);
+		
+	}
+
+	@Override
+	public int selectCategoryIdPosting(int postingId) {
+		return mapper.selectCategoryIdPosting(postingId);
+	}
+
+	@Override
+	public String selectPaymentTypePosting(int postingId) {
+		return mapper.selectPaymentTypePosting(postingId);
+	}
+
+	@Override
+	public DeliveryTypeDTO selectDeliveryTypeInfo(int deliveryTypeId) {
+		return mapper.selectDeliveryTypeInfo(deliveryTypeId);
+	}
+
+	@Override
+	public void addPayment(PaymentDTO paymentDTO) {
+		mapper.addPayment(paymentDTO);
+	}
+
+	@Override
+	public void addPaymentEtc(PaymentEtcDTO paymentEtcDTO) {
+		mapper.addPaymentEtc(paymentEtcDTO);
+	}
+
+	@Override
+	public void addPaymentProduct(PaymentProductDTO paymentProductDTO) {
+		mapper.addPaymentProduct(paymentProductDTO);
 		
 	}
 
