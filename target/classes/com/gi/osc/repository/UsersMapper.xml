@@ -62,6 +62,13 @@
 	
 		select * from users where realId = #{realId}
 	</select>
+	
+	
+	<!-- adminMain userlist -->
+    <select id="getAllUsers" resultType="com.gi.osc.domain.Users">
+        SELECT * FROM users
+    </select>
+
 
 	<!-- userinfo 
 	<insert id="addUserInfo"

@@ -1,9 +1,12 @@
 package com.gi.osc.service;
 
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gi.osc.bean.UsersDTO;
+import com.gi.osc.domain.Users;
 
 public interface UsersService {
 	public int loginChk(UsersDTO dto);
@@ -18,4 +21,6 @@ public interface UsersService {
 	public void headerprofile(UsersDTO usersDTO, MultipartFile file, String filePath, String realId);
 	
 	 public UsersDTO aaa(String realId);
+
+	public List<Users> getAllUsers();
 }

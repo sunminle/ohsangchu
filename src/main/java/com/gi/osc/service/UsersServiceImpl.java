@@ -1,5 +1,7 @@
 package com.gi.osc.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,6 +9,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gi.osc.bean.UsersDTO;
+import com.gi.osc.domain.Users;
 import com.gi.osc.repository.UsersMapper;
 
 @Service
@@ -53,6 +56,14 @@ public class UsersServiceImpl implements UsersService{
 	@Override
 	public UsersDTO aaa(String realId) {
 		return mapper.aaa(realId);
+	}
+
+
+
+
+	@Override
+	public List<Users> getAllUsers() {
+		 return mapper.getAllUsers();
 	}
 		
 }

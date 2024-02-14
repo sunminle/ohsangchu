@@ -1,5 +1,7 @@
 package com.gi.osc.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -10,12 +12,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gi.osc.bean.UsersDTO;
+import com.gi.osc.domain.Users;
 import com.gi.osc.service.MyPageServiceImpl;
 import com.gi.osc.service.UsersService;
 import com.gi.osc.service.UsersServiceImpl;
@@ -85,8 +89,13 @@ public class UsersController {
 		        return "users/register"; // 회원 가입 폼 페이지로 이동 
 		    }
 		}
-
-	
+		//users
+		   @GetMapping("/users")
+		    public String getUsers(Model model) {
+		        List<Users> users = service.getAllUsers();
+		        model.addAttribute("users", users);
+		        return "admin/adminMain"; 
+		    }
 		
 		
 		@RequestMapping(value = "/header", method = RequestMethod.GET)

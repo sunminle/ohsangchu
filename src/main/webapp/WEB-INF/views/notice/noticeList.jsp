@@ -40,7 +40,7 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 <!-- /header -->
 
-<title>noticeListAdmin</title>
+<title>noticeList</title>
 </head>
 <body>
 	<form id="addNotice">
@@ -51,15 +51,7 @@
 				<div class="col-lg-12">
 					<h1 class="page-header">Notice</h1>
 				</div>
-				<div class="row">
-					<div class="col-lg-12">
-						<button type="button"
-							class="btn btn-outline btn-primary pull-right"
-							onclick="location.href='addNotice'">
-							<i class="fa fa-edit fa-fw"></i> 글쓰기
-						</button>
-					</div>
-				</div>
+				
 				<br>
 				<div class="panel panel-default">
 					<div class="panel-heading">공지사항</div>
