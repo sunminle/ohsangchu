@@ -45,7 +45,8 @@
 	 	<!-- 판매량이 높은 제품 조회 -->
 		<select id="countPopularProducts" resultType="com.gi.osc.bean.PaymentDTO">
 			<![CDATA[
-				select po.thumnail , po.title,usp.* from posting po ,(
+				 select * from                                     
+    (select po.thumnail , po.title,usp.* , rownum r from posting po ,(
 				select u.id,u.NICKNAME , u.profile,sp.storename,sp.productname,sp.price,sp.postingid,sp.storeid from users u, 
 				    (select * from store s , 
 				    (select * from product where postingid in(
@@ -55,7 +56,7 @@
 				                    GROUP BY po.id ORDER BY totalCount DESC) WHERE ROWNUM <= 6 and totalCount > 1)) p
 				                    where p.storeid = s.id) sp
 				        where u.id=sp.userid) usp
-				    where po.id=usp.postingid
+				    where po.id=usp.postingid) where r > 0 and r <=6
 				]]>
 		</select>
 

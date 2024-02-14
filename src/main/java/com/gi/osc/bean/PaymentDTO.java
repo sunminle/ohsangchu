@@ -22,6 +22,7 @@ public class PaymentDTO {
     private int price;
     private String storeName;
     private String profile;
+    private String productname;
 	// 닉네임 받기위해
 	private String nickname;
 	

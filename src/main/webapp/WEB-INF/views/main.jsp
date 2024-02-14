@@ -26,6 +26,11 @@
 <!-- css -->
 <link href="/resources/css/include.css" rel="stylesheet">
 <link href="/resources/css/main.css" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barriecito&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+
 </head>
 <body>
 	
@@ -249,6 +254,7 @@
 					<img src="/resources/images/posting/${product.thumnail}" alt="프로필이미지" width="300px" height="300px">
 					<div class="proDes">
 						<div class="proTitle">${product.title}</div>
+						<div class="proPrice d-flex justify-content-end"><span>${product.productname}</span></div>
 						<div class="proPrice d-flex justify-content-end"><span>${product.price} 원</span></div>
 						<div class="proProfile d-flex align-items-center">
 							<div class="proImg">
