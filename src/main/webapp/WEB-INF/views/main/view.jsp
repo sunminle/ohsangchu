@@ -16,6 +16,10 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <!-- css -->
 <link href="/resources/css/include.css" rel="stylesheet">
+ 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barriecito&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
   
 <style>
 
@@ -28,7 +32,7 @@
     font-style: normal;
 }
 .proDes {font-family: 'Dovemayo_wild', sans-serif;}
-
+h2 {font-family: 'Dancing Script', cursive;}
 </style>
 	
 </head>
