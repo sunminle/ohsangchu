@@ -1,78 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<!DOCTYPE html>
-<html lang="en">
 <head>
-<script src="/resources/js/jquery-3.7.1.min.js"></script>
+<!-- bootstrap:css -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<!-- boot : js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <!--favicon-->
 <link rel="icon" href="/resources/images/site/leaf-solid.png">
+<!-- jQuery -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <!-- css -->
 <link href="/resources/css/include.css" rel="stylesheet">
-<!-- bootstrap:css -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-	crossorigin="anonymous">
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-}
+<link  href="/resources/css/purchase.css" rel="stylesheet">
+<link  href="/resources/css/order.css" rel="stylesheet">
 
-.containers {
-    max-width: 800px;
-    margin: 50px auto;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.headers {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.input-field {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.button {
-    background-color: #4caf50;
-    color: white;
-    padding: 15px;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.button:hover {
-    background-color: #45a049;
-}
-
-
-
-</style>
+<title>결제 페이지</title>
+</head>
+<body>
 <script>
 $(document).ready(function () {
 	console.log("${productDetail}");
@@ -87,33 +31,48 @@ $(document).ready(function () {
     });
 });
 </script>
+
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>결제 페이지</title>
-</head>
-<body>
 
 <div class="containers">
     <div class="headers">
         주문목록
     </div>
+    
+    ${productDetail }
+    
+    
 
     <form action="/my/orderSuccessPro" method="post">
-    	<c:forEach var = "productDetail" items = "${productDetail}">
-        <div class="form-group">
-            <label for="productName">상품명:${productDetail.productName}</label>
-        </div>
-
-        <div class="form-group">
-            <label for="quantity">수량:${productDetail.quantity}</label>
-            <input type = "hidden" name = "quantity" value = "${productDetail.quantity}">
-        </div>
-        
-         <div class="form-group">
-            <label for="price">가격:${productDetail.price*productDetail.quantity}원</label>
-        </div>
-        </c:forEach>
+    	<table class="table text-center align-middle">
+	    	<thead>
+	    		<tr class="table-light">
+	    			<th>선택</th>
+	    			<th>상품명</th>
+	    			<th>가격</th>
+	    			<th>수량</th>
+	    			<th>합계</th>
+	    			<th>삭제</th>
+	    		</tr>
+	    	</thead>
+	    	<tbody>
+	    		<c:forEach var ="product" items = "${productDetail}">
+		    		<tr>
+		    			<td><input type="checkbox" name="buy" value="260" checked></td>
+		    			<td>${product.productName}</td>
+		    			<td>${product.price}원</td>
+		    			<td>
+		    				<div class="d-flex align-items-center justify-content-center">
+		    					<input class="form-control text-center" type="text" value="${product.quantity}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+		    					개
+		    				</div>
+		    			</td>
+		    			<td>${product.price*product.quantity}원</td>
+		    			<td><button class="btn btn-danger">삭제</button></td>
+		    		</tr>
+		    	</c:forEach>
+	    	</tbody>
+	    </table>
 
         <div class="form-group">
             <label for="deliveryTypeName">배송 방법:${deliveryTypeDTO.deliveryTypeName}</label>

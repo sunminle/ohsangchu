@@ -144,26 +144,11 @@ public class ProductController {
 	}
 	
 	/*
-	@PostMapping("purchase")
-	public String purchase(@RequestBody OrderDTO dto, Model model) {
-		
-        //System.out.println(dto.getDeliveryMethod());
-        //System.out.println(dto.getProducts().get(0).getProductId());
-		System.out.println(dto);
-        
-        //모델에 값 추가
-		model.addAttribute("order", dto);
-		
-		return "/product/orderDetail";
-	}
-	*/
-	
 	@RequestMapping("orderDetail")
 	public String orderDetail(@ModelAttribute OrderDTO order, Model model){
 		
 		// 받은 데이터 처리
-		System.out.println("===================================================");
-        System.out.println(order.getProducts());
+		System.out.println(order.getProducts());
         System.out.println(order.getDeliveryTypeId());
         System.out.println(order.getPostingId());
         
@@ -172,6 +157,7 @@ public class ProductController {
 		
 		return "/product/orderDetail";
 	}
+	*/
 	
 }
 

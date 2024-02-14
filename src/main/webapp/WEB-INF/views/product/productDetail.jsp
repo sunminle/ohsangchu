@@ -359,7 +359,7 @@
 			     	// form 생성 및 데이터 추가
 			        var form = document.createElement('form'); // form 태그 생성
 		            form.setAttribute('method', 'post'); // 전송 방식 결정 (get or post)
-		            form.setAttribute('action', '/product/orderDetail'); // 전송할 url 지정
+		            form.setAttribute('action', '/my/orderDetail'); // 전송할 url 지정
 		            form.style.display = 'none'; // 숨김 처리
 
 		         	// formData를 form에 추가
