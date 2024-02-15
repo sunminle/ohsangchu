@@ -81,3 +81,15 @@ table input{
 	display:inline;
 	height:20px; 
 }
+table .qttBox{
+	border: 1px solid #e4e4e4;
+	border-radius: 10px;
+	padding: 6px 8px;
+	width: 40px;
+}
+table svg{
+	margin: 3px;
+}
+table tbody .btn-secondary{
+	margin-right: 15px;
+}
