@@ -555,4 +555,17 @@ public class MyPageController {
         return new ResponseEntity<>(orderProductList, HttpStatus.OK);
 	}
 	
+	@PostMapping
+	public @ResponseBody void updateMyProductBuyer(int paymentId, int selectedStatus){
+		service.updateMyProductBuyer(paymentId, selectedStatus);
+	}
+	
+	@PostMapping("myProductBuyerEtc")
+	public @ResponseBody ResponseEntity<List<PaymentEtcDTO>> myProductBuyerEtc(HttpSession session,
+									@RequestParam("paymentId") String paymentId) {
+		List<PaymentEtcDTO> paymentEtcList = service.selectPaymentEtc(Integer.parseInt(paymentId));
+		
+        return new ResponseEntity<>(paymentEtcList, HttpStatus.OK);
+	}
+	
 }

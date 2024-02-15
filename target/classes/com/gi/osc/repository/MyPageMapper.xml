@@ -375,4 +375,12 @@
 	<update id="updateProductQuantity">
 		update product set quantity = quantity - #{amount} where id = #{productId}
 	</update>
+	
+	<update id="updateMyProductBuyer">
+		update payment set status = #{selectedStatus} where id = #{paymentId}
+	</update>
+	
+	<select id="selectPaymentEtc" resultType="com.gi.osc.bean.PaymentEtcDTO">
+		select * from payment_etc where paymentid = #{paymentId}
+	</select>
 </mapper>

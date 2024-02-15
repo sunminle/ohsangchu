@@ -630,6 +630,16 @@ public class MyPageServiceImpl implements MyPageService{
 		mapper.updateProductQuantity(paymentProductDTO);
 	}
 
+	@Override
+	public void updateMyProductBuyer(int paymentId, int selectedStatus) {
+		mapper.updateMyProductBuyer(paymentId, selectedStatus);
+	}
+
+	@Override
+	public List<PaymentEtcDTO> selectPaymentEtc(int paymentId) {
+		return mapper.selectPaymentEtc(paymentId);
+	}
+
 	
 
 	
