@@ -26,7 +26,7 @@ private static final String HOST = "https://kapi.kakao.com";
     
 	private KakaoPayApprovalVO kakaoPayApprovalVO;
 	
-    public String kakaoPayReady(HttpServletRequest request, String productName, int quantity, String deliveryTypeName, int price) {
+    public String kakaoPayReady(HttpServletRequest request, String productName, int quantity, String deliveryTypeName, int price, int paymentId) {
  
         RestTemplate restTemplate = new RestTemplate();
  
@@ -44,22 +44,20 @@ private static final String HOST = "https://kapi.kakao.com";
         params.add("item_name", productName);
         params.add("quantity", String.valueOf(quantity));
         params.add("total_amount", String.valueOf(price));
-        params.add("tax_free_amount", "21000");
+        params.add("tax_free_amount", "1");
         params.add("approval_url", "http://localhost:8080/kakaoPaySuccess");
         params.add("cancel_url", "http://localhost:8080/kakaoPayCancel");
         params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail");
- 
          HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
- 
         try {
             kakaoPayReadyVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, KakaoPayReadyVO.class);
-            
             System.out.println("kakaoPayReadyVo=======" + kakaoPayReadyVO);
             
             kakaoPayReadyVO.setDeliveryTypeName(deliveryTypeName);
             kakaoPayReadyVO.setProductName(productName);
             kakaoPayReadyVO.setQuantity(quantity);
             kakaoPayReadyVO.setPrice(price);
+            kakaoPayReadyVO.setPaymentId(paymentId);
             request.getSession().setAttribute("kakaoPayReadyVO", kakaoPayReadyVO);
             
             return kakaoPayReadyVO.getNext_redirect_pc_url();

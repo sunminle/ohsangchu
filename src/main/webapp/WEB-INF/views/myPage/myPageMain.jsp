@@ -177,6 +177,7 @@
 				<button id="chattingList">채팅</button>
 			</div>
 			<div id="modify">
+				<c:if test="${!empty recentPaymentList}">
 				<h5>최근주문내역</h5>
 				<table>
 				<tr>
@@ -199,6 +200,11 @@
 				
 				</c:forEach>
 				</table>
+				</c:if>
+				<c:if test="${empty recentPaymentList}">
+				<h5>최근주문내역</h5>
+				최근 주문이 없습니다..!
+				</c:if>
 				<br/>
 				<br/>
 				<a href = "/my/reviewAll">리뷰 관리</a>

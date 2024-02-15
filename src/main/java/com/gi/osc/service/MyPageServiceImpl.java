@@ -18,6 +18,7 @@ import com.gi.osc.bean.DeliveryTypeDTO;
 import com.gi.osc.bean.DeliveryTypePostingDTO;
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.HashtagPostingDTO;
+import com.gi.osc.bean.MyOrderProductDTO;
 import com.gi.osc.bean.PaymentDTO;
 import com.gi.osc.bean.PaymentEtcDTO;
 import com.gi.osc.bean.PaymentProductDTO;
@@ -587,6 +588,46 @@ public class MyPageServiceImpl implements MyPageService{
 	public void addPaymentProduct(PaymentProductDTO paymentProductDTO) {
 		mapper.addPaymentProduct(paymentProductDTO);
 		
+	}
+
+	@Override
+	public List<MyOrderProductDTO> selectMyOrderProduct(int paymentId) {
+		return mapper.selectMyOrderProduct(paymentId);
+	}
+
+	@Override
+	public int selectPaymentProductCount(int paymentId) {
+		return mapper.selectPaymentProductCount(paymentId);
+	}
+
+	@Override
+	public String selectKakaoPayProductName(int paymentId) {
+		return mapper.selectKakaoPayProductName(paymentId);
+	}
+
+	@Override
+	public List<Integer> selectKakaoPayQuantity(int paymentId) {
+		return mapper.selectKakaoPayQuantity(paymentId);
+	}
+
+	@Override
+	public List<MyOrderProductDTO> selectKakaoPayPrice(int paymentId) {
+		return mapper.selectKakaoPayPrice(paymentId);
+	}
+
+	@Override
+	public String selectKakaoPayDeliveryTypeName(int paymentId) {
+		return mapper.selectKakaoPayDeliveryTypeName(paymentId);
+	}
+
+	@Override
+	public void updateStatus1(int paymentId) {
+		mapper.updateStatus1(paymentId);
+	}
+
+	@Override
+	public void updateProductQuantity(PaymentProductDTO paymentProductDTO) {
+		mapper.updateProductQuantity(paymentProductDTO);
 	}
 
 	

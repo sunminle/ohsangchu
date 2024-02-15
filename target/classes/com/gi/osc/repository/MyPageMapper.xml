@@ -206,8 +206,8 @@
 	
 	<select id="myOrderList">
 		<![CDATA[
-		select * from (select a.*, rownum r, (select count(*)from review r where r.postingid = a.id and userid = (select id from users where realid = #{realId})) as reviewCount from 
-		(select p.*,pm.orderdate from 
+		select * from (select a.*, rownum r from 
+		(select p.*,pm.orderdate,pm.id paymentId from 
 		posting p join payment pm on p.id = pm.postingid join users u on pm.userid = u.id 
 		where u.realid = #{realId} and pm.status = 0 order by pm.id desc)a) where r >= #{start} and r <= #{end}
 		]]>
@@ -289,7 +289,9 @@
 	</select>
 	
 	<select id="selectRecentPayment" resultType="com.gi.osc.bean.PostingDTO">
-		select p.*,pm.orderdate from posting p join payment pm on p.id = pm.postingid where pm.userid = #{userId} order by pm.orderdate desc
+		<![CDATA[
+		select * from (select p.*,pm.orderdate from posting p join payment pm on p.id = pm.postingid where pm.userid = #{userId} order by pm.orderdate desc) where rownum <= 10
+		]]>
 	</select>
 	
 	<select id="deliveryTypeNameChk">
@@ -342,4 +344,35 @@
 		insert into payment_product (paymentid,productid,amount) values(#{paymentId},#{productId},#{amount})
 	</insert>
 	
+	<select id="selectMyOrderProduct" resultType="com.gi.osc.bean.MyOrderProductDTO">
+		select p.productname,pp.amount,p.price from payment_product pp join product p on pp.productid = p.id where pp.paymentid = #{paymentId}
+	</select>
+	
+	<select id="selectPaymentProductCount">
+		select count(*) from payment_product where paymentid = #{paymentId}
+	</select>
+	
+	<select id="selectKakaoPayProductName">
+		select productname from product where id = (select pp.productid from payment_product pp where paymentid = #{paymentId} order by id asc FETCH FIRST 1 ROW ONLY)
+	</select>
+	
+	<select id="selectKakaoPayQuantity">
+		select amount from payment_product where paymentid = #{paymentId}
+	</select>
+	
+	<select id="selectKakaoPayPrice" resultType="com.gi.osc.bean.MyOrderProductDTO">
+		select p.price,pp.amount from product p join payment_product pp on p.id = pp.productid where pp.paymentid = #{paymentId}
+	</select>
+	
+	<select id="selectKakaoPayDeliveryTypeName">
+		select deliverytypename from deliverytype where id = (select deliverytypeid from payment_etc where paymentid = #{paymentId})
+	</select>
+	
+	<update id="updateStatus1">
+		update payment set status = 1 where id = #{paymentId}
+	</update>
+	
+	<update id="updateProductQuantity">
+		update product set quantity = quantity - #{amount} where id = #{productId}
+	</update>
 </mapper>
