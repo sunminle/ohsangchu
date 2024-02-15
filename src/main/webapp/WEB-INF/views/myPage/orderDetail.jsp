@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <head>
 <!-- bootstrap:css -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -17,20 +20,6 @@
 <title>결제 페이지</title>
 </head>
 <body>
-<script>
-$(document).ready(function () {
-	console.log("${productDetail}");
-    $('#agreementCheckbox').on('change', function () {
-        if ($(this).prop('checked')) {
-            $('input[name="agreementValue"]').val('1');
-            console.log(document.getElementsByName('agreementValue')[0].value);
-        } else {
-            $('input[name="agreementValue"]').val('0');
-            console.log(document.getElementsByName('agreementValue')[0].value);
-        }
-    });
-});
-</script>
 
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
@@ -38,11 +27,7 @@ $(document).ready(function () {
     <div class="headers">
         주문목록
     </div>
-    
-    ${productDetail }
-    
-    
-
+        
     <form action="/my/orderSuccessPro" method="post">
     	<table class="table text-center align-middle">
 	    	<thead>
@@ -60,19 +45,93 @@ $(document).ready(function () {
 		    		<tr>
 		    			<td><input type="checkbox" name="buy" value="260" checked></td>
 		    			<td>${product.productName}</td>
-		    			<td>${product.price}원</td>
+		    			<td>
+		    				<input class="prices" type="hidden" value="${product.price}">
+		    				<fmt:formatNumber type="number" maxFractionDigits="3" value="${product.price}"  />원</td>
 		    			<td>
 		    				<div class="d-flex align-items-center justify-content-center">
-		    					<input class="form-control text-center" type="text" value="${product.quantity}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-		    					개
+		    					<%-- <input class="form-control text-center" type="text" value="${product.quantity}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> --%>
+		    					<%-- <svg class="plus" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/></svg> --%>
+		    					<div class="qttBox">${product.quantity}</div> 개
+		    					<%-- <svg class="minus" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/></svg> --%>
 		    				</div>
 		    			</td>
-		    			<td>${product.price*product.quantity}원</td>
-		    			<td><button class="btn btn-danger">삭제</button></td>
+		    			<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${product.price*product.quantity}" />원</td>
+		    			<td><button class="btn btn-sm btn-danger delCol">삭제</button></td>	
 		    		</tr>
 		    	</c:forEach>
+		    	<tr>
+		    		<td colspan="6" class="text-end"><button onclick="unChk()" class="btn btn-sm btn-secondary">선택상품해제</button></td>
+		    	</tr>
+		    	<tr>
+		    		<td colspan="6" class="text-end"><span class="result text-center"></span></td>
+		    	</tr>
 	    	</tbody>
 	    </table>
+	    
+	    <script>
+	    
+	    // 페이지 로드 시 실행되는 코드
+        window.addEventListener('DOMContentLoaded', (event) => {  
+        	checkTotal();
+        });
+	 	// 삭제 버튼 클릭 시 해당 행 삭제
+	    document.querySelectorAll('.delCol').forEach(button => {
+	        button.addEventListener('click', function() {
+	            // 현재 버튼의 부모 노드(tr)를 찾아 삭제
+	            const row = this.closest('tr');
+	            row.remove();
+	            
+	            checkTotal();
+	        });
+	    });
+	    
+	  	//선택상품해제
+    	function unChk(){
+    		if($('input:checkbox[name="buy"]').is(":checked")){
+    			console.log("선택상품"+$('input:checkbox[name="buy"]:checked').length+"개 해제");
+    			$('input:checkbox[name=buy]:checked').attr('checked',false);
+    		}
+    		
+    		checkTotal();
+    	}
+	    
+	  	
+	    
+        function checkTotal(){
+    		// 모든 체크박스 요소 가져오기
+            const checkboxes = document.querySelectorAll('input[name="buy"]');
+            
+            // 모든 수량 요소 가져오기
+            const quantities = document.querySelectorAll('.qttBox');
+            
+            // 모든 가격 요소 가져오기
+            const prices = document.querySelectorAll('.prices');
+            
+            // 체크박스의 변화에 따라 합계금액 업데이트
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateTotal);
+            });
+            
+         	// 합계금액을 업데이트하는 함수
+            function updateTotal() {
+                let total = 0;
+                checkboxes.forEach((checkbox, i) => {
+                    if (checkbox.checked) {
+                        const price = parseInt(prices[i].value);
+                        const quantity = parseInt(quantities[i].innerText);
+                        //console.log("선택상품 가격 : "+price+", 선택상품 수량 : "+quantity);
+                        total += price * quantity;
+                    }
+                });
+                const totalSpan = document.querySelector('.result');
+                totalSpan.innerText = "합계금액 : " + total.toLocaleString('en-US', { style: 'currency', currency: 'KRW' });
+            }
+            
+            // 페이지 로드 시 합계금액 업데이트
+            updateTotal();
+    	};
+	    </script>
 
         <div class="form-group">
             <label for="deliveryTypeName">배송 방법:${deliveryTypeDTO.deliveryTypeName}</label>
