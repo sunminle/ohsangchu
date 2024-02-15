@@ -65,7 +65,7 @@
 	
 	
 	<!-- adminMain userlist -->
-    <select id="getAllUsers" resultType="com.gi.osc.domain.Users">
+    <select id="getAllUsers" resultType="com.gi.osc.bean.UsersDTO">
         SELECT * FROM users
     </select>
 
@@ -86,4 +86,10 @@
 
 	</insert>
 	-->
+	
+	<!-- 사용자 권한 변경 SQL 추가 -->
+    <update id="updateUserAuth" parameterType="Users">
+        UPDATE users SET auth = #{auth} WHERE real_id = #{realId}
+    </update>
+    
 </mapper>
