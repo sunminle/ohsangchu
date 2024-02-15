@@ -131,7 +131,6 @@
             // 페이지 로드 시 합계금액 업데이트
             updateTotal();
     	};
-	  	
 	    </script>
 
         <div class="form-group">
