@@ -7,3 +7,4 @@
 상품명:${info.item_name}<br/>
 상품수량:${info.quantity}<br/>
 결제금액:${info.amount.total}<br/>
+<button onclick="window.location='/my/myBuyList'">구매목록 바로가기</button>

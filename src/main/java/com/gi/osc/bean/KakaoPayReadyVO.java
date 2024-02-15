@@ -13,4 +13,5 @@ public class KakaoPayReadyVO {
     private int quantity;
     private String deliveryTypeName;
     private int price;
+    private int paymentId;
 }

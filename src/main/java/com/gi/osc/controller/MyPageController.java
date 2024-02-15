@@ -34,6 +34,7 @@ import com.gi.osc.bean.DeliveryTypeDTO;
 import com.gi.osc.bean.DeliveryTypePostingDTO;
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.HashtagPostingDTO;
+import com.gi.osc.bean.MyOrderProductDTO;
 import com.gi.osc.bean.OrderDTO;
 import com.gi.osc.bean.PaymentDTO;
 import com.gi.osc.bean.PaymentEtcDTO;
@@ -521,8 +522,10 @@ public class MyPageController {
 				paymentProductDTO.setProductId(Integer.parseInt(productId[i]));
 				paymentProductDTO.setAmount(Integer.parseInt(amount[i]));
 				service.addPaymentProduct(paymentProductDTO);
+				service.updateProductQuantity(paymentProductDTO);
 			}
 		}
+		
 		}
 		return "redirect:/my/orderSuccess";
 	}
@@ -543,4 +546,13 @@ public class MyPageController {
 		}
 		return "myPage/myOrderList";
 	}
+	
+	@PostMapping("myOrderProductList")
+	public @ResponseBody ResponseEntity<List<MyOrderProductDTO>> myOrderProductList(HttpSession session,
+									@RequestParam("paymentId") String paymentId) {
+		List<MyOrderProductDTO> orderProductList = service.selectMyOrderProduct(Integer.parseInt(paymentId));
+		
+        return new ResponseEntity<>(orderProductList, HttpStatus.OK);
+	}
+	
 }
