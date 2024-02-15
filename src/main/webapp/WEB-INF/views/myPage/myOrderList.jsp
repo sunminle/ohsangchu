@@ -10,6 +10,41 @@ function paginationClickHandler() {
     // 스크롤을 페이지 상단으로 이동
     $('html, body').animate({scrollTop: 0}, 'fast');
 }
+
+$(document).ready(function() {
+    <c:forEach var="post" items="${list}" varStatus="i">
+        processOrder('${post.paymentId}', ${i.count});
+    </c:forEach>
+});
+
+function processOrder(paymentId, index) {
+    var formData = new FormData();
+    formData.append("paymentId", paymentId);
+    
+    $.ajax({
+        type: "POST",
+        url: '/my/myOrderProductList',
+        contentType: false,
+        processData: false,
+        data: formData,
+        success: function(data) {
+            for (var i = 0; i < data.length; i++) {
+                var product = data[i]; 
+                console.log(product);
+                if(i === data.length - 1){
+                	$("#productList_" + index).append("상품명: " + product.productName + ", 구매수량: " + product.amount + ", Price: " + product.amount*product.price);
+                }
+                else{
+                	$("#productList_" + index).append("상품명: " + product.productName + ", 구매수량: " + product.amount + ", Price: " + product.amount*product.price + "<br>");
+                }
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+        }
+    });
+}
+
 </script>
 <!--favicon-->
 <link rel="icon" href="/resources/images/site/leaf-solid.png">
@@ -50,10 +85,21 @@ function paginationClickHandler() {
 			<div id="modify">
 				<h2>주문 목록</h2>
 				<c:if test = "${!empty list}">
-					<c:forEach var = "post" items = "${list}">
+					<c:forEach var = "post" items = "${list}" varStatus="i">
 					주문일자 : <fmt:formatDate value="${post.orderDate}" pattern="yyyy-MM-dd HH:mm" /><br/>
-					상품명 : <a href = "/product/detail?postNum=${post.id}">${post.title}</a><br/>
+					포스팅명 : <a href = "/product/detail?postNum=${post.id}">${post.title}</a><br/>
 					<img style = "width:200px;" src = "/resources/images/posting/${post.thumnail}"><br/>
+					<c:set var = "paymentId" value="${post.paymentId}"></c:set>
+					<div id = "productList_${i.count}"></div>
+					<c:if test="${post.paymentType == '무통장 입금' }">
+					무통장 입금
+					</c:if>
+					<c:if test="${post.paymentType == '카카오 페이' }">
+						<form method="post" action = "/kakaoPay" >
+							<input type = "hidden" name = "paymentId" value = "${post.paymentId}">
+							<button><img width = "30" height = "30" src = "/resources/images/kakaoPay.png"></button>
+						</form>
+					</c:if>
 					<hr/>
 					</c:forEach>
 					<c:if test="${startPage > 10 }">

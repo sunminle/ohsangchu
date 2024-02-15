@@ -11,6 +11,7 @@ import com.gi.osc.bean.DeliveryTypeDTO;
 import com.gi.osc.bean.DeliveryTypePostingDTO;
 import com.gi.osc.bean.HashtagDTO;
 import com.gi.osc.bean.HashtagPostingDTO;
+import com.gi.osc.bean.MyOrderProductDTO;
 import com.gi.osc.bean.PaymentDTO;
 import com.gi.osc.bean.PaymentEtcDTO;
 import com.gi.osc.bean.PaymentProductDTO;
@@ -78,5 +79,12 @@ public interface MyPageMapper {
 	public void addPayment(PaymentDTO paymentDTO);
 	public void addPaymentEtc(PaymentEtcDTO paymentEtcDTO);
 	public void addPaymentProduct(PaymentProductDTO paymentProductDTO);
-	
+	public List<MyOrderProductDTO> selectMyOrderProduct(int paymentId);
+	public int selectPaymentProductCount(int paymentId);
+	public String selectKakaoPayProductName(int paymentId);
+	public List<Integer> selectKakaoPayQuantity(int paymentId);
+	public List<MyOrderProductDTO> selectKakaoPayPrice(int paymentId);
+	public String selectKakaoPayDeliveryTypeName(int paymentId);
+	public void updateStatus1(int paymentId);
+	public void updateProductQuantity(PaymentProductDTO paymentProductDTO);
 }
