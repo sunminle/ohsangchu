@@ -87,4 +87,6 @@ public interface MyPageMapper {
 	public String selectKakaoPayDeliveryTypeName(int paymentId);
 	public void updateStatus1(int paymentId);
 	public void updateProductQuantity(PaymentProductDTO paymentProductDTO);
+	public void updateMyProductBuyer(@Param("paymentId")int paymentId, @Param("selectedStatus")int selectedStatus);
+	public List<PaymentEtcDTO> selectPaymentEtc(int paymentId);
 }
