@@ -65,6 +65,27 @@ public class UsersServiceImpl implements UsersService{
 	public List<Users> getAllUsers() {
 		 return mapper.getAllUsers();
 	}
+	
+
+	// 사용자 권한 변경 메서드 구현
+	 @Override
+	    public UsersDTO getUserByRealId(String realId) {
+	        return mapper.getUserByRealId(realId);
+	    }
+
+	    @Override
+	    public void updateUserAuth(UsersDTO dto) {
+	        mapper.updateUserAuth(dto);
+	    }
+
+
+
+
+		@Override
+		public void changeUserAuth(String realId, String auth) {
+			// TODO Auto-generated method stub
+			
+		}
 		
 }
 	

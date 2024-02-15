@@ -22,19 +22,23 @@ import lombok.NoArgsConstructor;
 @Table(name = "users")
 public class Users{
 
-	    @Id	//  PK
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)	// 자동 id 생성
-	    private String realId;
-	    
-	    @Column
-	    private String userName;
+    @Id	//  PK
+    @GeneratedValue(strategy = GenerationType.IDENTITY)	// 자동 id 생성
+    private String realId;
+    
+    @Column
+    private String userName;
 
-	    @Column(nullable = false)
-	    private String userPw;
-	    
-	    @Column
-	    private String nickname;
+    @Column(nullable = false)
+    private String userPw;
+    
+    @Column
+    private String nickname;
 
-	    @Column
-	    private Date regDate;
-	}
+    @Column
+    private Date regDate;
+
+    @Column
+    private String auth; // 사용자의 권한을 나타내는 필드
+  
+}

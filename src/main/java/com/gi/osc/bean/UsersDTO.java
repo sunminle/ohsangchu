@@ -23,4 +23,15 @@ public class UsersDTO {
 	private List<AuthDTO> authList;  // 권한
 	private int chatAlarmCount;
 	
+	  // 생성자
+    public UsersDTO(String realId, String auth) {
+        this.realId = realId;
+        this.auth = auth;
+    }
+
+
+    // 사용자 권한 변경 메서드
+    public void changeUserAuth(String auth) {
+        this.auth = auth;
+    }
 }

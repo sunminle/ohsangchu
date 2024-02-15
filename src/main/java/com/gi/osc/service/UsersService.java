@@ -23,4 +23,10 @@ public interface UsersService {
 	 public UsersDTO aaa(String realId);
 
 	public List<Users> getAllUsers();
+	
+	 // 사용자 권한 변경 메서드 
+	 UsersDTO getUserByRealId(String realId);
+	    void updateUserAuth(UsersDTO dto);
+
+		public void changeUserAuth(String realId, String auth);
 }
