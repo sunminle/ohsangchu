@@ -242,8 +242,29 @@ window.onload = function () {
 			</ul>
 			<div class="tabcontent">
 				<div id="ProductTab">
-					tab1 content
-				
+					<!-- 상품리스트 -->
+					<div class="d-flex justify-content-start w-100">
+						<c:forEach items="${posts }" var="post">
+							<div id="StoreProList" class="d-flex justify-content-start">
+								<div class="pro" onclick="location.href='/product/detail?postNum=5';">
+									<img src="/resources/images/posting/${post.thumnail }">
+									<div class="proDes">
+										<div class="proTitle">${post.title}</div>
+										<div class="proPrice d-flex justify-content-start align-items-center">
+											<div class="proImg">
+												<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
+											</div>
+											<span>${store.usersDTO.nickname }</span>
+										</div>
+										<div class="proProfile d-flex align-items-center">
+											<span>${store.storeName }</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+					<!-- /상품리스트 -->
 				</div>
 				
 				<div id="reviewTab">
@@ -435,6 +456,17 @@ window.onload = function () {
 </body>
 
 <script>
+$(function(){
+	$('.tabcontent > div').hide();
+	$('.tabnav a').click(function () {
+		$('.tabcontent > div').hide().filter(this.hash).fadeIn();
+	  	$('.tabnav a').removeClass('active');
+	  	$(this).addClass('active');
+	  	return false;
+	}).filter(':eq(0)').click();
+});
+
+
 //이미지모달
 $(function(){
 	// 이미지 클릭시 해당 이미지 모달

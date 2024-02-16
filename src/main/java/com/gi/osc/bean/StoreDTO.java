@@ -13,5 +13,8 @@ public class StoreDTO {
 	private String Keyword;
 	private String profile;
 	private String nickname;
+	
+	//유저정보
+	private UsersDTO usersDTO;
 
 }

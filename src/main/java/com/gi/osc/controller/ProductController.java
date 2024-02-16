@@ -124,61 +124,62 @@ public class ProductController {
 	public String store(HttpServletRequest request, Model model,HttpSession session) {
 		
 		//스토어넘버를 주면 해당 스토어 가져오기
-		//파라미터로 스토어 넘버 받기
-		int storeId = Integer.parseInt(request.getParameter("storeNum"));
-		StoreDTO store = postService.getStore(storeId);
-		
-		//유저넘버를 주면 해당 유저 정보 가져오기
-		int userId = store.getUserId();
-		UsersDTO user = postService.getUser(userId);
+	      //파라미터로 스토어 넘버 받기
+	      int storeId = Integer.parseInt(request.getParameter("storeNum"));
+	      StoreDTO store = postService.getStore(storeId);
+	      store.setUsersDTO(postService.getUser(store.getUserId()));
+	      
+	      //유저넘버를 주면 해당 유저 정보 가져오기
+	      int userId = store.getUserId();
+	      UsersDTO user = postService.getUser(userId);
 
-		// 스토어넘버를 주면 해당 스토어의 리뷰들 가져오기
-		ArrayList<ReviewDTO> reviews = storeService.getReviewsByStoreID(storeId);
-		// 리뷰에 해당 유저 정보 추가하기
-		for (ReviewDTO review : reviews) {
-			review.setUsers(postService.getUser(review.getUserId()));
-		}
-		int revCnt = reviews.size();
+	      // 스토어넘버를 주면 해당 스토어의 리뷰들 가져오기
+	      ArrayList<ReviewDTO> reviews = storeService.getReviewsByStoreID(storeId);
+	      // 리뷰에 해당 유저 정보 추가하기
+	      for (ReviewDTO review : reviews) {
+	         review.setUsers(postService.getUser(review.getUserId()));
+	      }
+	      int revCnt = reviews.size();
 
-		// 유저 넘버 주면 해당 유저 리뷰 평균
-		ArrayList<ReviewDTO> userRe = storeService.getReviews(userId);
-		double sum = 0;
-		for (ReviewDTO r : userRe) {
-			sum += r.getPoint();
-		}
-		double revAvg = sum / (userRe.size());
-		
-		//스토어넘버를 주면 해당 스토어의 포스트들 가져오기
-		ArrayList<PostingDTO> posts = storeService.getPosts(storeId);
+	      // 유저 넘버 주면 해당 유저 리뷰 평균
+	      ArrayList<ReviewDTO> userRe = storeService.getReviews(userId);
+	      double sum = 0;
+	      for (ReviewDTO r : userRe) {
+	         sum += r.getPoint();
+	      }
+	      double revAvg = sum / (userRe.size());
+	      
+	      //스토어넘버를 주면 해당 스토어의 포스트들 가져오기
+	      ArrayList<PostingDTO> posts = storeService.getPosts(storeId);
 
-		// 뷰 페이지에 보내기
-		model.addAttribute("store", store);
-		model.addAttribute("storeUser", user);
-		model.addAttribute("revCnt", revCnt);
-		model.addAttribute("revAvg", revAvg);
-		model.addAttribute("reviews", reviews);
-		model.addAttribute("posts", posts);
-		
-		//팔로잉&팔로우 유저수 표시
-		Map<String, Integer> folcnt = storeService.folcnt(storeId,store.getUserId());
-		
-		model.addAttribute("folcnt", folcnt);
-		
-		//팔로우 버튼 : 페이지 로드시
-		//로그인 유저 id
-		if(session.getAttribute("usersId") != null) {
-			String userName = (String)session.getAttribute("usersId");
-			int loginUid = userService.getUserId(userName);
-			int followCheck = storeService.followCheck(storeId, loginUid);
-			
-			model.addAttribute("followCheck",followCheck);
-		}else {
-			int followCheck = 3;
-			model.addAttribute("followCheck",followCheck);
-		}
-		
-		
-		return "product/store";
+	      // 뷰 페이지에 보내기
+	      model.addAttribute("store", store);
+	      model.addAttribute("storeUser", user);
+	      model.addAttribute("revCnt", revCnt);
+	      model.addAttribute("revAvg", revAvg);
+	      model.addAttribute("reviews", reviews);
+	      model.addAttribute("posts", posts);
+	      
+	      //팔로잉&팔로우 유저수 표시
+	      Map<String, Integer> folcnt = storeService.folcnt(storeId,store.getUserId());
+	      
+	      model.addAttribute("folcnt", folcnt);
+	      
+	      //팔로우 버튼 : 페이지 로드시
+	      //로그인 유저 id
+	      if(session.getAttribute("usersId") != null) {
+	         String userName = (String)session.getAttribute("usersId");
+	         int loginUid = userService.getUserId(userName);
+	         int followCheck = storeService.followCheck(storeId, loginUid);
+	         
+	         model.addAttribute("followCheck",followCheck);
+	      }else {
+	         int followCheck = 3;
+	         model.addAttribute("followCheck",followCheck);
+	      }
+	      
+	      
+	      return "product/store";
 	}
 	
 	/*
