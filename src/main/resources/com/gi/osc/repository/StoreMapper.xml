@@ -46,5 +46,20 @@
 	<delete id="unlike" parameterType="com.gi.osc.bean.HeartDTO">
 		delete from heart where postingId=#{postingId} and userId=#{userId}
 	</delete>
+	
+	<!-- selectList : 스토어넘버 주면 해당 스토어 모든 리뷰 가져오기 -->
+	<select id="getReviewsByStoreID" resultType="com.gi.osc.bean.ReviewDTO">
+		select *
+		from review
+		where postingid in (select id postingid
+		                    from posting
+		                    where storeid=#{storeId})
+		order by id desc
+	</select>
+	
+	<!-- selectList : 스토어넘버 주면 해당 스토어 모든 포스트 가져오기 -->
+	<select id="getPosts" resultType="com.gi.osc.bean.PostingDTO">
+		select * from posting where storeid=${storeId}
+	</select>
 
 </mapper>

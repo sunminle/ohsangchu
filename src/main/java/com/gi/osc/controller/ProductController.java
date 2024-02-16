@@ -126,11 +126,33 @@ public class ProductController {
 		//유저넘버를 주면 해당 유저 정보 가져오기
 		int userId = store.getUserId();
 		UsersDTO user = postService.getUser(userId);
+
+		// 스토어넘버를 주면 해당 스토어의 리뷰들 가져오기
+		ArrayList<ReviewDTO> reviews = storeService.getReviewsByStoreID(storeId);
+		// 리뷰에 해당 유저 정보 추가하기
+		for (ReviewDTO review : reviews) {
+			review.setUsers(postService.getUser(review.getUserId()));
+		}
+		int revCnt = reviews.size();
+
+		// 유저 넘버 주면 해당 유저 리뷰 평균
+		ArrayList<ReviewDTO> userRe = storeService.getReviews(userId);
+		double sum = 0;
+		for (ReviewDTO r : userRe) {
+			sum += r.getPoint();
+		}
+		double revAvg = sum / (userRe.size());
 		
-		
-		//뷰 페이지에 보내기
+		//스토어넘버를 주면 해당 스토어의 포스트들 가져오기
+		ArrayList<PostingDTO> posts = storeService.getPosts(storeId);
+
+		// 뷰 페이지에 보내기
 		model.addAttribute("store", store);
 		model.addAttribute("storeUser", user);
+		model.addAttribute("revCnt", revCnt);
+		model.addAttribute("revAvg", revAvg);
+		model.addAttribute("reviews", reviews);
+		model.addAttribute("posts", posts);
 		
 		//팔로잉&팔로우 유저수 표시
 		Map<String, Integer> folcnt = storeService.folcnt(storeId,store.getUserId());
