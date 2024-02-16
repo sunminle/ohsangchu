@@ -45,18 +45,18 @@
 	 	<!-- 판매량이 높은 제품 조회 -->
 		<select id="countPopularProducts" resultType="com.gi.osc.bean.PaymentDTO">
 			<![CDATA[
-				 select * from                                     
-    (select po.thumnail , po.title,usp.* , rownum r from posting po ,(
-				select u.id,u.NICKNAME , u.profile,sp.storename,sp.productname,sp.price,sp.postingid,sp.storeid from users u, 
-				    (select * from store s , 
-				    (select * from product where postingid in(
-				    select id from (
-				        select po.id, COUNT(*) as totalCount FROM payment pm
-				                    JOIN posting po ON pm.postingId = po.id
-				                    GROUP BY po.id ORDER BY totalCount DESC) WHERE ROWNUM <= 6 and totalCount > 1)) p
-				                    where p.storeid = s.id) sp
-				        where u.id=sp.userid) usp
-				    where po.id=usp.postingid) where r > 0 and r <=6
+				 SELECT subquery_alias.id, subquery_alias.thumnail, subquery_alias.title, s.storename, u.profile
+					FROM (
+					    SELECT po.id, po.thumnail, po.title, COUNT(*) AS totalCount, po.storeid
+					    FROM payment pm
+					    JOIN posting po ON pm.postingId = po.id
+					    GROUP BY po.id, po.thumnail, po.title, po.storeid
+					    HAVING COUNT(*) > 1
+					    ORDER BY totalCount DESC
+					) subquery_alias
+					JOIN store s ON subquery_alias.storeid = s.id
+					JOIN users u ON s.userid = u.id
+					WHERE ROWNUM <= 6
 				]]>
 		</select>
 
@@ -90,8 +90,11 @@
 		    WHERE c.id = #{categoryId}
 		</select>
 
-
-
+	    <!-- 검색어를 popular_word 테이블에 삽입하는 쿼리문 -->
+	    <insert id="insertKeyword" parameterType="String">
+	        INSERT INTO popular_word (pwWord, pwDate)
+	        VALUES (#{keyword}, SYSDATE())
+	    </insert>
 
 
 
