@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gi.osc.bean.UserInfoDTO;
 import com.gi.osc.bean.UsersDTO;
 import com.gi.osc.domain.Users;
 
@@ -13,6 +14,9 @@ public interface UsersService {
 	
 	//회원가입 처리
 	 public boolean registerPro(UsersDTO dto) throws Exception;
+	 
+	//회원 추가정보 가입 처리
+	public boolean registerInfoPro(UserInfoDTO dto) throws Exception;
 	
 	//userName주면 userId 가져오기
 	public int getUserId(String userName);

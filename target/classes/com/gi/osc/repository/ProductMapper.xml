@@ -14,4 +14,8 @@
 		select * from product where storeid = #{storeId} order by id desc
 	</select>
 
+<select id="productList2" resultType="com.gi.osc.bean.ProductDTO">
+    select * from product order by id desc
+</select>
+
 </mapper>

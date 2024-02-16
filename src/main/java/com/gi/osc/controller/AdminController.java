@@ -9,14 +9,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gi.osc.bean.ProductDTO;
 import com.gi.osc.bean.UsersDTO;
 import com.gi.osc.domain.Users;
+import com.gi.osc.service.ProductService;
 import com.gi.osc.service.UsersService;
 
 @Controller
@@ -37,17 +40,18 @@ public class AdminController {
     }
     
  // 사용자 권한 변경 
-    @PutMapping("/{userId}/auth")
+    @PostMapping("/auth")
     @ResponseBody
-    public ResponseEntity<?> changeUserAuth(@PathVariable String userId, @RequestParam String auth) {
+    public ResponseEntity<?> changeUserAuth(String userId, @RequestParam String auth) {
+    	System.out.println(""+userId+"----"+auth);
         try {
             UsersDTO user = userService.getUserByRealId(userId);
             if (user != null) {
                 user.changeUserAuth(auth);
                 userService.updateUserAuth(user);
-                return ResponseEntity.ok().body("{\"msg\": \"사용자 권한이 성공적으로 변경되었습니다.\"}");
+                return ResponseEntity.ok().body("{\"msg\": \"success.\"}");
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"msg\": \"사용자를 찾을 수 없습니다.\"}");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"msg\": \"aaaaa.\"}");
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -55,4 +59,15 @@ public class AdminController {
         }
     }
     
+ // 상품 상태 변경 
+    
+    @Autowired
+    private ProductService productService;
+    
+    @GetMapping("/goodsAdmin")
+    public String getProductList(Model model) {
+        List<ProductDTO> productList = productService.productList2(0);
+        model.addAttribute("products", productList);
+        return "admin/goodsAdmin"; 
+    }
 }

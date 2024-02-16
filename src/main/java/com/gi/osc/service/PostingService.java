@@ -1,6 +1,7 @@
 package com.gi.osc.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -23,5 +24,6 @@ public interface PostingService {
 	public ArrayList<ProductDTO> getProducts(int postNum);
 	public int paymentReviewCount(@Param("postingId") int postingId, @Param("reviewUserId") int reviewUserId);
 	public int postingReviewCount(@Param("postingId") int postingId, @Param("reviewUserId") int reviewUserId);
+	List<ProductDTO> productList(int storeId);
 	
 }

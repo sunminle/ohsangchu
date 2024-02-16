@@ -1,6 +1,7 @@
 package com.gi.osc.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,5 +77,10 @@ public class PostingServiceImpl implements PostingService{
 		return mapper.postingReviewCount(postingId, reviewUserId);
 	}
 	
+	  @Override
+	    public List<ProductDTO> productList(int storeId) {
+	        // 상점 ID를 기준으로 상품 리스트를 데이터베이스에서 가져옴
+	        return mapper.getProductListByStoreId(storeId);
+	    }
 
 }

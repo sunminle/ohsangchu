@@ -1,6 +1,7 @@
 package com.gi.osc.repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -26,5 +27,6 @@ public interface PostingMapper {
 	public ArrayList<ProductDTO> getProducts(int postingId);
 	public int paymentReviewCount(@Param("postingId") int postingId, @Param("reviewUserId") int reviewUserId);
 	public int postingReviewCount(@Param("postingId") int postingId, @Param("reviewUserId") int reviewUserId);
+	public List<ProductDTO> getProductListByStoreId(int storeId);
 
 }

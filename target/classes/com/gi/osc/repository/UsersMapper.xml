@@ -26,6 +26,9 @@
 		, 'default.png'
 		
 		)
+			<selectKey order="AFTER" resultType="int" keyColumn="id" keyProperty="id">
+				select max(id) id from users 
+			</selectKey>
 		</insert>
 		
 		<insert id="registerUserInfo" parameterType="com.gi.osc.bean.UserInfoDTO">
@@ -41,7 +44,7 @@
 		
 
 		) values (
-		userInfo_seq.nextval
+		  #{userId}
 		, #{tel}
 		, #{email}
 		, #{address}
@@ -87,9 +90,14 @@
 	</insert>
 	-->
 	
-	<!-- 사용자 권한 변경 SQL 추가 -->
-    <update id="updateUserAuth" parameterType="Users">
-        UPDATE users SET auth = #{auth} WHERE real_id = #{realId}
-    </update>
-    
+<!-- 사용자 권한 변경 SQL 추가 -->
+<update id="updateUserAuth" parameterType="com.gi.osc.bean.UsersDTO">
+    UPDATE users SET auth = #{auth} WHERE realid = #{realId}
+</update>
+
+<!-- adminMain userlist -->
+<select id="getUserByRealId" resultType="com.gi.osc.bean.UsersDTO">
+    SELECT * FROM users where realid = #{realId}
+</select>
+
 </mapper>

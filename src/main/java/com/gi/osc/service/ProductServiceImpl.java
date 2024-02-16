@@ -24,5 +24,11 @@ public class ProductServiceImpl implements ProductService{
 	public List<ProductDTO> productList(int storeId) {
 		return mapper.productList(storeId);
 	}
+
+	@Override
+	public List<ProductDTO> productList2(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

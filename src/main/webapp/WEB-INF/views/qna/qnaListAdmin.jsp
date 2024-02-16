@@ -51,7 +51,7 @@
 				<div class="col-lg-12">
 					<h1 class="page-header">QnA</h1>
 				</div>
-			
+
 				<br>
 				<div class="panel panel-default">
 					<div class="panel-heading">QnA</div>
@@ -65,18 +65,21 @@
 									<th>작성일</th>
 								</tr>
 							</thead>
-							 <c:forEach var="qna" items="${qnaList}">
-          
-							<tbody>
-								<tr>
-									<td>${qna.id}</td>
-									<td><a href="qnaDetail/${qna.id}">${qna.title}</td>
-									<td>${qna.userId}</td>
-									<td><fmt:formatDate value="${qna.regDate}" pattern="yy.MM.dd aa hh:mm" /></td>
-								</tr>
-							</tbody>
-							</c:forEach>
+							<c:forEach var="qna" items="${qnaList}">
 							
+
+								<tbody>
+									<tr>
+										<td>${qna.id}</td>
+										<td><a href="qnaDetail/${qna.id}">${qna.title}</td>
+										<td>${qna.userId}</td>
+										<td><fmt:formatDate value="${qna.regDate}"
+												pattern="yy.MM.dd aa hh:mm" /></td>
+									</tr>
+
+									
+							</c:forEach>
+
 						</table>
 					</div>
 				</div>
