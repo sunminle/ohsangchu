@@ -92,13 +92,17 @@ public class ProductController {
 			int heartCheck = 3;
 			model.addAttribute("heartCheck",heartCheck);
 		}
+		int paymentReviewCount = 0;
+		int postingReviewCount = 0;
+		if(session.getAttribute("usersId")!=null) {
 		String realId = (String)session.getAttribute("usersId");
 		int reviewUserId = myPageService.selectUsers(realId).getId();
 		int postingId = postNum;
-		int paymentReviewCount = postService.paymentReviewCount(postingId, reviewUserId);
-		int postingReviewCount = postService.postingReviewCount(postingId, reviewUserId);
-		System.out.println("페이먼트리뷰카운터======"+paymentReviewCount);
-		System.out.println("포스팅리뷰카운터======"+postingReviewCount);
+		paymentReviewCount = postService.paymentReviewCount(postingId, reviewUserId);
+		postingReviewCount = postService.postingReviewCount(postingId, reviewUserId);
+
+		
+		}
 		//뷰 페이지에 보내기
 		model.addAttribute("post", post);
 		model.addAttribute("store", store);
@@ -111,6 +115,7 @@ public class ProductController {
 		model.addAttribute("pList", pList);
 		model.addAttribute("paymentReviewCount",paymentReviewCount);
 		model.addAttribute("postingReviewCount",postingReviewCount);
+		
 		
 		return "product/productDetail";
 	}
