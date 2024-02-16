@@ -111,7 +111,7 @@
 				</div>
 				
 				<div class="input-box">
-					<input id="bank" type="text" name="bank" placeholder="은행">
+					<input id="bank" type="text" name="bankName" placeholder="은행">
 					<label for="bank">BANKNAME</label>
 				</div>
 				

@@ -15,7 +15,7 @@ th, td {
 	padding: 8px;
 	text-align: center;
 	position: relative;
-	font-size: 14px; /* 테이블 셀의 기본 폰트 크기 설정 */
+	font-size: 14px; 
 }
 
 th {
@@ -28,12 +28,17 @@ th {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	font-weight: bold;
-	font-size: 14px; /* 숫자의 폰트 크기 설정 */
+	font-size: 14px; 
 	color: #555;
 }
 </style>
 
 
+<!--favicon-->
+<link rel="icon" href="/resources/images/site/leaf-solid.png">
+<!-- css -->
+<link href="/resources/css/myPage.css" rel="stylesheet">
+<link href="/resources/css/include.css" rel="stylesheet">
 <!--favicon-->
 <link rel="icon" href="/resources/images/site/leaf-solid.png">
 <!-- css -->
@@ -45,6 +50,7 @@ th {
 	rel="stylesheet"
 	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 	crossorigin="anonymous">
+
 <jsp:include page="/WEB-INF/views/include/header.jsp" />
 <c:if test="${sessionScope.usersId != null}">
 	<center>
@@ -55,11 +61,12 @@ th {
 
 				<div id="container">
 					<div id="buttonContainer">
-						Users<br />
+						Admin<br />
 						<button onclick="window.location='/admin/adminMain'">회원관리</button>
-						<button onclick="window.location='/admin/boardAdmin'">게시물관리</button>
+						<button onclick="window.location.href='/admin/goodsAdmin'">상품관리</button>
 
 
+						
 					</div>
 					<div id="modify">
 						<h5>회원리스트</h5>
@@ -85,12 +92,12 @@ th {
 									<td><fmt:formatDate value="${user.regDate}"
 											pattern="yy.MM.dd aa hh:mm" /></td>
 									<!-- 등급 변경 -->
-									<td><select
-										onchange="changeUserAuth(this.value, '${user.realId}')">
+									<td><select id="auth">
 											<option value="1" ${user.auth eq 1 ? 'selected' : ''}>일반</option>
 											<option value="10" ${user.auth eq 10 ? 'selected' : ''}>프리미엄</option>
 											<option value="0" ${user.auth eq 0 ? 'selected' : ''}>제한/휴면</option>
 									</select>
+									<button onclick="changeUserAuth('${user.realId}')">수정</button>
 								</tr>
 
 							</c:forEach>
@@ -99,41 +106,36 @@ th {
 
 						</table>
 						<br /> <br />
-						<button onclick="modifyUser()">수정</button>
 					</div>
 				</div>
 	</center>
 </c:if>
 
 <script>
-
-function changeUserAuth(auth, realId) {
-    $.ajax({
-        type: "put",
-        url: "/admin/" + realId + "/auth",
-        data: { auth: auth },
-        dataType: "json"
-    }).done((res) => {
-        alert(res.msg);
-        // 권한이 변경되었으므로 화면을 다시 로드하거나 해당 행을 갱신하는 등의 작업 수행
-    }).fail((err) => {
-        alert(err.responseJSON.msg);
-    });
-}
-
-
-function modifyUser() {
-    var newAuth = $("select[name='auth']").val(); // 드롭다운 메뉴의 선택된 값을 가져옴
-
-    if (newAuth) { // 새로운 권한 값이 유효한 경우
-        var realId = $(this).closest("tr").find("td:first").text(); // 해당 행의 사용자 ID 가져오기
-        changeUserAuth(newAuth, realId); // 권한 변경 요청 보내기
-    } else {
-        alert("권한을 선택하세요."); // 선택 사항이 없을 경우 경고 메시지 표시
+    function changeUserAuth(realId) {
+        $.ajax({
+            type: "post",
+            url: "/admin/auth/",
+            data: { auth: $("#auth").val() , userId:realId },
+            dataType: "json",
+        }).done((res) => {
+            alert("회원정보 수정이 완료되었습니다.");
+           
+        }).fail((err) => {
+            alert(err.responseJSON.msg);
+        });
     }
-}
+
+	   function modifyUser() {
+        // 사용자가 "수정" 버튼을 클릭했을 때 수행되는 코드
+        alert("수정 버튼이 클릭되었습니다.");
+     
+    }
+	   
+	 
 
 </script>
+
 
 
 <!-- 

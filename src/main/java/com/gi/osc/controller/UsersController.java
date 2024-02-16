@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gi.osc.bean.AuthDTO;
+import com.gi.osc.bean.UserInfoDTO;
 import com.gi.osc.bean.UsersDTO;
 import com.gi.osc.domain.Users;
 import com.gi.osc.service.MyPageServiceImpl;
@@ -76,7 +77,7 @@ public class UsersController {
 		
 		// 회원가입 post
 		@RequestMapping(value = "/registerPro", method = RequestMethod.POST)
-		public String postRegister(UsersDTO dto, Model model) throws Exception {
+		public String postRegister(UsersDTO dto,UserInfoDTO infodto,  Model model) throws Exception {
 		    logger.info("post 회원가입");
 		    logger.info(dto.toString());
 
@@ -85,6 +86,11 @@ public class UsersController {
 
 		    if (registrationSuccess) {
 		        // 회원 가입 성공 시
+		    	infodto.setUserId(dto.getId());
+		    	boolean infoSuccess = service.registerInfoPro(infodto);
+		    	if(infoSuccess) {
+		    		System.out.println("회원의 추가 정보가 등록되었습니다.");
+		    	}
 		        model.addAttribute("message", "Registration successful!");
 		        return "redirect:/users/main"; // 로그인 페이지로 리다이렉트
 		    } else {

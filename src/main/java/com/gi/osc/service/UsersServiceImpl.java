@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gi.osc.bean.UserInfoDTO;
 import com.gi.osc.bean.UsersDTO;
 import com.gi.osc.domain.Users;
 import com.gi.osc.repository.UsersMapper;
@@ -42,6 +43,12 @@ public class UsersServiceImpl implements UsersService{
 	            throw e;
 	        }
 	    }
+
+		@Override
+		public boolean registerInfoPro(UserInfoDTO dto) throws Exception {
+			mapper.registerUserInfo(dto);  //db insert
+			return false;
+		}
 
 	@Override
 	public int getUserId(String userName) {
@@ -80,12 +87,15 @@ public class UsersServiceImpl implements UsersService{
 
 
 
-
 		@Override
 		public void changeUserAuth(String realId, String auth) {
 			// TODO Auto-generated method stub
 			
 		}
+
+
+
+
 		
 }
 	
