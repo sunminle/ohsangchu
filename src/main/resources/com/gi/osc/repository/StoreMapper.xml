@@ -56,5 +56,10 @@
 		                    where storeid=#{storeId})
 		order by id desc
 	</select>
+	
+	<!-- selectList : 스토어넘버 주면 해당 스토어 모든 포스트 가져오기 -->
+	<select id="getPosts" resultType="com.gi.osc.bean.PostingDTO">
+		select * from posting where storeid=${storeId}
+	</select>
 
 </mapper>

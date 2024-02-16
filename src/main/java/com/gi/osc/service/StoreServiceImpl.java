@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.repository.StoreMapper;
 
@@ -76,6 +77,11 @@ public class StoreServiceImpl implements StoreService{
 	@Override
 	public ArrayList<ReviewDTO> getReviewsByStoreID(int storeId) {
 		return mapper.getReviewsByStoreID(storeId);
+	}
+
+	@Override
+	public ArrayList<PostingDTO> getPosts(int storeId) {
+		return mapper.getPosts(storeId);
 	}
 
 }

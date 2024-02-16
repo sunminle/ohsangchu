@@ -3,6 +3,7 @@ package com.gi.osc.service;
 import java.util.ArrayList;
 import java.util.Map;
 
+import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.ReviewDTO;
 
 public interface StoreService {
@@ -13,5 +14,6 @@ public interface StoreService {
 	public ArrayList<ReviewDTO> getReviews(int userId);
 	public int like(int postingId, int userId);
 	public ArrayList<ReviewDTO> getReviewsByStoreID(int storeId);
+	public ArrayList<PostingDTO> getPosts(int storeId);
 	
 }

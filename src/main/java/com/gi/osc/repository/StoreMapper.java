@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.gi.osc.bean.PostingDTO;
 import com.gi.osc.bean.ReviewDTO;
 
 public interface StoreMapper {
@@ -23,5 +24,6 @@ public interface StoreMapper {
 	public int unlike(@Param("postingId") int postingId,
 					  @Param("userId") int userId);
 	public ArrayList<ReviewDTO> getReviewsByStoreID(int storeId);
+	public ArrayList<PostingDTO> getPosts(int storeId);
 	
 }

@@ -142,6 +142,9 @@ public class ProductController {
 			sum += r.getPoint();
 		}
 		double revAvg = sum / (userRe.size());
+		
+		//스토어넘버를 주면 해당 스토어의 포스트들 가져오기
+		ArrayList<PostingDTO> posts = storeService.getPosts(storeId);
 
 		// 뷰 페이지에 보내기
 		model.addAttribute("store", store);
@@ -149,6 +152,7 @@ public class ProductController {
 		model.addAttribute("revCnt", revCnt);
 		model.addAttribute("revAvg", revAvg);
 		model.addAttribute("reviews", reviews);
+		model.addAttribute("posts", posts);
 		
 		//팔로잉&팔로우 유저수 표시
 		Map<String, Integer> folcnt = storeService.folcnt(storeId,store.getUserId());
