@@ -3,6 +3,7 @@ package com.gi.osc.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gi.osc.bean.QNADTO;
+import com.gi.osc.service.MyPageService;
 import com.gi.osc.service.QnaService;
 import com.gi.osc.service.QnaServiceImpl;
 
@@ -33,7 +35,8 @@ public class QnaController {
 	@Autowired
 	private QnaServiceImpl serviceImpl;
 
-
+	@Autowired
+	private MyPageService myPageService;
 
 	// Qna글 get
 	@RequestMapping(value = "/addQna", method = RequestMethod.GET)
@@ -43,10 +46,12 @@ public class QnaController {
 
 	// 공지글 post
 	@RequestMapping(value = "/addQnaPro", method = RequestMethod.POST)
-	public String postAddQnaPro(QNADTO dto, Model model) throws Exception {
+	public String postAddQnaPro(QNADTO dto, HttpSession session, Model model) throws Exception {
 		logger.info("post Qna글");
 		logger.info(dto.toString());
-
+		String realId = (String) session.getAttribute("usersId");
+		int userId = myPageService.selectUsers(realId).getId();
+		dto.setUserId(userId);
 		 try {
 		        // 공지글 등록 처리
 		        boolean registrationSuccess = service.addQnaPro(dto);
