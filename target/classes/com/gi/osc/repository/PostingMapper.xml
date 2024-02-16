@@ -66,4 +66,12 @@
 		select * from product where postingid=#{postingid}
 	</select>
 	
+	<select id="paymentReviewCount">
+		select count(*) from payment where userid = #{reviewUserId} and postingid = #{postingId} and status > 0
+	</select>
+	
+	<select id="postingReviewCount">
+		select count(*) from review where userid = #{reviewUserId} and postingid = #{postingId}
+	</select>
+	
 </mapper>

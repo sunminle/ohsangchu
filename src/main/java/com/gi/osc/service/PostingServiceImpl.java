@@ -65,6 +65,16 @@ public class PostingServiceImpl implements PostingService{
 	public ArrayList<ProductDTO> getProducts(int postNum) {
 		return mapper.getProducts(postNum);
 	}
+
+	@Override
+	public int paymentReviewCount(int postingId, int reviewUserId) {
+		return mapper.paymentReviewCount(postingId, reviewUserId);
+	}
+
+	@Override
+	public int postingReviewCount(int postingId, int reviewUserId) {
+		return mapper.postingReviewCount(postingId, reviewUserId);
+	}
 	
 
 }

@@ -24,5 +24,7 @@ public interface PostingMapper {
 	public int heartCheck(@Param("postingId") int postingId,
 						  @Param("userId") int userId);
 	public ArrayList<ProductDTO> getProducts(int postingId);
+	public int paymentReviewCount(@Param("postingId") int postingId, @Param("reviewUserId") int reviewUserId);
+	public int postingReviewCount(@Param("postingId") int postingId, @Param("reviewUserId") int reviewUserId);
 
 }

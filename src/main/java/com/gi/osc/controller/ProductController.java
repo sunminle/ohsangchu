@@ -19,6 +19,7 @@ import com.gi.osc.bean.ProductDTO;
 import com.gi.osc.bean.ReviewDTO;
 import com.gi.osc.bean.StoreDTO;
 import com.gi.osc.bean.UsersDTO;
+import com.gi.osc.service.MyPageService;
 import com.gi.osc.service.PostingService;
 import com.gi.osc.service.StoreService;
 import com.gi.osc.service.UsersService;
@@ -33,6 +34,8 @@ public class ProductController {
 	private StoreService storeService;
 	@Autowired
 	private UsersService userService;
+	@Autowired
+	private MyPageService myPageService;
 
 	@RequestMapping("detail")
 	public String productDetail(HttpServletRequest request, Model model
@@ -89,7 +92,13 @@ public class ProductController {
 			int heartCheck = 3;
 			model.addAttribute("heartCheck",heartCheck);
 		}
-		
+		String realId = (String)session.getAttribute("usersId");
+		int reviewUserId = myPageService.selectUsers(realId).getId();
+		int postingId = postNum;
+		int paymentReviewCount = postService.paymentReviewCount(postingId, reviewUserId);
+		int postingReviewCount = postService.postingReviewCount(postingId, reviewUserId);
+		System.out.println("페이먼트리뷰카운터======"+paymentReviewCount);
+		System.out.println("포스팅리뷰카운터======"+postingReviewCount);
 		//뷰 페이지에 보내기
 		model.addAttribute("post", post);
 		model.addAttribute("store", store);
@@ -100,6 +109,8 @@ public class ProductController {
 		model.addAttribute("hashes", hashes);
 		model.addAttribute("likeCnt", likeCnt);
 		model.addAttribute("pList", pList);
+		model.addAttribute("paymentReviewCount",paymentReviewCount);
+		model.addAttribute("postingReviewCount",postingReviewCount);
 		
 		return "product/productDetail";
 	}
