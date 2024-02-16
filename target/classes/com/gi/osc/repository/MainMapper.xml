@@ -16,17 +16,22 @@
     	-->
     	<!--  상품검색 -->
     	<select id="searchProductsByName" parameterType="String" resultType="com.gi.osc.bean.ProductDTO">
-		    SELECT a.*, p.*
-		    FROM posting a
-		    JOIN product p ON a.id = p.postingid(+)  
-    		<where>
-        		<if test="searchKeyword != null and searchKeyword != ''">
-		            AND (p.productname LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%'
-		            OR a.title LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%'
-		            OR a.content LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%')
-		        </if>
-   			</where>
+			    SELECT a.*, p.*
+			    FROM posting a
+			    LEFT JOIN (
+			        SELECT postingid, MAX(productname) AS productname
+			        FROM product
+			        GROUP BY postingid
+			    ) p ON a.id = p.postingid
+			    <where>
+			        <if test="searchKeyword != null and searchKeyword != ''">
+			            AND (p.productname LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%'
+			            OR a.title LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%'
+			            OR a.content LIKE '%' || #{searchKeyword, jdbcType=VARCHAR} || '%')
+			        </if>
+			    </where>
 		</select>
+
 		
 		
 	<!-- 상점 검색 -->
@@ -46,25 +51,25 @@
 		<select id="countPopularProducts" resultType="com.gi.osc.bean.PaymentDTO">
 			<![CDATA[
 				 SELECT id, thumnail, title, storename, profile
-					FROM (
-					    SELECT subquery_alias.*, ROWNUM as rn
-					    FROM (
-					        SELECT p.id, p.thumnail, p.title, s.storename, u.profile,
-					               ROW_NUMBER() OVER (ORDER BY totalCount DESC) AS row_num
-					        FROM (
-					            SELECT po.id, po.thumnail, po.title, COUNT(*) AS totalCount, po.storeid
-					            FROM payment pm
-					            JOIN posting po ON pm.postingId = po.id
-					            GROUP BY po.id, po.thumnail, po.title, po.storeid
-					            HAVING COUNT(*) > 1
-					        ) subquery_alias
-					        JOIN store s ON subquery_alias.storeid = s.id
-					        JOIN users u ON s.userid = u.id
-					        JOIN posting p ON subquery_alias.id = p.id
-					    ) subquery_alias
-					    WHERE row_num <= 6
-					)
-					WHERE rn <= 6
+			FROM (
+			    SELECT subquery_alias.*, ROWNUM as rn
+			    FROM (
+			        SELECT p.id, p.thumnail, p.title, s.storename, u.profile,
+			               ROW_NUMBER() OVER (ORDER BY totalCount DESC) AS row_num
+			        FROM (
+			            SELECT po.id, po.thumnail, po.title, COUNT(*) AS totalCount, po.storeid
+			            FROM payment pm
+			            JOIN posting po ON pm.postingId = po.id
+			            GROUP BY po.id, po.thumnail, po.title, po.storeid
+			            HAVING COUNT(*) > 1
+			        ) subquery_alias
+			        JOIN store s ON subquery_alias.storeid = s.id
+			        JOIN users u ON s.userid = u.id
+			        JOIN posting p ON subquery_alias.id = p.id
+			    ) subquery_alias
+			    WHERE row_num <= 6
+			)
+			WHERE rn <= 6
 				]]>
 		</select>
 
