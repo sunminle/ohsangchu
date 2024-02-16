@@ -22,5 +22,6 @@ public interface StoreMapper {
 			  		@Param("userId") int userId);
 	public int unlike(@Param("postingId") int postingId,
 					  @Param("userId") int userId);
+	public ArrayList<ReviewDTO> getReviewsByStoreID(int storeId);
 	
 }

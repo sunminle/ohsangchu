@@ -12,5 +12,6 @@ public interface StoreService {
 	public Map<String,Integer> folcnt(int storeId, int storeUserId);
 	public ArrayList<ReviewDTO> getReviews(int userId);
 	public int like(int postingId, int userId);
+	public ArrayList<ReviewDTO> getReviewsByStoreID(int storeId);
 	
 }

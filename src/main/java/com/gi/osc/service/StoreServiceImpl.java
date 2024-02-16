@@ -73,4 +73,9 @@ public class StoreServiceImpl implements StoreService{
 		}
 	}
 
+	@Override
+	public ArrayList<ReviewDTO> getReviewsByStoreID(int storeId) {
+		return mapper.getReviewsByStoreID(storeId);
+	}
+
 }
