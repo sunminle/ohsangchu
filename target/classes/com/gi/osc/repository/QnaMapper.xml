@@ -18,7 +18,7 @@
 		) values (
 		
 		   qna_seq.nextval
-		, 22
+		, #{userId}
 		, #{title}
 		, #{content}
 		, sysdate

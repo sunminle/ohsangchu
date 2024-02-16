@@ -46,7 +46,7 @@ private static final String HOST = "https://kapi.kakao.com";
         params.add("total_amount", String.valueOf(price));
         params.add("tax_free_amount", "1");
         params.add("approval_url", "http://localhost:8080/kakaoPaySuccess");
-        params.add("cancel_url", "http://localhost:8080/kakaoPayCancel");
+        params.add("cancel_url", "http://localhost:8080/my/myOrderList");
         params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail");
          HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
         try {
