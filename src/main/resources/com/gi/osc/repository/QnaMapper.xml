@@ -36,6 +36,22 @@
         SELECT * FROM qna WHERE id = #{id}
     </select>
     
+    <!-- 사용자 ID에 해당하는 데이터 가져오기 -->
+    <select id="getQnaReplyById"  resultType="com.gi.osc.bean.QNAReplyDTO">
+        SELECT * FROM qna_reply WHERE id = #{id}
+    </select>
+    
+    <insert id="addQnaReply">
+    	insert into qna_reply (qnaid,userid,title,content) values (#{qnaId},#{userId},#{title},#{content})
+    </insert>
+    
+    <select id="qnaReplyCount">
+    	select count(*) from qna_reply where qnaid = #{qnaId}
+    </select>
+    
+    <select id="qnaReplyList" resultType="com.gi.osc.bean.QNAReplyDTO">
+    	select * from qna_reply where qnaId = #{qnaId}
+    </select>
  
 
 </mapper>

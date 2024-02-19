@@ -10,11 +10,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class QNAReplyDTO {
+	private int id;
 	private int qnaId;
 	private int userId;
 	private String title;
 	private String content;
 	private Date regDate;
 	
+	private String realId;
+	private int qnaReplyCount;
 	
 }

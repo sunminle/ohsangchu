@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gi.osc.bean.MyOrderProductDTO;
 import com.gi.osc.bean.QNADTO;
+import com.gi.osc.bean.QNAReplyDTO;
 import com.gi.osc.service.MyPageService;
 import com.gi.osc.service.QnaService;
 import com.gi.osc.service.QnaServiceImpl;
@@ -37,6 +42,7 @@ public class QnaController {
 
 	@Autowired
 	private MyPageService myPageService;
+	
 
 	// Qna글 get
 	@RequestMapping(value = "/addQna", method = RequestMethod.GET)
@@ -83,7 +89,12 @@ public class QnaController {
 	  
 	  //qna 리스트
 	  @GetMapping("/qnaList")
-	    public String qnaList(Model model) {
+	    public String qnaList(Model model,HttpSession session) {
+		  	int userAuth = 0;
+		  	if(session.getAttribute("usersId") != null) {
+		  	String realId = (String) session.getAttribute("usersId");
+		  	userAuth = Integer.parseInt( myPageService.selectUsers(realId).getAuth());
+		  	}
 	        List<QNADTO> qnaList = service.qnaList();
 	        
 	        // 각 공지사항의 detailUrl 설정
@@ -92,6 +103,7 @@ public class QnaController {
 	        }
 
 	        model.addAttribute("qnaList", qnaList);
+	        model.addAttribute("userAuth",userAuth);
 	        return "qna/qnaList";
 	    }
 	  
@@ -132,9 +144,49 @@ public class QnaController {
 	            // 다른 경우에는 qnaList.jsp로 이동 
 	            return "qna/qnaList";
 	        }
-	        
-	   
-
+	    }
 	    
-}}
+	    @RequestMapping("addQnaAnswer")
+	    public String addQnaAnswer(int qnaId, Model model) {
+	    	int qnaReplyCheck = service.qnaReplyCount(qnaId);
+	    	model.addAttribute("qnaId",qnaId);
+	    	model.addAttribute("qnaReplyCheck",qnaReplyCheck);
+	    	return "qna/addQnaAnswer";
+	    }
+	    
+	    @RequestMapping("addQnaAnswerPro")
+	    public String addQnaAnswerPro(QNAReplyDTO qnaReplyDTO, HttpSession session) {
+	    	if(session.getAttribute("usersId") != null) {
+			  	String realId = (String) session.getAttribute("usersId");
+			  	qnaReplyDTO.setUserId(myPageService.selectUsers(realId).getId());
+			  	service.addQnaReply(qnaReplyDTO);
+			  	}
+	    	return "qna/addQnaAnswerPro";
+	    }
+	    
+	    @PostMapping("qnaAnswerList")
+		public @ResponseBody ResponseEntity<QNAReplyDTO> myOrderProductList(HttpSession session,
+										@RequestParam("qnaId") String qnaId) {
+	    	QNAReplyDTO qnaReplyDTO = new QNAReplyDTO();
+	    	int qnaReplyCount = service.qnaReplyCount(Integer.parseInt(qnaId));
+	    	qnaReplyDTO.setQnaReplyCount(qnaReplyCount);
+	    	if(qnaReplyCount > 0) {
+	    	qnaReplyDTO = service.qnaReplyList(Integer.parseInt(qnaId));
+	    	qnaReplyDTO.setQnaReplyCount(qnaReplyCount);
+	    	qnaReplyDTO.setRealId(myPageService.selectRealId(qnaReplyDTO.getUserId()));
+	    	}
+	        return new ResponseEntity<>(qnaReplyDTO, HttpStatus.OK);
+		}
+	    
+	    
+	    @GetMapping("/qnaAnswerDetail/{id}") // {id}는 실제 공지사항의 ID 값
+	    public String qnaAnswerDetail(@PathVariable("id") long id, Model model) {
+	        // 공지사항 상세 정보를 가져와서 model에 추가
+	        QNAReplyDTO qna = service.getQnaReplyById(id);
+	        model.addAttribute("qna", qna);
+
+	        return "qna/qnaAnswerDetail"; 
+	    }
+
+}
 

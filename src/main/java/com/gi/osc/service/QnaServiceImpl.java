@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.gi.osc.bean.QNADTO;
+import com.gi.osc.bean.QNAReplyDTO;
 import com.gi.osc.repository.QnaMapper;
 
 
@@ -71,6 +72,26 @@ public class QnaServiceImpl implements QnaService{
     public QNADTO getQnaById(Long id) {
         return qnaMapper.getQnaById(id);
     }
+    
+    @Override
+    public QNAReplyDTO getQnaReplyById(Long id) {
+        return qnaMapper.getQnaReplyById(id);
+    }
+
+	@Override
+	public void addQnaReply(QNAReplyDTO qnaReplyDTO) {
+		mapper.addQnaReply(qnaReplyDTO);
+	}
+
+	@Override
+	public int qnaReplyCount(int qnaId) {
+		return mapper.qnaReplyCount(qnaId);
+	}
+
+	@Override
+	public QNAReplyDTO qnaReplyList(int qnaId) {
+		return mapper.qnaReplyList(qnaId);
+	}
 
 
 	

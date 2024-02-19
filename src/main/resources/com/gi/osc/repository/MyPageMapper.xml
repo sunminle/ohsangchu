@@ -383,4 +383,8 @@
 	<select id="selectPaymentEtc" resultType="com.gi.osc.bean.PaymentEtcDTO">
 		select * from payment_etc where paymentid = #{paymentId}
 	</select>
+	
+	<select id="selectRealId">
+		select realid from users where id = #{userId}
+	</select>
 </mapper>
