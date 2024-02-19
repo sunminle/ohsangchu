@@ -33,7 +33,53 @@
 
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    <c:forEach var="qna" items="${qnaList}" varStatus="i">
+        processOrder('${qna.id}', ${i.count});
+    </c:forEach>
+});
 
+function processOrder(qnaId, index) {
+    var formData = new FormData();
+    formData.append("qnaId", qnaId);
+    console.log(qnaId);
+     $.ajax({
+        type: "POST",
+        url: '/qna/qnaAnswerList',
+        contentType: false,
+        processData: false,
+        data: formData,
+        success: function(data) {
+                var qnaReplyList = data; 
+                console.log(qnaReplyList);
+                if(qnaReplyList.qnaReplyCount > 0){
+                	var regDate = new Date(qnaReplyList.regDate);
+
+                	var options = {
+                	        year: '2-digit',
+                	        month: '2-digit',
+                	        day: '2-digit',
+                	        hour: '2-digit',
+                	        minute: '2-digit'
+                	    };
+
+                	    var formattedDate = new Intl.DateTimeFormat('ko-KR', options).format(regDate);
+
+                	$("#qna_" + index).append("<td>"+qnaReplyList.qnaId+"-1</td>"
+							+"<td><a href='qnaAnswerDetail/"+qnaReplyList.id+"'>ㄴ"+qnaReplyList.title+"</td>"
+							+"<td>"+qnaReplyList.realId+"</td>"
+							+"<td>"+formattedDate+"</td>"
+							+"<td></td>");
+                }
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+        }
+    }); 
+}
+
+</script>
 <link href="/resources/css/include.css" rel="stylesheet">
 <link href="/resources/css/style.css" rel="stylesheet">
 
@@ -53,6 +99,7 @@
 					<h1 class="page-header">QnA</h1>
 				</div>
 					<div class="row">
+					<c:if test="${userAuth < 100}">
 					<div class="col-lg-12">
 						<button type="button"
 							class="btn btn-outline btn-primary pull-right"
@@ -60,6 +107,7 @@
 							<i class="fa fa-edit fa-fw"></i> 글쓰기
 						</button>
 					</div>
+					</c:if>
 				</div>
 				<br>
 				<div class="panel panel-default">
@@ -72,16 +120,30 @@
 									<th>제목</th>
 									<th>작성자</th>
 									<th>작성일</th>
+									<c:if test="${userAuth >99}">
+										<th>답변달기</th>
+									</c:if>
 								</tr>
 							</thead>
-							 <c:forEach var="qna" items="${qnaList}">
+							 <c:forEach var="qna" items="${qnaList}" varStatus="i">
           
 							<tbody>
 								<tr>
 									<td>${qna.id}</td>
 									<td><a href="qnaDetail/${qna.id}">${qna.title}</td>
 									<td>${qna.userId}</td>
-									<td><fmt:formatDate value="${qna.regDate}" pattern="yy.MM.dd aa hh:mm" /></td>
+									<td><fmt:formatDate value="${qna.regDate}" pattern="yy. MM. dd. aa hh:mm" /></td>
+									<c:if test="${userAuth >99}">
+										<td>
+											<button type="button"
+												class="btn btn-outline btn-primary pull-right"
+												onclick="location.href='/qna/addQnaAnswer?qnaId=${qna.id}'">
+												<i class="fa fa-edit fa-fw"></i> 답변쓰기
+											</button>
+										</td>
+									</c:if>
+								</tr>
+								<tr id = "qna_${i.count}">
 								</tr>
 							</tbody>
 							</c:forEach>

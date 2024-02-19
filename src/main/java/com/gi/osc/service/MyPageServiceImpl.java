@@ -640,6 +640,11 @@ public class MyPageServiceImpl implements MyPageService{
 		return mapper.selectPaymentEtc(paymentId);
 	}
 
+	@Override
+	public String selectRealId(int userId) {
+		return mapper.selectRealId(userId);
+	}
+
 	
 
 	

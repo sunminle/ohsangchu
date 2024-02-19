@@ -89,4 +89,5 @@ public interface MyPageMapper {
 	public void updateProductQuantity(PaymentProductDTO paymentProductDTO);
 	public void updateMyProductBuyer(@Param("paymentId")int paymentId, @Param("selectedStatus")int selectedStatus);
 	public List<PaymentEtcDTO> selectPaymentEtc(int paymentId);
+	public String selectRealId(int userId);
 }

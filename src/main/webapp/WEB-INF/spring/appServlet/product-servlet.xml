@@ -18,4 +18,5 @@
 	<beans:bean id="reviewAnswerDTO" class="com.gi.osc.bean.ReviewAnswerDTO" />
 	<beans:bean id="deliveryTypeDTO" class="com.gi.osc.bean.DeliveryTypeDTO"/>
 	<beans:bean id="deliveryTypePostingDTO" class="com.gi.osc.bean.DeliveryTypePostingDTO" />
+	<beans:bean id="qnaReplyDTO" class="com.gi.osc.bean.QNAReplyDTO" />
 </beans:beans>

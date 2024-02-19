@@ -195,10 +195,7 @@
     </ul>
 </li>
             
-           <c:if test="${usersId != null && usersId == 'admin'}">
-  	<a class="navbar-brand" href="/qna/qnaListAdmin"><b class="green">QnA</b></a>
-  </c:if>
-  <c:if test="${ usersId != 'admin'}">
+  <c:if test="${usersId != null}">
   	<a class="navbar-brand" href="/qna/qnaList"><b class="green">QnA</b></a>
   </c:if> 
             
