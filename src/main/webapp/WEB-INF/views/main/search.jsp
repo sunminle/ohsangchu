@@ -34,9 +34,21 @@
     font-style: normal;
 }
 
-.proDes {font-family: 'Dovemayo_wild', sans-serif;}
+.proDes {
+font-family: 'Dovemayo_wild', sans-serif;
+}
 
-h2 {font-family: 'EF_watermelonSalad', sans-serif;}
+h2 {
+font-family: 'EF_watermelonSalad', sans-serif;}
+
+.centered-image {
+    display: block;
+    margin: 0 auto; /* 위아래 여백은 0으로 하고 좌우 여백을 자동으로 설정합니다. */
+    width: 50%; /* 이미지의 너비를 조정할 수 있습니다. */
+}
+p {
+font-family: 'EF_watermelonSalad', sans-serif;}
+}
 
 </style>
 
@@ -54,8 +66,12 @@ h2 {font-family: 'EF_watermelonSalad', sans-serif;}
 <br />
     <!-- 검색 결과가 비어있는 경우 -->
    <c:if test="${empty productList and empty storeList and empty hashtagList}">
-    <p>검색 결과가 없어요ㅠㅠ..</p>
+    <div style="text-align: center;">
+        <img src="/resources/images/site/not.gif" width="400px" height="560px alt="검색 결과가 없는 이미지" class="centered-image">
+        <h2>검색 결과가 없어요ㅠㅠ..</h2>
+    </div>
 </c:if>
+
 
    <!-- 검색 결과가 있는 경우 -->
 	<c:if test="${productList != null}">
@@ -67,7 +83,7 @@ h2 {font-family: 'EF_watermelonSalad', sans-serif;}
                 <img src="/resources/images/posting/${product.thumnail}" alt="프로필이미지" width="300px" height="300px">
                 <div class="proDes">
                     <div class="proTitle">${product.title}</div>
-                    <div class="proPrice d-flex justify-content-end"><span>${product.price} 원</span></div>
+                    <div class="proPrice d-flex justify-content-end"><span></span></div>
                     <div class="proProfile d-flex align-items-center">
                         <div class="proImg">
                             <img src="">
@@ -201,6 +217,9 @@ h2 {font-family: 'EF_watermelonSalad', sans-serif;}
 </c:if>
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
-	<!-- /footer -->	
+	<!-- /footer -->
+	
+	
 </body>
+
 </html>

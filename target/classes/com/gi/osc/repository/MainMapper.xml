@@ -85,12 +85,14 @@
 		    </where>
 		</select>
 
+	<!--
 	<select id="getCategoriesByRange" resultType="com.gi.osc.bean.CategoryDTO">
         SELECT c.categoryName, p.title, p.thumnail, p.id, p.categoryId
         FROM category c
         JOIN posting p ON c.id = p.categoryId
         WHERE c.ID BETWEEN 100 AND 699
     </select>
+    -->
 
 		<select id="getCategories" resultType="com.gi.osc.bean.CategoryDTO">
 			select * from category
@@ -106,8 +108,23 @@
 	    <!-- 검색어를 popular_word 테이블에 삽입하는 쿼리문 -->
 	    <insert id="insertKeyword" parameterType="String">
 	        INSERT INTO popular_word (pwWord, pwDate)
-	        VALUES (#{keyword}, SYSDATE())
+	        VALUES (#{keyword}, SYSDATE)
 	    </insert>
+	    
+	    <!-- 중복되는 단어가 많은 순으로 정렬하여 가져오는 쿼리 -->
+		<select id="selectPopularWords" resultType="map">
+			<![CDATA[
+			    SELECT pwWord
+			    FROM (
+			        SELECT pwWord, COUNT(*) AS wordCount
+			        FROM popular_word
+			        GROUP BY pwWord
+			        ORDER BY COUNT(*) DESC
+			    )
+			    WHERE ROWNUM <= 10
+			    ]]>
+		</select>
+	    
 
 
 

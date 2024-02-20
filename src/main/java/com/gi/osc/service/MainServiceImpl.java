@@ -44,10 +44,10 @@ public class MainServiceImpl implements MainService {
 		return mapper.searchHashtagByName(searchKeyword);
 	}
 
-	 @Override
+	 /*@Override
 	    public List<CategoryDTO> getCategoriesByRange() {
 	        return mapper.getCategoriesByRange();
-	    }
+	    }*/
 
 	@Override
 	public List<CategoryDTO> getCategories() {
@@ -61,6 +61,19 @@ public class MainServiceImpl implements MainService {
 		return mapper.getPostingsByCategoryId(categoryId);
 	}
 
+	@Override
+	public void insertKeyword(String keyword) {
+		// TODO Auto-generated method stub
+		mapper.insertKeyword(keyword);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectPopularWords() {
+		// TODO Auto-generated method stub
+		return mapper.selectPopularWords();
+	}
+
+	
 
 	
 	
