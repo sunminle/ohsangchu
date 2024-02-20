@@ -17,40 +17,10 @@
 <!-- css -->
 <link href="/resources/css/include.css" rel="stylesheet">
 
-<style>
 
-.btn-default {background: #75C573;  color: #fff;}
 
-@font-face {
-    font-family: 'Dovemayo_wild';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/Dovemayo_wild.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'EF_watermelonSalad';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_watermelonSalad.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
+<link href="/resources/css/search.css" rel="stylesheet">
 
-.proDes {
-font-family: 'Dovemayo_wild', sans-serif;
-}
-
-h2 {
-font-family: 'EF_watermelonSalad', sans-serif;}
-
-.centered-image {
-    display: block;
-    margin: 0 auto; /* 위아래 여백은 0으로 하고 좌우 여백을 자동으로 설정합니다. */
-    width: 50%; /* 이미지의 너비를 조정할 수 있습니다. */
-}
-p {
-font-family: 'EF_watermelonSalad', sans-serif;}
-}
-
-</style>
 
 </head>
 <body>
@@ -72,11 +42,14 @@ font-family: 'EF_watermelonSalad', sans-serif;}
     </div>
 </c:if>
 
+<br />
+
 
    <!-- 검색 결과가 있는 경우 -->
 	<c:if test="${productList != null}">
     <!-- 각 제품에 대한 정보를 표시 -->
-    <div class="row justify-content-around">
+    <div id="newProduct">
+    <div id="newProList" class="row justify-content-around">
     <c:forEach var="product" items="${productList}" varStatus="loop">
         <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
             <div class="pro" onclick="location.href='/product/detail?postNum=${product.id}';">
@@ -85,9 +58,7 @@ font-family: 'EF_watermelonSalad', sans-serif;}
                     <div class="proTitle">${product.title}</div>
                     <div class="proPrice d-flex justify-content-end"><span></span></div>
                     <div class="proProfile d-flex align-items-center">
-                        <div class="proImg">
-                            <img src="">
-                        </div>
+                        
                         <span></span>
                     </div>
                 </div>
@@ -97,6 +68,7 @@ font-family: 'EF_watermelonSalad', sans-serif;}
         </div><div class="row justify-content-around">
     </c:if>
     </c:forEach>
+</div>
 </div>
     
             <br />
@@ -123,6 +95,7 @@ font-family: 'EF_watermelonSalad', sans-serif;}
 </c:if>
 <c:if test="${storeList != null}">
             <!-- 각 제품에 대한 정보를 표시 -->
+            <div id="newProduct">
             <div class="row justify-content-around">
     <c:forEach var="store" items="${storeList}" varStatus="loop">
         <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
@@ -132,9 +105,7 @@ font-family: 'EF_watermelonSalad', sans-serif;}
                     <div class="proTitle">${store.storeName}</div>
                     <div class="proPrice d-flex justify-content-end"><span>${store.nickname}</span></div>
                     <div class="proProfile d-flex align-items-center">
-                        <div class="proImg">
-                            <img src="">
-                        </div>
+                        
                         <span></span>
                     </div>
                 </div>
@@ -144,6 +115,7 @@ font-family: 'EF_watermelonSalad', sans-serif;}
         </div><div class="row justify-content-around">
     </c:if>
     </c:forEach>
+</div>
 </div>
             
             <br />
@@ -170,6 +142,7 @@ font-family: 'EF_watermelonSalad', sans-serif;}
 </c:if>
 <c:if test="${hashtagList != null}">
     <!-- 각 제품에 대한 정보를 표시 -->
+    <div id="newProduct">
     <div class="row justify-content-around">
     <c:forEach var="hashtag" items="${hashtagList}" varStatus="loop">
         <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
@@ -192,7 +165,7 @@ font-family: 'EF_watermelonSalad', sans-serif;}
     </c:if>
     </c:forEach>
 </div>
-    
+   </div> 
             <br />
             
              <!-- 페이징 컨트롤 표시 -->

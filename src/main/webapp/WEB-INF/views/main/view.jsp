@@ -21,19 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barriecito&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
   
-<style>
-
-.btn-default {background: #75C573;  color: #fff;}
-
-@font-face {
-    font-family: 'Dovemayo_wild';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/Dovemayo_wild.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-.proDes {font-family: 'Dovemayo_wild', sans-serif;}
-h2 {font-family: 'Dancing Script', cursive;}
-</style>
+<link href="/resources/css/view.css" rel="stylesheet">
 	
 </head>
 <body>
@@ -45,19 +33,31 @@ h2 {font-family: 'Dancing Script', cursive;}
     <br />
     
         <!-- 포스팅 정보 출력 -->
-        <div class="row justify-content-around">
-        <c:forEach items="${postings}" var="posting">
+        <div id="newProduct">
+    <div id="newProList" class="row justify-content-around">
+    <c:forEach var="posting" items="${postings}" varStatus="loop">
         <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
-        <div class="pro" onclick="location.href='/product/detail?postNum=${posting.id}';">
-     
-					<img src="/resources/images/posting/${posting.thumnail}" alt="프로필이미지" width="300px" height="300px">
-					<div class="proDes">
-						<div class="proTitle">${posting.title}</div>
-				</div>
+            <div class="pro" onclick="location.href='/product/detail?postNum=${posting.id}';">
+                <img src="/resources/images/posting/${posting.thumnail}" alt="프로필이미지" width="300px" height="300px">
+                <div class="proDes">
+                    <div class="proTitle">${posting.title}</div>
+                    <div class="proPrice d-flex justify-content-end"><span></span></div>
+                    <div class="proProfile d-flex align-items-center">
+                        
+                        <span></span>
+                    </div>
+                </div>
             </div>
-            </div>
-        </c:forEach>
         </div>
+         <c:if test="${loop.index % 5 == 4 or loop.last}">
+        </div><div class="row justify-content-around">
+    </c:if>
+    </c:forEach>
+</div>
+</div>
+        
+        <br />
+        
          <!-- 페이징 컨트롤 표시 -->
 			<div class="d-flex justify-content-center">
 				<div class="btn-group">
@@ -76,7 +76,8 @@ h2 {font-family: 'Dancing Script', cursive;}
 			        </c:if>
 			  	</div>
 			</div>
- 
+			
+ 			<br />
     
     <!-- footer -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
