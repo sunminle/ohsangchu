@@ -208,19 +208,19 @@
 		<div id="banner">
 			<div id="carouselExample" class="carousel slide">
 				<div class="carousel-inner">
-					<div class="carousel-item active banners">
+					<div class="carousel-item active banners" onclick="location.href='/main/view?categoryId=211';">
 						<img src="/resources/images/site/da.png" class="d-block w-100" alt="...">
 					</div>
-					<div class="carousel-item banners">
+					<div class="carousel-item banners" onclick="location.href='/main/view?categoryId=411';">
 						<img src="/resources/images/site/mimi.gif" class="d-block w-100" alt="...">
 					</div>
-					<div class="carousel-item banners">
+					<div class="carousel-item banners" onclick="location.href='/main/view?categoryId=511';">
 						<img src="/resources/images/site/po.gif" class="d-block w-100" alt="...">
 					</div>
-					<div class="carousel-item banners">
+					<div class="carousel-item banners" onclick="location.href='/main/view?categoryId=611';">
 						<img src="/resources/images/site/yf.png" class="d-block w-100" alt="...">
 					</div>
-					<div class="carousel-item banners">
+					<div class="carousel-item banners" onclick="location.href='/main/view?categoryId=111';">
 						<img src="/resources/images/site/ff.gif" class="d-block w-100" alt="...">
 					</div>
 				</div>
@@ -234,7 +234,7 @@
 		</div>
 		
 		<div id="qnabanner" class="mt-3">
-			<a class="w-100 d-flex justify-content-center" href="#">
+			<a class="w-100 d-flex justify-content-center" href="/qna/qnaList">
 				<img src="/resources/images/site/osc.gif">
 			</a>
 			<hr>
