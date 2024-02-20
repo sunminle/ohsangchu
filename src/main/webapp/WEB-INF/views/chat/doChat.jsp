@@ -41,19 +41,17 @@
 	});
 </script>
 
-
-<h1>chat..!!</h1>
+<h1>chat</h1>
 <div id = "msgs">
-==Chat start== <br/>
+====채팅방==== <br/>
 <c:if test="${!empty lineList }">
 	<c:forEach var = "lineList" items = "${lineList}">
 	<a>${lineList}</a><br/>
 	</c:forEach>
 </c:if>
 </div>
-<hr color = "red">
 <input type = "text" name = "chat" id = "chat">
-<input type = "button" value = "send" id = "sendBtn">
+<input type = "button" value = "전송" id = "sendBtn">
 <br/>
 
 
