@@ -105,7 +105,7 @@
 					<a class="navbar-brand" href="/admin/adminMain"><b
 						class="green">회원관리</b></a>
 				</c:if>
-				<a href="/my/myPageMain">마이페이지</a> <a href="/users/logout">로그아웃</a>
+				<a href="/chat/chattingList">🗨채팅🗨</a> <a href="/my/myPageMain">마이페이지</a> <a href="/users/logout">로그아웃</a>
 			</div>
 		</c:if>
 	</div>

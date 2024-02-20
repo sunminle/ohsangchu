@@ -33,8 +33,8 @@
 		<beans:property name="maxInMemorySize" value="-1" />
 		<beans:property name="uploadTempDir" value="file:/d:/upload/temp" />
 	</beans:bean>
-	<!-- 
+	 
 	<beans:bean id = "chat" class = "com.gi.osc.controller.MessageChat"/>
-	 -->
+	 
 	
 </beans:beans>
