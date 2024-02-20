@@ -5,10 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,10 +47,10 @@ public class MainController {
 
 
 	
-	@GetMapping("/main")
-	public String showSearchForm() {
-	    return "main/main";
-	}
+	//@GetMapping("/main")
+	//public String showSearchForm() {
+	//    return "main/main";
+	//}
 	
 	@GetMapping("/view")
 	public String view(@RequestParam(name = "page", defaultValue = "1") int page,
@@ -78,6 +81,7 @@ public class MainController {
 	public String searchProductsByName(@RequestParam(name = "page", defaultValue = "1") int page,
 	                                  int searchColumn, String searchKeyword,
 	                                  Model model) {
+			service.insertKeyword(searchKeyword);
 	   		if(searchColumn == 1) {
 				List<ProductDTO> productList = service.searchProductsByName(searchKeyword);
 				// 페이징 처리를 위한 로직 추가
@@ -129,6 +133,23 @@ public class MainController {
 	   return "main/search";
 	}
 	
+	/*@GetMapping("/test")
+    public List<Map<String, Object>> getPopularWords() {
+        return service.selectPopularWords();
+    }*/
+	
+	@GetMapping("/pwWord")
+	public ResponseEntity<List<Map<String, Object>>> getPopularWords() {
+	    List<Map<String, Object>> popularWords = service.selectPopularWords();
+	    return ResponseEntity.ok(popularWords);
+	}
+	
+	/*@GetMapping("")
+	public String getPopularWords(Model model) {
+	    List<Map<String, Object>> popularWords = service.selectPopularWords();
+	    model.addAttribute("popularWords", popularWords);
+	    return "main";
+	}*/
 	
 
 }

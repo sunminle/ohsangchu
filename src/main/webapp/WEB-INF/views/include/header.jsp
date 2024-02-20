@@ -18,7 +18,7 @@
 			<form action="/main/search" method="get">
 				<div class="d-flex align-items-center m-2">
 					<div class="d-flex justify-content-between align-items-center">
-						<select class="form-select" aria-label="Default select example"
+						<select id="searchColumn" class="form-select" aria-label="Default select example"
 							name="searchColumn">
 							<option selected value="1">상품</option>
 							<option value="2">상점</option>
@@ -44,53 +44,29 @@
 
 	<div id="chart" class="d-flex align-items-center">
 		<script type="text/javascript">
-			$(document)
-					.ready(
-							function() {
-								var word = new Array();
-								//객체 가져오기
-								var ranking = document
-										.getElementById("ranking");
-								//Ajax객체 생성
-								var request = new XMLHttpRequest();
-								//요청준비
-								request.open("get",
-										"/resources/etc/search.json", true);
-								//데이터 요청
-								request.send();
-								//데이터 수신
-								request.onreadystatechange = function() {
-									if (request.readyState == 4) {
-										if (request.status == 200) {
-											var obj = JSON
-													.parse(request.responseText); //json객체로 변환
-											console.log(obj);
-											var str = "";
-											for (var i = 0; i < 6; i++) {
-												str = "<b>" + (i + 1)
-														+ "</b> &nbsp;&nbsp;"
-														+ obj[i]['name'];
-												word[i] = str; //str을 순서대로 배열 형태로 저장
-											}
-										}
-									}
-								}
-								var i = 0;
-								var interval = setInterval(function() {
-									if (i > 5) { //i가 5이상이되면 반복이 종료되므로 
-										i = 0; //다시 i를 0으로 초기화
-									}
-									ranking.innerHTML = "<h3>" + word[i]
-											+ "</h3>";
-									i++;
-								}, 2000); //2초마다 갱신
-
-								//					setTimeout(function() {
-								//					clearInterval(interval);
-								//				}, 20000); //20초후 정지
-
-							});
+			var word = new Array();
+			var ranking = document.getElementById("ranking");
+			$.ajax({
+				url : '/main/pwWord',
+				success : function(data){
+					console.log(data[0].PWWORD);
+					for(var j =0 ; j < data.length ; j++){
+						str = "<b>" + (j + 1)+ "</b> &nbsp;&nbsp;"+ data[j].PWWORD;
+						word[j] = str; //str을 순서대로 배열 형태로 저장
+					}
+				}
+			});
+			
+			var i=0;
+			var interval = setInterval(function(){
+				if(i > 5){
+					i = 0 ;
+				}
+				$("#ranking").html("<h3>" + word[i]+ "</h3>");
+				i++;
+			},2000);
 		</script>
+		
 
 		<div id="ranking"></div>
 		<svg id="arrow" xmlns="http://www.w3.org/2000/svg" width="17"

@@ -18,9 +18,11 @@ public interface MainMapper {
 	public List<ProductDTO> searchProductsByName(String searchKeyword);
 	public List<PaymentDTO> countPopularProducts(int rownum);
 	public List<HashtagDTO> searchHashtagByName(String searchKeyword);
-	public List<CategoryDTO> getCategoriesByRange();
+	//public List<CategoryDTO> getCategoriesByRange();
 	public List<CategoryDTO> getCategories();
 	public List<PostingDTO> getPostingsByCategoryId(Long categoryId);
+	public void insertKeyword(String keyword);
+	public List<Map<String, Object>> selectPopularWords();
 	
 	
 
