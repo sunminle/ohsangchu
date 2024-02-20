@@ -23,11 +23,9 @@ function processOrder(paymentId, index) {
         processData: false,
         data: formData,
         success: function(data) {
-            for (var i = 0; i < data.length; i++) {
-                var paymentEtc = data[i]; 
+                var paymentEtc = data; 
                 console.log(paymentEtc);
                 	$("#accountHolder_" + index).append(paymentEtc.accountHolder);
-            }
         },
         error: function(xhr, status, error) {
             console.error(xhr.responseText);

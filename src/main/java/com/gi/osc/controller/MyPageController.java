@@ -561,11 +561,20 @@ public class MyPageController {
 	}
 	
 	@PostMapping("myProductBuyerEtc")
-	public @ResponseBody ResponseEntity<List<PaymentEtcDTO>> myProductBuyerEtc(HttpSession session,
+	public @ResponseBody ResponseEntity<PaymentEtcDTO> myProductBuyerEtc(HttpSession session,
 									@RequestParam("paymentId") String paymentId) {
-		List<PaymentEtcDTO> paymentEtcList = service.selectPaymentEtc(Integer.parseInt(paymentId));
+		PaymentEtcDTO paymentEtcList = service.selectPaymentEtc(Integer.parseInt(paymentId));
 		
         return new ResponseEntity<>(paymentEtcList, HttpStatus.OK);
+	}
+	
+	@PostMapping("myOrderDeliveryType")
+	public @ResponseBody ResponseEntity<DeliveryTypeDTO> myOrderDeliveryType(HttpSession session,
+									@RequestParam("paymentId") String paymentId) {
+		int deliveryTypeId = service.selectPaymentEtc(Integer.parseInt(paymentId)).getDeliveryTypeId();
+		DeliveryTypeDTO deliveryTypeDTO = service.selectDeliveryTypeInfo(deliveryTypeId);
+		
+        return new ResponseEntity<>(deliveryTypeDTO, HttpStatus.OK);
 	}
 	
 }

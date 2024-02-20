@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gi.osc.bean.DeliveryTypeDTO;
 import com.gi.osc.bean.KakaoPayReadyVO;
 import com.gi.osc.bean.MyOrderProductDTO;
 import com.gi.osc.service.KakaoPayService;
@@ -58,7 +59,11 @@ public class KakaoPayController {
 	    		priceSum += priceList.get(i).getAmount()* priceList.get(i).getPrice();
 	    	}
 	    	int price = priceSum;
-	    	String deliveryTypeName = myPageService.selectKakaoPayDeliveryTypeName(paymentId); 
+	    	int deliveryTypeId = myPageService.selectPaymentEtc(paymentId).getDeliveryTypeId();
+			DeliveryTypeDTO deliveryTypeDTO = myPageService.selectDeliveryTypeInfo(deliveryTypeId);
+			int deliveryTypePrice = deliveryTypeDTO.getDeliveryTypePrice();
+			price += deliveryTypePrice;
+	    	String deliveryTypeName = deliveryTypeDTO.getDeliveryTypeName(); 
 	
 	        return "redirect:" + kakaoPayService.kakaoPayReady(request,productName, quantity, deliveryTypeName, price, paymentId);
 	 

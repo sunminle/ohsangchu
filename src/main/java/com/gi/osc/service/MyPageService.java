@@ -78,6 +78,6 @@ public interface MyPageService {
 	public void updateStatus1(int paymentId);
 	public void updateProductQuantity(PaymentProductDTO paymentProductDTO);
 	public void updateMyProductBuyer(@Param("paymentId")int paymentId, @Param("selectedStatus")int selectedStatus);
-	public List<PaymentEtcDTO> selectPaymentEtc(int paymentId);
+	public PaymentEtcDTO selectPaymentEtc(int paymentId);
 	public String selectRealId(int userId);
 }

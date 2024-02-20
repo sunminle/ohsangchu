@@ -195,9 +195,9 @@
     </ul>
 </li>
             
-  <c:if test="${usersId != null}">
+
   	<a class="navbar-brand" href="/qna/qnaList"><b class="green">QnA</b></a>
-  </c:if> 
+ 
             
         </div>
 
