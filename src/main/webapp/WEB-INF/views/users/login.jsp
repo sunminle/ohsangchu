@@ -24,7 +24,7 @@
 <c:if test = "${chk == 0}">
 	<script> 
 	  alert("아이디 / 비밀번호를 확인하세요.");
-      history.go(1);
+      history.go(-1);
       
 	</script>
 </c:if>	

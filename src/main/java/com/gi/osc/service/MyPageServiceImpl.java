@@ -636,7 +636,7 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public List<PaymentEtcDTO> selectPaymentEtc(int paymentId) {
+	public PaymentEtcDTO selectPaymentEtc(int paymentId) {
 		return mapper.selectPaymentEtc(paymentId);
 	}
 

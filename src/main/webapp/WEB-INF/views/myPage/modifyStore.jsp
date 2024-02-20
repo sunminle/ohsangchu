@@ -84,6 +84,7 @@
 					<center>
 						<h2>판매자 정보 수정</h2>
 						<br />
+						<a href = "/product/store?storeNum=${storeDTO.id}">내상점으로</a>
 						<form method="post" action="/my/modifyStorePro"
 							onsubmit="return StoreNameCheckForm()">
 							상점 이름 : <input type="text" value="${storeDTO.storeName}"

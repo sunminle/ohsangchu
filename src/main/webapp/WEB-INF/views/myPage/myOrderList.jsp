@@ -38,11 +38,33 @@ function processOrder(paymentId, index) {
                 	$("#productList_" + index).append("상품명: " + product.productName + ", 구매수량: " + product.amount + ", Price: " + product.amount*product.price + "<br>");
                 }
             }
+            
+            $.ajax({
+                type: "POST",
+                url: '/my/myOrderDeliveryType',
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function(data) {
+                        var deliveryType = data; 
+                        console.log(deliveryType);
+                        	$("#productList_" + index).append("<br/>배달방식: " + deliveryType.deliveryTypeName + ", 배달가격: " + deliveryType.deliveryTypePrice);
+                    
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+            
         },
         error: function(xhr, status, error) {
             console.error(xhr.responseText);
         }
     });
+    
+    
+    
+    
 }
 
 </script>
