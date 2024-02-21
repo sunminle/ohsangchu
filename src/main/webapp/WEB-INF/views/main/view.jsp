@@ -22,13 +22,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Barriecito&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
   
 <link href="/resources/css/view.css" rel="stylesheet">
-	
+	<style>
+
+</style>
 </head>
 <body>
 	<!-- header -->
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<!-- /header -->
     <h2>Postings</h2>
+    
+    <br />
+    
+    <div class="posting">
+    <h3>${postings[0].categoryName}</h3>
+</div>
     
     <br />
     

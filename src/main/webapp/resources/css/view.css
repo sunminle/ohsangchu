@@ -8,11 +8,22 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'EF_watermelonSalad';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_watermelonSalad.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+.posting h3 {
+    font-family: 'EF_watermelonSalad', sans-serif; 
+    padding-left: 30px;
+}
 .proDes {
 	font-family: 'NanumSquareNeo-Variable', sans-serif;
 }
 h2 {
 	font-family: 'Dancing Script', cursive;
+	padding-left: 20px;
 }
 #newProduct{
 	width: auto;
