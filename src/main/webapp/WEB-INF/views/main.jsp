@@ -214,14 +214,14 @@
 					<div class="carousel-item banners" onclick="location.href='/main/view?categoryId=411';">
 						<img src="/resources/images/site/mimi.gif" class="d-block w-100" alt="...">
 					</div>
+					<div class="carousel-item banners" onclick="location.href='/main/view?categoryId=311';">
+						<img src="/resources/images/site/3.jpg" class="d-block w-100" alt="...">
+					</div>					
 					<div class="carousel-item banners" onclick="location.href='/main/view?categoryId=511';">
 						<img src="/resources/images/site/po.gif" class="d-block w-100" alt="...">
 					</div>
-					<div class="carousel-item banners" onclick="location.href='/main/view?categoryId=611';">
-						<img src="/resources/images/site/yf.png" class="d-block w-100" alt="...">
-					</div>
 					<div class="carousel-item banners" onclick="location.href='/main/view?categoryId=111';">
-						<img src="/resources/images/site/ff.gif" class="d-block w-100" alt="...">
+						<img src="/resources/images/site/4.jpg" class="d-block w-100" alt="...">
 					</div>
 				</div>
 				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
