@@ -16,6 +16,7 @@ public class PostingDTO {
 	private Date regDate;
 	private String thumnail;
 	private String paymentType;
+	private String categoryName;
 	
 	//배송방식
 	private ArrayList<DeliveryTypeDTO> deliveryType;
