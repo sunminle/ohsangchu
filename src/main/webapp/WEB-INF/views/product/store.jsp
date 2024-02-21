@@ -257,7 +257,7 @@ window.onload = function () {
 										<div class="proTitle">${post.title}</div>
 										<div class="proPrice d-flex justify-content-start align-items-center">
 											<div class="proImg">
-												<img src="https://cdn.9oodnews.com/news/photo/202112/13094_18959_2534.jpg" alt="프로필이미지">
+												<img src="/resources/images/profiles/${storeUser.profile}" alt="프로필이미지">
 											</div>
 											<span>${store.usersDTO.nickname }</span>
 										</div>
