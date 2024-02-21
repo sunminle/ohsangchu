@@ -657,6 +657,8 @@
 											</c:when>
 											<c:otherwise>
 												<span class="text">${rev.content}</span>
+												<span class="more-text"></span>
+												<span class="less-text"></span>
 											</c:otherwise>
 										</c:choose>
 									</div>							
