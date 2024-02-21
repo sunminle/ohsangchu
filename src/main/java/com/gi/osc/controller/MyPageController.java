@@ -280,6 +280,19 @@ public class MyPageController {
 		}
 		return new ResponseEntity<>(check, HttpStatus.OK);
 	}
+	
+	@RequestMapping("addStoreNameCheck")
+	public @ResponseBody ResponseEntity<String> addStoreNameCheck(String storeName,HttpSession session) {
+		String realId = (String) session.getAttribute("usersId");
+		int userId = service.selectUsers(realId).getId();
+		int count = service.storeNameCheck(storeName);
+		String check = "0";
+		
+		if(count == 0) {
+			check = "1";
+		}
+		return new ResponseEntity<>(check, HttpStatus.OK);
+	}
 
 	@RequestMapping("modifyStorePro")
 	public String modifyStorePro(HttpSession session, StoreDTO storeDTO) {

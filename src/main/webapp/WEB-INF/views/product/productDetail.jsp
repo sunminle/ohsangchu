@@ -13,7 +13,7 @@
 <!--favicon-->
 <link rel="icon" href="/resources/images/site/leaf-solid.png">
 <!-- jQuery -->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <!-- css -->
 <link href="/resources/css/include.css" rel="stylesheet">
 <link href="/resources/css/product.css" rel="stylesheet">

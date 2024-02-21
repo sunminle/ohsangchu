@@ -9,7 +9,7 @@
 			var storeName = $("input[name='storeName']").val();
 			if (storeName.trim() !== "") {
 			$.ajax({
-				url : "/my/storeNameCheck",
+				url : "/my/addStoreNameCheck",
 				data: { storeName: storeName },
 				success : function(result){
 					StoreNameCheckValue = result;
