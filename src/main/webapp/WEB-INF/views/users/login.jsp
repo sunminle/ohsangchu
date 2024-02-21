@@ -11,11 +11,11 @@
 	
 	// 뒤로 갈 히스토리가 있는 경우 및 우리 시스템에서 링크를 통해 유입된 경우aaa
 	if ('${backURI}' != '') {
-		location.href = "http://localhost:8080/${backURI}";   
+		location.href = "http://192.168.219.180:8080/${backURI}";   
 	}
 	// 히스토리가 없는 경우 (URL을 직접 입력하여 유입된 경우)
 	else {
-	    location.href = "http://localhost:8080/main";    // 메인페이지로 
+	    location.href = "http://192.168.219.180:8080/main";    // 메인페이지로 
 	}
 	</script>
 	
