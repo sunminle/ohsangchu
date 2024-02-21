@@ -131,6 +131,26 @@ section{overflow: hidden; /* 플로팅 해제 */}
 	border-top:none;
 }
 
+/********ProductTab************/
+#ProductTab>div {
+	width: 1600px;
+	min-width: 1000px;
+	height: auto;
+}
+#ProductTab>div:after{
+	content:'';
+   	display:block;
+	clear:both;
+}
+.clear{
+	clear: both;
+}
+
+.pro{
+	margin-top : 20px;
+	float: left;
+}
+
 /************StoreProList**************/
 #StoreProList .pro{
 	width: 280px !important;
@@ -217,7 +237,7 @@ section{overflow: hidden; /* 플로팅 해제 */}
   	word-break: break-all;
 }
 
-/**************review**/
+/**************review************/
 #reviews{
 	width: 100%;
 	min-height: 1000px;
