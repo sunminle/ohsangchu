@@ -244,9 +244,14 @@ window.onload = function () {
 				<div id="ProductTab">
 					<!-- 상품리스트 -->
 					<div class="d-flex justify-content-start w-100">
-						<c:forEach items="${posts }" var="post">
-							<div id="StoreProList" class="d-flex justify-content-start">
-								<div class="pro" onclick="location.href='/product/detail?postNum=5';">
+						<div id="StoreProList" class="w-100 justify-content-start">
+							<c:forEach items="${posts }" var="post" varStatus="status">
+							
+								<c:choose>
+									<c:when test="${status.count % 5 eq 1}"><div class="pro clear" onclick="location.href='/product/detail?postNum=${post.id}';"></c:when>
+									<c:otherwise><div class="pro" onclick="location.href='/product/detail?postNum=${post.id}';"></c:otherwise>
+								</c:choose>
+								
 									<img src="/resources/images/posting/${post.thumnail }">
 									<div class="proDes">
 										<div class="proTitle">${post.title}</div>
@@ -261,8 +266,12 @@ window.onload = function () {
 										</div>
 									</div>
 								</div>
-							</div>
-						</c:forEach>
+								
+								<c:if test="${status.count % 5 eq 0}"><br></c:if>
+								
+							</c:forEach>
+						</div>
+						
 					</div>
 					<!-- /상품리스트 -->
 				</div>
