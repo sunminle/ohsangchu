@@ -50,11 +50,11 @@
 	 	<!-- 판매량이 높은 제품 조회 -->
 		<select id="countPopularProducts" resultType="com.gi.osc.bean.PaymentDTO">
 			<![CDATA[
-				 SELECT id, thumnail, title, storename, profile
+				 SELECT id, thumnail, title, storename, profile, nickname
 			FROM (
 			    SELECT subquery_alias.*, ROWNUM as rn
 			    FROM (
-			        SELECT p.id, p.thumnail, p.title, s.storename, u.profile,
+			        SELECT p.id, p.thumnail, p.title, s.storename, u.profile, u.nickname,
 			               ROW_NUMBER() OVER (ORDER BY totalCount DESC) AS row_num
 			        FROM (
 			            SELECT po.id, po.thumnail, po.title, COUNT(*) AS totalCount, po.storeid

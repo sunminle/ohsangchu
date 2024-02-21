@@ -252,7 +252,7 @@
 					<div class="proDes">
 						<div class="proTitle">${product.title}</div>
 						<div class="proPrice d-flex justify-content-end"><span>${product.productname}</span></div>
-						<div class="proPrice d-flex justify-content-end"><span> </span></div>
+						<div class="proPrice d-flex justify-content-end"><span>${product.nickname} </span></div>
 						<div class="proProfile d-flex align-items-center">
 							<div class="proImg">
 								<img src="/resources/images/profiles/${product.profile}" alt="프로필이미지" width="300px" height="300px">
