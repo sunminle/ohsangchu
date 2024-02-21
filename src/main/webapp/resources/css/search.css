@@ -16,11 +16,13 @@
 }
 
 .proDes {
-font-family: 'NanumSquareNeo-Variable', sans-serif;
+	font-family: 'NanumSquareNeo-Variable', sans-serif;
 }
 
 h2 {
-font-family: 'EF_watermelonSalad', sans-serif;}
+	font-family: 'EF_watermelonSalad', sans-serif;
+	padding-left: 20px;
+}
 
 .centered-image {
     display: block;
